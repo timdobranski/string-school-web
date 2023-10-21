@@ -1,0 +1,29 @@
+#headerContainer {
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+  height: 8vw;
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: solid 1px rgb(63, 63, 63);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#logoContainer {
+  position: relative;
+  width: 30vw;
+  height: 6vw;
+
+}
+.button {
+}
+#loginButton {
+}
+@media (prefers-color-scheme: dark) {
+  #headerContainer {
+    background: rgba(255, 255, 255, 0.7);
+
+  }
+}
