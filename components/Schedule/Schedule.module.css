@@ -1,0 +1,47 @@
+.scheduleContainer {
+  /* Add styles for the schedule container */
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dayContainer {
+  margin: 1rem;
+  width: 200px;
+  background-color: black;
+  border: solid 4px rgb(0, 153, 255);
+  text-align: center;
+}
+.dayContainer h3 {
+  color: white;
+  padding: 10px;
+}
+
+.columns {
+  display: flex;
+}
+
+.timesColumn,
+.statusColumn {
+  /* flex: 1; */
+}
+
+.timesColumn {
+  background-color: white;
+  color: black;
+  width: 50px;
+}
+.statusColumn {
+  width: 150px;
+}
+.time {
+  /* Add styles for each time */
+  padding: 5px;
+}
+
+.open {
+  /* Add styles for each "Open!" status */
+  padding: 5px;
+}

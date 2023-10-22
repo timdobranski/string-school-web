@@ -13,12 +13,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body id='app'>
-        {/* <div id='background'>
-          <Image src={background} alt="La Mesa String School Logo" />
-        </div> */}
         <Header />
-        {children}
-        </body>
+        <div id='appContentContainer'>
+          {children}
+        </div>
+      </body>
     </html>
   )
 }

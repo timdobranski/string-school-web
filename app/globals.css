@@ -40,9 +40,23 @@ a {
 }
 
 #app {
-  background-image: url('/images/background.jpeg')
+  position: relative;
+  background-image: url('/images/background.jpeg');
+  /* border: solid red 4px; */
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
 }
-
+#appContentContainer {
+ border: solid rgb(126, 255, 126) 4px;
+ flex: 1;
+ margin-top: 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
 .button {
   position: absolute;
   top: 0;
@@ -51,8 +65,8 @@ a {
   padding: .5rem;
   border: none;
   background: rgba(0, 0, 0, 0.7);
-  font-size: 2rem;
-  background: linear-gradient(to bottom right, rgb(12, 224, 252), rgba(146, 255, 146, 0.9));
+  font-size: 1.5rem;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
   animation : transform 2s;
 }
 
@@ -60,4 +74,19 @@ a {
   transform: scale(1.1);
   cursor: pointer;
 }
-
+.infoCard {
+  position: relative;
+  /* border: solid red 4px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 40vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  margin: 2rem;
+  padding: 2rem;
+  border:rgb(126, 255, 126) solid 6px;
+  min-height: 500px;
+}
