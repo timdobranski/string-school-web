@@ -5,18 +5,29 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  color: white;
 }
 
 .dayContainer {
   margin: 1rem;
   width: 200px;
-  background-color: black;
-  border: solid 4px rgb(0, 153, 255);
+  background-color: rgba(0, 0, 0, 0.539);
+  backdrop-filter: blur(5px);
+  border: solid 4px rgb(88, 251, 172);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
 }
+
 .dayContainer h3 {
   color: white;
   padding: 10px;
+  font-size: 2rem;
+}
+#Mon h3 {
+
 }
 
 .columns {
@@ -33,15 +44,32 @@
   color: black;
   width: 50px;
 }
-.statusColumn {
-  width: 150px;
-}
-.time {
-  /* Add styles for each time */
-  padding: 5px;
-}
 
 .open {
   /* Add styles for each "Open!" status */
   padding: 5px;
+}
+
+.mon {
+
+}
+.wed {
+
+}
+.tues {
+
+}
+.wed {
+
+}
+.thurs {
+
+}
+.fri {
+
+}
+
+.timeColumn {
+  background: white;
+  color: black;
 }

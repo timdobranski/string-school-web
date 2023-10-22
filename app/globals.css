@@ -6,7 +6,16 @@
 }
 
 :root {
-
+  --blueBooked: rgba(20, 112, 149, 1);
+  --blueOpen: rgba(159, 197, 232, 1);
+  --greenBooked: rgba(47, 192, 45, 1);
+  --greenOpen: rgba(177, 252, 176, 1);
+  --redBooked: rgba(255, 45, 43, 1);
+  --redOpen: rgba(234, 153, 153, 1);
+  --yellowBooked: rgba(255, 182, 43, 1);
+  --yellowOpen: rgba(255, 242, 204, 1);
+  --purpleBooked: rgba(166, 77, 121, 1);
+  --purpleOpen: rgba(213, 166, 189, 1);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -49,7 +58,6 @@ a {
   height: 100vh;
 }
 #appContentContainer {
- border: solid rgb(126, 255, 126) 4px;
  flex: 1;
  margin-top: 8vw;
   display: flex;
@@ -82,7 +90,7 @@ a {
   justify-content: center;
   align-items: center;
   color: white;
-  width: 40vw;
+  width: 50vw;
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   margin: 2rem;

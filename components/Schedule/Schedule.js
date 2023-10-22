@@ -13,28 +13,26 @@ export default function Schedule({ startDate }) {
   return (
     <div className={styles.scheduleContainer}>
       {Object.entries(schedule).map(([day, times]) => (
-        <div key={day} id={day} className={styles.dayContainer}>
+        <div key={day} className={`${styles.dayContainer} ${styles[day.toLowerCase()]}`}>
           <h3>{day}</h3>
-          <div className={styles.columns}>
-            <div className={styles.timesColumn}>
+          <table className={styles.scheduleTable}>
+            {/* <thead>
+              <tr>
+                <th>Time</th>
+                <th>Status</th>
+              </tr>
+            </thead> */}
+            <tbody>
               {times.map((time) => (
-                <div key={`${day}-${time}`} className={styles.time}>
-                  {time}
-                </div>
+                <tr key={`${day}-${time}`}>
+                  <td className={styles.timeColumn}>{time}</td> {/* Added class to time column */}
+                  <td id={`${day}-${time}-status`} className={styles.open}>
+                    Open!
+                  </td>
+                </tr>
               ))}
-            </div>
-            <div className={styles.statusColumn}>
-              {times.map((time) => (
-                <div
-                  key={`${day}-${time}-status`}
-                  id={`${day}-${time}-status`}
-                  className={styles.open}
-                >
-                  Open!
-                </div>
-              ))}
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
       ))}
     </div>
