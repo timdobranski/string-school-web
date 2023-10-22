@@ -4,6 +4,19 @@
   font-weight: 200;
   src: url('../public/fonts/Economica-Regular.ttf');
 }
+@font-face {
+  font-family: 'Economica Bold';
+  font-style: normal;
+  font-weight: 200;
+  src: url('../public/fonts/Economica-Bold.ttf');
+}
+@font-face {
+  font-family: 'Bank Gothic';
+  font-style: normal;
+  font-weight: 200;
+  src: url('../public/fonts/BankGothic Regular.ttf');
+}
+
 
 :root {
   --blueBooked: rgba(20, 112, 149, 1);
@@ -87,14 +100,15 @@ a {
   /* border: solid red 4px; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   color: white;
-  width: 50vw;
+  width: auto;
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   margin: 2rem;
   padding: 2rem;
   border:rgb(126, 255, 126) solid 6px;
   min-height: 500px;
+  min-width: 800px;
 }

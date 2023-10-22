@@ -5,11 +5,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  color: white;
+  color: black;
 }
 
 .dayContainer {
-  margin: 1.5rem;
+  margin: 1rem;
   width: 160px;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
@@ -22,8 +22,8 @@
 
 .dayContainer h3 {
   display: inline-block;
-  width: 120%;
-  margin-left: -10%;
+  width: 110%;
+  margin-left: -5%;
   color: black;
   padding: 10px;
   font-size: 2rem;
@@ -52,51 +52,58 @@
 }
 
 .open {
-  /* Add styles for each "Open!" status */
   padding: 5px;
 }
-
-.mon {
-
-}
-.mon h3 {
-  background-color: var(--blueBooked)
-
-}
-
-.tues {
-
-}
-.tues h3 {
-  background-color: var(--greenBooked)
-
-}
-.wed {
-
-}
-.wed h3 {
-  background-color: var(--redBooked)
-
-}
-.thurs {
-
-}
-.thurs h3 {
-  background-color: var(--yellowBooked);
-
-
-}
-.fri {
-
-}
-.fri h3 {
-  background-color: var(--purpleBooked);
+.booked {
   color: black;
+  font-family: Economica Bold;
 }
-.sun {
+
+.mondayOpen {
+  background-color: var(--blueOpen);
+}
+.mondayBooked {
+  background-color: var(--blueBooked);
+  /* background: linear-gradient(to right, rgb(49, 200, 255), rgb(0, 135, 189)); */
+  color: black;
+  font-weight: bold;
+}
+
+.tuesdayOpen {
+  background-color: var(--greenOpen);
+}
+.tuesdayBooked {
+  background-color: var(--greenBooked);
+  /* background: linear-gradient(to right, rgb(38, 255, 197), rgb(7, 255, 78)); */
+}
+.wednesdayOpen {
+  background-color: var(--redOpen);
+}
+.wednesdayBooked {
+  background-color: var(--redBooked);
+  /* background: linear-gradient(to right, rgb(254, 53, 50), rgb(247, 213, 20)); */
+}
+.thursdayOpen {
+  background-color: var(--yellowOpen);
+}
+.thursdayBooked {
+  background-color: var(--yellowBooked);
+  /* background: linear-gradient(to right, rgb(255, 245, 132), rgb(243, 182, 0)); */
 
 }
-.sun h3 {
+.fridayOpen {
+  background-color: var(--purpleOpen);
+}
+.fridayBooked {
+  background-color: var(--purpleBooked);
+
+  /* background: linear-gradient(to right, #9100da, rgb(92, 0, 220)); */
+}
+.sundayOpen {
+  background-color: var(--blueOpen);
+}
+.sundayBooked {
   background-color: var(--blueBooked);
 
 }
+

@@ -4,10 +4,10 @@ import Schedule from '../../components/Schedule/Schedule';
 export default function SchedulePage() {
 
     return (
-      <>
+      <div className='infoCard'>
         <h1>SCHEDULE PAGE</h1>
-        <Schedule />
-      </>
+        <Schedule privacy={true} />
+      </div>
 
     )
 }
