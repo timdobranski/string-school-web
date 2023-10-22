@@ -25,8 +25,8 @@ export default function Schedule({ startDate }) {
             <tbody>
               {times.map((time) => (
                 <tr key={`${day}-${time}`}>
-                  <td className={styles.timeColumn}>{time}</td> {/* Added class to time column */}
-                  <td id={`${day}-${time}-status`} className={styles.open}>
+                  <td className={styles.timeColumn}>{time}</td>
+                  <td id={`${day}-${time}-status`} className={styles.statusColumn}>
                     Open!
                   </td>
                 </tr>
