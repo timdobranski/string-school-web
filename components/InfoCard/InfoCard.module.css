@@ -1,0 +1,8 @@
+.gradient-border {
+  width: 200px; /* Adjust the width and height as needed */
+  height: 200px;
+  border: 5px solid transparent; /* Set the initial border as transparent */
+  background-image: linear-gradient(to bottom right, #ff0000, #00ff00); /* Define your gradient colors */
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
