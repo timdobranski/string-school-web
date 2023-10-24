@@ -1,15 +1,29 @@
 import styles from './PublicNavbar.module.css';
-import Link from 'next/navigation';
+import Link from 'next/link';
 
 export default function PublicNavbar() {
 
   return (
-    <div id={styles.navbarContainer}>
-      <Link href='/'>HOME</Link>
-      <Link href='/'>ABOUT LESSONS</Link>
-      <Link href='/'>BOOK AN INTRO</Link>
-      <Link href='/'>PHOTOS</Link>
-      <Link href='/'>ABOUT ME</Link>
+    <div className={styles.navbarContainer}>
+      <div className={styles.navLink}>
+        <Link href='/'>HOME</Link>
+      </div>
+      <div className={styles.navLink}>
+        <Link href='/'>ABOUT LESSONS</Link>
+      </div>
+      <div className={styles.navLink}>
+        <Link href='/'>BOOK AN INTRO</Link>
+      </div>
+      <div className={styles.navLink}>
+        <Link href='/'>PHOTOS</Link>
+      </div>
+      <div className={styles.navLink}>
+        <Link href='/'>ABOUT ME</Link>
+      </div>
+
+
+
+
     </div>
   )
 

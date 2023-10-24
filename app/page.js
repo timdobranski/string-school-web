@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 // import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { supabase } from '../utils/supabase';
 import { useRouter } from 'next/navigation';
+import PublicNavbar from '../components/PublicNavbar/PublicNavbar';
 
 export default function Home() {
   // const supabase = createClientComponentClient();
@@ -31,8 +32,14 @@ export default function Home() {
 
 
   return (
-    <main className='infoCard'>
-      <h1>Stuff Goes Here</h1>
+    <main className='appContainer'>
+      <div className='infoCard'>
+        <PublicNavbar />
+      </div>
+
+      <div className='infoCard'>
+        <h1>Welcome!</h1>
+      </div>
     </main>
   )
 }
