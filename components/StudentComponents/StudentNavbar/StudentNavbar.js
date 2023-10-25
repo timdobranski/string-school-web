@@ -20,6 +20,12 @@ export default function StudentNavbar() {
           <h3 className={styles.navLink}>SONGS</h3>
         </Link>
         <Link href='/students/settings'>
+          <div className={styles.navLink}>LESSON LOGS</div>
+        </Link>
+        <Link href='/students/settings'>
+          <div className={styles.navLink}>PROGRESS</div>
+        </Link>
+        <Link href='/students/settings'>
           <div className={styles.navLink}>SETTINGS</div>
         </Link>
         <div className={styles.profileImgContainer}>

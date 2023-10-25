@@ -15,7 +15,7 @@ export default function Songs() {
   return (
     <main className='infoCard'>
       <h1>SONGS</h1>
-      <AlphaTab scoreData='../../public/tabs/dear-hunter.gpx'/>
+      {/* <AlphaTab scoreData='../../public/tabs/dear-hunter.gpx'/> */}
     </main>
   )
 
