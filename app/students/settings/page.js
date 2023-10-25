@@ -8,9 +8,16 @@ export default function StudentSettings() {
   const router = useRouter();
 
   const handleSignout = async () => {
-    const { error } = await supabase.auth.signOut();
-    console.log('error on signout: ', error);
-    router.push('/')
+    const { error } = await supabase.auth.signOut({
+      options: {
+        scope: 'global'
+      }
+    });
+    if (error) {
+      console.log('error on signout: ', error);
+    } else {
+      router.push('/')
+    }
   }
 
   return (

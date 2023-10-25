@@ -6,17 +6,17 @@ import StudentContext, { useAuth } from '../layout.js';
 import Image from 'next/image'
 
 export default function StudentHome() {
-  const { user, session, signOut } = useAuth();
+  const { googleUserData, session, signOut } = useAuth();
 
-  console.log('user:', user);
+  console.log('user:', googleUserData);
 
 
 
-  if (user) {
-    const name = user.user_metadata.full_name;
-    const email = user.email;
-    const phone = user.user_metadata.phone;
-    const photo = user.user_metadata.picture;
+  if (googleUserData) {
+    const name = googleUserData.user_metadata.full_name;
+    const email = googleUserData.email;
+    const phone = googleUserData.user_metadata.phone;
+    const photo = googleUserData.user_metadata.picture;
 
     return (
       <main className='infoCard'>
