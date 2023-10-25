@@ -9,8 +9,11 @@ import StudentContext, { useAuth } from '../layout.js';
 export default function StudentScheduling() {
   // User & student data provided by layout.js context
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
-  // Rescheduling Steps
-
+  // Rescheduling Steps: SchedulingHome, ChooseCancellation, ChooseNew, Confirm, Confirmed
+  const [render, setRender] = useState('SchedulingHome');
+  const [cancellation, setCancellation] = useState([]);
+  const [newLesson, setNewLesson] = useState([]);
+  const [newSpot, setNewSpot] = useState({day: '', time: '', startDate: ''});
 
 
   if (googleUserData) {
