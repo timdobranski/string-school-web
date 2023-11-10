@@ -1,0 +1,31 @@
+.downloadIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.searchResult {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+  border: solid rgb(206, 206, 206) 4px;
+  padding: 10px;
+  margin: .5rem;
+  background-color: black;
+}
+
+.searchResult span:nth-child(1) {
+  text-align: left;
+}
+
+.searchResult span:nth-child(2),
+.searchResult span:nth-child(3) {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}

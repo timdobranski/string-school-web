@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabase';
 import { useRouter } from 'next/navigation';
 import PublicNavbar from '../components/PublicNavbar/PublicNavbar';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
+config.autoAddCss = false;
 
 export default function Home() {
-  // const supabase = createClientComponentClient();
   const router= useRouter();
 
   useEffect(() => {

@@ -14,30 +14,44 @@ const auth = new google.auth.GoogleAuth({
     scopes: ["https://www.googleapis.com/auth/drive"],
   })
 
-  export const getData = async (query, mimeTypes) => {
+  export const getData = async (query, mimeTypes, searchType = 'song') => {
     const drive = google.drive({ version: "v3", auth });
     try {
       let queryParts = [];
 
-      // Add search query if provided
-      if (query) {
-        queryParts.push(`name contains '${query}'`);
-      }
-
-      // Add MIME type query if provided
-      if (mimeTypes && mimeTypes.length) {
-        const mimeTypeQuery = mimeTypes.map(type => `mimeType = '${type}'`).join(' or ');
-        queryParts.push(`(${mimeTypeQuery})`);
+      if (searchType === 'artist') {
+        // Search for folders matching the artist name
+        queryParts.push(`name contains '${query}' and mimeType = 'application/vnd.google-apps.folder'`);
+      } else {
+        // Search for files matching the song name
+        if (query) {
+          queryParts.push(`name contains '${query}'`);
+        }
+        if (mimeTypes && mimeTypes.length) {
+          const mimeTypeQuery = mimeTypes.map(type => `mimeType = '${type}'`).join(' or ');
+          queryParts.push(`(${mimeTypeQuery})`);
+        }
       }
 
       const fullQuery = queryParts.join(' and ');
       const res = await drive.files.list({
-        q: fullQuery
+        q: fullQuery,
+        fields: 'nextPageToken, files(id, name, mimeType, parents, webContentLink)'
       });
-      const files = res.data.files;
+      const items = res.data.files;
 
-      console.log('drive api response: ', files);
-      return files;
+      if (searchType === 'artist') {
+        // Fetch files within the found folders
+        const folderIds = items.map(folder => folder.id);
+        const fileQueries = folderIds.map(id => `'${id}' in parents`).join(' or ');
+        const fileRes = await drive.files.list({
+          q: `(${fileQueries}) and (${mimeTypes.map(type => `mimeType = '${type}'`).join(' or ')})`,
+          fields: 'nextPageToken, files(id, name, mimeType, parents)'
+        });
+        return fileRes.data.files;
+      }
+
+      return items;
     } catch (error) {
       console.error("Error fetching files:", error.message);
       return null;
