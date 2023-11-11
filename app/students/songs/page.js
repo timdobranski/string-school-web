@@ -12,6 +12,7 @@ import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 export default function Songs() {
   const { user, session, signOut } = useAuth();
   const [searchType, setSearchType] = useState('song'); // 'song' or 'artist'
+  const [browseType, setBrowseType] = useState('artist'); // 'artist' or 'movie' or 'holiday
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -35,52 +36,55 @@ export default function Songs() {
   const openFile = (file) => {
     const fileUrl = `${encodeURIComponent(file.webContentLink)}`;
     setScoreData(fileUrl);
-    setShowAlphaTab(true); // Set to true to show the AlphaTab component
+    setShowAlphaTab(true);
   };
 
   return (
     <main className='infoCard'>
-      <h1 className='sectionHeaders'>SONGS</h1>
+      {/* <h1 className='sectionHeaders'>SONGS</h1> */}
 
-      <h2 className='featureHeaders'>Recent Songs</h2>
-
-      <div className='featureHeaders'>
-        <h2>Search The Song Library</h2>
+      <div className={styles.searchContainer}>
+        <h2 className='featureHeaders'>Search The Song Library</h2>
+        <div className={styles.searchInputContainer}>
         <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
           <option value="song">By Song</option>
           <option value="artist">By Artist</option>
         </select>
         <input
+          className={styles.searchInput}
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Enter search term"
+          placeholder={`Search for ${searchType}s`}
         />
-        <button onClick={searchHandler}>Search</button>
-        {searchResults.map((file, index) => (
-  <div key={index} className={styles.searchResult}>
-    <span>{file.name}</span>
-    <span>
-      <a href={`https://drive.google.com/uc?export=download&id=${file.id}`} download>
-      <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
-        Download for Guitar Pro
-      </a>
-    </span>
-    <span>
-      <FontAwesomeIcon icon={faCirclePlay} className={styles.downloadIcon} />
-      <button onClick={() => openFile(file)}>
-        Open Here
-      </button>
-    </span>
-  </div>
-))}
+      </div>
+      <button onClick={searchHandler}>Search</button>
+      {searchResults.map((file, index) => (
+        <div key={index} className={styles.searchResult}>
+          <span>{file.name}</span>
+          <span>
+            <a href={`https://drive.google.com/uc?export=download&id=${file.id}`} download>
+            <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
+              Download for Guitar Pro
+            </a>
+          </span>
+          <span>
+            <FontAwesomeIcon icon={faCirclePlay} className={styles.downloadIcon} />
+            <button onClick={() => openFile(file)}>
+              Open Here
+            </button>
+          </span>
+        </div>
+      ))}
       </div>
 
-      <h2 className='featureHeaders'>Browse By Artist</h2>
+      <h2 className='featureHeaders'>Browse All Songs By Category</h2>
 
-      <h2 className='featureHeaders'>Browse Movie Scores & TV Themes</h2>
 
-      <h2 className='featureHeaders'>Browse Holiday Music</h2>
+      <h2 className='featureHeaders'>Recent Songs</h2>
+
+
+
       {showAlphaTab && <AlphaTab scoreData={scoreData}/>}
     </main>
   );

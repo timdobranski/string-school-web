@@ -123,11 +123,11 @@ a {
 }
 .featureHeaders {
   color: rgb(95, 180, 225);
-  font-family: Economica;
+  /* font-family: Economica; */
   margin-top: 2rem;
-  font-size: 1.25rem;
-  text-decoration: underline;
-  margin-bottom: .25rem;
+  font-size: 1.5rem;
+  /* text-decoration: underline; */
+  margin-bottom: 1rem;
 }
 .featureComments {
   font-style:italic;
