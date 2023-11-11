@@ -114,7 +114,7 @@ a {
   margin: 2rem;
   padding: 2rem;
   border:rgb(126, 255, 126) solid 6px;
-  /* min-height: 500px; */
+  min-height: 500px;
   min-width: 1000px;
   font-family: JennaSue;
 }
