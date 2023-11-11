@@ -36,10 +36,14 @@ const SearchResults = () => {
       console.error('Failed to fetch:', error);
     }
   };
+  const openFile = (file) => {
+    const fileUrl = `${encodeURIComponent(file.webContentLink)}`;
+    router.push(`/students/alphatab-player?fileUrl=${fileUrl}`);
+  };
 
   return (
     <div className='infoCard'>
-      <h1>Search Results</h1>
+      <h1>{`Search Results for "${query}"`}</h1>
       {searchResults.map((file, index) => (
         <div key={index} className={styles.searchResult}>
           <span>{file.name}</span>
