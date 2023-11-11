@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './Songs.module.css';
+import AlphaTab from '../../../components/AlphaTab/AlphaTab.js';
 import { useAuth } from '../layout.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +14,10 @@ export default function Songs() {
   const [searchType, setSearchType] = useState('song'); // 'song' or 'artist'
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+
+  const [showAlphaTab, setShowAlphaTab] = useState(false);
+  const [scoreData, setScoreData] = useState('');
+
 
   const searchHandler = async () => {
     try {
@@ -26,6 +31,11 @@ export default function Songs() {
     } catch (error) {
       console.error('Failed to fetch:', error);
     }
+  };
+  const openFile = (file) => {
+    const fileUrl = `${encodeURIComponent(file.webContentLink)}`;
+    setScoreData(fileUrl);
+    setShowAlphaTab(true); // Set to true to show the AlphaTab component
   };
 
   return (
@@ -71,7 +81,7 @@ export default function Songs() {
       <h2 className='featureHeaders'>Browse Movie Scores & TV Themes</h2>
 
       <h2 className='featureHeaders'>Browse Holiday Music</h2>
-
+      {showAlphaTab && <AlphaTab scoreData={scoreData}/>}
     </main>
   );
 }

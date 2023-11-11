@@ -46,10 +46,11 @@ const auth = new google.auth.GoogleAuth({
         const fileQueries = folderIds.map(id => `'${id}' in parents`).join(' or ');
         const fileRes = await drive.files.list({
           q: `(${fileQueries}) and (${mimeTypes.map(type => `mimeType = '${type}'`).join(' or ')})`,
-          fields: 'nextPageToken, files(id, name, mimeType, parents)'
+          fields: 'nextPageToken, files(id, name, mimeType, parents, webContentLink)' // Include webContentLink here
         });
         return fileRes.data.files;
       }
+
 
       return items;
     } catch (error) {
