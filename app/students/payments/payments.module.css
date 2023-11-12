@@ -1,0 +1,74 @@
+.paymentsTable {
+  width: 100%;
+  /* border-collapse: collapse; */
+  margin-top: 2rem;
+  text-align: center;
+}
+.paymentsTableBody * {
+  padding-top: 1rem;
+}
+
+.dueInfo {
+  margin-top: 2rem;
+}
+
+.paymentsHeaderRow th {
+  font-size: 1.25 rem;
+}
+
+.th-amount, .td-amount {
+  width: 20%;
+  text-align: center;
+}
+
+.th-day, .td-day {
+  width: 20%;
+  text-align: center;
+}
+
+.th-method, .td-method {
+  width: 20%;
+  text-align: center;
+}
+
+.th-month, .td-month {
+  width: 20%;
+  text-align: center;
+}
+
+.th-note, .td-note {
+  width: 20%;
+  text-align: center;
+}
+.paymentsData {
+  font-size: 1.25rem;
+}
+.paymentsTable .paymentsTableBody .td-note {
+  position: relative; /* Needed for absolute positioning of the fullNote */
+  cursor: pointer;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paymentsTable .paymentsTableBody .td-note .noteText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+td.fit {
+  width: 0;
+  min-width: fit-content;
+}
+.fullNote {
+  display: none; /* Initially hidden */
+  position: absolute;
+  right: 0;
+  top: 100%; /* Position below the td */
+  background-color: #000000; /* Background color for visibility */
+  border: 1px solid #ddd; /* Optional border */
+  padding: 5px;
+  z-index: 2; /* Ensure it's above other content */
+  width: 10vw;
+}

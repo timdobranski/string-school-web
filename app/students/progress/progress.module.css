@@ -1,0 +1,10 @@
+.nestedSection {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 40vw;
+  margin: 1rem 0rem 1rem 0rem;
+  text-align:center;
+}
+.nestedSection h1 {
+
+}

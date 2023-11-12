@@ -19,14 +19,11 @@ export default function StudentNavbar() {
         <Link href='/students/songs'>
           <h3 className={styles.navLink}>SONGS</h3>
         </Link>
-        <Link href='/students/lesson-logs'>
-          <div className={styles.navLink}>LESSON LOGS</div>
-        </Link>
         <Link href='/students/progress'>
           <div className={styles.navLink}>PROGRESS</div>
         </Link>
-        <Link href='/students/settings'>
-          <div className={styles.navLink}>SETTINGS</div>
+        <Link href='/students/payments'>
+          <div className={styles.navLink}>PAYMENTS</div>
         </Link>
         <div className={styles.profileImgContainer}>
           <Image src={googleUserData.user_metadata.picture} alt="Student Photo" fill='true' />
