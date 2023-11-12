@@ -28,9 +28,11 @@ export default function StudentNavbar() {
         <Link href='/students/payments'>
           <div className={styles.navLink}>PAYMENTS</div>
         </Link>
-        <div className={styles.profileImgContainer}>
-          <Image src={googleUserData.user_metadata.picture} alt="Student Photo" fill='true' />
-        </div>
+        <Link href='/students/settings'>
+          <div className={styles.profileImgContainer}>
+            <Image src={googleUserData.user_metadata.picture} alt="Student Photo" fill='true' />
+          </div>
+        </Link>
       </div>
     )
   } else {

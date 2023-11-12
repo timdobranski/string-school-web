@@ -15,9 +15,6 @@ export default function Songs() {
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSongs, setRecentSongs] = useState([]);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
-
-  const [showAlphaTab, setShowAlphaTab] = useState(false);
-  const [scoreData, setScoreData] = useState('');
   const Router = useRouter();
 
   const getRecentSongs = async () => {
@@ -30,7 +27,8 @@ export default function Songs() {
         gp_url
       )
     `)
-    .eq('student', supabaseUserData.student_id);
+    // .eq('student', supabaseUserData.student_id);
+    .eq('student', 21);
 
   if (error) {
     console.error('Error retrieving songs: ', error);
@@ -47,9 +45,8 @@ export default function Songs() {
   };
 
   const openFile = (file) => {
-    const fileUrl = `${encodeURIComponent(file.webContentLink)}`;
-    setScoreData(fileUrl);
-    setShowAlphaTab(true);
+    console.log('file inside recentSongs openFile: ', file);
+    Router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${file}`);
   };
 
   useEffect(() => {
@@ -97,7 +94,7 @@ export default function Songs() {
       </a>
     </span>
     <span className={styles.openButtonSpan}>
-      <button onClick={() => openFile(file.gp_url)}>
+      <button onClick={() => {console.log('file '); openFile(file.songs.gp_url)}}>
         <FontAwesomeIcon icon={faCirclePlay} className={styles.playIcon} />
         Open Here
       </button>
