@@ -1,6 +1,6 @@
 import styles from './ChooseCancellation.module.css';
 
-export default function ChooseCancellation() {
+export default function ChooseCancellation({ student }) {
 
     return (
       <div className='infoCard'>

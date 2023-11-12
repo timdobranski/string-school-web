@@ -51,19 +51,52 @@
   grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 10px; /* Adjust the gap as needed */
-  border: solid rgb(206, 206, 206) 4px;
+  /* border: solid rgb(79, 197, 243) 4px; */
   padding: 10px;
   margin: .5rem;
-  background-color: black;
+  /* background-color: black; */
+  color: white;
+  width: 50vw;
+  font-size: 1.25rem;
+}
+.searchResult button {
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+
+  border: none;
+  font-size: 1.25rem;
 }
 
 .searchResult span:nth-child(1) {
   text-align: left;
 }
+.openButtonSpan:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 
+}
 .searchResult span:nth-child(2),
 .searchResult span:nth-child(3) {
   text-align: center;
   display: flex;
   justify-content: center;
+  /* margin-left: 2rem; */
+  margin-right: 2rem;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  color: black;
+  padding: .5rem 1rem .5rem 1rem;
+}
+.searchResult span:nth-child(2):hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+
+.downloadIcon, .playIcon {
+  margin-right: 1rem;
+  color: black;
+  height: 20px;
+}
+.loading {
+  font-size: 2rem;
+  margin-top: 3rem;
 }

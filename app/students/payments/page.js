@@ -10,6 +10,8 @@ export default function Payments() {
   const [payments, setPayments] = useState([]);
   const [tooltipContent, setTooltipContent] = useState('');
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const getPayments = async () => {
     const { data, error } = await supabase
@@ -28,21 +30,24 @@ export default function Payments() {
       }
   }
 
-  const showFullNote = (note) => {
+  const handleNoteClick = (note) => {
+    console.log('handle note click ran')
     setTooltipContent(note);
-    setShowTooltip(true);
+    setIsModalOpen(true);
   };
-
-  const hideFullNote = () => {
-    setShowTooltip(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
    useEffect(() => {
     getPayments();
    }, []);
 
+
+
   return (
-    <div className='infoCard'>
+    <div>
+ <div className='infoCard'>
       <h1>Payments</h1>
       <h2 className='featureHeaders'>
         Total [Due/Past Due]:
@@ -67,23 +72,31 @@ export default function Payments() {
               <td className={`${styles['td-day']} ${styles.paymentsData}`}>{payment.day}</td>
               <td className={`${styles['td-method']} ${styles.paymentsData}`}>{payment.method}</td>
               <td className={`${styles['td-month']} ${styles.paymentsData}`}>{payment.month}</td>
-              <td
-                className={`${styles['td-note']} ${styles.paymentsData}`}
-                onMouseEnter={() => showFullNote(payment.note)}
-                onMouseLeave={() => hideFullNote()}
-              >
-                {payment.note}
-              </td>
+
+              {payment.note ? (
+                <td
+                  className={`${styles['td-note']} ${styles.paymentsData}`}
+                  onClick={() => handleNoteClick(payment.note)}
+                >
+                  {payment.note}
+                </td>
+              ) : null}
+
+
             </tr>
           ))}
         </tbody>
       </table>
-      <div
-        className={styles.fullNote}
-        style={{ display: showTooltip ? 'block' : 'none' }}
-      >
-        {tooltipContent}
-      </div>
+
     </div>
+    {isModalOpen && (
+        <div className={styles.modal} onClick={closeModal}>
+          <div className={styles.modalContent}>
+            <p>{tooltipContent}</p>
+          </div>
+        </div>
+      )}
+    </div>
+
   )
 }

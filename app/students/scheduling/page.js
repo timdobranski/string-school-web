@@ -11,6 +11,7 @@ export default function StudentScheduling() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
   // Rescheduling Steps: SchedulingHome, ChooseCancellation, ChooseNew, Confirm, Confirmed
   const [render, setRender] = useState('SchedulingHome');
+  // State to manage changes to the database
   const [cancellation, setCancellation] = useState([]);
   const [newLesson, setNewLesson] = useState([]);
   const [newSpot, setNewSpot] = useState({day: '', time: '', startDate: ''});

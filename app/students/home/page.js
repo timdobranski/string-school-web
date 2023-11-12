@@ -8,7 +8,8 @@ import Image from 'next/image'
 export default function StudentHome() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
-  console.log('user:', googleUserData);
+  console.log('google user data:', googleUserData);
+  console.log('supabase user data:', supabaseUserData);
 
 
 

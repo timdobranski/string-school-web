@@ -20,10 +20,6 @@ export default function PublicNavbar() {
       <div className={styles.navLink}>
         <Link href='/'>ABOUT ME</Link>
       </div>
-
-
-
-
     </div>
   )
 

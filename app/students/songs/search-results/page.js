@@ -5,12 +5,18 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowDown, faCirclePlay, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styles from './search-results.module.css';
+import { supabase } from '../../../../utils/supabase';
+import StudentContext, { useAuth } from '../../layout.js';
+import removeFileExtension from '../../../../utils/removeFileExtension';
+import addToRecentSongs from '../../../../utils/addToRecentSongs';
 
 const SearchResults = () => {
   const router = useRouter();
   const [searchResults, setSearchResults] = useState([]);
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
+  const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
+
 
 
   const query = searchParams.get('query')
@@ -38,9 +44,13 @@ const SearchResults = () => {
       console.error('Failed to fetch:', error);
     }
   };
+
+
   const openFile = (file) => {
+    // console.log('supabaseUserData: ', supabaseUserData);
+    addToRecentSongs(supabaseUserData.student_id, file);
     const fileUrl = `${encodeURIComponent(file.webContentLink)}`;
-    router.push(`/students/alphatab-player?fileUrl=${fileUrl}`);
+    router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${fileUrl}`);
   };
 
   return (

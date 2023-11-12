@@ -16,7 +16,7 @@ export default function AlphaTab({ scoreData }) {
     key={scoreData}
     src={`http://localhost:3001/alphatab?songFile=${scoreData}`}
     width="100%"
-    height="100%"
+    height="1000px"
     style={{
       border: 'none',
     }}

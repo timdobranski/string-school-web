@@ -7,7 +7,9 @@ export default function Progress() {
 
       <div className={styles.nestedSection}>
         <h1 className='featureHeaders'>Setlist</h1>
-
+        <div>
+          <p></p>
+        </div>
       </div>
       <div className={styles.nestedSection}>
         <h1 className='featureHeaders'>Skills</h1>

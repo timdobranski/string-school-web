@@ -22,6 +22,9 @@ export default function StudentNavbar() {
         <Link href='/students/progress'>
           <div className={styles.navLink}>PROGRESS</div>
         </Link>
+        <Link href='/students/practice'>
+          <div className={styles.navLink}>PRACTICE</div>
+        </Link>
         <Link href='/students/payments'>
           <div className={styles.navLink}>PAYMENTS</div>
         </Link>

@@ -1,21 +1,44 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Songs.module.css';
 import AlphaTab from '../../../components/AlphaTab/AlphaTab.js';
-import { useAuth } from '../layout.js';
+import StudentContext, { useAuth } from '../layout.js';
 import { useRouter } from 'next/navigation';
+import { supabase } from '../../../utils/supabase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleArrowDown, faCirclePlay, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Songs() {
-  const { user, session, signOut } = useAuth();
   const [searchType, setSearchType] = useState('song'); // 'song' or 'artist'
-  const [searchQuery, setSearchQuery] = useState('dose');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [recentSongs, setRecentSongs] = useState([]);
+  const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
   const [showAlphaTab, setShowAlphaTab] = useState(false);
   const [scoreData, setScoreData] = useState('');
   const Router = useRouter();
 
+  const getRecentSongs = async () => {
+    const { data, error } = await supabase
+    .from('recent_songs')
+    .select(`
+      song,
+      songs (
+        title,
+        gp_url
+      )
+    `)
+    .eq('student', supabaseUserData.student_id);
+
+  if (error) {
+    console.error('Error retrieving songs: ', error);
+  } else {
+    console.log('Retrieved songs: ', data);
+    setRecentSongs(data);
+  }
+  };
 
   const searchHandler = async () => {
   console.log('router params: ', searchQuery, searchType);
@@ -29,10 +52,12 @@ export default function Songs() {
     setShowAlphaTab(true);
   };
 
+  useEffect(() => {
+    getRecentSongs();
+  }, [supabaseUserData]);
+
   return (
     <main className='infoCard'>
-      {/* <h1 className='sectionHeaders'>SONGS</h1> */}
-
       <div className={styles.searchContainer}>
         <h2 className='featureHeaders'>Search The Song Library</h2>
         <div className={styles.searchInputContainer}>
@@ -45,6 +70,11 @@ export default function Songs() {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              searchHandler();
+            }
+          }}
           placeholder={`Search for ${searchType}s`}
         />
       </div>
@@ -56,10 +86,28 @@ export default function Songs() {
 
 
       <h2 className='featureHeaders'>Recent Songs</h2>
+      {recentSongs.length > 0 ? (
+ recentSongs.map((file, index) => (
+  <div key={index} className={styles.searchResult}>
+    <span>{file.songs.title}</span>
+    <span>
+      <a href={file.songs.gp_url} download>
+        <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
+        Download for Guitar Pro
+      </a>
+    </span>
+    <span className={styles.openButtonSpan}>
+      <button onClick={() => openFile(file.gp_url)}>
+        <FontAwesomeIcon icon={faCirclePlay} className={styles.playIcon} />
+        Open Here
+      </button>
+    </span>
+  </div>
+))
+      ): null}
 
-
-
-      {showAlphaTab && <AlphaTab scoreData={scoreData}/>}
     </main>
   );
+
+
 }
