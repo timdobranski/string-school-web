@@ -3,6 +3,7 @@
 import styles from './payments.module.css';
 import { supabase } from '../../../utils/supabase';
 import { useState, useEffect } from 'react';
+import StudentContext, { useAuth } from '../layout.js';
 import formatDate from '../../../utils/dateFormatter';
 
 export default function Payments() {
@@ -11,13 +12,14 @@ export default function Payments() {
   const [tooltipContent, setTooltipContent] = useState('');
   const [showTooltip, setShowTooltip] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
 
   const getPayments = async () => {
     const { data, error } = await supabase
       .from('payments')
       .select('*')
-      .eq('student', 21)
+      .eq('student', supabaseUserData.student_id)
       .order('day', { ascending: false });
       if(error) {
         console.log('error: ', error);
@@ -48,12 +50,12 @@ export default function Payments() {
   return (
     <div>
  <div className='infoCard'>
-      <h1>Payments</h1>
+      <h1 className='sectionHeaders'>Payments</h1>
       <h2 className='featureHeaders'>
         Total [Due/Past Due]:
       </h2>
-      <p>$[amount]</p>
-
+      <p className={styles.amountDue}>$[amount]</p>
+      <h1 className='sectionHeaders'>Payment History</h1>
       <table className={styles.paymentsTable}>
         <thead>
         <tr className={styles.paymentsHeaderRow}>

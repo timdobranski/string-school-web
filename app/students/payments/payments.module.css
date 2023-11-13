@@ -112,3 +112,7 @@ td.fit {
   text-decoration: none;
   cursor: pointer;
 }
+
+.amountDue {
+  margin-bottom: 2rem;
+}

@@ -27,8 +27,8 @@ export default function Songs() {
         gp_url
       )
     `)
-    // .eq('student', supabaseUserData.student_id);
-    .eq('student', 21);
+    .eq('student', supabaseUserData.student_id);
+    // .eq('student', 21);
 
   if (error) {
     console.error('Error retrieving songs: ', error);
