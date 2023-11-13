@@ -40,7 +40,6 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
     }
     // Calculate the date of the next n lessons depending on how many are needed minus makeups
     function calculateRegularLessons(studentData, numberOfLessons, cancellationSet) {
-      console.log('studentData: ', studentData);
       const regularDay = getDayNumber(studentData.day);
       const regularTime = studentData.time; // Assuming format like "15:00"
       const newDay = studentData.new_day ? getDayNumber(studentData.new_day) : null;
@@ -58,17 +57,20 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
           milliseconds: 0
       });
 
-      while (lessons.length < numberOfLessons) {
-          let lessonDay = regularDay;
-          let lessonTime = regularTime;
-          let lessonType = 'regular';
+      let isUsingNewSchedule = false;
 
-          // Switch to new schedule if current date is past new start date
-          if (newStart && nextLessonDate >= newStart) {
+      while (lessons.length < numberOfLessons) {
+          let lessonDay = isUsingNewSchedule ? newDay : regularDay;
+          let lessonTime = isUsingNewSchedule ? newTime : regularTime;
+          let lessonType = isUsingNewSchedule ? 'new spot' : 'regular';
+
+          if (newStart && nextLessonDate >= newStart && !isUsingNewSchedule) {
+              isUsingNewSchedule = true;
               lessonDay = newDay !== null ? newDay : lessonDay;
               lessonTime = newTime || lessonTime;
               lessonType = 'new spot';
-              nextLessonDate = nextDay(nextLessonDate, lessonDay);
+              // Adjust nextLessonDate to the new schedule
+              nextLessonDate = nextDay(startOfDay(nextLessonDate), lessonDay);
           }
 
           nextLessonDate = set(nextLessonDate, {
@@ -85,9 +87,9 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
           }
 
           // Move to the next week
-          nextLessonDate = addWeeks(nextLessonDate, 1);
+          nextLessonDate = addWeeks(startOfDay(nextLessonDate), 1);
       }
-      console.log('regular lessons just before return: ', lessons);
+
       return lessons;
   }
 
@@ -137,7 +139,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
 
       // Add cancellations with type
       cancellations.forEach(cancellation => {
-        console.log('cancellation inside forEach: ', cancellation)
+        // console.log('cancellation inside forEach: ', cancellation)
           lessons.push({
               date: cancellation.date,
               time: cancellation.time,
@@ -160,7 +162,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
 
       // Add regular lessons with type
       regularLessons.forEach(lesson => {
-        console.log('note: ', lesson.note);
+        // console.log('note: ', lesson.note);
           lessons.push({
               ...lesson,
               type: lesson.type,
@@ -169,7 +171,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
       // Sort lessons by date
       lessons = sortLessonsByDate(lessons);
 
-      console.log('lessons: ', lessons);
+      // console.log('lessons: ', lessons);
       // Format lessons and return
       return lessons.map(lesson => ({
           date: formatDate(lesson.date),

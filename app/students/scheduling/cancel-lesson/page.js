@@ -10,7 +10,7 @@ export default function CancellationPage() {
   const student = {id: 21}
   // Components needed:
 
-  // List of upcoming lessons
+  // List of upcoming lessons [check]
   // Confirmation?
   // Confirmed
 
@@ -32,7 +32,9 @@ export default function CancellationPage() {
   }, []);
 
   useEffect(() => {
+    console.log('scheduleDates: ', scheduleDates);
     const upcomingLessons = scheduleDates.map((lesson, index) => {
+
       const { rowClassName, dateClassName, typeClassName } = getLessonClassNames(lesson.type, styles);
 
       // Check if the lesson type is a cancellation and render a custom message
