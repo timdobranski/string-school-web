@@ -27,8 +27,9 @@ export default function StudentScheduling() {
       <div className='infoCard'>
 
         <h1 className='sectionHeaders'>SCHEDULING</h1>
-
-        <h2 className='featureHeaders'>Cancel A Lesson</h2>
+        <Link href='/students/scheduling/cancel-lesson'>
+          <h2 className='featureHeaders'>Cancel A Lesson</h2>
+        </Link>
         <p className='featureComments'>Cancel now & reschedule later</p>
 
         <h2 className='featureHeaders'>Reschedule A Lesson</h2>

@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Economica';
-  font-style: normal;
-  font-weight: 200;
+  /* font-style: normal;
+  font-weight: 200; */
   src: url('../public/fonts/Economica-Regular.ttf');
 }
 @font-face {
@@ -21,6 +21,10 @@
   font-style: normal;
   font-weight: 200;
   src: url('../public/fonts/JosefinSans.ttf');
+}
+@font-face {
+  font-family: 'SanFrancisco';
+  src: url('../public/fonts/SFNSText-Regular.otf') format('truetype');
 }
 
 :root {
@@ -126,11 +130,14 @@ a {
   /* font-family: Economica; */
   margin-top: 2rem;
   font-size: 2rem;
-  /* text-decoration: underline; */
-  margin-bottom: 1rem;
+  text-decoration: underline;
+  margin-bottom: 0rem;
+  font-weight: 800;
+  line-height: 1.2;
 }
 .featureComments {
   font-style:italic;
-  color: #cccccc;
+  font-family: SanFrancisco;
+  color: #ababab;
 
 }

@@ -1,0 +1,39 @@
+.lessonsTable {
+  width: 100%; /* Full-width table */
+  border-collapse: collapse; /* Optional: removes the space between the borders of each cell */
+  font-size: 1.25rem;
+}
+
+/* Style for table headers */
+.lessonsTable th {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Style for table cells */
+.lessonsTable td {
+  text-align: center;
+  vertical-align: middle; /* This will vertically center the text in the cells */
+  padding: 10px; /* Optional: adds some padding inside each cell */
+}
+
+/* Additional styling for cancellation rows, if needed */
+.cancellationDate {
+  text-decoration: line-through;
+  color: rgb(215, 119, 119);
+}
+.cancellationType {
+  color: rgb(215, 119, 119);
+}
+
+/* Additional styling for regular rows, if needed */
+.regularRow td {
+  /* Styles specific to regular rows */
+}
+
+.instructions {
+  margin: 2rem 0 3rem 0;;
+}
+.lessonHeader {
+
+}

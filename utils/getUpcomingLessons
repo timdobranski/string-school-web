@@ -1,0 +1,168 @@
+import { supabase } from './supabase';
+import { format, parseISO, addWeeks, set, getDay, startOfDay, isValid, nextDay } from 'date-fns';
+
+export default async function getUpcomingLessons(studentId, numberOfLessons) {
+
+    async function getStudentData(studentId) {
+        let { data, error } = await supabase
+            .from('students')
+            .select('*')
+            .eq('id', studentId)
+            .single();
+
+        if (error) throw error;
+        return data;
+    }
+
+    async function getCancellations(studentId) {
+      let { data, error } = await supabase
+          .from('cancellations')
+          .select('*, users(first_name)')
+          .eq('student', studentId);
+          console.log("Cancellations:", data);
+      if (error) throw error;
+      return data;
+  }
+
+  async function getMakeups(studentId) {
+    let { data, error } = await supabase
+        .from('makeups')
+        .select('*, users(first_name)')
+        .eq('student', studentId);
+
+    if (error) throw error;
+    return data;
+}
+
+    function getDayNumber(dayString) {
+      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      return daysOfWeek.indexOf(dayString);
+    }
+
+    function calculateRegularLessons(studentData, numberOfLessons) {
+      const regularDay = getDayNumber(studentData.day);
+      const regularTime = studentData.time; // Assuming format like "15:00"
+      const newDay = studentData.new_day ? getDayNumber(studentData.new_day) : null;
+      const newTime = studentData.new_time;
+      const newStart = studentData.new_start_date ? parseISO(studentData.new_start_date) : null;
+
+      let lessons = [];
+      let currentDate = startOfDay(new Date()); // Start from today
+
+      // Calculate the date of the next lesson
+      let nextLessonDate = nextDay(currentDate, regularDay);
+      nextLessonDate = set(nextLessonDate, {
+          hours: parseInt(regularTime.split(':')[0]),
+          minutes: parseInt(regularTime.split(':')[1]),
+          seconds: 0,
+          milliseconds: 0
+      });
+
+      while (lessons.length < numberOfLessons) {
+          let lessonDay = regularDay;
+          let lessonTime = regularTime;
+
+          // Switch to new schedule if current date is past new start date
+          if (newStart && nextLessonDate >= newStart) {
+              lessonDay = newDay !== null ? newDay : lessonDay;
+              lessonTime = newTime || lessonTime;
+              nextLessonDate = nextDay(nextLessonDate, lessonDay);
+          }
+
+          nextLessonDate = set(nextLessonDate, {
+              hours: parseInt(lessonTime.split(':')[0]),
+              minutes: parseInt(lessonTime.split(':')[1]),
+              seconds: 0,
+              milliseconds: 0
+          });
+
+          lessons.push({ date: nextLessonDate, day: studentData.day, time: lessonTime });
+          nextLessonDate = addWeeks(nextLessonDate, 1); // Move to the next week
+      }
+
+      return lessons;
+  }
+
+  function formatDate(dateInput) {
+    // Check if the input is a string or a Date object
+    let date;
+    if (typeof dateInput === 'string') {
+        // Parse the string into a Date object
+        date = parseISO(dateInput);
+    } else if (dateInput instanceof Date) {
+        // Use the Date object as-is
+        date = dateInput;
+    } else {
+        console.error('Invalid date input:', dateInput);
+        return 'Invalid Date';
+    }
+
+    // Check if the date is valid
+    if (!isValid(date)) {
+        console.error('Invalid date after parsing:', dateInput, date);
+        return 'Invalid Date';
+    }
+
+    try {
+        // Format the date
+        return format(date, "EEEE, MMMM do");
+    } catch (error) {
+        console.error('Error formatting date:', dateInput, date, error);
+        return 'Error in Date Format';
+    }
+}
+
+    function sortLessonsByDate(lessons) {
+      return lessons.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    async function createObjects(studentId, number) {
+      const studentData = await getStudentData(studentId);
+      const cancellations = await getCancellations(studentId);
+      const makeups = await getMakeups(studentId);
+      const regularLessons = calculateRegularLessons(studentData, number);
+
+      let lessons = [];
+
+      // Add cancellations with type
+      cancellations.forEach(cancellation => {
+          lessons.push({
+              ...cancellation,
+              type: 'cancellation',
+              createdByFirstName: cancellation.users.first_name
+          });
+      });
+
+      // Add makeups with type
+      makeups.forEach(makeup => {
+          lessons.push({
+              ...makeup,
+              type: 'makeup',
+              createdByFirstName: makeup.users.first_name
+          });
+      });
+
+      // Add regular lessons with type
+      regularLessons.forEach(lesson => {
+          lessons.push({
+              ...lesson,
+              type: 'regular'
+          });
+      });
+
+      // Sort lessons by date
+      lessons = sortLessonsByDate(lessons);
+
+      // Format lessons and return
+      return lessons.map(lesson => ({
+          date: formatDate(lesson.date),
+          day: lesson.day || studentData.day, // Use studentData.day if lesson.day is undefined
+          time: lesson.time,
+          type: lesson.type,
+          note: lesson.note,
+          createdBy: lesson.createdBy
+      }));
+  }
+
+    return await createObjects(studentId, numberOfLessons);
+}
