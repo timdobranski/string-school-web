@@ -1,11 +1,10 @@
 'use client';
 
-// import getDates from '../../../../utils/getDates';
 import getUpcomingLessons from '../../../../utils/getUpcomingLessons';
 import { supabase } from '../../../../utils/supabase';
 import { useState, useEffect } from 'react';
 import styles from './cancel-lesson.module.css';
-// import populateScheduleDates from '../../../../utils/getDates';
+import { getLessonClassNames } from '../../../../utils/getLessonClassNames';
 
 export default function CancellationPage() {
   const student = {id: 21}
@@ -33,16 +32,24 @@ export default function CancellationPage() {
   }, []);
 
   useEffect(() => {
-  console.log('scheduleDates: ', scheduleDates);
-  const upcomingLessons = scheduleDates.map((lesson, index) => (
-    <tr key={index} className={styles.regularRow}>
-    <td className={`${styles.lesson} ${lesson.type === 'cancellation' ? styles.cancellationRow : ''}`}>{lesson.date}</td>
-    <td className={styles.lessonType}>{lesson.type}</td>
-    <td className={styles.lessonNote}>{lesson.note || 'N/A'}</td>
-  </tr>
-  ));
-  setUpcomingLessons(upcomingLessons)
-  }, [scheduleDates])
+    const upcomingLessons = scheduleDates.map((lesson, index) => {
+      const { rowClassName, dateClassName, typeClassName } = getLessonClassNames(lesson.type, styles);
+
+      // Check if the lesson type is a cancellation and render a custom message
+      const lessonTypeDisplay = lesson.type === 'cancellation'
+        ? `Cancelled by ${lesson.createdBy}`
+        : lesson.type;
+
+      return (
+        <tr key={index} className={rowClassName}>
+          <td className={`${styles.lesson} ${dateClassName}`}>{`${lesson.date} @ ${lesson.time}`}</td>
+          <td className={`${styles.lessonType} ${typeClassName}`}>{lessonTypeDisplay}</td>
+          <td className={styles.lessonNote}>{lesson.note || '-'}</td>
+        </tr>
+      );
+    });
+    setUpcomingLessons(upcomingLessons);
+  }, [scheduleDates]);
 
 
 

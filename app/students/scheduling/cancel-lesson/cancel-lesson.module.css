@@ -20,10 +20,10 @@
 /* Additional styling for cancellation rows, if needed */
 .cancellationDate {
   text-decoration: line-through;
-  color: rgb(215, 119, 119);
+  color: rgb(226, 83, 117);
 }
-.cancellationType {
-  color: rgb(215, 119, 119);
+.cancellation {
+  color: rgb(226, 83, 117);
 }
 
 /* Additional styling for regular rows, if needed */
@@ -34,6 +34,10 @@
 .instructions {
   margin: 2rem 0 3rem 0;;
 }
-.lessonHeader {
 
+.newSpotDate, .newSpot {
+  color: rgb(41, 255, 41);
+}
+.makeupDate, .makeup {
+  color: rgb(41, 255, 41);
 }

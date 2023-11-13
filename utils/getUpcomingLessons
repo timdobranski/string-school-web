@@ -38,18 +38,18 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
       const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       return daysOfWeek.indexOf(dayString);
     }
-
+    // Calculate the date of the next n lessons depending on how many are needed minus makeups
     function calculateRegularLessons(studentData, numberOfLessons, cancellationSet) {
+      console.log('studentData: ', studentData);
       const regularDay = getDayNumber(studentData.day);
       const regularTime = studentData.time; // Assuming format like "15:00"
       const newDay = studentData.new_day ? getDayNumber(studentData.new_day) : null;
       const newTime = studentData.new_time;
-      const newStart = studentData.new_start_date ? parseISO(studentData.new_start_date) : null;
+      const newStart = studentData.new_spot_start_date ? parseISO(studentData.new_spot_start_date) : null;
 
       let lessons = [];
       let currentDate = startOfDay(new Date()); // Start from today
 
-      // Calculate the date of the next lesson
       let nextLessonDate = nextDay(currentDate, regularDay);
       nextLessonDate = set(nextLessonDate, {
           hours: parseInt(regularTime.split(':')[0]),
@@ -61,11 +61,13 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
       while (lessons.length < numberOfLessons) {
           let lessonDay = regularDay;
           let lessonTime = regularTime;
+          let lessonType = 'regular';
 
           // Switch to new schedule if current date is past new start date
           if (newStart && nextLessonDate >= newStart) {
               lessonDay = newDay !== null ? newDay : lessonDay;
               lessonTime = newTime || lessonTime;
+              lessonType = 'new spot';
               nextLessonDate = nextDay(nextLessonDate, lessonDay);
           }
 
@@ -76,17 +78,16 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
               milliseconds: 0
           });
 
-          // Format date and time for comparison
           const lessonDateTimeString = `${format(nextLessonDate, "yyyy-MM-dd")}-${lessonTime}`;
 
-          // Skip if this date-time is in the cancellation set
           if (!cancellationSet.has(lessonDateTimeString)) {
-              lessons.push({ date: nextLessonDate, day: studentData.day, time: lessonTime });
+              lessons.push({ date: nextLessonDate, day: studentData.day, time: lessonTime, type: lessonType });
           }
 
-          nextLessonDate = addWeeks(nextLessonDate, 1); // Move to the next week
+          // Move to the next week
+          nextLessonDate = addWeeks(nextLessonDate, 1);
       }
-
+      console.log('regular lessons just before return: ', lessons);
       return lessons;
   }
 
@@ -162,7 +163,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
         console.log('note: ', lesson.note);
           lessons.push({
               ...lesson,
-              type: 'regular',
+              type: lesson.type,
           });
       });
       // Sort lessons by date
