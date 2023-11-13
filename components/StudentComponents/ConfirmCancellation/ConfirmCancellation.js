@@ -45,7 +45,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
     }
   };
 
-  const regularMessage = (
+  const cancelMessage = (
     <>
       <p>Are you sure you want to cancel this lesson?</p>
       <p>This will cancel your lesson and apply one make-up credit to your account. </p>
@@ -62,7 +62,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
       <h1 className='featureHeaders'>Confirm</h1>
       <div className={styles.confirmMessageContainer}>
         <p className={styles.cancelDate}>{`${cancellation.dateString} @ ${cancellation.time}`}</p>
-        {cancelType === 'regular' || cancelType === 'new spot' ? regularMessage : uncancelMessage}
+        {cancelType === 'regular' || cancelType === 'new spot' || cancelType === 'makeup' ? cancelMessage : uncancelMessage}
       </div>
       <input
         type='text'
