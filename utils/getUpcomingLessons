@@ -39,7 +39,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
       return daysOfWeek.indexOf(dayString);
     }
 
-    function calculateRegularLessons(studentData, numberOfLessons) {
+    function calculateRegularLessons(studentData, numberOfLessons, cancellationSet) {
       const regularDay = getDayNumber(studentData.day);
       const regularTime = studentData.time; // Assuming format like "15:00"
       const newDay = studentData.new_day ? getDayNumber(studentData.new_day) : null;
@@ -76,7 +76,14 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
               milliseconds: 0
           });
 
-          lessons.push({ date: nextLessonDate, day: studentData.day, time: lessonTime });
+          // Format date and time for comparison
+          const lessonDateTimeString = `${format(nextLessonDate, "yyyy-MM-dd")}-${lessonTime}`;
+
+          // Skip if this date-time is in the cancellation set
+          if (!cancellationSet.has(lessonDateTimeString)) {
+              lessons.push({ date: nextLessonDate, day: studentData.day, time: lessonTime });
+          }
+
           nextLessonDate = addWeeks(nextLessonDate, 1); // Move to the next week
       }
 
@@ -120,8 +127,10 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
       const studentData = await getStudentData(studentId);
       const cancellations = await getCancellations(studentId);
       const makeups = await getMakeups(studentId);
-      const regularLessons = calculateRegularLessons(studentData, number);
-      console.log('cancellations: ', cancellations);
+      // const regularLessons = calculateRegularLessons(studentData, number);
+      const cancellationSet = new Set(cancellations.map(c => `${c.date}-${c.time}`));
+      const numberOfRegularLessons = number - makeups.length;
+      const regularLessons = calculateRegularLessons(studentData, numberOfRegularLessons, cancellationSet);
 
       let lessons = [];
 
