@@ -19,7 +19,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
           .from('cancellations')
           .select('*, users(first_name)')
           .eq('student', studentId);
-          console.log("Cancellations:", data);
+          // console.log("Cancellations:", data);
       if (error) throw error;
       return data;
   }
@@ -121,38 +121,45 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
       const cancellations = await getCancellations(studentId);
       const makeups = await getMakeups(studentId);
       const regularLessons = calculateRegularLessons(studentData, number);
+      console.log('cancellations: ', cancellations);
 
       let lessons = [];
 
       // Add cancellations with type
       cancellations.forEach(cancellation => {
+        console.log('cancellation inside forEach: ', cancellation)
           lessons.push({
-              ...cancellation,
+              date: cancellation.date,
+              time: cancellation.time,
               type: 'cancellation',
-              createdByFirstName: cancellation.users.first_name
+              note: cancellation.note,
+              createdBy: cancellation.users.first_name
           });
       });
 
       // Add makeups with type
       makeups.forEach(makeup => {
           lessons.push({
-              ...makeup,
+              date: makeup.date,
+              time: makeup.time,
               type: 'makeup',
-              createdByFirstName: makeup.users.first_name
+              note: makeup.note,
+              createdBy: makeup.users.first_name
           });
       });
 
       // Add regular lessons with type
       regularLessons.forEach(lesson => {
+        console.log('note: ', lesson.note);
           lessons.push({
               ...lesson,
-              type: 'regular'
+              type: 'regular',
           });
       });
-
       // Sort lessons by date
       lessons = sortLessonsByDate(lessons);
 
+      console.log('lessons: ', lessons);
       // Format lessons and return
       return lessons.map(lesson => ({
           date: formatDate(lesson.date),

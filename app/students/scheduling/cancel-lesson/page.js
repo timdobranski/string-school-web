@@ -16,19 +16,37 @@ export default function CancellationPage() {
   // Confirmed
 
   const [scheduleDates, setScheduleDates] = useState([]);
+  const [upcomingLessons, setUpcomingLessons] = useState([]);
 
   useEffect(() => {
-    // populateScheduleDates(student, 10, setScheduleDates);
-    console.log('lesson dates: ', getUpcomingLessons(student.id, 10));
-  }, [])
+    async function fetchScheduleDates() {
+      try {
+        const dates = await getUpcomingLessons(student.id, 10);
+        setScheduleDates(dates);
+      } catch (error) {
+        console.error("Error fetching schedule dates:", error);
+        // Handle the error appropriately
+      }
+    }
 
+    fetchScheduleDates();
+  }, []);
+
+  useEffect(() => {
+  console.log('scheduleDates: ', scheduleDates);
   const upcomingLessons = scheduleDates.map((lesson, index) => (
     <tr key={index} className={styles.regularRow}>
-    <td className={`${styles.lessonString} ${lesson.type === 'cancellation' ? styles.cancellationRow : ''}`}>{lesson.string}</td>
+    <td className={`${styles.lesson} ${lesson.type === 'cancellation' ? styles.cancellationRow : ''}`}>{lesson.date}</td>
     <td className={styles.lessonType}>{lesson.type}</td>
     <td className={styles.lessonNote}>{lesson.note || 'N/A'}</td>
   </tr>
   ));
+  setUpcomingLessons(upcomingLessons)
+  }, [scheduleDates])
+
+
+
+
 
 
   return (
@@ -44,7 +62,7 @@ export default function CancellationPage() {
       </tr>
     </thead>
     <tbody>
-      {upcomingLessons}
+      {scheduleDates ? upcomingLessons : <h2>Loading...</h2>}
     </tbody>
   </table>
     </div>
