@@ -1,23 +1,23 @@
 'use client';
 
-import getUpcomingLessons from '../../../../utils/getUpcomingLessons';
 import { supabase } from '../../../../utils/supabase';
 import { useState, useEffect } from 'react';
 import styles from './cancel-lesson.module.css';
-import UpcomingLessons from '../../../../components/StudentComponents/UpcomingLessons/UpcomingLessons';
+import getUpcomingLessons from '../../../../utils/getUpcomingLessons';
 import ChooseCancellation from '../../../../components/StudentComponents/ChooseCancellation/ChooseCancellation';
+import ConfirmCancellation from '../../../../components/StudentComponents/ConfirmCancellation/ConfirmCancellation';
+import CancellationConfirmed from '../../../../components/StudentComponents/CancellationConfirmed/CancellationConfirmed';
 
 export default function CancellationPage() {
+  const [step, setStep] = useState(1);
+  // !!!!!!!!!!!!! NEED TO UPDATE TO REAL STUDENT ID !!!!!!!!!!!!!
   const student = {id: 21}
-  // Components needed:
-
-  // List of upcoming lessons [check]
-  // Confirmation?
-  // Confirmed
 
   const [scheduleDates, setScheduleDates] = useState([]);
   const [upcomingLessons, setUpcomingLessons] = useState([]);
+  const [cancellation, setCancellation] = useState({time: '', note: '', createdBy: '', dbDate: ''});
 
+  // get upcoming lessons
   useEffect(() => {
     async function fetchScheduleDates() {
       try {
@@ -28,26 +28,30 @@ export default function CancellationPage() {
         // Handle the error appropriately
       }
     }
-
     fetchScheduleDates();
   }, []);
 
+  // set upcoming lessons
   useEffect(() => {
-
     setUpcomingLessons(upcomingLessons);
   }, [scheduleDates]);
 
-
-
-
-
+  useEffect(() => {
+    console.log('cancellation: ', cancellation)
+  }, [cancellation]);
 
   return (
     <div className='infoCard'>
-      {/* <h1 className='sectionHeaders'>Cancel Lesson</h1>
-      <p className={styles.instructions}>{`Choose the lesson you'd like to cancel from the list of upcoming lessons below:`}</p>
-      <UpcomingLessons scheduleDates={scheduleDates} /> */}
-      <ChooseCancellation scheduleDates={scheduleDates} />
+      { step === 1 ? <ChooseCancellation
+        scheduleDates={scheduleDates}
+        setCancellation={setCancellation}
+        setStep={setStep} /> : null}
+      { step === 2 ? <ConfirmCancellation
+        scheduleDates={scheduleDates}
+        setCancellation={setCancellation}
+        cancellation={cancellation}
+        setStep={setStep} /> : null}
+      { step === 3 ? <CancellationConfirmed scheduleDates={scheduleDates} setStep={setStep} /> : null}
     </div>
   )
 }

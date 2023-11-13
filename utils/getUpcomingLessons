@@ -1,6 +1,15 @@
 import { supabase } from './supabase';
 import { format, parseISO, addWeeks, set, getDay, startOfDay, isValid, nextDay } from 'date-fns';
 
+
+// retrieves an array of a student's upcoming lessons
+// makeups and cancellations are included first
+// then regular lessons are added by calculating from the student's regular day/time
+// takes a student id, and a number of lessons. Cancellations don't count toward the number,
+// but are still returned anyway.
+
+// sample output: [{date, time, type, note, createdBy, id, }]...
+
 export default async function getUpcomingLessons(studentId, numberOfLessons) {
 
     async function getStudentData(studentId) {
@@ -139,7 +148,7 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
 
       // Add cancellations with type
       cancellations.forEach(cancellation => {
-        console.log('cancellation inside forEach: ', cancellation)
+        // console.log('cancellation inside forEach: ', cancellation)
           lessons.push({
               date: cancellation.date,
               time: cancellation.time,

@@ -37,3 +37,33 @@
 .makeupDate, .makeup {
   color: rgb(41, 255, 41);
 }
+.modal {
+ position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  background-color: rgba(0, 0, 0, .6);
+  /* backdrop-filter: blur(20px); */
+
+}
+.modalContent {
+  font-size: 1.5rem;
+  border: solid red 4px;
+  height: 10vh;
+  background: black;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.lesson:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  text-decoration: underline;
+}

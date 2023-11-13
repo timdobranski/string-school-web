@@ -1,0 +1,30 @@
+.confirmContainer {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.confirmMessageContainer {
+  margin: 2rem;
+}
+.confirmContainer input {
+  display: block;
+  font-size: 1.25rem;
+  padding: .5rem;
+  width: 75%;
+  margin: 1rem;
+}
+
+.confirmContainer button {
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  padding: .5rem 1rem .5rem 1rem;
+  border: none;
+  font-size: 1.25rem;
+}
+.cancelDate {
+  margin: 1rem;
+  text-decoration: underline;
+}

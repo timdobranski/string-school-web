@@ -18,10 +18,10 @@ export default function StudentScheduling() {
 
 
   if (googleUserData) {
-    console.log('"student" inside scheduling:', student);
-    console.log('"supabaseuserdata" inside scheduling:', supabaseUserData);
-    console.log('"googleUserData" inside scheduling:', googleUserData);
-    console.log('"session" inside scheduling:', session);
+    // console.log('"student" inside scheduling:', student);
+    // console.log('"supabaseuserdata" inside scheduling:', supabaseUserData);
+    // console.log('"googleUserData" inside scheduling:', googleUserData);
+    // console.log('"session" inside scheduling:', session);
 
     return (
       <div className='infoCard'>
