@@ -139,13 +139,15 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
 
       // Add cancellations with type
       cancellations.forEach(cancellation => {
-        // console.log('cancellation inside forEach: ', cancellation)
+        console.log('cancellation inside forEach: ', cancellation)
           lessons.push({
               date: cancellation.date,
               time: cancellation.time,
               type: 'cancellation',
               note: cancellation.note,
-              createdBy: cancellation.users.first_name
+              createdBy: cancellation.users.first_name,
+              created_at: cancellation.created_at,
+              id: cancellation.id
           });
       });
 
@@ -156,18 +158,22 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
               time: makeup.time,
               type: 'makeup',
               note: makeup.note,
-              createdBy: makeup.users.first_name
+              createdBy: makeup.users.first_name,
+              id: makeup.id
           });
       });
 
       // Add regular lessons with type
       regularLessons.forEach(lesson => {
-        // console.log('note: ', lesson.note);
-          lessons.push({
-              ...lesson,
-              type: lesson.type,
-          });
-      });
+        // Format the date in 'YYYY-MM-DD' format for the database
+        const dbDate = format(lesson.date, "yyyy-MM-dd");
+
+        lessons.push({
+            ...lesson,
+            dbDate, // Add this formatted date for database use
+            type: lesson.type,
+        });
+    });
       // Sort lessons by date
       lessons = sortLessonsByDate(lessons);
 
@@ -179,7 +185,10 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
           time: lesson.time,
           type: lesson.type,
           note: lesson.note,
-          createdBy: lesson.createdBy
+          createdBy: lesson.createdBy,
+          created_at: lesson.created_at,
+          id: lesson.id,
+          dbDate: lesson.dbDate
       }));
   }
 
