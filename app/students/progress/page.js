@@ -20,6 +20,7 @@ export default function Progress() {
     if (error) {
       console.log('error: ', error);
     } else {
+      console.log('lesson logs: ', data);
       setLessonLogs(data);
     }
   };
@@ -36,7 +37,7 @@ export default function Progress() {
     if (error) {
       console.log('error: ', error);
     } else {
-      console.log('data: ', data);
+      console.log('setlist: ', data);
       // Assuming you want to extract songs data from the joined results
       const songsData = data.map(item => item.songs);
       setSetlist(songsData);
@@ -56,30 +57,45 @@ export default function Progress() {
       <div className='infoCard'>
         <h1 className='sectionHeader'>Progress</h1>
 
-        <div className={styles.nestedSection}>
+
           <h1 className='featureHeaders'>Setlist</h1>
           <p className='featureComments'>{`All The Songs You've Learned`}</p>
-          <div>
-            <p></p>
-          </div>
-        </div>
-        <div className={styles.nestedSection}>
-          <h1 className='featureHeaders'>Skills</h1>
-          <p className='featureComments'>{`Skills You've Learned, Shown In Relation To Different Skills Paths`}</p>
-
-        </div>
-        <div className={styles.nestedSection}>
-          <h1 className='featureHeaders'>Lesson Logs</h1>
-          <p className='featureComments'>Updates From Me</p>
-          {lessonLogs.map((log) => {
+          {setlist.map((song) => {
             return (
-              <div key={log.id} className={styles.lessonLog}>
-                <h2 className={styles.lessonLogHeader}>{log.title}</h2>
-                <p className={styles.lessonLogContent}>{log.text}</p>
+              <div key={song.id} className={styles.lessonLog}>
+                <h2 className={styles.songTitle}>{song.title}</h2>
               </div>
             )
           })}
-        </div>
+
+
+
+          <h1 className='featureHeaders'>Skills</h1>
+          <p className='featureComments'>{`Skills You've Learned, Shown In Relation To Different Skills Paths`}</p>
+
+
+
+          <h1 className='featureHeaders'>Lesson Logs</h1>
+          <p className='featureComments'>Updates From Me</p>
+          <table className={styles.lessonLogsTable}>
+  <thead>
+    <tr>
+      <th className={styles.lessonLogHeader}>What We Did</th>
+      <th className={styles.lessonLogHeader}>What to Practice</th>
+      <th className={styles.lessonLogHeader}>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {lessonLogs.map((log) => (
+      <tr key={log.id} className={styles.lessonLogRow}>
+        <td className={styles.lessonLogCell}>{log.what_we_did}</td>
+        <td className={styles.lessonLogCell}>{log.what_to_practice}</td>
+        <td className={styles.lessonLogCell}>{log.notes}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
       </div>
     )
   } else {
