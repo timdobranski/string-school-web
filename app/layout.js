@@ -2,7 +2,7 @@ import './globals.css';
 import Header from '../components/Header/Header';
 import Image from 'next/image';
 import background from '../public/images/background.jpeg'
-import Script from 'next/script';
+
 
 
 export const metadata = {
@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
         <Header />
         <div id='appContentContainer'>
           {children}
-          <Script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.js" />
         </div>
       </body>
     </html>

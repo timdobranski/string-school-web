@@ -10,7 +10,7 @@ export default function Header() {
     <div id={styles.headerContainer}>
       <Link href='/' id={styles.homeButton}>
         <div id={styles.logoContainer}>
-          <Image src={logo} fill='true' alt="La Mesa String School Logo" />
+          <Image src={logo} fill='true' alt="La Mesa String School Logo" priority='true' />
         </div>
       </Link>
       <Link href='/login' className='button' id={styles.loginButton}>STUDENT LOGIN</Link>

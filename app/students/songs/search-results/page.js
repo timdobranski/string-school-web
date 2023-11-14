@@ -55,30 +55,32 @@ const SearchResults = () => {
 
   return (
     <div className='infoCard'>
-      <h1>{`Search Results for "${query}"`}</h1>
       {isLoading ? (
         <div className={styles.loading}>
           <FontAwesomeIcon icon={faSpinner} spin />
-          <span>Loading...</span>
+          <h2>Searching Google Drive...</h2>
         </div>
       ) : (
-        searchResults.map((file, index) => (
-          <div key={index} className={styles.searchResult}>
-            <span>{file.name}</span>
-            <span>
-              <a href={`https://drive.google.com/uc?export=download&id=${file.id}`} download>
-                <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
-                Download for Guitar Pro
-              </a>
-            </span>
-            <span className={styles.openButtonSpan}>
-              <button onClick={() => openFile(file)}>
-                <FontAwesomeIcon icon={faCirclePlay} className={styles.playIcon} />
-                Open Here
-              </button>
-            </span>
-          </div>
-        ))
+        <>
+          <h1 className='sectionHeader'>{`Search Results for "${query}":`}</h1>
+          {searchResults.length > 0 ? searchResults.map((file, index) => (
+            <div key={index} className={styles.searchResult}>
+              <span>{file.name}</span>
+              <span>
+                <a href={`https://drive.google.com/uc?export=download&id=${file.id}`} download>
+                  <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
+                  Download for Guitar Pro
+                </a>
+              </span>
+              <span className={styles.openButtonSpan}>
+                <button onClick={() => openFile(file)}>
+                  <FontAwesomeIcon icon={faCirclePlay} className={styles.playIcon} />
+                  Open Here
+                </button>
+              </span>
+            </div>
+          )) : <p className={styles.noResultsMessage}>{`No ${type}s found :( `}</p>}
+        </>
       )}
     </div>
   );

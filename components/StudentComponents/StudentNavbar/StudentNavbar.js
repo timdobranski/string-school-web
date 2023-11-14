@@ -30,7 +30,7 @@ export default function StudentNavbar() {
         </Link>
         <Link href='/students/settings'>
           <div className={styles.profileImgContainer}>
-            <Image src={googleUserData.user_metadata.picture} alt="Student Photo" fill='true' />
+            <Image src={googleUserData.user_metadata.picture} alt="Student Photo" fill='true' sizes="(max-width: 768px) 50px, 50px" />
           </div>
         </Link>
       </div>

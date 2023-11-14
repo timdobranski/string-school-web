@@ -50,7 +50,9 @@ export default function Songs() {
   };
 
   useEffect(() => {
-    getRecentSongs();
+    if (supabaseUserData) {
+      getRecentSongs();
+    }
   }, [supabaseUserData]);
 
   return (

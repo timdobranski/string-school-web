@@ -100,3 +100,12 @@
   font-size: 2rem;
   margin-top: 3rem;
 }
+
+.loadingPage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+}

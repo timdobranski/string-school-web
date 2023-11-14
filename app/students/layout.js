@@ -11,6 +11,7 @@ function AuthProvider({ children }) {
   const [googleUserData, setGoogleUserData] = useState(null);
   const [supabaseUserData, setSupabaseUserData] = useState(null);
   const [student, setStudent] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const session = supabase.auth.getSession();
@@ -23,6 +24,7 @@ function AuthProvider({ children }) {
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        setIsLoading(true);
         setSession(session);
         setGoogleUserData(session?.user ?? null);
 
@@ -32,6 +34,7 @@ function AuthProvider({ children }) {
           setSupabaseUserData(null);
           setStudent(null);
         }
+        setIsLoading(false);
       }
     );
 
@@ -41,6 +44,7 @@ function AuthProvider({ children }) {
   }, []);
 
   async function fetchSupabaseUserData(userId) {
+    setIsLoading(true);
     const { data: userData, error } = await supabase
       .from('users')
       .select('*')
@@ -76,6 +80,7 @@ function AuthProvider({ children }) {
     googleUserData,
     supabaseUserData,
     student,
+    isLoading,
     signIn: (data) => supabase.auth.signIn(data),
     signOut: () => supabase.auth.signOut(),
   };
