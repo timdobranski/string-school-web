@@ -1,5 +1,10 @@
+'use client';
+
+import StudentContext, { useAuth } from '../layout.js';
+
 
 export default function Practice() {
+  const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
 
   return (

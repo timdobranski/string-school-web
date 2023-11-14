@@ -33,7 +33,6 @@ export default function Payments() {
   }
 
   const handleNoteClick = (note) => {
-    console.log('handle note click ran')
     setTooltipContent(note);
     setIsModalOpen(true);
   };
@@ -46,10 +45,9 @@ export default function Payments() {
    }, []);
 
 
-
   return (
     <div>
- <div className='infoCard'>
+      <div className='infoCard'>
       <h1 className='sectionHeaders'>Payments</h1>
       <h2 className='featureHeaders'>
         Total [Due/Past Due]:

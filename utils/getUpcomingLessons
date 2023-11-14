@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import { format, parseISO, addWeeks, set, getDay, startOfDay, isValid, nextDay } from 'date-fns';
+import { format, parseISO, addWeeks, set, getDay, startOfDay, isValid, nextDay, parse } from 'date-fns';
 
 
 // retrieves an array of a student's upcoming lessons
@@ -22,26 +22,35 @@ export default async function getUpcomingLessons(studentId, numberOfLessons) {
         if (error) throw error;
         return data;
     }
+    function isFutureDate(dateStr, timeStr) {
+        const now = new Date();
+        const dateTimeStr = `${dateStr} ${timeStr}`; // Combine date and time
+        const formatStr = 'yyyy-MM-dd h:mma'; // Specify the format
+        // Parse the combined date and time string
+        const lessonDate = parse(dateTimeStr, formatStr, new Date());
+        return lessonDate > now;
+    }
+
 
     async function getCancellations(studentId) {
-      let { data, error } = await supabase
-          .from('cancellations')
-          .select('*, users(first_name)')
-          .eq('student', studentId);
-          // console.log("Cancellations:", data);
-      if (error) throw error;
-      return data;
-  }
+        let { data, error } = await supabase
+            .from('cancellations')
+            .select('*, users(first_name)')
+            .eq('student', studentId);
 
-  async function getMakeups(studentId) {
-    let { data, error } = await supabase
-        .from('makeups')
-        .select('*, users(first_name)')
-        .eq('student', studentId);
+        if (error) throw error;
+        return data.filter(cancellation => isFutureDate(cancellation.date, cancellation.time));
+    }
 
-    if (error) throw error;
-    return data;
-}
+    async function getMakeups(studentId) {
+        let { data, error } = await supabase
+            .from('makeups')
+            .select('*, users(first_name)')
+            .eq('student', studentId);
+
+        if (error) throw error;
+        return data.filter(makeup => isFutureDate(makeup.date, makeup.time));
+    }
 
     function getDayNumber(dayString) {
       const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

@@ -1,0 +1,17 @@
+.announcement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  margin: 2rem;
+  font-size: 1.25rem;
+  text-align: center;
+  border: solid rgb(144, 255, 144) 4px;
+  padding: 1rem 2rem 1rem 2rem;
+  background: linear-gradient(
+    90deg,
+    rgba(58, 58, 58, 0.5) 0%,
+    rgba(28, 28, 28, 0.5) 100%
+  );
+}

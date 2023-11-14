@@ -1,10 +1,28 @@
 import styles from './UpcomingLessons.module.css';
 import { getLessonClassNames } from '../../../utils/getLessonClassNames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import getUpcomingLessons from '../../../utils/getUpcomingLessons';
 
-export default function UpcomingLessons({ scheduleDates, setStep, setCancellation }) {
+// Renders a table of upcoming lessons. Requires studentId and numOfLessons props.
+// Optional props: setStep, setCancellation (for use in the cancel-lesson page)
+export default function UpcomingLessons({  setStep, setCancellation, studentId, numOfLessons }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [scheduleDates, setScheduleDates] = useState([]);
 
+  // fetch upcoming lesson dates
+  useEffect(() => {
+    async function fetchScheduleDates() {
+      try {
+        const dates = await getUpcomingLessons(studentId, numOfLessons);
+        setScheduleDates(dates);
+      } catch (error) {
+        console.error("Error fetching schedule dates:", error);
+        // Handle the error appropriately
+      }
+    }
+    fetchScheduleDates();
+  }, [])
+  // convert upcoming lesson dates to jsx table rows
   const upcomingLessons = scheduleDates.map((lesson, index) => {
     const { rowClassName, dateClassName, typeClassName } = getLessonClassNames(lesson.type, styles);
     // Check if the lesson type is a cancellation and render a custom message
@@ -27,6 +45,7 @@ export default function UpcomingLessons({ scheduleDates, setStep, setCancellatio
       </tr>
     );
   });
+
   // sets the cancellation data and moves to the next step,
   // after checking if the cancellation is an un-cancellation
   // and less than 24hours before the lesson
@@ -66,19 +85,15 @@ export default function UpcomingLessons({ scheduleDates, setStep, setCancellatio
       if (tempDate < now) {
         tempDate.setFullYear(currentYear + 1);
       }
-
       return tempDate;
     }
 
     // Parse the cancellation date and time
     const cancellationDateTime = parseCustomDateString(dateString, time);
     const now = new Date();
-    console.log('cancellationDateTime: ', cancellationDateTime);
-    console.log('now: ', now);
-    console.log('datestring and time: ', dateString, time)
+
     // Check if the cancellation is at least 20 hours in the future
     const hoursDifference = (cancellationDateTime - now) / (1000 * 60 * 60);
-    console.log('hours difference: ', hoursDifference);
     if (type === 'cancellation' && hoursDifference < 20) {
       setModalIsOpen(true);
       return; // Exit the function early if the condition is met
@@ -93,7 +108,10 @@ export default function UpcomingLessons({ scheduleDates, setStep, setCancellatio
 
     setStep(prevStep => prevStep + 1);
   };
-
+  // conditionally render message or no table
+  if (scheduleDates.length === 0) {
+    return <p>Searching for upcoming lessons...</p>;
+  }
   return (
     <>
     <table className={styles.lessonsTable}>

@@ -7,22 +7,14 @@ import StudentContext, { useAuth } from '../layout.js';
 
 
 export default function StudentScheduling() {
-  // User & student data provided by layout.js context
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
-  // Rescheduling Steps: SchedulingHome, ChooseCancellation, ChooseNew, Confirm, Confirmed
   const [render, setRender] = useState('SchedulingHome');
-  // State to manage changes to the database
   const [cancellation, setCancellation] = useState([]);
   const [newLesson, setNewLesson] = useState([]);
   const [newSpot, setNewSpot] = useState({day: '', time: '', startDate: ''});
 
 
   if (googleUserData) {
-    // console.log('"student" inside scheduling:', student);
-    // console.log('"supabaseuserdata" inside scheduling:', supabaseUserData);
-    // console.log('"googleUserData" inside scheduling:', googleUserData);
-    // console.log('"session" inside scheduling:', session);
-
     return (
       <div className='infoCard'>
 
