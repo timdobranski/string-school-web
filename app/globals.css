@@ -141,3 +141,13 @@ a {
   color: #ababab;
 
 }
+.featureButton {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin: 1rem;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  color: black;
+  padding: .5rem 1rem .5rem 1rem;
+}

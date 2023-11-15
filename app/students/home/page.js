@@ -5,7 +5,7 @@ import { supabase } from '../../../utils/supabase';
 import StudentContext, { useAuth } from '../layout.js';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import getUpcomingLessons from '../../../utils/getUpcomingLessons';
+import getUpcomingLessons from '../../../utils/getUpcomingLessons.js';
 import UpcomingLessons from '../../../components/StudentComponents/UpcomingLessons/UpcomingLessons.js';
 
 export default function StudentHome() {
