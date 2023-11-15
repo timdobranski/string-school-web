@@ -6,6 +6,7 @@ import getPracticeLogs from '../../../utils/getPracticeLogs';
 import setPracticeLog from '../../../utils/setPracticeLog';
 import togglePracticeTracking from '../../../utils/togglePracticeTracking';
 import styles from './practice.module.css';
+import Link from 'next/link';
 
 export default function Practice() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
@@ -29,8 +30,9 @@ export default function Practice() {
     return (
       <div className='infoCard'>
         <h1 className='sectionHeader'>Practice</h1>
-
-        <button className='featureButton'>Start A Practice Session</button>
+        <Link href='/students/practice/timer'>
+        <div className='featureButton'>Start A Practice Session</div>
+        </Link>
         <button className='featureButton'>Log  A Past Practice</button>
 
         <h2 className={'featuresHeader'}>{`This Week's Practice`}</h2>

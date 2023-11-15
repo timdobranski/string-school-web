@@ -1,0 +1,69 @@
+.timer {
+  border: solid rgb(0, 157, 255) 4px;
+  width: 50vw;
+  height: 150px;
+  margin: 0 auto;
+
+  /* border-radius: 50%; */
+  background: black;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.displayedTime {
+  color: white;
+  font-size: 4rem;
+  margin-right: 10rem;
+}
+/* same as global feature */
+.timerButton {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin: 1rem;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  color: black;
+  padding: .5rem 1rem .5rem 1rem;
+}
+.timerControlButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 2rem; */
+}
+.noteContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: black;
+  color: white;
+  width: 50vw;
+  /* height: 250px; */
+  margin: 0 auto;
+  margin-top:2rem;
+  padding: 1rem;
+  border: solid rgb(248, 1, 83) 4px;
+}
+
+.noteHeader {
+  font-size: 2rem;
+  margin: 1rem;
+}
+.noteDirections {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.noteInput {
+  width: 100%;
+  height: 40px;
+  font-size: 1.25rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
