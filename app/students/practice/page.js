@@ -33,7 +33,7 @@ export default function Practice() {
         <Link href='/students/practice/timer'>
         <div className='featureButton'>Start A Practice Session</div>
         </Link>
-        <button className='featureButton'>Log  A Past Practice</button>
+        <button className='featureButton'>Log  A Past Practice Session</button>
 
         <h2 className={'featuresHeader'}>{`This Week's Practice`}</h2>
         <table className={styles.practiceSessionsTable}>

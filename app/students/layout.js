@@ -3,6 +3,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import StudentNavbar from '../../components/StudentComponents/StudentNavbar/StudentNavbar';
 import { supabase } from '../../utils/supabase';
+import { useRouter } from 'next/navigation';
+
 
 const AuthContext = createContext();
 
@@ -12,6 +14,8 @@ function AuthProvider({ children }) {
   const [supabaseUserData, setSupabaseUserData] = useState(null);
   const [student, setStudent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
 
   useEffect(() => {
     const session = supabase.auth.getSession();
@@ -42,6 +46,13 @@ function AuthProvider({ children }) {
       authListener.subscription.unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (!isLoading && !session) {
+      // Redirect to the home page if not signed in
+      router.push('/');
+    }
+  }, [session, isLoading, router]);
 
   async function fetchSupabaseUserData(userId) {
     setIsLoading(true);
