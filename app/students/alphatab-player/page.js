@@ -1,6 +1,6 @@
 'use client';
 
-import AlphaTab from '../../../components/AlphaTab/Alphatab';
+import AlphaTab from '../../../components/AlphaTab/AlphaTab';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import styles from './alphatabPlayer.module.css';
