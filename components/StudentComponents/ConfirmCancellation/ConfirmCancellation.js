@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styles from './ConfirmCancellation.module.css';
 import { supabase } from '../../../utils/supabase';
+import addMakeupCredit from '../../../utils/addMakeupCredit.js';
 
-export default function CancellationConfirmation({ cancellation, setCancellation, setStep }) {
+export default function CancellationConfirmation({ cancellation, setCancellation, setStep, user, student }) {
   const [note, setNote] = useState('');
   const [cancelType, setCancelType] = useState(cancellation.type);
 
@@ -16,11 +17,13 @@ export default function CancellationConfirmation({ cancellation, setCancellation
         const { data, error } = await supabase
           .from('cancellations')
           .insert([
-            { date: cancellation.dateString, time: cancellation.time, createdBy: cancellation.createdBy, note: cancellation.note }
+            { date: cancellation.dbDate, time: cancellation.time, created_by: user.id, note: note, student: student.id }
           ]);
 
         if (error) throw error;
         console.log('Insertion successful:', data);
+        addMakeupCredit(student)
+        setStep(3);
       } else if (cancellation.type === 'cancellation') {
         // Remove from cancellations table
         const { data, error } = await supabase
@@ -29,7 +32,8 @@ export default function CancellationConfirmation({ cancellation, setCancellation
           .match({ id: cancellation.id });
 
         if (error) throw error;
-        console.log('Deletion successful:', data);
+        console.log('Deletion of cancellation successful:', data);
+        setStep(3);
       } else if (cancellation.type === 'makeup') {
         // Remove from makeups table
         const { data, error } = await supabase
@@ -39,6 +43,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
 
         if (error) throw error;
         console.log('Deletion successful:', data);
+        setStep(3);
       }
     } catch (error) {
       console.error('Error in cancellation process:', error);
