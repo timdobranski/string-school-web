@@ -6,7 +6,7 @@ import styles from './AlphaTab.module.css';
 export default function AlphaTab({ scoreData }) {
 
 
-  const htmlFilePath = `/api/alphaTabPlayer?songFile=${scoreData}`;
+  const iframeSrc = `/alphatab/alphatabPlayer.html?songFile=${encodeURIComponent(scoreData)}`;
 
 
   return (
@@ -14,7 +14,7 @@ export default function AlphaTab({ scoreData }) {
       <iframe
       id='alphatab-iframe'
       key={scoreData}
-      src={`${htmlFilePath}`}
+      src={`${iframeSrc}`}
       width="100%"
       height="1000px"
       style={{

@@ -96,9 +96,20 @@
       const wrapper = document.querySelector(".at-wrap");
       const main = wrapper.querySelector(".at-main");
 
+      function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const songFileLink = getQueryParam('songFile');
+    if (!songFileLink) {
+      alert('No song file provided');
+      // Handle the error appropriately
+    }
+
       // initialize alphatab
       const settings = {
-        file: '/alphatab/downloadedFile.gp',
+        file: `/api/alphaTabPlayer?songFile=${encodeURIComponent(songFileLink)}`,
         player: {
           enablePlayer: true,
           soundFont: "https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/soundfont/sonivox.sf2",
