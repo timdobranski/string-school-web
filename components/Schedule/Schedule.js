@@ -8,16 +8,16 @@ import fetchScheduleData from '../../app/services/fetchScheduleData';
 export default function Schedule({ startDate, privacy }) {
   const [ scheduleData, setScheduleData ] = useState(null);
   const schedule = {
-    Monday: ['4:30', '5:00', '5:30', '6:00', '7:00', '7:30', '8:00'],
-    Tuesday: ['4:30', '5:00', '5:30', '6:00', '7:00', '7:30', '8:00'],
-    Wednesday: ['4:30', '5:00', '5:30', '6:00', '7:00', '7:30', '8:00'],
-    Thursday: ['4:30', '5:00', '5:30', '6:30', '7:00', '7:30', '8:00'],
-    Friday: ['4:30', '5:00', '5:30'],
-    Sunday: ['10:00', '10:30', '11:00', '11:30'],
+    Monday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
+    Tuesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
+    Wednesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
+    Thursday: ['4:30pm', '5:00pm', '5:30pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
+    Friday: ['4:30pm', '5:00pm', '5:30pm'],
+    Sunday: ['10:00am', '10:30am', '11:00am', '11:30am'],
   }
 
+  // fetchScheduleData needs a boolean value for privacy
   useEffect(() => {
-    // You should handle async operations in useEffect
     const fetchData = async () => {
       const data = await fetchScheduleData(privacy);
       setScheduleData(data);
@@ -43,7 +43,7 @@ export default function Schedule({ startDate, privacy }) {
                     : 'Open!';
                   return (
                     <tr key={`${day}-${time}`}>
-                      <td className={styles.timeColumn}>{time}</td>
+                      <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
                       <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${status}`]} ${styles[status.toLowerCase()]}`}>
                         {name}
                       </td>

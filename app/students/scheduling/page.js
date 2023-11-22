@@ -21,11 +21,12 @@ export default function StudentScheduling() {
         <h1 className='sectionHeaders'>SCHEDULING</h1>
         <Link href='/students/scheduling/cancel-lesson'>
           <h2 className='featureHeaders'>Cancel A Lesson</h2>
+          <p className='featureComments'>Cancel now & reschedule later</p>
         </Link>
-        <p className='featureComments'>Cancel now & reschedule later</p>
-
+        <Link href='/students/scheduling/reschedule-lesson'>
         <h2 className='featureHeaders'>Reschedule A Lesson</h2>
         <p className='featureComments'>Cancel and reschedule now</p>
+        </Link>
 
         <h2 className='featureHeaders'>Schedule A Makeup Lesson</h2>
         <p className='featureComments'>Use a makeup credit</p>

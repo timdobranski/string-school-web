@@ -15,3 +15,7 @@
     rgba(28, 28, 28, 0.5) 100%
   );
 }
+.makeupsNumber {
+  font-size: 1.75rem;
+  /* margin-top: 1.5rem; */
+}

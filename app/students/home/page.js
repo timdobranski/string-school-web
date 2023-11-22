@@ -55,7 +55,7 @@ export default function StudentHome() {
         })}
 
         <h2 className='featureHeaders'>Makeups Available:</h2>
-        <p>{makeups}</p>
+        <p className={styles.makeupsNumber}>{makeups}</p>
         <h2 className='featureHeaders'>Upcoming Lessons</h2>
         <UpcomingLessons studentId={student.id} numOfLessons={5}/>
 
