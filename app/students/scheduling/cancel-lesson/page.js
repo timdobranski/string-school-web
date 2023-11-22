@@ -39,14 +39,7 @@ export default function CancellationPage() {
     console.log('supabaseUserData: ', supabaseUserData);
   }, [supabaseUserData])
 
-  // set upcoming lessons
-  // useEffect(() => {
-  //   setUpcomingLessons(upcomingLessons);
-  // }, [scheduleDates]);
 
-  // useEffect(() => {
-  //   console.log('cancellation: ', cancellation)
-  // }, [cancellation]);
   if (supabaseUserData && student && scheduleDates && upcomingLessons) {
     return (
       <div className='infoCard'>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './ConfirmCancellation.module.css';
 import { supabase } from '../../../utils/supabase';
-import addMakeupCredit from '../../../utils/addMakeupCredit.js';
+import adjustMakeupCredit from '../../../utils/adjustMakeupCredit.js';
 
 export default function CancellationConfirmation({ cancellation, setCancellation, setStep, user, student }) {
   const [note, setNote] = useState('');
@@ -12,7 +12,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
     setCancellation(prevCancellation => ({ ...prevCancellation, note }));
 
     try {
-      if (cancellation.type === 'regular' || cancellation.type === 'new spot') {
+      if (cancellation.type === 'regular' || cancellation.type === 'new spot' || cancellation.type === 'makeup') {
         // Insert into cancellations table
         const { data, error } = await supabase
           .from('cancellations')
@@ -22,7 +22,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
 
         if (error) throw error;
         console.log('Insertion successful:', data);
-        addMakeupCredit(student)
+        adjustMakeupCredit(student, 'increment');
         setStep(3);
       } else if (cancellation.type === 'cancellation') {
         // Remove from cancellations table
@@ -33,18 +33,20 @@ export default function CancellationConfirmation({ cancellation, setCancellation
 
         if (error) throw error;
         console.log('Deletion of cancellation successful:', data);
-        setStep(3);
-      } else if (cancellation.type === 'makeup') {
-        // Remove from makeups table
-        const { data, error } = await supabase
-          .from('makeups')
-          .delete()
-          .match({ id: cancellation.id });
-
-        if (error) throw error;
-        console.log('Deletion successful:', data);
+        adjustMakeupCredit(student, 'decrement');
         setStep(3);
       }
+      // else if (cancellation.type === 'makeup') {
+      //   // Remove from makeups table
+      //   const { data, error } = await supabase
+      //     .from('makeups')
+      //     .delete()
+      //     .match({ id: cancellation.id });
+
+      //   if (error) throw error;
+      //   console.log('Deletion successful:', data);
+      //   setStep(3);
+      // }
     } catch (error) {
       console.error('Error in cancellation process:', error);
     }

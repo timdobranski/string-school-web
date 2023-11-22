@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 
-// takes in the student object and adds a makeup credit to the student's account
-const addMakeupCredit = async (student) => {
+// takes in the student object and a settings object with value: {adjustment: 'increment}
+const adjustMakeupCredit = async (student, type) => {
   console.log('student:', student);
   const id = student.id;
   try {
@@ -15,7 +15,7 @@ const addMakeupCredit = async (student) => {
     if (fetchError) throw fetchError;
     console.log('studentData: ', studentData);
     // Increment the makeups
-    const newMakeups = studentData.makeups + 1;
+    const newMakeups = studentData.makeups + (type === 'increment' ? 1 : -1);
     console.log('newmakeups: ', newMakeups);
     // Update the makeups value
     const { data: updateData, error: updateError } = await supabase
@@ -32,4 +32,4 @@ const addMakeupCredit = async (student) => {
   }
 };
 
-export default addMakeupCredit;
+export default adjustMakeupCredit;
