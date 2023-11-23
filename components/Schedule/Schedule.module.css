@@ -91,7 +91,7 @@
   /* background: linear-gradient(to right, rgb(254, 53, 50), rgb(247, 213, 20)); */
 }
 .wednesdayCancellation {
-  background-color: var(--redOpen) !important;
+  background-color: var(--redOpen);
   color: white;
 }
 .thursdayOpen {
@@ -181,4 +181,56 @@
 .activeDot {
   transform: scale(1.5);
   background-color: rgb(36, 146, 179);
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.slideInRight {
+  animation: slideInFromRight 0.5s forwards;
+}
+
+.slideInLeft {
+  animation: slideInFromLeft 0.5s forwards;
+}
+
+.slideOutLeft {
+  animation: slideOutToLeft 0.5s forwards;
+}
+
+.slideOutRight {
+  animation: slideOutToRight 0.5s forwards;
 }

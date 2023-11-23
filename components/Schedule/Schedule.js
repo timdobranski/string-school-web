@@ -11,9 +11,11 @@ import dateFormatter from '../../utils/dateFormatter';
 
 export default function Schedule({ startDate, privacy }) {
   const [ scheduleData, setScheduleData ] = useState(null); // array of objects w/day/time or more, depending on privacy
+  const [ scheduleRenders, setScheduleRenders ] = useState([]); // actual jsx to render for each week
   const [ scheduleDates, setScheduleDates ] = useState(null);  // Array of tuples for Mon-Sun upcoming dates
   const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable
   const [currentWeek, setCurrentWeek] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(''); // 'left' or 'right'
 
   const schedule = {
     Monday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
@@ -23,19 +25,81 @@ export default function Schedule({ startDate, privacy }) {
     Friday: ['4:30pm', '5:00pm', '5:30pm'],
     Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }
-  // fetchScheduleData needs a boolean value for privacy
+
   useEffect(() => {
-    const fetchData = async () => {
-      // const data = await getScheduleData(scheduleDates[0][0], privacy, 8);
-      const data = await getAllUpcomingLessons(8, privacy);
-      console.log('final schedule data: ', data);
-      setScheduleData(data);
-    };
-    fetchData();
-  }, [scheduleDates]);
+    if (scheduleData && scheduleData.schedule) {
+      const renders = scheduleData.schedule.map((weekSchedule, index) => {
+        return (
+          <div className={styles.scheduleContainer} key={index}>
+          {Object.entries(schedule).map(([day, times]) => (
+            <div key={day} className={`${styles.dayContainer} ${styles[day.toLowerCase()]}`}>
+              <h3 className={styles[`${day.toLowerCase()}Booked`]}>{day}</h3>
+              <table className={styles.scheduleTable}>
+                <tbody>
+                  {times.map((time) => {
+                    const scheduleEntry = weekSchedule.find(entry => entry.day === day && entry.time === time);
+                    var studentInfo;
+                    if (scheduleEntry) {
+                      studentInfo = scheduleData.students.find(s => s.id === scheduleEntry.student);
+                    }
 
+                    let statusText, className, name, additionalClass;
 
-  // get and set the weeks array (formatted and raw)
+                    if (scheduleEntry) {
+                      switch (scheduleEntry.type) {
+                        case 'cancellation':
+                          statusText = 'Open this week only';
+                          className = 'Open';
+                          additionalClass = `${day.toLowerCase()}Open`;
+                          name = statusText;
+                          break;
+                        case 'makeup':
+                          statusText = privacy
+                            ? 'Booked this week only'
+                            : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
+
+                          className = 'Booked';
+                          additionalClass = `${day.toLowerCase()}Booked`;
+                          name = statusText;
+                          break;
+                        case 'regular':
+                        default:
+                          statusText = privacy
+                            ? 'Booked'
+                            : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
+
+                          className = 'Booked';
+                          name = `${scheduleEntry.first_name || ''} ${scheduleEntry.last_name || ''}`.trim() || statusText;
+                          break;
+                      }
+                    } else {
+                      statusText = 'Open';
+                      className = 'Open';
+                      name = 'Open!';
+                    }
+
+                    return (
+                      <tr key={`${day}-${time}`}>
+                        <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
+                        <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${className}`]} ${styles[className.toLowerCase()]} ${additionalClass || ''}`}>
+                          {name}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
+        );
+      });
+      setScheduleRenders(renders);
+    }
+  }, [scheduleData]);
+
+  // get and set the weeks array (formatted and raw) and the schedule data
+  // fetchScheduleData needs a number of weeks to return, and boolean value for privacy
   useEffect(() => {
     const dates = getArrayOfMondays(8);
     const formatOptions = { length: 'short', includeYear: false};
@@ -47,17 +111,30 @@ export default function Schedule({ startDate, privacy }) {
     setScheduleDates(dates);
     setFormattedDates(formattedDates);
 
+    const fetchData = async () => {
+      const data = await getAllUpcomingLessons(8, privacy);
+      console.log('final schedule data: ', data);
+      setScheduleData(data);
+    };
+    fetchData();
+
   }, [])
 
-
+  useEffect (() => {
+    console.log('current week: ', currentWeek);
+    console.log('scheduleRenders[currentWeek]: ', scheduleRenders);
+  }, [currentWeek])
 
   const nextWeek = () => {
     if (currentWeek < 7) {
+      setSlideDirection('right');
       setCurrentWeek((curr) => curr + 1);
     }
   }
+
   const prevWeek = () => {
     if (currentWeek > 0) {
+      setSlideDirection('left');
       setCurrentWeek((curr) => curr - 1);
     }
   }
@@ -81,68 +158,11 @@ export default function Schedule({ startDate, privacy }) {
         <FontAwesomeIcon icon={faCircleArrowRight} className={styles.arrow} onClick={nextWeek}/>
       </div>
 
-      <div className={styles.scheduleContainer}>
-        {Object.entries(schedule).map(([day, times]) => (
-          <div key={day} className={`${styles.dayContainer} ${styles[day.toLowerCase()]}`}>
-            <h3 className={styles[`${day.toLowerCase()}Booked`]}>{day}</h3>
-            <table className={styles.scheduleTable}>
-              <tbody>
-                {times.map((time) => {
-                  const scheduleEntry = scheduleData.schedule[currentWeek].find(entry => entry.day === day && entry.time === time);
-                  var studentInfo;
-                  if (scheduleEntry) {
-                    studentInfo = scheduleData.students.find(s => s.id === scheduleEntry.student);
-                  }
-
-                  let statusText, className, name, additionalClass;
-
-                  if (scheduleEntry) {
-                    switch (scheduleEntry.type) {
-                      case 'cancellation':
-                        statusText = 'Open this week only';
-                        className = 'Open';
-                        additionalClass = `${day.toLowerCase()}Open`;
-                        name = statusText;
-                        break;
-                      case 'makeup':
-                        statusText = privacy
-                          ? 'Booked this week only'
-                          : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
-
-                        className = 'Booked';
-                        additionalClass = `${day.toLowerCase()}Booked`;
-                        name = statusText;
-                        break;
-                      case 'regular':
-                      default:
-                        statusText = privacy
-                          ? 'Booked'
-                          : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
-
-                        className = 'Booked';
-                        name = `${scheduleEntry.first_name || ''} ${scheduleEntry.last_name || ''}`.trim() || statusText;
-                        break;
-                    }
-                  } else {
-                    statusText = 'Open';
-                    className = 'Open';
-                    name = 'Open!';
-                  }
-
-                  return (
-                    <tr key={`${day}-${time}`}>
-                      <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
-                      <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${className}`]} ${styles[className.toLowerCase()]} ${additionalClass || ''}`}>
-                        {name}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        ))}
-      </div>
+      {/* <div className={`${styles.scheduleContainer} ${slideDirection === 'right' ? 'slideInRight' : 'slideInLeft'}`}> */}
+        {/* {currentWeek > 0 ? scheduleRenders[currentWeek - 1] : null} */}
+        {scheduleRenders[currentWeek]}
+        {/* {currentWeek < scheduleRenders.length - 1 ? scheduleRenders[currentWeek + 1] : null} */}
+      {/* </div> */}
       </>
     ) : (
       <h1>Loading...</h1>
