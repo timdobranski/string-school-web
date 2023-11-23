@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from './Schedule.module.css';
 import supabase from '../../utils/supabase';
 import getAllUpcomingLessons from '../../utils/getAllUpcomingLessons';
@@ -8,15 +9,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import getArrayOfMondays from '../../utils/getArrayOfMondays';
 import dateFormatter from '../../utils/dateFormatter';
+import { Carousel } from 'react-responsive-carousel';
 
 export default function Schedule({ startDate, privacy }) {
   const [ scheduleData, setScheduleData ] = useState(null); // array of objects w/day/time or more, depending on privacy
   const [ scheduleRenders, setScheduleRenders ] = useState([]); // actual jsx to render for each week
   const [ scheduleDates, setScheduleDates ] = useState(null);  // Array of tuples for Mon-Sun upcoming dates
   const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable
-  const [currentWeek, setCurrentWeek] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(''); // 'left' or 'right'
+  const [ currentWeek, setCurrentWeek] = useState(0);
+  const [ currentItem, setCurrentItem] = useState(0);
 
+  // data structure for schedule spots to render table
   const schedule = {
     Monday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
     Tuesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
@@ -120,22 +123,27 @@ export default function Schedule({ startDate, privacy }) {
 
   }, [])
 
-  useEffect (() => {
-    console.log('current week: ', currentWeek);
-    console.log('scheduleRenders[currentWeek]: ', scheduleRenders);
-  }, [currentWeek])
+  const Dot = ({ index, isActive, onClick }) => (
+    <button
+      className={`${styles.navDot} ${isActive ? styles.activeDot : ''}`}
+      onClick={() => onClick(index)}
+      aria-label={`Go to slide ${index + 1}`}
+    />
+  );
+
+  const onDotClick = (index) => {
+    setCurrentItem(index);
+  };
 
   const nextWeek = () => {
-    if (currentWeek < 7) {
-      setSlideDirection('right');
-      setCurrentWeek((curr) => curr + 1);
+    if (currentItem < scheduleRenders.length - 1) {
+      setCurrentItem(currentItem + 1);
     }
   }
 
   const prevWeek = () => {
-    if (currentWeek > 0) {
-      setSlideDirection('left');
-      setCurrentWeek((curr) => curr - 1);
+    if (currentItem > 0) {
+      setCurrentItem(currentItem - 1);
     }
   }
 
@@ -143,26 +151,42 @@ export default function Schedule({ startDate, privacy }) {
     scheduleData ? (
       <>
       <div className={styles.scheduleHeadersContainer}>
-        <FontAwesomeIcon icon={faCircleArrowLeft} className={styles.arrow} onClick={prevWeek}/>
+      <button onClick={prevWeek} className={styles.customArrowLeft}>
+          <FontAwesomeIcon icon={faCircleArrowLeft} className={styles.arrow}/>
+        </button>
         <div className={styles.dateAndDotsContainer}>
-          <h2 className={styles.scheduleHeader}>{`${formattedDates[currentWeek][0]} - ${formattedDates[currentWeek][1]}`}</h2>
-          <div className={styles.dotContainer}>
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div
-                key={index}
-                className={`${styles.navDot} ${index === currentWeek ? styles.activeDot : ''}`}
-              ></div>
-            ))}
-          </div>
+          <h2 className={styles.scheduleHeader}>{`${formattedDates[currentItem][0]} - ${formattedDates[currentItem][1]}`}</h2>
+
+         <div className={styles.navDotsContainer}>
+          {scheduleRenders.map((_, index) => (
+      <Dot
+        key={index}
+        index={index}
+        isActive={currentItem === index}
+        onClick={onDotClick}
+      />
+    ))}
+              </div>
         </div>
-        <FontAwesomeIcon icon={faCircleArrowRight} className={styles.arrow} onClick={nextWeek}/>
+        <button onClick={nextWeek} className={styles.customArrowRight}>
+          <FontAwesomeIcon icon={faCircleArrowRight} className={styles.arrow} />
+        </button>
       </div>
 
-      {/* <div className={`${styles.scheduleContainer} ${slideDirection === 'right' ? 'slideInRight' : 'slideInLeft'}`}> */}
-        {/* {currentWeek > 0 ? scheduleRenders[currentWeek - 1] : null} */}
-        {scheduleRenders[currentWeek]}
-        {/* {currentWeek < scheduleRenders.length - 1 ? scheduleRenders[currentWeek + 1] : null} */}
-      {/* </div> */}
+      <div className={`${styles.carouselContainer} `}>
+      <Carousel
+  showThumbs={false}
+  className={styles.carousel}
+  showStatus={false}
+  selectedItem={currentItem}
+>
+  {scheduleRenders.map((render, index) => (
+    <div key={index} className={`${styles.scheduleSlide} ${index === currentItem ? styles.activeSlide : ''}`}>
+      {render}
+    </div>
+  ))}
+</Carousel>
+      </div>
       </>
     ) : (
       <h1>Loading...</h1>

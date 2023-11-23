@@ -1,3 +1,9 @@
+.carouselContainer {
+  position: relative;
+  width: 100vw;
+
+}
+
 .scheduleContainer {
   /* Add styles for the schedule container */
   position: relative;
@@ -7,8 +13,12 @@
   align-items: flex-start;
   color: black;
   background-color: rgba(0, 0, 0, 0.7);
+  width: 80vw;
   /* border: solid rgb(99, 245, 99) 4px; */
   font-family: Economica;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-bottom: 3rem;
 }
 
 .dayContainer {
@@ -127,9 +137,10 @@
   align-items: center;
   color: black;
   background-color: rgba(0, 0, 0, 0.9);
-  /* border: solid white 4px; */
   padding: 1rem;
-  margin: 1rem;
+  width: 80vw;
+  margin: 0 auto;
+  margin-bottom: 1rem;
 }
 .scheduleHeader {
   font-size: 2rem;
@@ -162,75 +173,44 @@
   padding-top: .5rem;
 
 }
-.dotContainer {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+
+
+
+.customArrowLeft, .customArrowRight {
+  position: absolute;
+  background: transparent;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  border: none;
+  z-index: 2;
 }
-.navDot {
-  position: relative;
-  width: 10px;
-  height: 10px;
+ .customArrowLeft {
+  left: 10px;
+}
+.customArrowRight {
+  right: 10px;
+}
+
+.carousel {
+
+}
+.navdotsContainer {
+
+}
+ .navDot {
+  background: transparent;
+  border: none;
+  margin: 10px;
   border-radius: 50%;
-  background-color: rgb(104, 245, 137);
-  margin: 0 .5rem 0 .5rem;
+  width: 8px; /* Custom dot size */
+  height: 8px; /* Custom dot size */
+  background:rgba(255, 255, 255, .7);
+  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+
 }
+
 .activeDot {
+  background: white;
   transform: scale(1.5);
-  background-color: rgb(36, 146, 179);
-}
-
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOutToLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes slideOutToRight {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-.slideInRight {
-  animation: slideInFromRight 0.5s forwards;
-}
-
-.slideInLeft {
-  animation: slideInFromLeft 0.5s forwards;
-}
-
-.slideOutLeft {
-  animation: slideOutToLeft 0.5s forwards;
-}
-
-.slideOutRight {
-  animation: slideOutToRight 0.5s forwards;
 }
