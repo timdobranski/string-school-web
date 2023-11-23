@@ -105,7 +105,10 @@ export default function Schedule({ startDate, privacy }) {
                         name = statusText;
                         break;
                       case 'makeup':
-                        // Define statusText, className, and additionalClass for 'makeup' type
+                        statusText = 'Booked this week only';
+                        className = 'Booked';
+                        additionalClass = `${day.toLowerCase()}Booked`;
+                        name = statusText;
                         break;
                       case 'regular':
                       default:

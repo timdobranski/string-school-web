@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
-import { format, parseISO, addWeeks, set, startOfDay, isValid, nextDay, parse, startOfWeek, formatISO } from 'date-fns';
+import { parseISO, addWeeks, set, startOfDay, isValid, nextDay, parse, startOfWeek, formatISO } from 'date-fns';
+import { zonedTimeToUtc, utcToZonedTime, format } from 'date-fns-tz';
 
 // Function to retrieve all students' data - either private or public based on boolean argument
 async function getAllStudents(privacy) {
@@ -67,7 +68,8 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
     };
 
 
-    // FIRST: ITERATE THROUGH STUDENT DATA AND ADD REGULAR/NEW SPOT LESSONS
+    // FIRST: ITERATE THROUGH STUDENT DATA AND ADD REGULAR/NEW SPOT LESSONS.
+    // SECOND: ADD CANCELLATIONS
     students.forEach(student => {
       const upcomingRegularDates = createDatesArray(getDayNumber(student.day), numberOfLessons);
         console.log('student day: ', student.day)
@@ -93,21 +95,48 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
               student: student.id, booked: false, type: 'cancellation', day: student.day, time: student.time
             });
           }
-
-
         }
       }
     });
-    makeups.forEach(makeup => {
+        // THIRD: UPDATE MAKEUPS (add to wee with booked = true and type = makeup)
+    const timeZone = 'America/Los_Angeles';
+    const mondaysArrayDates = mondaysArray.map(dateStr =>
+      utcToZonedTime(zonedTimeToUtc(dateStr, timeZone), timeZone)
+    );
 
+    makeups.forEach(makeup => {
+      // Parse the date and get the day of the week
+      const makeupDate = utcToZonedTime(zonedTimeToUtc(makeup.date, timeZone), timeZone);
+      const dayOfWeek = makeupDate.getDay();
+      console.log('makeup.date: ', makeup.date)
+      console.log('makeupDate: ', makeupDate)
+      console.log('day of week: ', dayOfWeek )
+      // Map dayOfWeek to a string (e.g., 'Monday', 'Tuesday', ...)
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const dayString = days[dayOfWeek];
+
+      // Create the object to be pushed
+      const makeupEntry = {
+        student: makeup.student,
+        booked: true,
+        type: 'makeup',
+        day: dayString,
+        time: makeup.time
+      };
+
+      let targetArrayIndex = -1;
+
+      for (let i = 0; i < mondaysArrayDates.length; i++) {
+        if (makeupDate >= mondaysArrayDates[i] && (i === mondaysArrayDates.length - 1 || makeupDate < mondaysArrayDates[i + 1])) {
+          targetArrayIndex = i;
+          break;
+        }
+      }
+      if (targetArrayIndex !== -1) {
+        result.schedule[targetArrayIndex].push(makeupEntry);
+      }
     })
     // !!!!!!!!!!!!!!!!If there IS a new spot start date, check if the start date is in the current week or in the past
-
-
-    // THIRD: UPDATE MAKEUPS (add to wee with booked = true and type = makeup)
-
-    // console.log('cancellations data:', cancellations);
-    // console.log('result: ', result);
     return result;
   }
 
