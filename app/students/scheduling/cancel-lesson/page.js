@@ -12,9 +12,6 @@ import CancellationConfirmed from '../../../../components/StudentComponents/Canc
 export default function CancellationPage() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
   const [step, setStep] = useState(1);
-  // !!!!!!!!!!!!! NEED TO UPDATE TO REAL STUDENT ID !!!!!!!!!!!!!
-  // const student = {id: 21}
-
   const [scheduleDates, setScheduleDates] = useState([]);
   const [upcomingLessons, setUpcomingLessons] = useState([]);
   const [cancellation, setCancellation] = useState({dateString: '', time: '', note: '', createdBy: '', dbDate: '', id: '', type:''});
@@ -26,6 +23,7 @@ export default function CancellationPage() {
     async function fetchScheduleDates() {
       try {
         const dates = await getUpcomingLessons(student.id, 10);
+        console.log('dates from getUpcomingLessons: ', dates)
         setScheduleDates(dates);
       } catch (error) {
         console.error("Error fetching schedule dates:", error);

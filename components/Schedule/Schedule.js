@@ -3,16 +3,16 @@
 import { useState, useEffect } from 'react';
 import styles from './Schedule.module.css';
 import supabase from '../../utils/supabase';
-import fetchScheduleData from '../../app/services/fetchScheduleData';
+import getAllUpcomingLessons from '../../utils/getAllUpcomingLessons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import getArrayOfMondays from '../../utils/getArrayOfMondays';
 import dateFormatter from '../../utils/dateFormatter';
 
 export default function Schedule({ startDate, privacy }) {
-  const [ scheduleData, setScheduleData ] = useState(null);
-  const [ scheduleDates, setScheduleDates ] = useState(null);
-  const [ formattedDates, setFormattedDates ] = useState(null);
+  const [ scheduleData, setScheduleData ] = useState(null); // array of objects w/day/time or more, depending on privacy
+  const [ scheduleDates, setScheduleDates ] = useState(null);  // Array of tuples for Mon-Sun upcoming dates
+  const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable
   const [currentWeek, setCurrentWeek] = useState(0);
   const schedule = {
     Monday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
@@ -20,17 +20,19 @@ export default function Schedule({ startDate, privacy }) {
     Wednesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
     Thursday: ['4:30pm', '5:00pm', '5:30pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
     Friday: ['4:30pm', '5:00pm', '5:30pm'],
-    Sunday: ['10:00am', '10:30am', '11:00am', '11:30am'],
+    Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }
-
   // fetchScheduleData needs a boolean value for privacy
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchScheduleData(privacy);
+      // const data = await getScheduleData(scheduleDates[0][0], privacy, 8);
+      const data = await getAllUpcomingLessons(8, false);
+      console.log('final schedule data: ', data);
       setScheduleData(data);
     };
     fetchData();
-  }, [privacy]);
+  }, [scheduleDates]);
+
 
   // get and set the weeks array (formatted and raw)
   useEffect(() => {
@@ -46,10 +48,15 @@ export default function Schedule({ startDate, privacy }) {
 
   }, [])
 
+  useEffect(() => {
+    if (scheduleData) {
+      // console.log('current week: ', currentWeek);
+      // console.log('scheduleData[currentWeek]: ', scheduleData.schedule[currentWeek]);
+    }
+
+  }, [currentWeek])
+
   const nextWeek = () => {
-    console.log('currentWeek: ', currentWeek);
-    console.log('formattedDates: ', formattedDates)
-    console.log('formattedDates[currentWeek]: ', formattedDates[currentWeek])
     if (currentWeek < 7) {
       setCurrentWeek((curr) => curr + 1);
     }
@@ -86,15 +93,37 @@ export default function Schedule({ startDate, privacy }) {
             <table className={styles.scheduleTable}>
               <tbody>
                 {times.map((time) => {
-                  const scheduleEntry = scheduleData.find(entry => entry.day === day && entry.time === time);
-                  const status = scheduleEntry ? 'Booked' : 'Open';
-                  const name = scheduleEntry
-                    ? `${scheduleEntry.first_name || ''} ${scheduleEntry.last_name || ''}`.trim() || 'Booked'
-                    : 'Open!';
+                  const scheduleEntry = scheduleData.schedule[currentWeek].find(entry => entry.day === day && entry.time === time);
+                  let statusText, className, name, additionalClass;
+
+                  if (scheduleEntry) {
+                    switch (scheduleEntry.type) {
+                      case 'cancellation':
+                        statusText = 'Open this week only';
+                        className = 'Open';
+                        additionalClass = `${day.toLowerCase()}Open`;
+                        name = statusText;
+                        break;
+                      case 'makeup':
+                        // Define statusText, className, and additionalClass for 'makeup' type
+                        break;
+                      case 'regular':
+                      default:
+                        statusText = 'Booked';
+                        className = 'Booked';
+                        name = `${scheduleEntry.first_name || ''} ${scheduleEntry.last_name || ''}`.trim() || statusText;
+                        break;
+                    }
+                  } else {
+                    statusText = 'Open';
+                    className = 'Open';
+                    name = 'Open!';
+                  }
+
                   return (
                     <tr key={`${day}-${time}`}>
                       <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
-                      <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${status}`]} ${styles[status.toLowerCase()]}`}>
+                      <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${className}`]} ${styles[className.toLowerCase()]} ${additionalClass || ''}`}>
                         {name}
                       </td>
                     </tr>
