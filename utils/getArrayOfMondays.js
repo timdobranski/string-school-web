@@ -1,10 +1,8 @@
-import dateFormatted from './dateFormatter';
-
 export default function upcomingWeeks(numWeeks) {
   let today = new Date();
   let dayOfWeek = today.getDay();
   // Adjust for Sunday being 0
-  let mondayOffset = (dayOfWeek === 0 ? -7 : 0) - dayOfWeek;
+  let mondayOffset = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek;
 
   // Set to the most recent Monday
   let currentMonday = new Date(today);
@@ -13,13 +11,17 @@ export default function upcomingWeeks(numWeeks) {
   let weeks = [];
 
   for (let i = 0; i < numWeeks; i++) {
-      let sunday = new Date(currentMonday);
-      sunday.setDate(sunday.getDate() + 6);
-
-      weeks.push([formatDate(currentMonday), formatDate(sunday)]);
-      currentMonday.setDate(currentMonday.getDate() + 7);
+    let week = [];
+    for (let j = 0; j < 7; j++) { // 7 days in a week
+      let day = new Date(currentMonday);
+      day.setDate(day.getDate() + j);
+      week.push(formatDate(day));
+    }
+    weeks.push(week);
+    currentMonday.setDate(currentMonday.getDate() + 7); // Move to next Monday
   }
 
+  console.log('weeks: ', weeks);
   return weeks;
 }
 

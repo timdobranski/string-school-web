@@ -28,15 +28,23 @@ export default function Schedule({ startDate, privacy }) {
     Friday: ['4:30pm', '5:00pm', '5:30pm'],
     Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }
+  const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   useEffect(() => {
     if (scheduleData && scheduleData.schedule) {
       const renders = scheduleData.schedule.map((weekSchedule, index) => {
         return (
           <div className={styles.scheduleContainer} key={index}>
-          {Object.entries(schedule).map(([day, times]) => (
-            <div key={day} className={`${styles.dayContainer} ${styles[day.toLowerCase()]}`}>
-              <h3 className={styles[`${day.toLowerCase()}Booked`]}>{day}</h3>
+          {Object.entries(schedule).map(([day, times], dayIndex) => {
+            // Find the corresponding date for this day
+            const dayDate = formattedDates[currentItem][dayIndex];
+
+            return (
+              <div key={day} className={`${styles.dayContainer} ${styles[day.toLowerCase()]}`}>
+                <div className={styles[`${day.toLowerCase()}Booked`]}>
+                  <h3>{day}</h3>
+                  <p>{dayDate}</p>
+                </div>
               <table className={styles.scheduleTable}>
                 <tbody>
                   {times.map((time) => {
@@ -93,7 +101,8 @@ export default function Schedule({ startDate, privacy }) {
                 </tbody>
               </table>
             </div>
-          ))}
+            )}
+          )}
         </div>
         );
       });
@@ -108,8 +117,14 @@ export default function Schedule({ startDate, privacy }) {
     const formatOptions = { length: 'short', includeYear: false};
     const formattedDates = dates.map(date => {
       const formattedMon = dateFormatter(date[0], formatOptions);
-      const formattedSun = dateFormatter(date[1], formatOptions);
-      return [formattedMon, formattedSun];
+      const formattedTue = dateFormatter(date[1], formatOptions);
+      const formattedWed = dateFormatter(date[2], formatOptions);
+      const formattedThu = dateFormatter(date[3], formatOptions);
+      const formattedFri = dateFormatter(date[4], formatOptions);
+      const formattedSat = dateFormatter(date[5], formatOptions);
+      const formattedSun = dateFormatter(date[6], formatOptions);
+
+      return [formattedMon, formattedTue, formattedWed, formattedThu, formattedFri, formattedSat, formattedSun];
     })
     setScheduleDates(dates);
     setFormattedDates(formattedDates);
