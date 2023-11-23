@@ -61,7 +61,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
 
     // Create a result object with student data and an empty array for each week
     let result = {
-      students: students,
+      students: privacy ? null : students,
       schedule: [
         [], [] ,[] ,[] ,[] ,[] ,[] ,[]
       ]
@@ -88,11 +88,11 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
           );
           if(!isCancelled) {
             result.schedule[i].push({
-               student: student.id, booked: true, type: 'regular', day: student.day, time: student.time
+               student: privacy ? null : student.id, booked: true, type: 'regular', day: student.day, time: student.time
             });
           } else {
             result.schedule[i].push({
-              student: student.id, booked: false, type: 'cancellation', day: student.day, time: student.time
+              student: privacy ? null : student.id, booked: false, type: 'cancellation', day: student.day, time: student.time
             });
           }
         }
@@ -117,7 +117,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
 
       // Create the object to be pushed
       const makeupEntry = {
-        student: makeup.student,
+        student: privacy ? null : makeup.student,
         booked: true,
         type: 'makeup',
         day: dayString,

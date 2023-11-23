@@ -4,7 +4,7 @@ import Schedule from '../../../../components/Schedule/Schedule';
 
 export default function RescheduleLesson() {
   return (
-    <Schedule privacy={true}/>
+    <Schedule privacy={false}/>
   )
 
 }

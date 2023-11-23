@@ -14,6 +14,7 @@ export default function Schedule({ startDate, privacy }) {
   const [ scheduleDates, setScheduleDates ] = useState(null);  // Array of tuples for Mon-Sun upcoming dates
   const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable
   const [currentWeek, setCurrentWeek] = useState(0);
+
   const schedule = {
     Monday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
     Tuesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
@@ -26,7 +27,7 @@ export default function Schedule({ startDate, privacy }) {
   useEffect(() => {
     const fetchData = async () => {
       // const data = await getScheduleData(scheduleDates[0][0], privacy, 8);
-      const data = await getAllUpcomingLessons(8, false);
+      const data = await getAllUpcomingLessons(8, privacy);
       console.log('final schedule data: ', data);
       setScheduleData(data);
     };
@@ -48,13 +49,7 @@ export default function Schedule({ startDate, privacy }) {
 
   }, [])
 
-  useEffect(() => {
-    if (scheduleData) {
-      // console.log('current week: ', currentWeek);
-      // console.log('scheduleData[currentWeek]: ', scheduleData.schedule[currentWeek]);
-    }
 
-  }, [currentWeek])
 
   const nextWeek = () => {
     if (currentWeek < 7) {
@@ -73,16 +68,16 @@ export default function Schedule({ startDate, privacy }) {
       <div className={styles.scheduleHeadersContainer}>
         <FontAwesomeIcon icon={faCircleArrowLeft} className={styles.arrow} onClick={prevWeek}/>
         <div className={styles.dateAndDotsContainer}>
-  <h2 className={styles.scheduleHeader}>{`${formattedDates[currentWeek][0]} - ${formattedDates[currentWeek][1]}`}</h2>
-  <div className={styles.dotContainer}>
-    {Array.from({ length: 8 }).map((_, index) => (
-      <div
-        key={index}
-        className={`${styles.navDot} ${index === currentWeek ? styles.activeDot : ''}`}
-      ></div>
-    ))}
-  </div>
-</div>
+          <h2 className={styles.scheduleHeader}>{`${formattedDates[currentWeek][0]} - ${formattedDates[currentWeek][1]}`}</h2>
+          <div className={styles.dotContainer}>
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div
+                key={index}
+                className={`${styles.navDot} ${index === currentWeek ? styles.activeDot : ''}`}
+              ></div>
+            ))}
+          </div>
+        </div>
         <FontAwesomeIcon icon={faCircleArrowRight} className={styles.arrow} onClick={nextWeek}/>
       </div>
 
@@ -94,6 +89,11 @@ export default function Schedule({ startDate, privacy }) {
               <tbody>
                 {times.map((time) => {
                   const scheduleEntry = scheduleData.schedule[currentWeek].find(entry => entry.day === day && entry.time === time);
+                  var studentInfo;
+                  if (scheduleEntry) {
+                    studentInfo = scheduleData.students.find(s => s.id === scheduleEntry.student);
+                  }
+
                   let statusText, className, name, additionalClass;
 
                   if (scheduleEntry) {
@@ -105,14 +105,20 @@ export default function Schedule({ startDate, privacy }) {
                         name = statusText;
                         break;
                       case 'makeup':
-                        statusText = 'Booked this week only';
+                        statusText = privacy
+                          ? 'Booked this week only'
+                          : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
+
                         className = 'Booked';
                         additionalClass = `${day.toLowerCase()}Booked`;
                         name = statusText;
                         break;
                       case 'regular':
                       default:
-                        statusText = 'Booked';
+                        statusText = privacy
+                          ? 'Booked'
+                          : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
+
                         className = 'Booked';
                         name = `${scheduleEntry.first_name || ''} ${scheduleEntry.last_name || ''}`.trim() || statusText;
                         break;

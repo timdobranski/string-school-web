@@ -6,7 +6,7 @@ export default function SchedulePage() {
     return (
       <div className='infoCard'>
         <h1>SCHEDULE PAGE</h1>
-        <Schedule privacy={true} />
+        <Schedule privacy={false} />
       </div>
 
     )
