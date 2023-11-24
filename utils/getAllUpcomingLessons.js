@@ -143,18 +143,30 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
 
 
 
-  const example = {
-    students: {studentid: 'student data'},
-    schedule:
-      [
-        [
-          { day: 'day', time: 'time', student: 'student id', booked: true, type: 'regular'},
-          { day: 'day', time: 'time', student: 'student id', booked: true, type: 'makeup'},
-          { day: 'day', time: 'time', student: 'student id', booked: true, type: 'cancellation'}
-        ]
-      ]
-  }
+  // const example = {
+  //   students: {studentid: 'student data'},
+  //   schedule:
+  //     [
+  //       [ // week array
+  //         { day: 'day', time: 'time', student: 'student id', booked: true, type: 'regular'},
+  //         { day: 'day', time: 'time', student: 'student id', booked: true, type: 'makeup'},
+  //         { day: 'day', time: 'time', student: 'student id', booked: true, type: 'cancellation'}
+  //       ]
+  //     ]
+  // }
 
+  // const example = {
+  //   students: {studentid: 'student data'},
+  //   schedule:
+  //     [
+  //       [ // week array
+  //         { day: 'day', time: 'time', student: 'student id', booked: true, type: 'regular'},
+  //         { day: 'day', time: 'time', student: 'student id', booked: true, type: 'makeup'},
+  //         { day: 'day', time: 'time', student: 'student id', booked: true, type: 'cancellation'}
+  //       ]
+  //     ]
+
+  // }
 
 
 
