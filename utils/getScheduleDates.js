@@ -1,5 +1,7 @@
 import dateFormatter from './dateFormatter';
 
+// Returns an array of arrays containing the dates for the next numWeeks weeks
+// formatOptions: { format: true || false, length: 'short || 'long', includeYear: true || false }
 export default function getScheduleDates(numWeeks, formatOptions) {
   let today = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
 
@@ -22,14 +24,17 @@ export default function getScheduleDates(numWeeks, formatOptions) {
       if (j !== 5) { // Skip Saturday (5th day of the week starting from Monday)
         let day = new Date(currentMonday);
         day.setDate(day.getDate() + j);
-        week.push(dateFormatter(toISOStringDate(day), formatOptions)); // Format each day
+        if (formatOptions.format) {
+          week.push(dateFormatter(toISOStringDate(day), formatOptions)); // Format each day
+        } else {
+          week.push(toISOStringDate(day)); // Don't format each day
+        }
       }
     }
     weeks.push(week);
     // Move to next Monday
     currentMonday.setDate(currentMonday.getDate() + 7);
   }
-  console.log('weeks: ', weeks)
   return weeks;
 }
 

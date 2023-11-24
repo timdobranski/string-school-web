@@ -27,8 +27,27 @@ export default function Schedule({ startDate, privacy }) {
     Friday: ['4:30pm', '5:00pm', '5:30pm'],
     Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }
-  // const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
+  const handleSpotClick = (day, date, time, student) => {
+    console.log('spot clicked: ', day, date, time, student);
+  }
+
+  // get schedule
+  // fetchScheduleData needs a number of weeks to return, and boolean value for privacy
+  useEffect(() => {
+    const formatOptions = { length: 'short', includeYear: false, format: true };
+    const formattedDates = getScheduleDates(8, formatOptions);
+    setFormattedDates(formattedDates);
+
+    const fetchData = async () => {
+      const data = await getAllUpcomingLessons(8, privacy);
+      console.log('final schedule data: ', data);
+      setScheduleData(data);
+    };
+    fetchData();
+  }, [privacy]);
+
+  // create weekly schedule renders for carousel
   useEffect(() => {
     if (scheduleData && scheduleData.schedule) {
       const renders = scheduleData.schedule.map((weekSchedule, index) => {
@@ -91,7 +110,9 @@ export default function Schedule({ startDate, privacy }) {
                         return (
                           <tr key={`${day}-${time}`}>
                             <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
-                            <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${className}`]} ${styles[className.toLowerCase()]} ${additionalClass || ''}`}>
+                            <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${className}`]} ${styles[className.toLowerCase()]} ${additionalClass || ''}`}
+                              onClick={() => handleSpotClick(day, dayDate, time, scheduleEntry.student ?? null)}
+                            >
                               {name}
                             </td>
                           </tr>
@@ -109,24 +130,8 @@ export default function Schedule({ startDate, privacy }) {
     }
   }, [scheduleData]);
 
-  // get and set the weeks array (formatted and raw) and the schedule data
-  // fetchScheduleData needs a number of weeks to return, and boolean value for privacy
-  useEffect(() => {
-    const formatOptions = { length: 'short', includeYear: false };
-    const formattedDates = getScheduleDates(8, formatOptions);
-    setFormattedDates(formattedDates);
 
-    const fetchData = async () => {
-      const data = await getAllUpcomingLessons(8, privacy);
-      console.log('final schedule data: ', data);
-      setScheduleData(data);
-    };
-    fetchData();
-  }, []);
-
-
-
-
+  // nav dots for the carousel
   const Dot = ({ index, isActive, onClick }) => (
     <button
       className={`${styles.navDot} ${isActive ? styles.activeDot : ''}`}
@@ -150,13 +155,13 @@ export default function Schedule({ startDate, privacy }) {
   return (
     scheduleData ? (
       <>
+        {/* CAROUSEL NAVIGATION */}
         <div className={styles.scheduleHeadersContainer}>
           <button onClick={prevWeek} className={styles.customArrowLeft}>
             <FontAwesomeIcon icon={faCircleArrowLeft} className={styles.arrow}/>
           </button>
           <div className={styles.dateAndDotsContainer}>
             <h2 className={styles.scheduleHeader}>{`${formattedDates[currentItem][0]} - ${formattedDates[currentItem][5]}`}</h2>
-
             <div className={styles.navDotsContainer}>
               {scheduleRenders.map((_, index) => (
                 <Dot
@@ -172,10 +177,11 @@ export default function Schedule({ startDate, privacy }) {
           </button>
         </div>
 
+        {/* CAROUSEL OF WEEKLY SCHEDULES */}
         <div className={`${styles.carouselContainer} `}>
           <Carousel
-            showThumbs={false}
             className={styles.carousel}
+            showThumbs={false}
             showStatus={false}
             showIndicators={false}
             selectedItem={currentItem}
