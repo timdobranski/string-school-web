@@ -25,7 +25,7 @@ export default function ConfirmMakeup({ makeup, setStep, user, student }) {
 
       if (makeupError) throw makeupError;
       console.log('Insertion into makeups successful:', makeupResponse);
-
+      adjustMakeupCredits(student, 'decrement');
       setStep(3);
     } catch (error) {
       console.error('Error in adding makeup:', error);

@@ -31,16 +31,22 @@ export default function StudentScheduling() {
           <h2 className='featureHeaders'>Schedule A Makeup Lesson</h2>
           <p className='featureComments'>Use a makeup credit</p>
         </Link>
-
-        <h2 className='featureHeaders'>Switch Spots</h2>
-        <p className='featureComments'>Change To A Different Recurring Weekly Spot</p>
-
-        <h2 className='featureHeaders'>Add An Additional Spot</h2>
-        <p className='featureComments'>Book An Additional Recurring Weekly Spot</p>
-
-        <h2 className='featureHeaders'>Schedule An Extra Lesson</h2>
-        <p className='featureComments'>Book A One-Time Extra Lesson</p>
-
+        <Link href='/students/scheduling/schedule-extra'>
+          <h2 className='featureHeaders'>View Attendance History</h2>
+          <p className='featureComments'>View Lessons Attended, Cancelled, and Made-Up</p>
+        </Link>
+        <Link href='/students/scheduling/switch-spots'>
+          <h2 className='featureHeaders'>Switch Spots</h2>
+          <p className='featureComments'>Change To A Different Recurring Weekly Spot</p>
+        </Link>
+        <Link href='/students/scheduling/add-spot'>
+          <h2 className='featureHeaders'>Add An Additional Spot</h2>
+          <p className='featureComments'>Book An Additional Recurring Weekly Spot</p>
+        </Link>
+        <Link href='/students/scheduling/schedule-extra'>
+          <h2 className='featureHeaders'>Schedule An Extra Lesson</h2>
+          <p className='featureComments'>Book A One-Time Extra Lesson</p>
+        </Link>
       </div>
     )
   } else {

@@ -121,9 +121,11 @@ a {
   min-height: 500px;
   min-width: 1000px;
   font-family: JennaSue;
+  text-align: center;
 }
 .sectionHeaders {
   text-decoration: underline;
+
 }
 .featureHeaders {
   color: rgb(95, 180, 225);
@@ -133,13 +135,15 @@ a {
   text-decoration: underline;
   margin-bottom: 1rem;
   font-weight: 800;
-  line-height: 1.2;
+  /* line-height: 1.2; */
+  /* border: solid white 2px; */
+  margin-bottom: 0;
 }
 .featureComments {
   font-style:italic;
   font-family: SanFrancisco;
   color: #ababab;
-
+  /* border: solid white 2px; */
 }
 .featureButton {
   text-align: center;

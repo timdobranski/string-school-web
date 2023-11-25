@@ -44,7 +44,7 @@ export default function ConfirmReschedule({ cancellation, makeup, setStep, user,
         <p>{`You're rescheduling your lesson on`}</p>
         <p className={styles.date}>{`${cancellation.dateString} @ ${cancellation.time}`}</p>
         <p>to</p>
-        <p className={styles.date}>{`${makeup.date} @ ${makeup.time}.`}</p>
+        <p className={styles.date}>{`${makeup.day}, ${makeup.date} @ ${makeup.time}.`}</p>
         <p>Do you want to proceed?</p>
 
       </div>
