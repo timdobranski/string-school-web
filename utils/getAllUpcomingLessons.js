@@ -6,21 +6,30 @@ import getScheduleDates from './getScheduleDates';
 // HELPERS
 
 // retrieve schedule data
-async function getSchedule() {
-  let { data, error } = await supabase
+async function getSchedule(studentId) {
+  let query = supabase
     .from('schedule')
     .select('*')
     .order('id', { ascending: true });
+
+  if (studentId) {
+    query = query.or(`student.eq.${studentId},new_student.eq.${studentId}`);
+  }
+
+  let { data, error } = await query;
+
   if (error) throw error;
   return data;
 }
+
 // Function to retrieve all students' data - either private or public based on boolean argument
-async function getAllStudents(privacy) {
+async function getAllStudents(privacy, studentId) {
   const studentData = privacy === true ? 'day, time, new_day, new_time, new_spot_start_date' : '*';
 
   let { data, error } = await supabase
     .from('students')
-    .select(studentData);
+    .select(studentData)
+    .match(studentId ? { id: studentId } : {});
   if (error) throw error;
   return data;
 }
@@ -79,9 +88,11 @@ function dateIsPast(currentDate, startDate) {
 
   // Compare the dates
   if (date1 < date2) {
-    return false;
-  } else if (date1 >= date2) {
+
     return true;
+  } else if (date1 >= date2) {
+
+    return false;
   }
 }
 // returns the first and last name of a student
@@ -112,11 +123,25 @@ function makeupChecker(makeups, inputDate, inputTime) {
     return {isMakeup: false, data: null};
   }
 }
+function formatScheduleIntoList(schedule) {
+  const result = [];
+  schedule.forEach(week => {
+    console.log('week inside formatScheduleIntoList: ', week)
+    for (var spotKey in week) {
+      if (week.hasOwnProperty(spotKey)) {
+        const spot = week[spotKey];
+        spot.className = spot.type;
+        result.push(spot);
+      }
+    }
+  });
+  return result;
+}
 
 // Get Upcoming Schedule Data for several weeks
-export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
-  const schedule = await getSchedule();
-  const students = await getAllStudents(privacy);
+export default async function getAllUpcomingLessons(numberOfLessons, privacy, studentId) {
+  const schedule = await getSchedule(studentId);
+  const students = await getAllStudents(privacy, studentId);
   const makeups = await getAllMakeups();
   const cancellations = await getAllCancellations();
   const mondaysArray= createDatesArray(1, numberOfLessons);
@@ -126,7 +151,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
 
   // Create dates array: an array of arrays for every week day for the next n weeks
   let result = {
-    students: privacy ? null : students,
+    students: students,
     schedule: [
       [], [] ,[] ,[] ,[] ,[] ,[] ,[]
     ]
@@ -142,14 +167,18 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
         time: spot.time,
         student: spot.student,
         type: spot.booked ? 'regular' : 'open',
-        cellText: privacy ? 'Booked' : (spot.booked ? studentName(students, spot.student) : 'Open!'),
+        cellText: spot.booked ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!',
       }
 
       // First check if schedule spot has new_Student_Start_Date && we have already reached that week
-      if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
-        spotData.type = 'new spot';
-        spotData.student = studentName(students, spot.new_student);
+      if (spot.new_student_start_date && !(dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date))) {
+        spotData.type = 'regular';
+        spotData.student = spot.new_student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, spot.new_student);
+      }
+      // Next check if schedule spot has new_Student_Start_Date && we have NOT yet reached that week (flag for skip)
+      if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
+        spotData.type = 'futureSpot';
       }
       // Check if spot is a cancellation
       if (isCancellation(cancellations, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)) {
@@ -163,11 +192,24 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
         spotData.student = checkForMakeup.data.student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, checkForMakeup.data.student);
       }
+
       spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
-      result.schedule[weekIndex].push(spotData)
+
+      // Next check if schedule spot has new_Student_Start_Date && we have NOT yet reached that week (skip)
+      if (!studentId) {
+        result.schedule[weekIndex].push(spotData)
+      } else {
+        if (spotdata.type !== 'futureSpot' && spotData.type !== 'open') {
+          result.schedule[weekIndex].push(spotData)
+        }
+      }
+
     })
   })
-  // console.log('schedule data refactor results: ', result)
+  // If a student id is provided, format the schedule into a list
+  if (studentId) {
+    result.schedule = formatScheduleIntoList(result.schedule)
+  }
   return result;
 }
 
@@ -175,7 +217,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
 
 
 
-// const privacy = false;
+
 // const example = {
 //   students: {studentid: 'student data'},
 //   schedule:
@@ -196,79 +238,3 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
 //     ]
 // }
 
-
-
-
-
-
-
-
-
-
-// FIRST: ITERATE THROUGH STUDENT DATA AND ADD REGULAR/NEW SPOT LESSONS.
-// SECOND: ADD CANCELLATIONS
-// students.forEach(student => {
-//   // Creates an array of dates for the next n occurrences of the student's regular day
-//   const upcomingRegularDates = createDatesArray(getDayNumber(student.day), numberOfLessons);
-
-//   // If NO new_spot_start_date, add the day/time data to the week object
-//   if (!student.new_spot_start_date ) {
-//     for (var i = 0; i < result.schedule.length; i++) {
-
-//       // boolean flag to determine if the current week's lesson is cancelled already
-//       const isCancelled = cancellations.some(cancellation => {
-//         return (upcomingRegularDates[i] === (cancellation.date)
-//           && cancellation.time === student.time)
-//       }
-//       );
-//       if(!isCancelled) {
-//         result.schedule[i].push({
-//           student: privacy ? null : student.id, booked: true, type: 'regular', day: student.day, time: student.time
-//         });
-//       } else {
-//         result.schedule[i].push({
-//           student: privacy ? null : student.id, booked: false, type: 'cancellation', day: student.day, time: student.time
-//         });
-//       }
-//     }
-//   }
-// });
-// // THIRD: UPDATE MAKEUPS (add to wee with booked = true and type = makeup)
-// const timeZone = 'America/Los_Angeles';
-// const mondaysArrayDates = mondaysArray.map(dateStr =>
-//   utcToZonedTime(zonedTimeToUtc(dateStr, timeZone), timeZone)
-// );
-
-// makeups.forEach(makeup => {
-//   // Parse the date and get the day of the week
-//   const makeupDate = utcToZonedTime(zonedTimeToUtc(makeup.date, timeZone), timeZone);
-//   const dayOfWeek = makeupDate.getDay();
-
-//   // Map dayOfWeek to a string (e.g., 'Monday', 'Tuesday', ...)
-//   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-//   const dayString = days[dayOfWeek];
-
-//   // Create the object to be pushed
-//   const makeupEntry = {
-//     student: privacy ? null : makeup.student,
-//     booked: true,
-//     type: 'makeup',
-//     day: dayString,
-//     time: makeup.time
-//   };
-
-//   let targetArrayIndex = -1;
-
-//   for (let i = 0; i < mondaysArrayDates.length; i++) {
-//     if (makeupDate >= mondaysArrayDates[i] && (i === mondaysArrayDates.length - 1 || makeupDate < mondaysArrayDates[i + 1])) {
-//       targetArrayIndex = i;
-//       break;
-//     }
-//   }
-//   if (targetArrayIndex !== -1) {
-//     result.schedule[targetArrayIndex].push(makeupEntry);
-//   }
-// })
-// // !!!!!!!!!!!!!!!!If there IS a new spot start date, check if the start date is in the current week or in the past
-// return result;
-// }

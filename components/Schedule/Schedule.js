@@ -38,8 +38,8 @@ export default function Schedule({ startDate, privacy, handler }) {
     setFormattedDates(formattedDates);
 
     const fetchData = async () => {
+      //num of lessons, privacy boolean, studentId
       const data = await getAllUpcomingLessons(8, privacy);
-      console.log('final schedule data: ', data);
       setScheduleData(data);
     };
     fetchData();
@@ -48,6 +48,7 @@ export default function Schedule({ startDate, privacy, handler }) {
   // create weekly schedule renders for carousel
   useEffect(() => {
     if (scheduleData && scheduleData.schedule) {
+
       // For each weekArray in the scheduleData, create a render
       const renders = scheduleData.schedule.map((weekSchedule, index) => {
 
@@ -67,6 +68,7 @@ export default function Schedule({ startDate, privacy, handler }) {
                     <tbody>
                       {times.map((time) => {
                         const spot = weekSchedule.find(entry => entry.day === day && entry.time === time);
+
                         const spotClass = spot.className;
                         return (
                           <tr key={`${day}-${time}`}>

@@ -29,10 +29,10 @@ export default function StudentHome() {
   }, []);
 
   useEffect(() => {
-    console.log('announcements: ', announcements);
+    // console.log('announcements: ', announcements);
   }, [announcements]);
   // console.log('google user data:', googleUserData);
-  console.log('supabase user data:', supabaseUserData);
+  // console.log('supabase user data:', supabaseUserData);
 
 
   if (googleUserData && student && announcements) {
