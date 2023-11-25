@@ -157,7 +157,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
         spotData.student = checkForMakeup.data.student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, checkForMakeup.data.student);
       }
-      spotData.type = spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
+      spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
       result.schedule[weekIndex].push(spotData)
     })
   })

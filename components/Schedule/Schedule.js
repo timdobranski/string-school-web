@@ -50,7 +50,9 @@ export default function Schedule({ startDate, privacy }) {
   // create weekly schedule renders for carousel
   useEffect(() => {
     if (scheduleData && scheduleData.schedule) {
+      // For each weekArray in the scheduleData, create a render
       const renders = scheduleData.schedule.map((weekSchedule, index) => {
+
         return (
           <div className={styles.scheduleContainer} key={index}>
             {Object.entries(schedule).map(([day, times], dayIndex) => {
@@ -59,61 +61,22 @@ export default function Schedule({ startDate, privacy }) {
 
               return (
                 <div key={day} className={`${styles.dayContainer} ${styles[day.toLowerCase()]}`}>
-                  <div className={styles[`${day.toLowerCase()}Booked`]}>
+                  <div className={styles[`${day.toLowerCase()}Regular`]}>
                     <h3>{day}</h3>
                     <p>{dayDate}</p>
                   </div>
                   <table className={styles.scheduleTable}>
                     <tbody>
                       {times.map((time) => {
-                        const scheduleEntry = weekSchedule.find(entry => entry.day === day && entry.time === time);
-                        var studentInfo;
-                        if (scheduleEntry) {
-                          studentInfo = scheduleData.students.find(s => s.id === scheduleEntry.student);
-                        }
-
-                        let statusText, className, name, additionalClass;
-
-                        if (scheduleEntry) {
-                          switch (scheduleEntry.type) {
-                          case 'cancellation':
-                            statusText = 'Open this week only';
-                            className = 'Open';
-                            additionalClass = `${day.toLowerCase()}Open`;
-                            name = statusText;
-                            break;
-                          case 'makeup':
-                            statusText = privacy
-                              ? 'Booked this week only'
-                              : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
-
-                            className = 'Booked';
-                            additionalClass = `${day.toLowerCase()}Booked`;
-                            name = statusText;
-                            break;
-                          case 'regular':
-                          default:
-                            statusText = privacy
-                              ? 'Booked'
-                              : `${studentInfo.first_name}${studentInfo.last_name ? ` ${studentInfo.last_name}` : ''}`;
-
-                            className = 'Booked';
-                            name = `${scheduleEntry.first_name || ''} ${scheduleEntry.last_name || ''}`.trim() || statusText;
-                            break;
-                          }
-                        } else {
-                          statusText = 'Open';
-                          className = 'Open';
-                          name = 'Open!';
-                        }
-
+                        const spot = weekSchedule.find(entry => entry.day === day && entry.time === time);
+                        const spotClass = spot.className;
                         return (
                           <tr key={`${day}-${time}`}>
                             <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
-                            <td className={`${styles.statusColumn} ${styles[`${day.toLowerCase()}${className}`]} ${styles[className.toLowerCase()]} ${additionalClass || ''}`}
-                              onClick={() => handleSpotClick(day, dayDate, time, scheduleEntry.student ?? null)}
+                            <td className={`${styles.statusColumn} ${styles[spotClass]}`}
+                              onClick={() => handleSpotClick(day, dayDate, time, spot.student ?? null)}
                             >
-                              {name}
+                              {spot.cellText}
                             </td>
                           </tr>
                         );
