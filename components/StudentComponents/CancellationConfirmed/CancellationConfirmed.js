@@ -14,12 +14,12 @@ export default function CancellationConfirmed({ cancellation }) {
     )
   } else if (cancellation.type === 'cancellation') {
 
-      confirmMessage = (
-        <div>
-          <h1>Cancellation Reversed</h1>
-          <p>{`Your cancelled lesson on ${cancellation.dateString} at ${cancellation.time} has been reversed. `}</p>
-        </div>
-      )
+    confirmMessage = (
+      <div>
+        <h1>Cancellation Reversed</h1>
+        <p>{`Your cancelled lesson on ${cancellation.dateString} at ${cancellation.time} has been reversed. `}</p>
+      </div>
+    )
   }
 
   return (

@@ -11,7 +11,7 @@ import getScheduleDates from '../../utils/getScheduleDates';
 import dateFormatter from '../../utils/dateFormatter';
 import { Carousel } from 'react-responsive-carousel';
 
-export default function Schedule({ startDate, privacy, handler}) {
+export default function Schedule({ startDate, privacy, handler }) {
   const [ scheduleData, setScheduleData ] = useState(null); // array of objects w/day/time or more, depending on privacy
   const [ scheduleRenders, setScheduleRenders ] = useState([]); // actual jsx to render for each week
   const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable

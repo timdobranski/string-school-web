@@ -4,16 +4,17 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import InfoCard from '../components/InfoCard/InfoCard';
 import { useEffect, useState } from 'react';
-// import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { supabase } from '../utils/supabase';
 import { useRouter } from 'next/navigation';
 import PublicNavbar from '../components/PublicNavbar/PublicNavbar';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
+import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
 export default function Home() {
   const router= useRouter();
+  const [renderPage, setRenderPage] = useState(false);
+
 
   useEffect(() => {
     const checkSession = async () => {
@@ -21,32 +22,34 @@ export default function Home() {
 
       if (error) {
         console.error('Error getting session:', error);
+        setRenderPage(true);
       } else if (data.session) {
-        console.log('data.session.user.id: ', data.session.user.id)
         // Get data from custom user table
         const { data: userData, error } = await supabase
-        .from('users')
-        .select('*')
-        .eq('auth_user_id', data.session.user.id)
-        .single();
-      // If there is an associated user, redirect to home
-      if (userData) {
-        console.log('userData: ', userData);
-        router.push('/students/home');
-      }
-       if (error) {
-        // Redirect to finish signup
-        console.log('error: ', error);
-        router.push('/finish-signup');
-      } else {
-        console.log('No session or error');
-      }
+          .from('users')
+          .select('*')
+          .eq('auth_user_id', data.session.user.id)
+          .single();
+        // If there is an associated user, redirect to home
+        if (userData) {
+          console.log('userData: ', userData);
+          router.push('/students/home');
+        }
+        if (error) {
+        // User signed into google, but does not yet exist in supabase; redirect to finish signup
+          console.log('error: ', error);
+          router.push('/finish-signup');
+        } else {
+          setRenderPage(true);
+          console.log('No session or error');
+        }
 
       } else {
         console.log('No session');
+        setRenderPage(true);
       }
     };
-  checkSession();
+    checkSession();
   }, []);
 
   const handleSignout = async () => {
@@ -55,6 +58,13 @@ export default function Home() {
     router.push('/')
   }
 
+  if (!renderPage) {
+    return (
+      <div className='infoCard'>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
   return (
     <main className='appContainer'>
       <div className='infoCard'>
