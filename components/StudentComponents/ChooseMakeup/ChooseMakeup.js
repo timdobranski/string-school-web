@@ -12,9 +12,10 @@ export default function ChooseMakeup ({ setMakeup, setStep }) {
   }
 
   return (
-    <div className='infoCard'>
+    <>
       <h1>Choose your makeup spot</h1>
       <Schedule privacy={true} handler={makeupHandler} setMakeup={setMakeup}/>
-    </div>
+    </>
+
   )
 }

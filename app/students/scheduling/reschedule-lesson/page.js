@@ -6,7 +6,7 @@ import StudentContext, { useAuth } from '../../layout.js';
 import ChooseMakeup from '../../../../components/StudentComponents/ChooseMakeup/ChooseMakeup';
 import ChooseCancellation from '../../../../components/StudentComponents/ChooseCancellation/ChooseCancellation';
 import ConfirmReschedule from '../../../../components/StudentComponents/ConfirmReschedule/ConfirmReschedule';
-import RescheduleConfirmed from '../../../../components/StudentComponents/RescheduleConfirmed/RescheduleConfirmed';
+import SchedulingConfirm from '../../../../components/StudentComponents/SchedulingConfirm/SchedulingConfirm';
 
 export default function RescheduleLesson() {
   const [step, setStep] = useState(1); // choose cancel, choose makeup, confirm, confirmed
@@ -20,7 +20,7 @@ export default function RescheduleLesson() {
       {step === 1 ? <ChooseCancellation setStep={setStep} setCancellation={setCancellation} /> : null}
       {step === 2 ? <ChooseMakeup setStep={setStep} setMakeup={setMakeup} /> : null}
       {step === 3 ? <ConfirmReschedule setStep={setStep} cancellation={cancellation} makeup={makeup} user={supabaseUserData} student={student}/> : null}
-      {step === 4 ? <RescheduleConfirmed setStep={setStep} cancellation={cancellation} makeup={makeup} /> : null}
+      {step === 4 ? <SchedulingConfirm setStep={setStep} cancellation={cancellation} makeup={makeup} type='reschedule' /> : null}
     </div>
   )
 }

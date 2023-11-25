@@ -24,12 +24,13 @@ export default function StudentScheduling() {
           <p className='featureComments'>Cancel now & reschedule later</p>
         </Link>
         <Link href='/students/scheduling/reschedule-lesson'>
-        <h2 className='featureHeaders'>Reschedule A Lesson</h2>
-        <p className='featureComments'>Cancel and reschedule now</p>
+          <h2 className='featureHeaders'>Reschedule A Lesson</h2>
+          <p className='featureComments'>Cancel and reschedule now</p>
         </Link>
-
-        <h2 className='featureHeaders'>Schedule A Makeup Lesson</h2>
-        <p className='featureComments'>Use a makeup credit</p>
+        <Link href='/students/scheduling/schedule-makeup'>
+          <h2 className='featureHeaders'>Schedule A Makeup Lesson</h2>
+          <p className='featureComments'>Use a makeup credit</p>
+        </Link>
 
         <h2 className='featureHeaders'>Switch Spots</h2>
         <p className='featureComments'>Change To A Different Recurring Weekly Spot</p>

@@ -7,7 +7,7 @@ import styles from './cancel-lesson.module.css';
 import getUpcomingLessons from '../../../../utils/getUpcomingLessons.js';
 import ChooseCancellation from '../../../../components/StudentComponents/ChooseCancellation/ChooseCancellation';
 import ConfirmCancellation from '../../../../components/StudentComponents/ConfirmCancellation/ConfirmCancellation';
-import CancellationConfirmed from '../../../../components/StudentComponents/CancellationConfirmed/CancellationConfirmed';
+import SchedulingConfirm from '../../../../components/StudentComponents/SchedulingConfirm/SchedulingConfirm';
 
 export default function CancellationPage() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
@@ -55,14 +55,16 @@ export default function CancellationPage() {
           student={student}
           user={supabaseUserData} /> : null}
 
-        { step === 3 ? <CancellationConfirmed
+        { step === 3 ? <SchedulingConfirm
           scheduleDates={scheduleDates}
           cancellation={cancellation}
-          setStep={setStep}
-          student={student} /> : null}
+          // setStep={setStep}
+          student={student}
+          type='cancellation' /> : null}
       </div>
     )
   } else {
     return (<h1>Loading...</h1>)
   }
 }
+

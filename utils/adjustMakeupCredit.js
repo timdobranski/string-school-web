@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 
-// takes in the student object and a settings object with value: {adjustment: 'increment}
+// takes in the student object and a string 'increment' or 'decrement'
 const adjustMakeupCredit = async (student, type) => {
   console.log('student:', student);
   const id = student.id;
