@@ -3,6 +3,7 @@ import { parseISO, addWeeks, set, startOfDay, isValid, nextDay, parse, startOfWe
 import { zonedTimeToUtc, utcToZonedTime, format } from 'date-fns-tz';
 import getScheduleDates from './getScheduleDates';
 
+// HELPERS
 
 // retrieve schedule data
 async function getSchedule() {
@@ -23,19 +24,25 @@ async function getAllStudents(privacy) {
   if (error) throw error;
   return data;
 }
-// Function to retrieve all makeups
+// Function to retrieve all makeups scheduled for today or later
 async function getAllMakeups() {
+  const today = new Date().toISOString().split('T')[0];
+
   let { data, error } = await supabase
     .from('makeups')
-    .select('*');
+    .select('*')
+    .gte('date', today);
   if (error) throw error;
   return data;
 }
-// Function to retrieve all cancellations
+// Function to retrieve all cancellations scheduled for today or later
 async function getAllCancellations() {
+  const today = new Date().toISOString().split('T')[0];
+
   let { data, error } = await supabase
     .from('cancellations')
-    .select('*');
+    .select('*')
+    .gte('date', today);
   if (error) throw error;
   return data;
 }
@@ -83,8 +90,8 @@ function studentName(students, id) {
   const student = students.find(student => student.id === id);
 
   if (student) {
-    // If a matching student is found, concatenate first_name and last_name with a space
-    return `${student.first_name} ${student.last_name}`;
+    // If a matching student is found, return name (first + last, or just first if no last found)
+    return `${student.first_name} ${student.last_name || ''}`.trim();
   } else {
     // If no matching student is found, return a message or an empty string
     return 'Student not found'; // You can customize this message
@@ -106,7 +113,7 @@ function makeupChecker(makeups, inputDate, inputTime) {
   }
 }
 
-// Refactored function to get upcoming lessons for all students
+// Get Upcoming Schedule Data for several weeks
 export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
   const schedule = await getSchedule();
   const students = await getAllStudents(privacy);
@@ -128,7 +135,6 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy) {
   result.schedule.forEach((week, weekIndex) => {
     schedule.forEach((spot, spotIndex) => {
       // Starting data for return before considering cancellations, makeups, or new spots
-
       const spotData = {
         day: spot.day,
         date : formattedDatesArray[weekIndex][dayIndex(spot.day)],

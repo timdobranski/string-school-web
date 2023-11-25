@@ -11,7 +11,7 @@ import getScheduleDates from '../../utils/getScheduleDates';
 import dateFormatter from '../../utils/dateFormatter';
 import { Carousel } from 'react-responsive-carousel';
 
-export default function Schedule({ startDate, privacy }) {
+export default function Schedule({ startDate, privacy, handler}) {
   const [ scheduleData, setScheduleData ] = useState(null); // array of objects w/day/time or more, depending on privacy
   const [ scheduleRenders, setScheduleRenders ] = useState([]); // actual jsx to render for each week
   const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable
@@ -28,9 +28,7 @@ export default function Schedule({ startDate, privacy }) {
     Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }
 
-  const handleSpotClick = (day, date, time, student) => {
-    console.log('spot clicked: ', day, date, time, student);
-  }
+
 
   // get schedule
   // fetchScheduleData needs a number of weeks to return, and boolean value for privacy
@@ -74,7 +72,13 @@ export default function Schedule({ startDate, privacy }) {
                           <tr key={`${day}-${time}`}>
                             <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
                             <td className={`${styles.statusColumn} ${styles[spotClass]}`}
-                              onClick={() => handleSpotClick(day, dayDate, time, spot.student ?? null)}
+                              onClick={() => handler({
+                                day: spot.day,
+                                time: spot.time,
+                                date: spot.date,
+                                dbDate: spot.dbDate,
+                                student: spot.student
+                              })}
                             >
                               {spot.cellText}
                             </td>
