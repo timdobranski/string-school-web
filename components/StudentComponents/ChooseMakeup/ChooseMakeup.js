@@ -14,7 +14,7 @@ export default function ChooseMakeup ({ setMakeup, setStep }) {
   return (
     <>
       <h1>Choose your makeup spot</h1>
-      <Schedule privacy={true} handler={makeupHandler} setMakeup={setMakeup}/>
+      <Schedule privacy={false} handler={makeupHandler} setMakeup={setMakeup}/>
     </>
 
   )

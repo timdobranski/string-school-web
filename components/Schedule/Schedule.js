@@ -40,6 +40,7 @@ export default function Schedule({ startDate, privacy, handler }) {
     const fetchData = async () => {
       //num of lessons, privacy boolean, studentId
       const data = await getAllUpcomingLessons(8, privacy);
+      console.log('data provided to Schedule component w/no id given: ', data)
       setScheduleData(data);
     };
     fetchData();

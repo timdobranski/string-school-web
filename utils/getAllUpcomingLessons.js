@@ -13,11 +13,15 @@ async function getSchedule(studentId) {
     .order('id', { ascending: true });
 
   if (studentId) {
-    query = query.or(`student.eq.${studentId},new_student.eq.${studentId}`);
+    query = supabase
+      .from('schedule')
+      .select('*')
+      .or(`student.eq.${studentId},new_student.eq.${studentId}`)
+      .order('id', { ascending: true });
   }
 
   let { data, error } = await query;
-
+  console.log('getSchedule returns(with studentId=', studentId, ': ',  data);
   if (error) throw error;
   return data;
 }
@@ -124,9 +128,10 @@ function makeupChecker(makeups, inputDate, inputTime) {
   }
 }
 function formatScheduleIntoList(schedule) {
+  // console.log('schedule inside formatScheduleIntoList: ', schedule)
   const result = [];
   schedule.forEach(week => {
-    console.log('week inside formatScheduleIntoList: ', week)
+    // console.log('week inside formatScheduleIntoList: ', week)
     for (var spotKey in week) {
       if (week.hasOwnProperty(spotKey)) {
         const spot = week[spotKey];
@@ -166,17 +171,17 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         dbDate: dbDatesArray[weekIndex][dayIndex(spot.day)],
         time: spot.time,
         student: spot.student,
-        type: spot.booked ? 'regular' : 'open',
-        cellText: spot.booked ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!',
+        type: spot.student ? 'regular' : 'open',
+        cellText: spot.student ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!',
       }
 
-      // First check if schedule spot has new_Student_Start_Date && we have already reached that week
+      // First check if the spot if a future spot and we've reached that week
       if (spot.new_student_start_date && !(dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date))) {
         spotData.type = 'regular';
         spotData.student = spot.new_student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, spot.new_student);
       }
-      // Next check if schedule spot has new_Student_Start_Date && we have NOT yet reached that week (flag for skip)
+      // Next check if it's a future spot and we HAVEN'T reached that week (if so, flag it)
       if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
         spotData.type = 'futureSpot';
       }
@@ -195,21 +200,24 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
 
       spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
 
-      // Next check if schedule spot has new_Student_Start_Date && we have NOT yet reached that week (skip)
+      // If this is for the schedule
       if (!studentId) {
         result.schedule[weekIndex].push(spotData)
       } else {
-        if (spotdata.type !== 'futureSpot' && spotData.type !== 'open') {
+        // If this is for a student
+        if (spotData.type !== 'futureSpot' && spotData.type !== 'open') {
           result.schedule[weekIndex].push(spotData)
         }
       }
 
     })
+
   })
   // If a student id is provided, format the schedule into a list
   if (studentId) {
     result.schedule = formatScheduleIntoList(result.schedule)
   }
+
   return result;
 }
 
