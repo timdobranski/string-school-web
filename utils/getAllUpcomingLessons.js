@@ -128,10 +128,9 @@ function makeupChecker(makeups, inputDate, inputTime) {
   }
 }
 function formatScheduleIntoList(schedule) {
-  // console.log('schedule inside formatScheduleIntoList: ', schedule)
   const result = [];
+
   schedule.forEach(week => {
-    // console.log('week inside formatScheduleIntoList: ', week)
     for (var spotKey in week) {
       if (week.hasOwnProperty(spotKey)) {
         const spot = week[spotKey];
@@ -194,11 +193,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         spotData.student = spot.new_student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, spot.new_student);
       }
-      const currentDate = formattedDatesArray[weekIndex][dayIndex(spot.day)];
-      if (currentDate === 'Dec 29' && spot.id === 32) {
-        // debugger;
-      }
-      console.log('siwtchSpotTracker[spot.id]: ', switchSpotsTracker[spot.id])
+      // console.log('siwtchSpotTracker[spot.id]: ', switchSpotsTracker[spot.id])
       // Check if this is an old spot for any other spot, and we've reached its end week
       let foundKey = null;
       for (const [key, value] of Object.entries(switchSpotsTracker)) {
@@ -237,8 +232,6 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
       spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
 
       if (spot.id ===  31) {
-        console.log('spot being iterated over: ', spot);
-        console.log('spotData added to return: ', spotData);
       }
       // If this is for the schedule
       if (!studentId) {

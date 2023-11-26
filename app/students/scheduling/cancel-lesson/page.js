@@ -45,6 +45,8 @@ export default function CancellationPage() {
         { step === 1 ? <ChooseCancellation
           scheduleDates={scheduleDates}
           setCancellation={setCancellation}
+          student={student}
+          user={supabaseUserData}
           setStep={setStep} /> : null}
 
         { step === 2 ? <ConfirmCancellation

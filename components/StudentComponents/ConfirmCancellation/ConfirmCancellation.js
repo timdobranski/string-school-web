@@ -68,7 +68,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
     <div className={styles.confirmContainer}>
       <h1 className='featureHeaders'>Confirm</h1>
       <div className={styles.confirmMessageContainer}>
-        <p className={styles.cancelDate}>{`${cancellation.dateString} @ ${cancellation.time}`}</p>
+        <p className={styles.cancelDate}>{`${cancellation.date} @ ${cancellation.time}`}</p>
         {cancelType === 'regular' || cancelType === 'new spot' || cancelType === 'makeup' ? cancelMessage : uncancelMessage}
       </div>
       <input

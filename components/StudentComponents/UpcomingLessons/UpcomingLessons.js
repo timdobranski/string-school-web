@@ -16,6 +16,14 @@ export default function UpcomingLessons({  handler, studentId, numOfLessons }) {
       try {
         const dates = await getAllUpcomingLessons(10, false, 21);
         console.log('dates from getUpcomingLessons: ', dates)
+
+        //Remove lessons that are in the past:
+        const pacificTime = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+        const currentDate = new Date(pacificTime);
+        const formattedDate = currentDate.toISOString().split('T')[0];
+
+        dates.schedule = dates.schedule.filter(date => date.dbDate >= formattedDate);
+
         setScheduleDates(dates);
       } catch (error) {
         console.error("Error fetching schedule dates:", error);
@@ -40,7 +48,9 @@ export default function UpcomingLessons({  handler, studentId, numOfLessons }) {
           <tbody>
             {scheduleDates.schedule.map((date, index) => (
               <tr key={index}>
-                <td className={`${styles.dateColumn} ${date.className}`}>
+                <td
+                  className={`${styles.dateColumn} ${date.className}`}
+                  onClick={() => {handler(date.date, date.time, date.note, date.dbDate, date.type, date.day)}} >
                   {`${date.day}, ${date.date} @ ${date.time}`}
                 </td>
                 <td className={styles.typeColumn}>
