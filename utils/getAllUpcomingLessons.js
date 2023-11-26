@@ -93,10 +93,10 @@ function dateIsPast(currentDate, startDate) {
   // Compare the dates
   if (date1 < date2) {
 
-    return true;
+    return false;
   } else if (date1 >= date2) {
 
-    return false;
+    return true;
   }
 }
 // returns the first and last name of a student
@@ -161,6 +161,14 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
       [], [] ,[] ,[] ,[] ,[] ,[] ,[]
     ]
   };
+  // Keep track of spots (key) with a new student start date and their corresponding removed spot (value)
+  const switchSpotsTracker = {};
+  // ex. key is the new spot, value is the old spot
+  // {
+  //   31: {oldSpot: 30, changeDate: '2021-12-06'},
+  // }
+
+
   // For each week array, iterate through the schedule data
   result.schedule.forEach((week, weekIndex) => {
     schedule.forEach((spot, spotIndex) => {
@@ -175,16 +183,44 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         cellText: spot.student ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!',
       }
 
-      // First check if the spot if a future spot and we've reached that week
-      if (spot.new_student_start_date && !(dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date))) {
+      // If the current spot has a new spot start date add it to the switchSpotsTracker(WORKS)
+      if (spot.new_student_start_date ) {
+        if (!switchSpotsTracker[spot.id]) { switchSpotsTracker[spot.id] = {oldSpot: spot.new_spot_replaces, changeDate: spot.new_student_start_date} };
+      }
+
+      // Check if this is a new spot, and we've reached its start week (WORKS)
+      if (switchSpotsTracker[spot.id] && dateIsPast(dbDatesArray[weekIndex][5], switchSpotsTracker[spot.id].changeDate)) {
         spotData.type = 'regular';
         spotData.student = spot.new_student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, spot.new_student);
       }
-      // Next check if it's a future spot and we HAVEN'T reached that week (if so, flag it)
-      if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
-        spotData.type = 'futureSpot';
+      const currentDate = formattedDatesArray[weekIndex][dayIndex(spot.day)];
+      if (currentDate === 'Dec 29' && spot.id === 32) {
+        // debugger;
       }
+      console.log('siwtchSpotTracker[spot.id]: ', switchSpotsTracker[spot.id])
+      // Check if this is an old spot for any other spot, and we've reached its end week
+      let foundKey = null;
+      for (const [key, value] of Object.entries(switchSpotsTracker)) {
+        if (value.oldSpot === spot.id) {
+          foundKey = key;
+          break; // Exit the loop once the key is found
+        }
+      }
+
+      if (foundKey && dateIsPast(dbDatesArray[weekIndex][5], switchSpotsTracker[foundKey].changeDate)) {
+        spotData.type = 'open';
+        spotData.student = null;
+        spotData.cellText = 'Open!';
+      }
+
+
+      // // Next check if it's a future spot and we HAVEN'T reached that week (if so, flag it)
+      // if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
+      //   spotData.type = 'futureSpot';
+      // }
+
+
       // Check if spot is a cancellation
       if (isCancellation(cancellations, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)) {
         spotData.type = 'cancellation';
@@ -197,15 +233,19 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         spotData.student = checkForMakeup.data.student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, checkForMakeup.data.student);
       }
-
+      // Now that the type has been determined, assign a corresponding className
       spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
 
+      if (spot.id ===  31) {
+        console.log('spot being iterated over: ', spot);
+        console.log('spotData added to return: ', spotData);
+      }
       // If this is for the schedule
       if (!studentId) {
         result.schedule[weekIndex].push(spotData)
       } else {
         // If this is for a student
-        if (spotData.type !== 'futureSpot' && spotData.type !== 'open') {
+        if (spotData.type !== 'futureSpot' && spotData.type !== 'pastSpot' && spotData.type !== 'open') {
           result.schedule[weekIndex].push(spotData)
         }
       }
@@ -217,7 +257,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
   if (studentId) {
     result.schedule = formatScheduleIntoList(result.schedule)
   }
-
+  console.log('final result: ', result);
   return result;
 }
 
