@@ -18,6 +18,7 @@ export default function ConfirmMakeup({ makeup, setStep, user, student }) {
         .insert({
           date: makeup.dbDate,
           time: makeup.time,
+          day: makeup.day,
           created_by: user.id,
           note: note,
           student: student.id
@@ -52,7 +53,7 @@ export default function ConfirmMakeup({ makeup, setStep, user, student }) {
       ></input>
       <button
         onClick={() => makeupHandler()}
-      >Reschedule Lesson</button>
+      >Schedule Makeup</button>
     </div>
   )
 }

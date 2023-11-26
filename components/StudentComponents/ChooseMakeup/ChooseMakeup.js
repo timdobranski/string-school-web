@@ -7,7 +7,7 @@ export default function ChooseMakeup ({ setMakeup, setStep }) {
       alert('This spot is already booked. Please choose another.')
       return;
     }
-    setMakeup({date: spot.date, time: spot.time, dbDate: spot.dbDate, day: spot.day})
+    setMakeup({date: spot.date, time: spot.time, dbDate: spot.dbDate, day: spot.day, id: spot.id})
     setStep(previous =>  previous + 1);
   }
 

@@ -117,7 +117,6 @@ function isCancellation(cancellations, inputDate, inputTime) {
 }
 // function to determine if current spot is a makeup. Returns array of boolean, and then makeup data if so
 function makeupChecker(makeups, inputDate, inputTime) {
-  console.log('inputDate: ', inputDate, 'inputTime: ', inputTime);
   const result = makeups.some(makeup => makeup.date === inputDate && makeup.time === inputTime);
 
   if (result) {

@@ -105,7 +105,9 @@ export default function Schedule({ startDate, privacy, handler }) {
                                 date: spot.date,
                                 dbDate: spot.dbDate,
                                 student: spot.student
-                              }) : undefined}
+                              }) : () => {
+                                alert('This lesson has already passed. Please choose another lesson in the future.');
+                              }}
                             >
                               {isPast && spot.cellText === 'Open!' ? 'Lesson Passed' : spot.cellText}
                             </td>
