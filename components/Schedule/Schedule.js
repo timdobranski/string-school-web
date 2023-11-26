@@ -50,13 +50,36 @@ export default function Schedule({ startDate, privacy, handler }) {
   useEffect(() => {
     if (scheduleData && scheduleData.schedule) {
 
+      function isSpotPast(spotDbDate, spotTime) {
+        // Convert 12-hour time format to 24-hour format
+        const timeParts = spotTime.match(/(\d+):(\d+)(am|pm)/i);
+        let hours = parseInt(timeParts[1], 10);
+        const minutes = timeParts[2];
+        const ampm = timeParts[3].toLowerCase();
+
+        if (ampm === 'pm' && hours < 12) hours += 12;
+        if (ampm === 'am' && hours === 12) hours = 0;
+
+        // Combine the spot's date and time in 24-hour format
+        const spotDateTimeString = `${spotDbDate} ${hours}:${minutes}`;
+
+        // Parse the combined date and time as a Date object in Pacific Time
+        const spotDateTimePacific = new Date(spotDateTimeString).toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+        const spotDateTime = new Date(spotDateTimePacific);
+
+        // Get the current date and time in Pacific Time Zone
+        const currentDateTimePacific = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+        const currentDateTime = new Date(currentDateTimePacific);
+
+        // Compare the spot date and time with the current date and time
+        return spotDateTime < currentDateTime;
+      }
+
       // For each weekArray in the scheduleData, create a render
       const renders = scheduleData.schedule.map((weekSchedule, index) => {
-
         return (
           <div className={styles.scheduleContainer} key={index}>
             {Object.entries(schedule).map(([day, times], dayIndex) => {
-            // Find the corresponding date for this day
               const dayDate = formattedDates[index][dayIndex];
 
               return (
@@ -69,21 +92,22 @@ export default function Schedule({ startDate, privacy, handler }) {
                     <tbody>
                       {times.map((time) => {
                         const spot = weekSchedule.find(entry => entry.day === day && entry.time === time);
-
                         const spotClass = spot.className;
+                        const isPast = isSpotPast(spot.dbDate, spot.time);
+
                         return (
                           <tr key={`${day}-${time}`}>
                             <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
-                            <td className={`${styles.statusColumn} ${styles[spotClass]}`}
-                              onClick={() => handler({
+                            <td className={`${styles.statusColumn} ${styles[spotClass]} ${isPast ? styles.disabledSpot : ''}`}
+                              onClick={!isPast ? () => handler({
                                 day: spot.day,
                                 time: spot.time,
                                 date: spot.date,
                                 dbDate: spot.dbDate,
                                 student: spot.student
-                              })}
+                              }) : undefined}
                             >
-                              {spot.cellText}
+                              {isPast && spot.cellText === 'Open!' ? 'Lesson Passed' : spot.cellText}
                             </td>
                           </tr>
                         );
@@ -91,11 +115,12 @@ export default function Schedule({ startDate, privacy, handler }) {
                     </tbody>
                   </table>
                 </div>
-              )}
-            )}
+              );
+            })}
           </div>
         );
       });
+
       setScheduleRenders(renders);
     }
   }, [scheduleData]);

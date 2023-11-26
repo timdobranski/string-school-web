@@ -109,8 +109,11 @@
   background-color: var(--yellowBooked);
   font-family: Economica;
   /* background: linear-gradient(to right, rgb(255, 245, 132), rgb(243, 182, 0)); */
-
 }
+.thursdayMakeup {
+  background-color: var(--yellowBooked);
+}
+
 .fridayOpen {
   background-color: var(--purpleOpen);
 }
@@ -137,7 +140,6 @@
 .sundayRegular {
   background-color: var(--blueBooked);
   font-family: Economica;
-
 }
 .scheduleHeadersContainer {
   position: relative;

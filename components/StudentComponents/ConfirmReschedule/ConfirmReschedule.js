@@ -42,7 +42,7 @@ export default function ConfirmReschedule({ cancellation, makeup, setStep, user,
       <h1 className='featureHeaders'>Confirm</h1>
       <div className={styles.confirmMessageContainer}>
         <p>{`You're rescheduling your lesson on`}</p>
-        <p className={styles.date}>{`${cancellation.dateString} @ ${cancellation.time}`}</p>
+        <p className={styles.date}>{`${cancellation.date} @ ${cancellation.time}`}</p>
         <p>to</p>
         <p className={styles.date}>{`${makeup.day}, ${makeup.date} @ ${makeup.time}.`}</p>
         <p>Do you want to proceed?</p>

@@ -37,6 +37,21 @@ export default function CancellationPage() {
     console.log('supabaseUserData: ', supabaseUserData);
   }, [supabaseUserData])
 
+  useEffect(() => {
+    window.history.pushState({ step }, '', `?step=${step}`);
+  }, [step]);
+
+  // Handle browser navigation
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (event.state?.step) {
+        setStep(event.state.step);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   if (supabaseUserData && student && scheduleDates && upcomingLessons) {
     return (

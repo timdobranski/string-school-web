@@ -10,7 +10,7 @@ export default function Confirmation({ type, cancellation, makeup }) {
       confirmMessage = (
         <div>
           <h1>Lesson Cancelled</h1>
-          <p>{`Your lesson on ${cancellation.dateString} at ${cancellation.time} has been cancelled and one makeup credit has been added to your account.`}</p>
+          <p>{`Your lesson on ${cancellation.date} at ${cancellation.time} has been cancelled and one makeup credit has been added to your account.`}</p>
         </div>
       )
     } else if (cancellation.type === 'cancellation') {
@@ -18,7 +18,7 @@ export default function Confirmation({ type, cancellation, makeup }) {
       confirmMessage = (
         <div>
           <h1>Cancellation Reversed</h1>
-          <p>{`Your cancelled lesson on ${cancellation.dateString} at ${cancellation.time} has been reversed. `}</p>
+          <p>{`Your cancelled lesson on ${cancellation.date} at ${cancellation.time} has been reversed. `}</p>
         </div>
       )
     }
@@ -51,7 +51,7 @@ export default function Confirmation({ type, cancellation, makeup }) {
     return (
       <div className={styles.confirmContainer}>
         <p>{`Confirmed! You've rescheduled from:`}</p>
-        <p className={styles.date}>{`${cancellation.dateString} @ ${cancellation.time}`}</p>
+        <p className={styles.date}>{`${cancellation.date} @ ${cancellation.time}`}</p>
         <p>to:</p>
         <p className={styles.date}>{`${makeup.day}, ${makeup.date} @ ${makeup.time}.`}</p>
         <Link href='/students/home'>

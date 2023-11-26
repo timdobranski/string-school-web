@@ -118,6 +118,7 @@ function isCancellation(cancellations, inputDate, inputTime) {
 }
 // function to determine if current spot is a makeup. Returns array of boolean, and then makeup data if so
 function makeupChecker(makeups, inputDate, inputTime) {
+  console.log('inputDate: ', inputDate, 'inputTime: ', inputTime);
   const result = makeups.some(makeup => makeup.date === inputDate && makeup.time === inputTime);
 
   if (result) {
@@ -162,7 +163,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
   };
   // Keep track of spots (key) with a new student start date and their corresponding removed spot (value)
   const switchSpotsTracker = {};
-  // ex. key is the new spot, value is the old spot
+  // ex. key is the new spot, set to an obj w/oldSpot and changeDate
   // {
   //   31: {oldSpot: 30, changeDate: '2021-12-06'},
   // }
@@ -171,7 +172,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
   // For each week array, iterate through the schedule data
   result.schedule.forEach((week, weekIndex) => {
     schedule.forEach((spot, spotIndex) => {
-      // Starting data for return before considering cancellations, makeups, or new spots
+      // Starting data for return before considering cancellations, makeups, or spot changes
       const spotData = {
         day: spot.day,
         date : formattedDatesArray[weekIndex][dayIndex(spot.day)],
@@ -180,26 +181,27 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         student: spot.student,
         type: spot.student ? 'regular' : 'open',
         cellText: spot.student ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!',
+        id: spot.id,
       }
 
-      // If the current spot has a new spot start date add it to the switchSpotsTracker(WORKS)
+      // If the current spot has a new spot start date add it to the switchSpotsTracker
       if (spot.new_student_start_date ) {
         if (!switchSpotsTracker[spot.id]) { switchSpotsTracker[spot.id] = {oldSpot: spot.new_spot_replaces, changeDate: spot.new_student_start_date} };
       }
 
-      // Check if this is a new spot, and we've reached its start week (WORKS)
+      // Check if this is a new spot, and we've reached its start week
       if (switchSpotsTracker[spot.id] && dateIsPast(dbDatesArray[weekIndex][5], switchSpotsTracker[spot.id].changeDate)) {
         spotData.type = 'regular';
         spotData.student = spot.new_student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, spot.new_student);
       }
-      // console.log('siwtchSpotTracker[spot.id]: ', switchSpotsTracker[spot.id])
-      // Check if this is an old spot for any other spot, and we've reached its end week
+
+      // Check if this is an old spot for any other spot/student, and we've reached its end week
       let foundKey = null;
       for (const [key, value] of Object.entries(switchSpotsTracker)) {
         if (value.oldSpot === spot.id) {
           foundKey = key;
-          break; // Exit the loop once the key is found
+          break;
         }
       }
 
@@ -208,8 +210,6 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         spotData.student = null;
         spotData.cellText = 'Open!';
       }
-
-
       // // Next check if it's a future spot and we HAVEN'T reached that week (if so, flag it)
       // if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
       //   spotData.type = 'futureSpot';
@@ -220,6 +220,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
       if (isCancellation(cancellations, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)) {
         spotData.type = 'cancellation';
         spotData.cellText = 'Open this week';
+        spotData.id = cancellations.find(cancellation => cancellation.date === dbDatesArray[weekIndex][dayIndex(spot.day)] && cancellation.time === spot.time).id;
       }
       // Check if spot is a makeup, and override cancellation if so
       const checkForMakeup = makeupChecker(makeups, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)
@@ -227,12 +228,11 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         spotData.type = 'makeup';
         spotData.student = checkForMakeup.data.student;
         spotData.cellText = privacy ? 'Booked' : studentName(students, checkForMakeup.data.student);
+        spotData.id = checkForMakeup.data.id;
       }
       // Now that the type has been determined, assign a corresponding className
       spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
 
-      if (spot.id ===  31) {
-      }
       // If this is for the schedule
       if (!studentId) {
         result.schedule[weekIndex].push(spotData)
@@ -244,7 +244,6 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
       }
 
     })
-
   })
   // If a student id is provided, format the schedule into a list
   if (studentId) {

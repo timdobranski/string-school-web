@@ -1,41 +1,49 @@
-.lessonsTable {
-  width: 100%; /* Full-width table */
-  border-collapse: collapse; /* Optional: removes the space between the borders of each cell */
-  font-size: 1.25rem;
+.scheduleTable {
+  width: 100%;
+  font-size: 1.5rem;
+  border-collapse: collapse;
+  /* border: solid red 4px; */
 }
-
-/* Style for table headers */
-.lessonsTable th {
+.tableHead {
+  height: 100px;
+  font-size: 2rem;
+}
+.lessonRow {
+  border-spacing: 5rem;
+  padding: .5rem;
+  /* border: solid red 2px; */
+  height: 50px;
+}
+.dateColumn {
+width: 50%
+}
+.typeColumn {
+ width: 30%;
+}
+.noteColumn {
+  width: 20%;
+}
+.lessonRow:hover {
+  cursor: pointer;
+  /* transform: scale(1.1); */
+  background-color: rgba(255, 255, 255, .1);
   text-align: center;
-  font-weight: bold;
 }
-
-/* Style for table cells */
-.lessonsTable td {
-  text-align: center;
-  vertical-align: middle; /* This will vertically center the text in the cells */
-  padding: 10px; /* Optional: adds some padding inside each cell */
+.lessonRow:hover td {
+  transform: scale (1.1);
 }
-
-/* Additional styling for cancellation rows, if needed */
-.cancellationDate {
+.lessonRow .cancellationDate {
+  color: rgb(242, 61, 106);
   text-decoration: line-through;
-  color: rgb(226, 83, 117);
 }
-.cancellation {
-  color: rgb(226, 83, 117);
+.lessonRow .cancellation {
+  color: rgb(242, 61, 106);
 }
-
-/* Additional styling for regular rows, if needed */
-.regularRow td {
-  /* Styles specific to regular rows */
+.lessonRow .makeupDate {
+  color: rgb(104, 245, 137);
 }
-
-.newSpotDate, .newSpot {
-  color: rgb(41, 255, 41);
-}
-.makeupDate, .makeup {
-  color: rgb(41, 255, 41);
+.lessonRow .makeup {
+  color: rgb(104, 245, 137);
 }
 .modal {
  position: fixed;

@@ -39,7 +39,8 @@ export default function ConfirmMakeup({ makeup, setStep, user, student }) {
       <h1>Confirm Makeup</h1>
       <p>{`You'll be scheduling an extra make-up lesson for:`}</p>
       <p>{`${makeup.day}, ${makeup.date} @ ${makeup.time}`}</p>
-      <p>and one makeup credit will be deducted from your account.</p>
+      <p>{`Makeups available: ${student.makeups}`}</p>
+      <p>{`After scheduling this makeup, you will have ${student.makeups - 1} remaining`}</p>
       <p>Would you like to proceed?</p>
 
 

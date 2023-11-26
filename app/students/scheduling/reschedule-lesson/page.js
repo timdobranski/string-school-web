@@ -14,10 +14,12 @@ export default function RescheduleLesson() {
   const [makeup, setMakeup] = useState({date: '', time: '', note: '', createdBy: null, dbDate: '', student: null});
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
+  if (!student || !supabaseUserData) return <h1>Loading...</h1>
+
   return (
     <div className='infoCard'>
       <h1>RESCHEDULE LESSON PAGE</h1>
-      {step === 1 ? <ChooseCancellation setStep={setStep} setCancellation={setCancellation} /> : null}
+      {step === 1 ? <ChooseCancellation setStep={setStep} setCancellation={setCancellation} student={student} user ={supabaseUserData} /> : null}
       {step === 2 ? <ChooseMakeup setStep={setStep} setMakeup={setMakeup} /> : null}
       {step === 3 ? <ConfirmReschedule setStep={setStep} cancellation={cancellation} makeup={makeup} user={supabaseUserData} student={student}/> : null}
       {step === 4 ? <SchedulingConfirm setStep={setStep} cancellation={cancellation} makeup={makeup} type='reschedule' /> : null}

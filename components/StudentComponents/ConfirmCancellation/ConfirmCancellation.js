@@ -12,7 +12,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
     setCancellation(prevCancellation => ({ ...prevCancellation, note }));
 
     try {
-      if (cancellation.type === 'regular' || cancellation.type === 'new spot' || cancellation.type === 'makeup') {
+      if (cancellation.type === 'regular' || cancellation.type === 'new spot') {
         // Insert into cancellations table
         const { data, error } = await supabase
           .from('cancellations')
@@ -36,17 +36,19 @@ export default function CancellationConfirmation({ cancellation, setCancellation
         adjustMakeupCredit(student, 'decrement');
         setStep(3);
       }
-      // else if (cancellation.type === 'makeup') {
-      //   // Remove from makeups table
-      //   const { data, error } = await supabase
-      //     .from('makeups')
-      //     .delete()
-      //     .match({ id: cancellation.id });
+      else if (cancellation.type === 'makeup') {
+        console.log('cancellation: ', cancellation)
+        // Remove from makeups table
+        const { data, error } = await supabase
+          .from('makeups')
+          .delete()
+          .match({ id: cancellation.id });
 
-      //   if (error) throw error;
-      //   console.log('Deletion successful:', data);
-      //   setStep(3);
-      // }
+        if (error) throw error;
+        console.log('Deletion successful:', data);
+        adjustMakeupCredit(student, 'increment');
+        setStep(3);
+      }
     } catch (error) {
       console.error('Error in cancellation process:', error);
     }

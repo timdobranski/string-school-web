@@ -36,34 +36,32 @@ export default function UpcomingLessons({  handler, studentId, numOfLessons }) {
 
   if (scheduleDates.schedule) {
     return (
-      <div>
-        <table className={styles.scheduleTable}>
-          <thead>
-            <tr>
-              <th className={styles.columnHeader1}>Date</th>
-              <th className={styles.columnHeader2}>Type</th>
-              <th className={styles.columnHeader3}>Notes</th>
+      <table className={styles.scheduleTable}>
+        <thead className={styles.tableHead}>
+          <tr>
+            <th className={styles.columnHeader1}>Date</th>
+            <th className={styles.columnHeader2}>Type</th>
+            <th className={styles.columnHeader3}>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scheduleDates.schedule.map((date, index) => (
+            <tr key={index} className={styles.lessonRow}>
+              <td
+                className={`${styles.dateColumn} ${styles[`${date.className}Date`]}`}
+                onClick={() => {handler(date.date, date.time, date.note, date.dbDate, date.type, date.day, date.id)}} >
+                {`${date.day}, ${date.date} @ ${date.time}`}
+              </td>
+              <td className={`${styles.typeColumn} ${styles[date.className]}`}>
+                {date.type}
+              </td>
+              <td className={styles.noteColumn}>
+                {date.note || '-'}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {scheduleDates.schedule.map((date, index) => (
-              <tr key={index}>
-                <td
-                  className={`${styles.dateColumn} ${date.className}`}
-                  onClick={() => {handler(date.date, date.time, date.note, date.dbDate, date.type, date.day)}} >
-                  {`${date.day}, ${date.date} @ ${date.time}`}
-                </td>
-                <td className={styles.typeColumn}>
-                  {date.type}
-                </td>
-                <td className={styles.noteColumn}>
-                  {date.note || ''}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     )
   } else {
     return (
