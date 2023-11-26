@@ -17,7 +17,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
         const { data, error } = await supabase
           .from('cancellations')
           .insert([
-            { date: cancellation.dbDate, time: cancellation.time, created_by: user.id, note: note, student: student.id }
+            { date: cancellation.dbDate, time: cancellation.time, created_by: user.id, note: note, student: student.id, day: cancellation.day }
           ]);
 
         if (error) throw error;

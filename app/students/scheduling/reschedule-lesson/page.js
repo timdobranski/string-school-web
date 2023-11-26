@@ -10,8 +10,8 @@ import SchedulingConfirm from '../../../../components/StudentComponents/Scheduli
 
 export default function RescheduleLesson() {
   const [step, setStep] = useState(1); // choose cancel, choose makeup, confirm, confirmed
-  const [cancellation, setCancellation] = useState({date: '', time: '', note: '', createdBy: null, dbDate: '', student: null, type: ''});
-  const [makeup, setMakeup] = useState({date: '', time: '', note: '', createdBy: null, dbDate: '', student: null});
+  const [cancellation, setCancellation] = useState({date: '', time: '', note: '', createdBy: null, dbDate: '', student: null, type: '', day: ''});
+  const [makeup, setMakeup] = useState({date: '', time: '', note: '', createdBy: null, dbDate: '', student: null, day: ''});
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
   if (!student || !supabaseUserData) return <h1>Loading...</h1>

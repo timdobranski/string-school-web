@@ -14,7 +14,7 @@ export default function CancellationPage() {
   const [step, setStep] = useState(1);
   const [scheduleDates, setScheduleDates] = useState([]);
   const [upcomingLessons, setUpcomingLessons] = useState([]);
-  const [cancellation, setCancellation] = useState({dateString: '', time: '', note: '', createdBy: '', dbDate: '', id: '', type:''});
+  const [cancellation, setCancellation] = useState({dateString: '', time: '', note: '', createdBy: '', dbDate: '', id: '', type:'', day: ''});
 
   // get upcoming lessons
   useEffect(() => {

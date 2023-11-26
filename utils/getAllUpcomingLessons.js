@@ -5,7 +5,7 @@ import getScheduleDates from './getScheduleDates';
 
 // HELPERS
 
-// retrieve schedule data
+// retrieve schedule data - all students, or one if studentId is provided
 async function getSchedule(studentId) {
   let query = supabase
     .from('schedule')
@@ -25,8 +25,7 @@ async function getSchedule(studentId) {
   if (error) throw error;
   return data;
 }
-
-// Function to retrieve all students' data - either private or public based on boolean argument
+// Retrieve all students' data - either private or public based on boolean argument, and all students or one if studentId is provided
 async function getAllStudents(privacy, studentId) {
   const studentData = privacy === true ? 'day, time, new_day, new_time, new_spot_start_date' : '*';
 
@@ -130,7 +129,6 @@ function makeupChecker(makeups, inputDate, inputTime) {
 }
 function formatScheduleIntoList(schedule) {
   const result = [];
-
   schedule.forEach(week => {
     for (var spotKey in week) {
       if (week.hasOwnProperty(spotKey)) {
@@ -157,13 +155,12 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
   // Create dates array: an array of arrays for every week day for the next n weeks
   let result = {
     students: students,
-    schedule: [
-      [], [] ,[] ,[] ,[] ,[] ,[] ,[]
-    ]
+    schedule: [ [], [] ,[] ,[] ,[] ,[] ,[] ,[] ]
   };
-  // Keep track of spots (key) with a new student start date and their corresponding removed spot (value)
+
+  // Keep track of spots that have or will switch to a new student while iterating through the schedule
   const switchSpotsTracker = {};
-  // ex. key is the new spot, set to an obj w/oldSpot and changeDate
+  // ex. key is the new spot id, set to an obj w/oldSpot id and changeDate
   // {
   //   31: {oldSpot: 30, changeDate: '2021-12-06'},
   // }
@@ -172,7 +169,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
   // For each week array, iterate through the schedule data
   result.schedule.forEach((week, weekIndex) => {
     schedule.forEach((spot, spotIndex) => {
-      // Starting data for return before considering cancellations, makeups, or spot changes
+      // Starting data for return before considering spot changes, cancellations, makeups
       const spotData = {
         day: spot.day,
         date : formattedDatesArray[weekIndex][dayIndex(spot.day)],
@@ -204,52 +201,117 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
           break;
         }
       }
-
       if (foundKey && dateIsPast(dbDatesArray[weekIndex][5], switchSpotsTracker[foundKey].changeDate)) {
         spotData.type = 'open';
         spotData.student = null;
         spotData.cellText = 'Open!';
       }
-      // // Next check if it's a future spot and we HAVEN'T reached that week (if so, flag it)
-      // if (spot.new_student_start_date && dateIsPast(dbDatesArray[weekIndex][0], spot.new_student_start_date)) {
-      //   spotData.type = 'futureSpot';
-      // }
 
 
-      // Check if spot is a cancellation
-      if (isCancellation(cancellations, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)) {
-        spotData.type = 'cancellation';
-        spotData.cellText = 'Open this week';
-        spotData.id = cancellations.find(cancellation => cancellation.date === dbDatesArray[weekIndex][dayIndex(spot.day)] && cancellation.time === spot.time).id;
-      }
-      // Check if spot is a makeup, and override cancellation if so
-      const checkForMakeup = makeupChecker(makeups, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)
-      if (checkForMakeup.isMakeup){
-        spotData.type = 'makeup';
-        spotData.student = checkForMakeup.data.student;
-        spotData.cellText = privacy ? 'Booked' : studentName(students, checkForMakeup.data.student);
-        spotData.id = checkForMakeup.data.id;
+      // Handle cancellations and makeups --IF-- no studentId provided
+      if (!studentId) {
+        // Check if spot is a cancellation, override regular spot data if so.
+        if (isCancellation(cancellations, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)) {
+          spotData.type = 'cancellation';
+          spotData.cellText = 'Open this week';
+          spotData.id = cancellations.find(cancellation => cancellation.date === dbDatesArray[weekIndex][dayIndex(spot.day)] && cancellation.time === spot.time).id;
+        }
+        // Check if spot is a makeup, and override regular spot data or cancellation if so
+        const checkForMakeup = makeupChecker(makeups, dbDatesArray[weekIndex][dayIndex(spot.day)], spot.time)
+        if (checkForMakeup.isMakeup){
+          spotData.type = 'makeup';
+          spotData.student = checkForMakeup.data.student;
+          spotData.cellText = privacy ? 'Booked' : studentName(students, checkForMakeup.data.student);
+          spotData.id = checkForMakeup.data.id;
+        }
       }
       // Now that the type has been determined, assign a corresponding className
       spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
 
-      // If this is for the schedule
+      // If this is for the schedule, add it to the result
       if (!studentId) {
         result.schedule[weekIndex].push(spotData)
       } else {
-        // If this is for a student
-        if (spotData.type !== 'futureSpot' && spotData.type !== 'pastSpot' && spotData.type !== 'open') {
+        // If this is for a student, only add it if it's a regular spot
+        if (spotData.type === 'regular') {
           result.schedule[weekIndex].push(spotData)
         }
       }
-
     })
+    const insertOrUpdateEntry = (weekIndex, newEntry) => {
+      const schedule = result.schedule[weekIndex];
+
+      // Find index of an entry with the exact same date and time
+      const exactMatchIndex = schedule.findIndex(entry =>
+        entry.dbDate === newEntry.dbDate && entry.time === newEntry.time);
+
+      if (exactMatchIndex !== -1) {
+        // Replace existing entry
+        schedule[exactMatchIndex] = newEntry;
+        return;
+      }
+
+      // Find the correct position to insert the new entry
+      const insertionIndex = schedule.findIndex(entry =>
+        entry.dbDate > newEntry.dbDate ||
+        (entry.dbDate === newEntry.dbDate && entry.time > newEntry.time));
+
+      if (insertionIndex !== -1) {
+        // Insert new entry at the found position
+        schedule.splice(insertionIndex, 0, newEntry);
+      } else {
+        // If no later entry is found, push to the end
+        schedule.push(newEntry);
+      }
+    };
+
+    // Handle cancellations and makeups if studentId is provided
+    if (studentId) {
+      // Iterate through cancellations to add them to the schedule if they fall within the current week
+      cancellations.forEach(cancellation => {
+        if (cancellation.date >= dbDatesArray[weekIndex][0] && cancellation.date <= dbDatesArray[weekIndex][5]) {
+          const cancellationData = {
+            day: cancellation.day,
+            date : formattedDatesArray[weekIndex][dayIndex(cancellation.day)],
+            dbDate: cancellation.date,
+            time: cancellation.time,
+            student: null,
+            type: 'cancellation',
+            cellText: 'Open this week',
+            id: cancellation.id,
+            className: `cancellation`,
+            note: cancellation.note
+          }
+          insertOrUpdateEntry(weekIndex, cancellationData);
+        }
+      })
+      // Iterate through makeups to add them to the schedule if they fall within the current week
+      makeups.forEach(makeup => {
+        if (makeup.date >= dbDatesArray[weekIndex][0] && makeup.date <= dbDatesArray[weekIndex][5]) {
+          const makeupData = {
+            day: makeup.day,
+            date : formattedDatesArray[weekIndex][dayIndex(makeup.day)],
+            dbDate: makeup.date,
+            time: makeup.time,
+            student: makeup.student,
+            type: 'makeup',
+            cellText: privacy ? 'Booked' : studentName(students, makeup.student),
+            id: makeup.id,
+            className: `makeup`,
+            note: makeup.note
+          }
+          insertOrUpdateEntry(weekIndex, makeupData);
+        }
+      })
+    }
+
   })
-  // If a student id is provided, format the schedule into a list
+  // If a student id is provided, format the schedule weeks into a flat list of lessons for convenience
   if (studentId) {
+    console.log('result.schedule: ', result.schedule)
     result.schedule = formatScheduleIntoList(result.schedule)
   }
-  console.log('final result: ', result);
+  // console.log('final result: ', result);
   return result;
 }
 
