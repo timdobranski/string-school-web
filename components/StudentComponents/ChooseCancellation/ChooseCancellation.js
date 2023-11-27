@@ -5,8 +5,8 @@ import UpcomingLessons from '../UpcomingLessons/UpcomingLessons';
 
 export default function ChooseCancellation({ setStep, setCancellation, student, user }) {
 
-  const handleCancellationSelect = (date, time, note, dbDate, type, day, id) => {
-    setCancellation({ date, time, note, dbDate, type, day, id });
+  const handleCancellationSelect = (date, time, note, dbDate, type, day, id, associated_makeup, associated_cancellation) => {
+    setCancellation({ date, time, note, dbDate, type, day, id, associated_makeup, associated_cancellation });
     setStep(2);
   }
 

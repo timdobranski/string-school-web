@@ -279,7 +279,8 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
             cellText: 'Open this week',
             id: cancellation.id,
             className: `cancellation`,
-            note: cancellation.note
+            note: cancellation.note,
+            associated_makeup: cancellation.associated_makeup
           }
           insertOrUpdateEntry(weekIndex, cancellationData);
         }
@@ -297,7 +298,8 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
             cellText: privacy ? 'Booked' : studentName(students, makeup.student),
             id: makeup.id,
             className: `makeup`,
-            note: makeup.note
+            note: makeup.note,
+            associated_cancellation: makeup.associated_cancellation
           }
           insertOrUpdateEntry(weekIndex, makeupData);
         }

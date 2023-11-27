@@ -28,3 +28,12 @@
   margin: 1rem;
   text-decoration: underline;
 }
+.handleMakeupChoiceWrapper  *{
+  margin: 1rem;
+}
+.optionButton {
+  margin: 1rem;
+}
+.optionButton:hover {
+  cursor: pointer;
+}

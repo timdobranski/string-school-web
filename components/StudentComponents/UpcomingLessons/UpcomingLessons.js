@@ -49,7 +49,7 @@ export default function UpcomingLessons({  handler, studentId, numOfLessons }) {
             <tr key={index} className={styles.lessonRow}>
               <td
                 className={`${styles.dateColumn} ${styles[`${date.className}Date`]}`}
-                onClick={() => {handler(date.date, date.time, date.note, date.dbDate, date.type, date.day, date.id)}} >
+                onClick={() => {handler(date.date, date.time, date.note, date.dbDate, date.type, date.day, date.id, date.associated_makeup, date.associated_cancellation)}} >
                 {`${date.day}, ${date.date} @ ${date.time}`}
               </td>
               <td className={`${styles.typeColumn} ${styles[date.className]}`}>
