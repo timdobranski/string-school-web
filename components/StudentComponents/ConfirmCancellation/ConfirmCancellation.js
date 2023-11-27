@@ -34,15 +34,18 @@ export default function CancellationConfirmation({ cancellation, setCancellation
         .match({ id: cancellation.associated_cancellation});
 
       if (cancellationError) throw cancellationError;
-      if (cancellation.length === 1) {
-        return cancellation;
-      }
+
+      return associatedCancellation;
+
     }
     if (cancellation.type === 'cancellation') {
       checkForAssociatedMakeup().then(makeup => setAssociatedMakeup(makeup[0]));
     }
     if (cancellation.type === 'makeup') {
-      checkForAssociatedCancellation().then(cancellation => setAssociatedCancellation(cancellation[0]));
+      checkForAssociatedCancellation().then(cancellation => {
+        console.log('cancellation: ', cancellation);
+        setAssociatedCancellation(cancellation[0])
+      });
     }
 
   }, [])
@@ -78,7 +81,7 @@ export default function CancellationConfirmation({ cancellation, setCancellation
 
       } else if (cancellation.type === 'cancellation') {
 
-        // Remove from cancellations table
+        // Remove cancellation and associated makeup
         if (removeAssociatedMakeup === true) {
           const { data: cancellationData, error: cancellationError } = await supabase
             .from('cancellations')
@@ -97,6 +100,12 @@ export default function CancellationConfirmation({ cancellation, setCancellation
           console.log('Deletion of makeup successful:', makeupData);
 
         } else {
+          // Remove only the cancellation, but remove the associated makeup's associated_cancellation value
+          const { data: makeupData, error: makeupError } = await supabase
+            .from('makeups')
+            .update({ associated_cancellation: null })
+            .match({ id: cancellation.associated_makeup });
+
           const { data, error } = await supabase
             .from('cancellations')
             .delete()
@@ -112,24 +121,58 @@ export default function CancellationConfirmation({ cancellation, setCancellation
 
 
 
-
       } else if (cancellation.type === 'makeup') {
+        // Remove makeup and associated cancellation
+        if (removeAssociatedCancellation === true) {
         // Remove from makeups table
-        const { data, error } = await supabase
-          .from('makeups')
-          .delete()
-          .match({ id: cancellation.id });
+          const { data, error } = await supabase
+            .from('makeups')
+            .delete()
+            .match({ id: cancellation.id });
 
-        if (error) throw error;
-        console.log('Deletion successful:', data);
-        adjustMakeupCredit(student, 'increment');
+          if (error) throw error;
+          console.log('Deletion successful:', data);
+          // Remove from cancellations table
+          const { data: cancellationData, error: cancellationError } = await supabase
+            .from('cancellations')
+            .delete()
+            .match({ id: cancellation.associated_cancellation });
+
+        } else {
+          // Remove from makeups table
+          const { data, error } = await supabase
+            .from('makeups')
+            .delete()
+            .match({ id: cancellation.id });
+
+          if (error) throw error;
+          console.log('Deletion successful:', data);
+
+          const { data: makeupData, error: makeupError } = await supabase
+            .from('cancellations')
+            .update({ associated_makeup: null })
+            .match({ id: cancellation.associated_cancellation });
+
+          adjustMakeupCredit(student.id, 'increment');
+        }
         setStep(3);
       }
+
     } catch (error) {
       console.error('Error in cancellation process:', error);
     }
+
+
+
+
+
+
+
+
   };
 
+  // This is a series of messages that will be displayed to the user depending on the type of cancellation
+  // and whether or not there is an associated makeup or cancellation
   const cancelMessage = (
     <>
       <p>Are you sure you want to cancel this lesson?</p>
@@ -142,48 +185,65 @@ export default function CancellationConfirmation({ cancellation, setCancellation
       ></input>
     </>
   )
-  const uncancelMessage = associatedMakeup ? (
-    <>
-      <p>{`This is a cancelled lesson. It has an associated makeup lesson that was created at the same time for:`}</p>
-      <p> {`${dateFormatter(associatedMakeup.date, {format: 'short', includeDay: true, includeYear: false})}, @ ${associatedMakeup.time}`}</p>
-      <p>{`To uncancel the lesson, first choose if you'd also like to remove the associated makeup. If you choose to uncancel this
-        cancellation but keep the makeup, one makeup credit will be deducted from your account if you have one. Otherwise,
-        an additional lesson will be booked and the next invoice will be adjusted at the price of $27.50 unless this or another
-        makeup is cancelled.`}</p>
-      <p>*Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson*</p>
-      <div className={styles.handleMakeupChoiceWrapper}>
-        <button className={styles.optionButton} onClick={() => handleMakeupChoice(true)}>Remove associated makeup</button>
-        <button className={styles.optionButton} onClick={() => handleMakeupChoice(false)}>Keep associated makeup</button>
-      </div>
-    </>
-  ) : (
-    <>
-      <p>This is a cancelled lesson. Would you like to un-cancel and attend?</p>
-      <p>Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson.</p>
-    </>
-  )
+
+  let message;
+  switch (cancelType) {
+  case 'makeup':
+    message = associatedCancellation ?
+      <>
+        <p>{`This is a makeup lesson. It has an associated cancelled lesson that was created at the same time for:`}</p>
+        <p> {`${dateFormatter(associatedCancellation.date, {format: 'short', includeDay: true, includeYear: false})}, @ ${associatedCancellation.time}`}</p>
+        <p>{`To cancel the makeup, first choose if you'd also like to un-cancel the associated cancelled lesson. If you choose not to remove the associated
+            cancellation, one makeup credit will be added to your account`}</p>
+        <p>*Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson*</p>
+        <div className={styles.handleMakeupChoiceWrapper}>
+          <button className={styles.optionButton} onClick={() => handleMakeupChoice(true)}>Un-cancel associated cancellation</button>
+          <button className={styles.optionButton} onClick={() => handleMakeupChoice(false)}>Keep associated lesson cancelled</button>
+        </div>
+      </>
+      : (
+        <>
+          <p>This is a makeup lesson. Would you like to cancel?</p>
+          <p>Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson.</p>
+        </>
+      );
+    break;
+  case 'cancellation':
+    message = associatedMakeup ?
+      <>
+        <p>{`This is a cancelled lesson. It has an associated makeup lesson that was created at the same time for:`}</p>
+        <p> {`${dateFormatter(associatedMakeup.date, {format: 'short', includeDay: true, includeYear: false})}, @ ${associatedMakeup.time}`}</p>
+        <p>{`To uncancel the lesson, first choose if you'd also like to remove the associated makeup. If you choose to uncancel this
+      cancellation but keep the makeup, one makeup credit will be deducted from your account if you have one. Otherwise,
+      an additional lesson will be booked and the next invoice will be adjusted at the price of $27.50 unless this or another
+      makeup is cancelled.`}</p>
+        <p>*Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson*</p>
+        <div className={styles.handleMakeupChoiceWrapper}>
+          <button className={styles.optionButton} onClick={() => handleMakeupChoice(true)}>Remove associated makeup</button>
+          <button className={styles.optionButton} onClick={() => handleMakeupChoice(false)}>Keep associated makeup</button>
+        </div>
+      </>
+      : (
+        <>
+          <p>This is a cancelled lesson. Would you like to un-cancel and attend?</p>
+          <p>Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson.</p>
+        </>
+      );
+    break;
+  default:
+    message = cancelMessage;
+  }
 
 
-  const cancelMakeupMessage = (
-    <>
-      <p>{`This is a makeup lesson. It has an associated cancelled lesson that was created at the same time for:`}</p>
-      {/* <p> {`${dateFormatter(associatedCancellation.date, {format: 'short', includeDay: true, includeYear: false})}, @ ${associatedCancellation.time}`}</p> */}
-      <p>{`To cancel the makeup, first choose if you'd also like to un-cancel the associated cancelled lesson. If you choose not to remove the associated
-      cancellation, one makeup credit will be added to your account`}</p>
-      <p>*Cancelled lessons can only be un-cancelled at least 24 hours prior to the lesson*</p>
-      <div className={styles.handleMakeupChoiceWrapper}>
-        <button className={styles.optionButton} onClick={() => handleMakeupChoice(true)}>Un-cancel associated cancellation</button>
-        <button className={styles.optionButton} onClick={() => handleMakeupChoice(false)}>Keep associated lesson cancelled</button>
-      </div>
-    </>
-  )
+
+
 
   return (
     <div className={styles.confirmContainer}>
       <h1 className='featureHeaders'>Confirm</h1>
       <div className={styles.confirmMessageContainer}>
         <p className={styles.cancelDate}>{`${cancellation.date} @ ${cancellation.time}`}</p>
-        {cancelType === 'makeup' ? cancelMakeupMessage : (cancelType !== 'cancellation' ? cancelMessage : uncancelMessage)}
+        {message}
       </div>
 
       <button
