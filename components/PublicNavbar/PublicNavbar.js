@@ -9,16 +9,16 @@ export default function PublicNavbar() {
         <Link href='/'>HOME</Link>
       </div>
       <div className={styles.navLink}>
-        <Link href='/'>ABOUT LESSONS</Link>
+        <Link href='/public/about-lessons'>ABOUT LESSONS</Link>
       </div>
       <div className={styles.navLink}>
-        <Link href='/'>BOOK AN INTRO</Link>
+        <Link href='/pubic/book-intro'>BOOK AN INTRO</Link>
       </div>
       <div className={styles.navLink}>
-        <Link href='/'>PHOTOS</Link>
+        <Link href='/public/photos'>PHOTOS</Link>
       </div>
       <div className={styles.navLink}>
-        <Link href='/'>ABOUT ME</Link>
+        <Link href='/public/about-me'>ABOUT ME</Link>
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 // Follow this setup guide to integrate the Deno language server with your editor:
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
-
+// import { supabase } from '../../../utils/supabase';
 // console.log("Hello from Functions!")
 
 // Deno.serve(async (req) => {
@@ -9,6 +9,43 @@
 //   const data = {
 //     message: `Hello ${name}!`,
 //   }
+
+//   async function updateNewSpots(): Promise<void> {
+//     // Get current date in Pacific Time
+//     const currentDate = new Date().toLocaleDateString("en-US", { timeZone: "America/Los_Angeles" });
+
+//     // Fetch students whose new_student_start_date is today
+//     const { data: students, error } = await supabase
+//       .from('students')
+//       .select('*')
+//       .eq('new_student_start_date', currentDate);
+
+//     if (error) {
+//       console.error('Error fetching students:', error);
+//       return;
+//     }
+
+//     // Update each student
+//     students?.forEach(async (student) => {
+//       const { error: updateError } = await supabase
+//         .from('students')
+//         .update({
+//           day: student.new_day,
+//           time: student.new_time,
+//           new_student_start_date: null,
+//           new_day: null,
+//           new_time: null
+//         })
+//         .eq('id', student.id);
+
+//       if (updateError) {
+//         console.error('Error updating student:', updateError);
+//       }
+//     });
+//   }
+
+//   updateNewSpots();
+
 
 //   return new Response(
 //     JSON.stringify(data),
@@ -27,40 +64,4 @@
     --data '{"name":"Functions"}'
 
 */
-import { supabase } from '../../../utils/supabase';
 
-async function updateNewSpots(): Promise<void> {
-  // Get current date in Pacific Time
-  const currentDate = new Date().toLocaleDateString("en-US", { timeZone: "America/Los_Angeles" });
-
-  // Fetch students whose new_student_start_date is today
-  const { data: students, error } = await supabase
-    .from('students')
-    .select('*')
-    .eq('new_student_start_date', currentDate);
-
-  if (error) {
-    console.error('Error fetching students:', error);
-    return;
-  }
-
-  // Update each student
-  students?.forEach(async (student) => {
-    const { error: updateError } = await supabase
-      .from('students')
-      .update({
-        day: student.new_day,
-        time: student.new_time,
-        new_student_start_date: null,
-        new_day: null,
-        new_time: null
-      })
-      .eq('id', student.id);
-
-    if (updateError) {
-      console.error('Error updating student:', updateError);
-    }
-  });
-}
-
-updateNewSpots();

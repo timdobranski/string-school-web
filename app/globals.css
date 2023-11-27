@@ -113,6 +113,7 @@ a {
   align-items: center;
   color: white;
   width: auto;
+  max-width: 70vw;
   background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(5px);
   margin: 2rem;
@@ -125,7 +126,10 @@ a {
 }
 .sectionHeaders {
   text-decoration: underline;
-
+}
+.text {
+  font-size: 1.25rem;
+  margin: 1rem;
 }
 .featureHeaders {
   color: rgb(95, 180, 225);
@@ -135,8 +139,6 @@ a {
   text-decoration: underline;
   margin-bottom: 1rem;
   font-weight: 800;
-  /* line-height: 1.2; */
-  /* border: solid white 2px; */
   margin-bottom: 0;
 }
 .featureComments {
