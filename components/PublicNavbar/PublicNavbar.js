@@ -12,7 +12,7 @@ export default function PublicNavbar() {
         <Link href='/public/about-lessons'>ABOUT LESSONS</Link>
       </div>
       <div className={styles.navLink}>
-        <Link href='/pubic/book-intro'>BOOK AN INTRO</Link>
+        <Link href='/public/book-intro'>BOOK AN INTRO</Link>
       </div>
       <div className={styles.navLink}>
         <Link href='/public/photos'>PHOTOS</Link>
