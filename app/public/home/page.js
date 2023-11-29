@@ -1,5 +1,5 @@
 import styles from './home.module.css';
-import PublicNavbar from '../../components/PublicNavbar/PublicNavbar';
+import PublicNavbar from '../../../components/PublicNavbar/PublicNavbar';
 
 export default function PublicHome() {
 
