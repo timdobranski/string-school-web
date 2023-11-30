@@ -5,7 +5,7 @@ export default function PublicHome() {
 
   return (
     <main className='appContainer'>
-      <PublicNavbar />
+      {/* <PublicNavbar /> */}
 
 
       <div className='infoCard'>

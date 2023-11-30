@@ -2,10 +2,10 @@
 .navbarContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
   margin-top: 2rem;
-  width: 100%;
+  width: 70%;
   font-size: 1.75rem;
   background-color: rgba(0, 0, 0, .8);
   color: white;

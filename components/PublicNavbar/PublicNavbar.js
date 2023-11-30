@@ -6,7 +6,7 @@ export default function PublicNavbar() {
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.navLink}>
-        <Link href='/'>HOME</Link>
+        <Link href='/public/home'>HOME</Link>
       </div>
       <div className={styles.navLink}>
         <Link href='/public/about-lessons'>ABOUT LESSONS</Link>

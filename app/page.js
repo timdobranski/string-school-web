@@ -13,7 +13,6 @@ config.autoAddCss = false;
 
 export default function Home() {
   const router= useRouter();
-  const [renderPage, setRenderPage] = useState(false);
 
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function Home() {
 
       if (error) {
         console.error('Error getting session:', error);
-        setRenderPage(true);
+
       } else if (data.session) {
         // Get data from custom user table
         const { data: userData, error } = await supabase
@@ -43,7 +42,7 @@ export default function Home() {
           console.log('error: ', error);
           router.push('/finish-signup');
         } else {
-          setRenderPage(true);
+
           console.log('No session or error');
         }
 
@@ -61,13 +60,7 @@ export default function Home() {
     router.push('/')
   }
 
-  if (!renderPage) {
-    return (
-      <div className='infoCard'>
-        <h1>Loading...</h1>
-      </div>
-    )
-  }
+
   return (
     <h1 className='sectionHeaders'>Checking Login Status...</h1>
   )
