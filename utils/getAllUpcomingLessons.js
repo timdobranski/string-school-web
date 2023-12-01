@@ -21,7 +21,6 @@ async function getSchedule(studentId) {
   }
 
   let { data, error } = await query;
-  console.log('getSchedule returns(with studentId=', studentId, ': ',  data);
   if (error) throw error;
   return data;
 }
@@ -309,7 +308,7 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
   })
   // If a student id is provided, format the schedule weeks into a flat list of lessons for convenience
   if (studentId) {
-    console.log('result.schedule: ', result.schedule)
+    // console.log('result.schedule: ', result.schedule)
     result.schedule = formatScheduleIntoList(result.schedule)
   }
   // console.log('final result: ', result);
