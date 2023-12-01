@@ -1,0 +1,86 @@
+.timeColumn,
+.statusColumn {
+  font-size: 1.25rem;
+  padding: .5rem;
+  font-family: Economica;
+}
+
+.statusColumn {
+  width: 80%;
+}
+
+.open {
+  padding: 5px;
+}
+.booked {
+  color: black;
+  font-family: Economica Bold;
+}
+
+.mondayOpen {
+  background-color: var(--blueOpen);
+}
+.mondayRegular {
+  background-color: var(--blueBooked);
+  font-family: Economica;
+  color: black;
+  font-weight: bold;
+}
+
+.tuesdayOpen {
+  background-color: var(--greenOpen);
+}
+.tuesdayRegular {
+  background-color: var(--greenBooked);
+  font-family: Economica;
+}
+.wednesdayOpen {
+  background-color: var(--redOpen);
+}
+.wednesdayRegular {
+  background-color: var(--redBooked);
+  font-family: Economica;
+  /* background: linear-gradient(to right, rgb(254, 53, 50), rgb(247, 213, 20)); */
+}
+.wednesdayCancellation {
+  background-color: var(--redOpen);
+}
+.thursdayOpen {
+  background-color: var(--yellowOpen);
+}
+.thursdayRegular {
+  background-color: var(--yellowBooked);
+  font-family: Economica;
+  /* background: linear-gradient(to right, rgb(255, 245, 132), rgb(243, 182, 0)); */
+}
+.thursdayMakeup {
+  background-color: var(--yellowBooked);
+}
+
+.fridayOpen {
+  background-color: var(--purpleOpen);
+}
+.fridayRegular {
+  background-color: var(--purpleBooked);
+  font-family: Economica;
+}
+.fridayCancellation {
+  background-color: var(--purpleOpen);
+}
+.fridayMakeup {
+  background-color: var(--purpleBooked);
+}
+.fridayFutureSpot {
+  background-color: var(--purpleOpen);
+
+}
+.fridayNewSpot {
+  background-color: var(--purpleOpen);
+}
+.sundayOpen {
+  background-color: var(--blueOpen);
+}
+.sundayRegular {
+  background-color: var(--blueBooked);
+  font-family: Economica;
+}

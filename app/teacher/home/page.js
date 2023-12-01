@@ -5,11 +5,14 @@ import Schedule from '../../../components/Schedule/Schedule';
 import getStudentData from '../../../utils/getStudentData';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { supabase } from '../../../utils/supabase';
+import { useRouter } from 'next/navigation';
 
 export default function TeacherHome() {
   const [currentStudent, setCurrentStudent] = useState();
   const [studentInfoRender, setStudentInfoRender] = useState();
   const [activeSpotId, setActiveSpotId] = useState(null);
+  const router = useRouter();
 
 
   const spotClickHandler = async ({ day, time, date, dbDate, student }) => {
@@ -17,7 +20,18 @@ export default function TeacherHome() {
     setCurrentStudent(studentData);
     setActiveSpotId(student);
   }
-
+  const handleSignout = async () => {
+    const { error } = await supabase.auth.signOut({
+      options: {
+        scope: 'global'
+      }
+    });
+    if (error) {
+      console.log('error on signout: ', error);
+    } else {
+      router.push('/')
+    }
+  }
 
 
   useEffect(() => {
@@ -25,34 +39,29 @@ export default function TeacherHome() {
     if (currentStudent && currentStudent.contacts) {
       const studentInfoBox = (
         <>
+          <div>
+            <Link href={`/teacher/student-info?student=${currentStudent.lessons.students[0].id}`}>
 
-          {currentStudent.contacts.map((contact) => {
-            return (
-              <div key={contact.id}>
-                <p >{`${contact.first_name} ${contact.last_name}`}</p>
-                <p>{contact.phone || 'No phone provided'}</p>
-                <p>{contact.email || 'No email provided'}</p>
-                <p>{contact.preferred_comm === 'none' ? 'No communication preference' : contact.preferred_comm}</p>
-
-              </div>
-            )
-          })}
+            </Link>
+          </div>
         </>
       )
       setStudentInfoRender(studentInfoBox);
- }
+    }
 
   }, [currentStudent])
 
 
   return (
     <>
-      <h1 className='sectionHeaders'>Teacher Home</h1>
       <Schedule
         privacy={false}
         handler={spotClickHandler}
         activeSpotId={activeSpotId}
-        studentData={studentInfoRender}/>
+        studentData={studentInfoRender}
+      />
+      <button className={styles.signOutButton} onClick={handleSignout}>Sign Out</button>
+
     </>
   )
 }

@@ -1,6 +1,7 @@
 import styles from './Week.module.css';
+import Spot from '../Spot/Spot';
 
-export default function Week({ weekSchedule, formattedDates, index, activeSpotId, studentData }) {
+export default function Week({ weekSchedule, formattedDates, index, activeSpotId, studentData, handler }) {
 
   // data structure for schedule spots to render table
   const schedule = {
@@ -60,7 +61,19 @@ export default function Week({ weekSchedule, formattedDates, index, activeSpotId
                   return (
                     <tr key={`${day}-${time}`}>
                       <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
-                      <td className={`${styles.statusColumn} ${styles[spotClass]} ${isPast ? styles.disabledSpot : ''}`}
+                      <Spot
+                        handler={handler}
+                        spot={spot}
+                        spotClass={spotClass}
+                        isPast={isPast}
+                        studentData={studentData}
+                        activeSpotId={activeSpotId}
+                        privacy={privacy}
+                      />
+
+
+
+                      {/* <td className={`${styles.statusColumn} ${styles[spotClass]} ${isPast ? styles.disabledSpot : ''}`}
                         onClick={!isPast ? () => handler({
                           day: spot.day,
                           time: spot.time,
@@ -77,7 +90,7 @@ export default function Week({ weekSchedule, formattedDates, index, activeSpotId
                             {studentData}
                           </div> : null
                         }
-                      </td>
+                      </td> */}
                     </tr>
                   );
                 })}

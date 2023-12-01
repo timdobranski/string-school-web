@@ -20,9 +20,6 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
   const [ currentWeek, setCurrentWeek] = useState(0);
   const [ currentItem, setCurrentItem] = useState(0);
 
-
-
-
   // get schedule (fetchScheduleData needs a number of weeks to return, and boolean value for privacy)
   useEffect(() => {
     const formatOptions = { length: 'short', includeYear: false, format: true };
@@ -37,10 +34,9 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
     fetchData();
   }, [privacy]);
 
-  // create weekly schedule renders for carousel
+  // once schedule is fetched, create weekly schedule renders for carousel
   useEffect(() => {
     if (scheduleData && scheduleData.schedule && formattedDates) {
-
 
       // For each weekArray in the scheduleData, create a render
       const renders = scheduleData.schedule.map((weekSchedule, index) => {
@@ -51,7 +47,9 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
             index={index}
             key={index}
             activeSpotId={activeSpotId}
-            studentData={studentData}/>
+            studentData={studentData}
+            handler={handler}
+          />
         )
 
       });
@@ -111,6 +109,7 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
             showThumbs={false}
             showStatus={false}
             showIndicators={false}
+            showArrows={false}
             selectedItem={currentItem}
           >
             {scheduleRenders.map((render, index) => (
