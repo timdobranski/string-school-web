@@ -8,6 +8,9 @@
 .statusColumn {
   width: 80%;
 }
+.statusColumn:hover {
+  cursor: pointer;
+}
 
 .open {
   padding: 5px;
@@ -83,4 +86,29 @@
 .sundayRegular {
   background-color: var(--blueBooked);
   font-family: Economica;
+}
+
+.studentDataWrapper {
+  max-height: 0;
+  /* transition: max-height 0.5s ease-out; */
+  overflow: hidden;
+}
+
+
+.active {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  margin-top: .5rem;
+  height: auto;
+  max-height:200px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: solid black 2px;
+
+  transition: max-height 0.75s ease-in;
+}
+
+.break {
+  color: white;
 }

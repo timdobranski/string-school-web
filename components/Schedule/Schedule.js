@@ -13,7 +13,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Week from '../Week/Week';
 
 // activeSpotId and studentData are for teacher view to render extra student data on click
-export default function Schedule({ startDate, privacy, handler, activeSpotId, studentData }) {
+export default function Schedule({ startDate, privacy, handler, activeSpotId, studentData, setActiveSpotId }) {
   const [ scheduleData, setScheduleData ] = useState(null); // array of objects w/day/time or more, depending on privacy
   const [ scheduleRenders, setScheduleRenders ] = useState([]); // actual jsx to render for each week
   const [ formattedDates, setFormattedDates ] = useState(null); // Same as above, but formatted to be readable
@@ -49,6 +49,8 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
             activeSpotId={activeSpotId}
             studentData={studentData}
             handler={handler}
+            privacy={privacy}
+            setActiveSpotId={setActiveSpotId}
           />
         )
 

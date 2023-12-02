@@ -14,11 +14,20 @@ export default function TeacherHome() {
   const [activeSpotId, setActiveSpotId] = useState(null);
   const router = useRouter();
 
+  // student prop is the student id
+  const spotClickHandler = async ({ day, time, date, dbDate, student, id }) => {
+    if (activeSpotId === id) { setActiveSpotId(null); return;}
 
-  const spotClickHandler = async ({ day, time, date, dbDate, student }) => {
-    const studentData = await getStudentData(student);
-    setCurrentStudent(studentData);
-    setActiveSpotId(student);
+    const studentData = (
+      <div className={styles.studentCardWrapper}>
+        <Link href={`/teacher/view-student?studentId=${student}`}><p classname='text'>View Student</p></Link>
+        <Link href={`/teacher/log-absence?student=${student}`}><p className='text'>Log Absence</p></Link>
+        <Link href={`/teacher/log-payment?student=${student}`}><p className='text'>Log Payment</p></Link>
+      </div>
+    )
+
+    setStudentInfoRender(studentData);
+    setActiveSpotId(id);
   }
   const handleSignout = async () => {
     const { error } = await supabase.auth.signOut({
@@ -58,6 +67,7 @@ export default function TeacherHome() {
         privacy={false}
         handler={spotClickHandler}
         activeSpotId={activeSpotId}
+        setActiveSpotId={setActiveSpotId}
         studentData={studentInfoRender}
       />
       <button className={styles.signOutButton} onClick={handleSignout}>Sign Out</button>

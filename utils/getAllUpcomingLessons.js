@@ -170,14 +170,14 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
       // Starting data for return before considering spot changes, cancellations, makeups
       const spotData = {
         day: spot.day,
-        date : formattedDatesArray[weekIndex][dayIndex(spot.day)],
+        date: formattedDatesArray[weekIndex][dayIndex(spot.day)],
         dbDate: dbDatesArray[weekIndex][dayIndex(spot.day)],
         time: spot.time,
         student: spot.student,
-        type: spot.student ? 'regular' : 'open',
-        cellText: spot.student ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!',
+        type: spot.break ? 'break' : (spot.student ? 'regular' : 'open'),
+        cellText: spot.break ? 'Break' : (spot.student ? (privacy ? 'Booked' : studentName(students, spot.student)) : 'Open!'),
         id: spot.id,
-      }
+      };
 
       // If the current spot has a new spot start date add it to the switchSpotsTracker
       if (spot.new_student_start_date ) {
@@ -224,7 +224,8 @@ export default async function getAllUpcomingLessons(numberOfLessons, privacy, st
         }
       }
       // Now that the type has been determined, assign a corresponding className
-      spotData.className = spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1);
+      spotData.className = spotData.type !== 'break' ? spotData.day.charAt(0).toLowerCase() + spotData.day.slice(1) + spotData.type.charAt(0).toUpperCase() + spotData.type.slice(1)
+        : 'break';
 
       // If this is for the schedule, add it to the result
       if (!studentId) {
