@@ -11,7 +11,7 @@ export default function Skills() {
   const [filterType, setFilterType] = useState('all');
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
-  // get student's skills
+  // get student's skills data
   useEffect(() => {
     if (student && student.id) {
       const loadSkills = async () => {
@@ -55,7 +55,7 @@ export default function Skills() {
             </tr>
           ))}
           <tr className={styles.totalRow}>
-            <td className={`${styles.skillNameColumn} ${styles.totalCell}`}>Total</td>
+            <td className={`${styles.skillNameColumn} ${styles.totalCell}`}>Total (out of attempted skills)</td>
             {filterType === 'all' && <>
               <td className={`${styles.understandingColumn} ${styles.totalCell}`}>{`${totalUnderstanding}/${maxUnderstanding}`}</td>
               <td className={`${styles.playingColumn} ${styles.totalCell}`}>{`${totalPlaying}/${maxPlaying}`}</td>
@@ -67,7 +67,7 @@ export default function Skills() {
       </table>
     );
   }
-
+  // calculate the totals for each skill type
   const calculateTotals = (skills) => {
     let totalUnderstanding = 0;
     let totalPlaying = 0;
@@ -99,12 +99,29 @@ export default function Skills() {
   return (
     <div className='infoCard'>
       <h1>Skills</h1>
+      <div className={styles.skillsPageDirections}>
+        <p className='text'>{`Skills can be earned by completing each skill's related tests. You can can mark skills complete in person
+        during your lessons with my guidance or here in the app any time if you have the 'Manage Skills' setting enabled in the settings menu.`}</p>
+        <p className='text'>Each skill can be mastered in up to three different ways:</p>
+        <div className={styles.skillTypesInfo}>
+          <p className='text'>1. Knowledge of the idea</p>
+          <p className='text'>2. Ability to play it on the guitar</p>
+          <p className='text'>3. Ability to recognize it by ear</p>
+        </div>
+        <p className='text'>In each of these categories, up to 3 points are possible depending on how easy it is to pass the skill test.</p>
+        <p className='text'>You can view your overall progress or filter to view it in musical knowledge, playing ability, and ear training.</p>
+        <p className='text'>Finally, you can also choose a Goal Path or a Genre path below. These are collections of skills that build fluency
+        in the listed area, and there you can see the skills you may be missing to help guide your progress.</p>
+      </div>
+
+      <p  className='text'>You can view your total skills here,
+        or select a Goal or Genre path below to see your progress in that area.</p>
       {/* Dropdown or buttons to change filterType */}
       <div>
-        <button onClick={() => setFilterType('all')}>All</button>
-        <button onClick={() => setFilterType('understanding')}>Understanding</button>
-        <button onClick={() => setFilterType('playing')}>Playing</button>
-        <button onClick={() => setFilterType('ear')}>Ear</button>
+        <button className='button' onClick={() => setFilterType('all')}>All</button>
+        <button className='button' onClick={() => setFilterType('understanding')}>Understanding</button>
+        <button className='button' onClick={() => setFilterType('playing')}>Playing</button>
+        <button className='button' onClick={() => setFilterType('ear')}>Ear</button>
       </div>
       {skills.length > 0 ? renderSkillsTable() : <p>No skills data available.</p>}
     </div>

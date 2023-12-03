@@ -1,3 +1,21 @@
+.skillsPageDirections {
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 15px;
+  border: solid 1px white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.skillTypesInfo {
+  margin: 1rem;
+  text-align: left;
+}
+
 .skillsTable {
     width: 70%;
     margin: 1rem;
@@ -33,4 +51,10 @@
 }
 .earColumn {
 
+}
+.totalRow {
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-top: white 1px solid;
+    color: rgb(101, 243, 143)
 }
