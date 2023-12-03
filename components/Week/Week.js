@@ -6,9 +6,9 @@ export default function Week({ weekSchedule, formattedDates, index, activeSpotId
   // data structure for schedule spots to render table
   const schedule = {
     Monday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
-    Tuesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
-    Wednesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '7:00pm', '7:30pm', '8:00pm'],
-    Thursday: ['4:30pm', '5:00pm', '5:30pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
+    Tuesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
+    Wednesday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
+    Thursday: ['4:30pm', '5:00pm', '5:30pm', '6:00pm', '6:30pm', '7:00pm', '7:30pm', '8:00pm'],
     Friday: ['4:30pm', '5:00pm', '5:30pm'],
     Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }

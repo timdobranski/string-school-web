@@ -1,0 +1,36 @@
+.skillsTable {
+    width: 60%;
+    margin: 1rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    /* border: 1px solid #ddd; */
+    font-size: 1.25rem;
+}
+.headerRow {
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-bottom: white 1px solid;
+}
+.skillNameColumn {
+    width: 40%;
+    text-align: left;
+    padding: 8px;
+}
+
+.playingColumn, .understandingColumn, .earColumn {
+    width: 20%;
+    text-align: center;
+    padding: 8px;
+
+}
+
+
+.playingColumn {
+  width: 10%;
+}
+.understandingColumn {
+  width: 10%;
+}
+.earColumn {
+  width: 10%;
+}

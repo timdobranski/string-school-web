@@ -4,6 +4,7 @@ import styles from './progress.module.css';
 import StudentContext, { useAuth } from '../layout.js';
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../utils/supabase';
+import Link from 'next/link';
 
 export default function Progress() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
@@ -58,43 +59,43 @@ export default function Progress() {
         <h1 className='sectionHeader'>Progress</h1>
 
 
-          <h1 className='featureHeaders'>Setlist</h1>
-          <p className='featureComments'>{`All The Songs You've Learned`}</p>
-          {setlist.map((song) => {
-            return (
-              <div key={song.id} className={styles.lessonLog}>
-                <h2 className={styles.songTitle}>{song.title}</h2>
-              </div>
-            )
-          })}
+        <h1 className='featureHeaders'>Setlist</h1>
+        <p className='featureComments'>{`All The Songs You've Learned`}</p>
+        {setlist.map((song) => {
+          return (
+            <div key={song.id} className={styles.lessonLog}>
+              <h2 className={styles.songTitle}>{song.title}</h2>
+            </div>
+          )
+        })}
 
 
 
-          <h1 className='featureHeaders'>Skills</h1>
-          <p className='featureComments'>{`Skills You've Learned, Shown In Relation To Different Skills Paths`}</p>
+        <h1 className='featureHeaders'>Skills</h1>
+        <p className='featureComments'>{`Skills You've Learned, Shown In Relation To Different Skills Paths`}</p>
+        <Link href='/students/progress/skills'><p className='text'>View All Skills</p></Link>
 
 
-
-          <h1 className='featureHeaders'>Lesson Logs</h1>
-          <p className='featureComments'>Updates From Me</p>
-          <table className={styles.lessonLogsTable}>
-  <thead>
-    <tr>
-      <th className={styles.lessonLogHeader}>What We Did</th>
-      <th className={styles.lessonLogHeader}>What to Practice</th>
-      <th className={styles.lessonLogHeader}>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    {lessonLogs.map((log) => (
-      <tr key={log.id} className={styles.lessonLogRow}>
-        <td className={styles.lessonLogCell}>{log.what_we_did}</td>
-        <td className={styles.lessonLogCell}>{log.what_to_practice}</td>
-        <td className={styles.lessonLogCell}>{log.notes}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+        <h1 className='featureHeaders'>Lesson Logs</h1>
+        <p className='featureComments'>Updates From Me</p>
+        <table className={styles.lessonLogsTable}>
+          <thead>
+            <tr>
+              <th className={styles.lessonLogHeader}>What We Did</th>
+              <th className={styles.lessonLogHeader}>What to Practice</th>
+              <th className={styles.lessonLogHeader}>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lessonLogs.map((log) => (
+              <tr key={log.id} className={styles.lessonLogRow}>
+                <td className={styles.lessonLogCell}>{log.what_we_did}</td>
+                <td className={styles.lessonLogCell}>{log.what_to_practice}</td>
+                <td className={styles.lessonLogCell}>{log.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
       </div>
     )
