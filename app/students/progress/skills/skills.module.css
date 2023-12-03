@@ -10,6 +10,9 @@
   justify-content: center;
   align-items: center;
 }
+.skillsHeader {
+  margin-left: 15px;
+}
 
 .skillTypesInfo {
   margin: 1rem;
@@ -57,4 +60,52 @@
     font-size: 1.5rem;
     border-top: white 1px solid;
     color: rgb(101, 243, 143)
+}
+.filtersWrapper{
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1rem;
+  border-radius: 15px;
+  border: solid 1px white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.filterButton {
+  position: relative;
+  margin: 1rem;
+  padding: .5rem;
+  width: 175px;
+  border: none;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 1.25rem;
+  border-radius: 4px;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  animation : transform 2s;
+}
+.filterButton:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.infoIcon{
+  height: 15px;
+  width: 15px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.infoIcon:hover{
+  cursor: pointer;
+}
+.closeIcon{
+  position: relative;
+  top: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  /* margin: 1rem; */
+  margin-left: auto;
+}
+.closeIcon:hover{
+  cursor: pointer;
 }
