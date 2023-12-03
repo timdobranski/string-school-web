@@ -1,0 +1,77 @@
+.tableWrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+.pathDropdownWrapper {
+  margin: 2rem;
+}
+.pathSelect {
+  width: auto;
+  height: 2rem;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  border: solid black 2px;
+}
+.pathName {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 1rem;
+}
+.pathDescription {
+  font-size: 1.25rem;
+  margin: 1rem;
+  text-align: center;
+}
+.columnSelect {
+  width: auto;
+  font-size: 1.25rem;
+  margin: 2rem;
+}
+.pathTable {
+    width: 90%;
+    border-collapse: collapse;
+    font-size: 1.25rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.tableHeaders {
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-bottom: solid rgb(255, 255, 255) 2px;
+  margin: .5rem;
+  padding: .5rem;
+}
+.moduleRow {
+  text-align: left;
+}
+.skillRow {
+  text-align: left;
+  padding-left: 1rem;
+  font-size: 1rem;
+  color:rgb(146, 255, 146);
+  height: 0;
+}
+.totals {
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-top: solid rgb(255, 255, 255) 2px;
+  color:rgb(146, 255, 146);
+  margin: .5rem;
+  padding: .5rem;
+}
+.columnSelectButton {
+  position: relative;
+  margin: .5rem 2rem .5rem 2rem;
+  padding: .5rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 1.5rem;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  animation : transform 2s;
+  border-radius: 4px;
+}
+.columnSelectButton:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

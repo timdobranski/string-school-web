@@ -5,10 +5,10 @@ export default async function getSkills(studentId) {
   let { data, error } = await supabase
     .from('student_skills')
     .select(`
-      understanding_level,
+      knowledge_level,
       playing_level,
       ear_level,
-      skill:skills!inner(id, name, playing_test, understanding_test, ear_test)
+      skill:skills!inner(id, name, playing_test, knowledge_test, ear_test)
     `)
     .eq('student', studentId);
 
