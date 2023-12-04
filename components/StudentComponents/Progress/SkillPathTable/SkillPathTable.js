@@ -89,21 +89,22 @@ export default function SkillPathTable({ skillPaths }) {
             displayColumns === 'all' || displayColumns === 'knowledge' ? '' : styles.hidden
           }`}
         >
-          {skill.understanding_level}/{module.possible_knowledge_points}
+          {skill.knowledge_test ? (skill.knowledge_level || '0') + '/3' : null}
         </td>
         <td
           className={`${styles.skillPoints} ${
             displayColumns === 'all' || displayColumns === 'playing' ? '' : styles.hidden
           }`}
         >
-          {skill.playing_level}/{module.possible_playing_points}
+          {skill.playing_test ? (skill.playing_level || '0') + '/3' : null}
+          {/* {skill.playing_level || '0'}/{3} */}
         </td>
         <td
           className={`${styles.skillPoints} ${
             displayColumns === 'all' || displayColumns === 'ear' ? '' : styles.hidden
           }`}
         >
-          {skill.ear_level}/{module.possible_ear_points}
+          {skill.ear_test ? (skill.ear_level || '0') + '/3' : null}
         </td>
       </tr>
     ));
@@ -194,27 +195,7 @@ export default function SkillPathTable({ skillPaths }) {
         <div>
           <h2 className={styles.pathName}>{selectedPath.name}</h2>
           <p className={styles.pathDescription}>{selectedPath.description}</p>
-          <div className={styles.columnSelect}>
-            <label>Display Columns:</label>
-            <button className={styles.columnSelectButton} onClick={() => handleColumnChange('all')}>
-              All
-            </button>
-            <button
-              className={styles.columnSelectButton}
-              onClick={() => handleColumnChange('knowledge')}
-            >
-              Knowledge
-            </button>
-            <button
-              className={styles.columnSelectButton}
-              onClick={() => handleColumnChange('playing')}
-            >
-              Playing
-            </button>
-            <button className={styles.columnSelectButton} onClick={() => handleColumnChange('ear')}>
-              Ear
-            </button>
-          </div>
+
 
           {/* path table */}
           <table className={styles.pathTable}>

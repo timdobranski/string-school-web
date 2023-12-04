@@ -35,22 +35,42 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+.pathTable td {
+  /* height: 15px; */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.pathTable tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
 .tableHeaders {
   font-size: 1.5rem;
   font-weight: 800;
   border-bottom: solid rgb(255, 255, 255) 2px;
   margin: .5rem;
   padding: .5rem;
+  text-align: left;
 }
 .moduleRow {
   text-align: left;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.moduleName {
+  width: 25%;
+}
+.moduleDescription {
+  font-size: 1.25rem;
 }
 .skillRow {
   text-align: left;
-  padding-left: 1rem;
   font-size: 1rem;
   color:rgb(146, 255, 146);
   height: 0;
+}
+.skillName {
+  padding-left: 1rem;
 }
 .totals {
   font-size: 1.5rem;
@@ -59,6 +79,7 @@
   color:rgb(146, 255, 146);
   margin: .5rem;
   padding: .5rem;
+  text-align: left;
 }
 .columnSelectButton {
   position: relative;
