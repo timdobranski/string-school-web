@@ -1,10 +1,13 @@
 import styles from './SkillPathTable.module.css';
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SkillPathTable({ skillPaths }) {
   const [selectedPath, setSelectedPath] = useState(null);
   const [displayColumns, setDisplayColumns] = useState('all');
   const [openModules, setOpenModules] = useState([]);
+  const router = useRouter();
 
   const handlePathChange = (path) => {
     setSelectedPath(path);
@@ -81,7 +84,9 @@ export default function SkillPathTable({ skillPaths }) {
     if (!module) return null;
 
     return module.skills.map((skill) => (
-      <tr key={skill.id} className={styles.skillRow}>
+      <tr key={skill.id} className={styles.skillRow}
+        onClick={() => router.push(`/students/progress/skill-summary?skillId=${skill.id}`)}>
+
         <td className={styles.skillName}>{skill.name}</td>
         <td className={styles.skillDescription}>{skill.description || ""}</td>
         <td
@@ -107,6 +112,7 @@ export default function SkillPathTable({ skillPaths }) {
           {skill.ear_test ? (skill.student_skills[0].ear_level || '0') + '/3' : null}
         </td>
       </tr>
+
     ));
   };
 

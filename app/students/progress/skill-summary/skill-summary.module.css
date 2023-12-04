@@ -1,0 +1,28 @@
+.skillTestWrapper {
+  margin: .5rem;
+}
+.enableUpdateButton {
+  background-color: rgb(250, 137, 137);
+  color: black;
+  padding: .5rem 0rem .5rem 0rem;
+  margin: 1rem 0rem 1rem 0rem;
+  font-size: 1.25rem;
+  border: none;
+}
+.skillName {
+  font-weight: bold;
+  margin-top: 1.5rem;
+}
+.canUpdateMessage:hover {
+  cursor: pointer;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: .5rem;
+}
+.icon:hover {
+  color: white;
+  cursor: pointer;
+}
