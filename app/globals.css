@@ -123,6 +123,7 @@ a {
   min-width: 1000px;
   font-family: JennaSue;
   text-align: center;
+  overflow:visible;
 }
 .sectionHeaders {
   text-decoration: underline;
