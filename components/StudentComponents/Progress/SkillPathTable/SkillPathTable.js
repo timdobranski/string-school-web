@@ -89,14 +89,14 @@ export default function SkillPathTable({ skillPaths }) {
             displayColumns === 'all' || displayColumns === 'knowledge' ? '' : styles.hidden
           }`}
         >
-          {skill.knowledge_test ? (skill.knowledge_level || '0') + '/3' : null}
+          {skill.knowledge_test ? (skill.student_skills[0].knowledge_level || '0') + '/3' : null}
         </td>
         <td
           className={`${styles.skillPoints} ${
             displayColumns === 'all' || displayColumns === 'playing' ? '' : styles.hidden
           }`}
         >
-          {skill.playing_test ? (skill.playing_level || '0') + '/3' : null}
+          {skill.playing_test ? (skill.student_skills[0].playing_level || '0') + '/3' : null}
           {/* {skill.playing_level || '0'}/{3} */}
         </td>
         <td
@@ -104,7 +104,7 @@ export default function SkillPathTable({ skillPaths }) {
             displayColumns === 'all' || displayColumns === 'ear' ? '' : styles.hidden
           }`}
         >
-          {skill.ear_test ? (skill.ear_level || '0') + '/3' : null}
+          {skill.ear_test ? (skill.student_skills[0].ear_level || '0') + '/3' : null}
         </td>
       </tr>
     ));

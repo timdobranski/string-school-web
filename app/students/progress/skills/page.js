@@ -108,7 +108,7 @@ export default function Skills() {
   useEffect(() => {
     if (student && student.id) {
       const getSkillPaths = async () => {
-        const skillPaths = await getStudentSkillPaths(14);
+        const skillPaths = await getStudentSkillPaths(student.id);
         setSkillPaths(skillPaths);
       }
       getSkillPaths();
