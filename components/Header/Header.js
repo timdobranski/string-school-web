@@ -18,7 +18,7 @@ export default function Header() {
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
       console.log(event, session);
 
-      if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+      if (event === 'SIGNED_IN' ) {
         setPicture(session.user.user_metadata.picture);
         setSignedIn(true);
       }
@@ -30,7 +30,7 @@ export default function Header() {
 
   }, []);
 
-  const loginButton = ( <Link href='/login' className='loginButton' id={styles.loginButton}>Sign In</Link>)
+  const loginButton = ( <Link href='/login' className={styles.loginButton} id={styles.loginButton}>Sign In</Link>)
   const settingsButton = (
     <Link href='/students/settings'>
       <div className={styles.profileImgContainer}>

@@ -17,19 +17,18 @@
   width: 30vw;
   height: 6vw;
 }
+
 .loginButton {
-  .loginButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 2rem;
-    padding: .5rem;
-    border: none;
-    background: rgba(0, 0, 0, 0.7);
-    font-size: 1.5rem;
-    background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
-    animation : transform 2s;
-  }
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2rem;
+  padding: .5rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 1.5rem;
+  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  animation : transform 2s;
 }
 .profileImgContainer {
   position: absolute;

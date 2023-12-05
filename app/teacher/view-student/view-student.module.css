@@ -1,0 +1,16 @@
+.lessonLogsWrapper {
+  width: 100%;
+  margin: 1rem;
+
+}
+.lessonLogsHeader {
+  width: 100%;
+  margin: 1rem 0rem 1rem 0rem;
+
+}
+.lessonLogsHeader h3 {
+  width: 33%;
+  display: inline-block;
+  text-align: center;
+  font-size: 1.75rem;
+}

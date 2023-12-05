@@ -1,0 +1,41 @@
+.lessonLogWrapper {
+  width: 100%;
+  /* border: solid white 4px; */
+  margin: .5rem 0rem .5rem 0rem;
+  padding: .5rem 1rem .5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: solid 1px rgb(71, 71, 71)
+}
+.lessonLogWrapper * {
+  display: inline-block;
+}
+.lessonLogWrapper div {
+  font-size: 1.25rem;
+
+}
+.logRowContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+.lessonLogHeader {
+  display: block;
+  font-size: 1.25rem;
+  color: rgb(128, 255, 128);
+  margin-bottom: .5rem;
+}
+
+.whatWeDidColumn {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.whatToPracticeColumn {
+  width: 33%;
+}
+.notesColumn {
+  width: 33%;
+
+}
