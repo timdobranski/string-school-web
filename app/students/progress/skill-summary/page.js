@@ -111,6 +111,8 @@ export default function SkillSummary() {
         </div>
       </Modal>
 
+
+
       {!userCanUpdate && supabaseUserData.update_skills_alert_dismissed === false ? canUpdateMessage : null}
       <h1 className={styles.skillName}>{`${skillData.skill.name}`}</h1>
       <h3 className='text'>{`${skillData.skill.description}`}</h3>
@@ -126,93 +128,109 @@ export default function SkillSummary() {
        for skills that you know so well that you will probably know forever`}</p>
 
 
+      <div className={styles.testsWrapper}>
+        {skillData.skill.playing_test && (
+          <div className={styles.skillTestWrapper}>
+            <h1 className='featureHeaders'>Playing Test</h1>
+            <p className={styles.testDescription}>{skillData.skill.playing_test}</p>
+            <p className={styles.currentLevel}>{`Your current level: ${skillData.playing_level}`}</p>
+            {userCanUpdate ?
+              <>
+                <select
+                  name="playing"
+                  id="playing"
+                  value={playingValue}
+                  onChange={(e) => setPlayingValue(e.target.value)}
+                  className={styles.select}
 
-      {skillData.skill.playing_test && (
-        <div className={styles.skillTestWrapper}>
-          <h1 className='featureHeaders'>Playing Test</h1>
-          <p className='text'>{skillData.skill.playing_test}</p>
-          <p className='text'>{`Your current level: ${skillData.playing_level}`}</p>
-          {userCanUpdate ?
-            <>
-              <select
-                name="playing"
-                id="playing"
-                value={playingValue}
-                onChange={(e) => setPlayingValue(e.target.value)}
-                className={styles.select}
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <button
+                  onClick={() => {
+                    const skillUpdated = updateSkillHandler(student.id, skillId, 'playing', playingValue);
+                    if (skillUpdated) {
+                      skillData.playing_level = playingValue;
+                      setModalIsOpen(true)
+                    }
+                  }}
+                  className='button'
+                >Update</button>
+              </> : null}
+          </div>
+        )}
 
-              >
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-              <button
-                onClick={() => {
-                  updateSkillHandler(student.id, skillId, 'playing', playingValue);
-                  setModalIsOpen(true)
-                }}
-                className='button'
-              >Update</button>
-            </> : null}
-        </div>
-      )}
+        {skillData.skill.knowledge_test && (
+          <div className={styles.skillTestWrapper}>
+            <h1 className='featureHeaders'>Knowledge Test</h1>
+            <p className={styles.testDescription}>{skillData.skill.knowledge_test}</p>
+            <p className={styles.currentLevel}>{`Your current level: ${skillData.knowledge_level}`}</p>
 
-      {skillData.skill.knowledge_test && (
-        <div className={styles.skillTestWrapper}>
-          <h1 className='featureHeaders'>Knowledge Test</h1>
-          <p className='text'>{skillData.skill.knowledge_test}</p>
-          <p className='text'>{`Your current level: ${skillData.knowledge_level}`}</p>
-          {/* <div></div> */}
-          {userCanUpdate ?
-            <>
-              <select
-                name="knowledge"
-                id="knowledge"
-                value={knowledgeValue}
-                onChange={(e) => setKnowledgeValue(e.target.value)}
-                className={styles.select}
+            {userCanUpdate ?
+              <>
+                <select
+                  name="knowledge"
+                  id="knowledge"
+                  value={knowledgeValue}
+                  onChange={(e) => setKnowledgeValue(e.target.value)}
+                  className={styles.select}
 
-              >
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-              <button
-                onClick={() => updateSkillHandler(student.id, skillId, 'knowledge', knowledgeValue)}
-                className='button'
-              >Update</button>
-            </>
-            : null}
-        </div>
-      )}
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <button
+                  onClick={() => {
+                    const skillUpdated = updateSkillHandler(student.id, skillId, 'knowledge', knowledgeValue);
+                    if (skillUpdated) {
+                      skillData.knowledge_level = knowledgeValue;
+                      setModalIsOpen(true)
+                    }
+                  }}
+                  className='button'
+                >Update</button>
+              </>
+              : null}
+          </div>
+        )}
 
-      {skillData.skill.ear_test && (
-        <div className={styles.skillTestWrapper}>
-          <h1 className='featureHeaders'>Ear Test</h1>
-          <p className='text'>{skillData.skill.ear_test}</p>
-          <p className='text'>{`Your current level: ${skillData.ear_level}`}</p>
-          {userCanUpdate ?
-            <>
-              <select
-                name="ear"
-                id="ear"
-                value={earValue}
-                onChange={(e) => setEarValue(e.target.value)}
-                className={styles.select}
-              >
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-              <button
-                onClick={() => updateSkillHandler(student.id, skillId, 'ear', earValue)}
-                className='button'>Update</button>
-            </> : null }
-        </div>
-      )}
+        {skillData.skill.ear_test && (
+          <div className={styles.skillTestWrapper}>
+            <h1 className='featureHeaders'>Ear Test</h1>
+            <p className={styles.testDescription}>{skillData.skill.ear_test}</p>
+            <p className={styles.currentLevel}>{`Your current level: ${skillData.ear_level}`}</p>
+            {userCanUpdate ?
+              <>
+                <select
+                  name="ear"
+                  id="ear"
+                  value={earValue}
+                  onChange={(e) => setEarValue(e.target.value)}
+                  className={styles.select}
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <button
+                  onClick={() => {
+                    const skillUpdated = updateSkillHandler(student.id, skillId, 'ear', earValue);
+                    if (skillUpdated) {
+                      skillData.ear_level = earValue;
+                      setModalIsOpen(true)
+                    }
+                  }}
+                  className='button'>Update</button>
+              </> : null }
+          </div>
+        )}
+      </div>
     </div>
   );
 };

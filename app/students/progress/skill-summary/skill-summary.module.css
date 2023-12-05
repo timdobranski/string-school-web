@@ -1,5 +1,14 @@
 .skillTestWrapper {
   margin: .5rem;
+  width: 33%;
+  height: 500px;
+  padding: .5rem;
+  background-color: rgba(255, 255, 255, .2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 .enableUpdateButton {
   background-color: rgb(250, 137, 137);
@@ -53,4 +62,26 @@
 .confirmMessage {
   font-size: 2.5rem;
   margin: 1rem;
+}
+.testsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 100%;
+  margin: 1rem;
+}
+.currentLevel {
+  background-color: white;
+  color: black;
+  padding: .5rem .5rem .5rem .5rem;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.testDescription {
+  height: 150px;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }

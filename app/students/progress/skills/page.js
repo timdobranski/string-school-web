@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import getStudentSkillPaths from '../../../../utils/getStudentSkillPaths';
 import SkillPathTable from '../../../../components/StudentComponents/Progress/SkillPathTable/SkillPathTable';
+import Modal from 'react-modal';
 
 
 export default function Skills() {
@@ -15,9 +16,10 @@ export default function Skills() {
   const [filterType, setFilterType] = useState('all');
   const [showInfo, setShowInfo] = useState(false);
   const [skillPaths, setSkillPaths] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
-  // get student's skills data
+  // get all of the student's existing skills
   // useEffect(() => {
   //   if (student && student.id) {
   //     const loadSkills = async () => {
@@ -116,11 +118,25 @@ export default function Skills() {
   }, [student]);
 
 
-
+  const modalStyles = {
+    overlay: {
+      backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    content: {
+      top: '20vh',
+      width: '60vw',
+      margin: '0 auto',
+      height: 'auto',
+      background: 'linear-gradient(to bottom, #FFFFFF #E5E5E5)',
+      borderRadius: '10px',
+      padding: '0',
+      zIndex: 1000
+      // border: 'none',
+    }
+  }
 
   const pageDirections = (
     <div className={styles.skillsPageDirections}>
-      <FontAwesomeIcon icon={faCircleXmark} className={styles.closeIcon} onClick={() => setShowInfo(false)} />
       <p className='text'>{`Skills can be earned by completing each skill's related tests. We can can mark skills complete together
     during your lessons with my guidance or you can do so here in the app any time if you have the 'Manage Skills' setting enabled
     in the settings menu.`}</p>
@@ -146,11 +162,21 @@ export default function Skills() {
           <FontAwesomeIcon
             icon={faCircleInfo}
             className={styles.infoIcon}
-            onClick={() => setShowInfo(prev => !prev)}
+            onClick={() => setModalIsOpen(prev => !prev)}
           />
         </h1>
 
-        {showInfo ? pageDirections : null}
+        <Modal
+          isOpen={modalIsOpen}
+          onClose={() => setModalIsOpen(false)}
+          onRequestClose={() => setModalIsOpen(false)}
+          shouldCloseOnOverlayClick={true}
+          style={modalStyles}
+        >
+          {pageDirections}
+        </Modal>
+
+
 
         <p  className='text'>You can view your total skills here,
         or select a Goal or Genre path below to see your progress in that area.</p>
