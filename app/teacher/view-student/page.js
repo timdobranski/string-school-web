@@ -36,20 +36,25 @@ export default function ViewStudent() {
             )
           }
           )}
-          <div className={styles.lessonLogsWrapper}>
-            <h3 className='featureHeaders'>Lesson Logs</h3>
-            <div className={styles.practiceSessionsHeader}>
-              <h3>Date</h3>
-              <h3>Duration</h3>
-              <h3>Notes</h3>
-            </div>
-            {studentData.practice.slice(0, 4).map((session, index) => {
-              return (
-                <StudentPracticeSession session={session} key={index} />
-              )
-            })}
-          </div>
         </div>
+        <div className={styles.lessonLogsWrapper}>
+          <h3 className='featureHeaders'>Practice Sessions</h3>
+          <div className={styles.practiceSessionsHeader}>
+            <h3>Date</h3>
+            <h3>Duration</h3>
+            <h3>Notes</h3>
+          </div>
+          {studentData.practice.slice(0, 4).map((session, index) => {
+            return (
+              <StudentPracticeSession session={session} key={index} />
+            )
+          })}
+        </div>
+        <div className={styles.lessonLogsWrapper}>
+          <h3 className='featureHeaders'>Setlist & Skills</h3>
+
+        </div>
+
       </div>
     )
 
