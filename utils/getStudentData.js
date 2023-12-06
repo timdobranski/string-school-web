@@ -16,13 +16,15 @@ const getStudentData = async (studentId) => {
     const contactsPromise = supabase.from('users').select('*').eq('student_id', studentId);
     const lessonLogsPromise = supabase.from('lessonLogs').select('*').eq('student', studentId);
     const paymentsPromise = supabase.from('payments').select('*').eq('student', studentId);
+    const practicePromise = supabase.from('practiceSessions').select('*').eq('student', studentId);
 
     // Execute all promises concurrently
-    const [lessonsResult, contactsResult, lessonLogsResult, paymentsResult] = await Promise.all([
+    const [lessonsResult, contactsResult, lessonLogsResult, paymentsResult, practiceResult] = await Promise.all([
       lessonsPromise,
       contactsPromise,
       lessonLogsPromise,
-      paymentsPromise
+      paymentsPromise,
+      practicePromise
     ]);
 
     // Check for errors in the results
@@ -30,18 +32,21 @@ const getStudentData = async (studentId) => {
     if (contactsResult.error) throw contactsResult.error;
     if (lessonLogsResult.error) throw lessonLogsResult.error;
     if (paymentsResult.error) throw paymentsResult.error;
+    if (practiceResult.error) throw practiceResult.error;
 
     // Extract data from results
     const lessons = lessonsResult;
     const contacts = contactsResult.data;
     const lessonLogs = lessonLogsResult.data;
     const payments = paymentsResult.data;
+    const practice = practiceResult.data;
 
     const result = {
       lessons,
       contacts,
       lessonLogs,
-      payments
+      payments,
+      practice
     };
 
     console.log('getStudentData result: ', result);

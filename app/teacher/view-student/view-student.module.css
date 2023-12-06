@@ -1,7 +1,6 @@
 .lessonLogsWrapper {
   width: 100%;
   margin: 1rem;
-
 }
 .lessonLogsHeader {
   width: 100%;
@@ -13,4 +12,15 @@
   display: inline-block;
   text-align: center;
   font-size: 1.75rem;
+}
+.practiceSessionsHeader {
+  width: 100%;
+  margin: 1rem 0rem 1rem 0rem;
+}
+.practiceSessionsHeader h3 {
+  width: 33%;
+  display: inline-block;
+  text-align: center;
+  font-size: 1.75rem;
+  color: rgb(128, 255, 128);
 }

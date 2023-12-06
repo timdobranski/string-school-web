@@ -1,0 +1,17 @@
+.practiceSessionWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: .5rem 0rem .5rem 0rem;
+}
+.practiceSessionWrapper * {
+    width: 33%;
+
+    padding: .25rem 0rem .25rem 0rem;
+}
+.practiceSessionWrapper:hover {
+    cursor: pointer;
+}
