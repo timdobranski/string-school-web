@@ -1,5 +1,5 @@
 import styles from './UpcomingLessons.module.css';
-import { getLessonClassNames } from '../../../utils/getLessonClassNames';
+// import { getLessonClassNames } from '../../../utils/getLessonClassNames';
 import { useState, useEffect } from 'react';
 import getUpcomingLessons from '../../../utils/getUpcomingLessons';
 import getAllUpcomingLessons from '../../../utils/getAllUpcomingLessons';

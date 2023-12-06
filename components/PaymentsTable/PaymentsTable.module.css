@@ -1,0 +1,70 @@
+.paymentsTable {
+  width: 100%;
+  /* border-collapse: collapse; */
+  margin-top: 2rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: solid 1px rgb(71, 71, 71);
+  padding: .5rem;
+}
+.paymentsTableBody * {
+  padding-top: 1rem;
+}
+
+.dueInfo {
+  margin-top: 2rem;
+}
+
+.paymentsHeaderRow th {
+  font-size: 1.25 rem;
+}
+
+.th-amount, .td-amount {
+  width: 20%;
+  text-align: center;
+}
+
+.th-day, .td-day {
+  width: 20%;
+  text-align: center;
+}
+
+.th-method, .td-method {
+  width: 20%;
+  text-align: center;
+}
+
+.th-month, .td-month {
+  width: 20%;
+  text-align: center;
+}
+
+.th-note, .td-note {
+  width: 20%;
+  text-align: center;
+}
+.paymentsData {
+  font-size: 1.25rem;
+}
+.paymentsTable .paymentsTableBody .td-note {
+  position: relative; /* Needed for absolute positioning of the fullNote */
+  cursor: pointer;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paymentsTable .paymentsTableBody .td-note .noteText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+td.fit {
+  width: 0;
+  min-width: fit-content;
+}
+.tableheaders{
+  color: rgb(128, 255, 128);
+  font-size: 1.75rem;
+}
