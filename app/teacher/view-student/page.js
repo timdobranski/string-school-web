@@ -6,7 +6,8 @@ import { useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react';
 import StudentLessonLog from '../../../components/TeacherComponents/StudentLessonLog/StudentLessonLog.js';
 import StudentPracticeSession from '../../../components/TeacherComponents/StudentPracticeSession/StudentPracticeSession.js';
-import PaymentsTable from '../../../components/PaymentsTable/PaymentsTable'
+import PaymentsTable from '../../../components/PaymentsTable/PaymentsTable';
+import ContactsTable from '../../../components/ContactsTable/ContactsTable';
 
 export default function ViewStudent() {
   const [studentData, setStudentData] = useState();
@@ -110,6 +111,12 @@ export default function ViewStudent() {
         <div className={styles.paymentsWrapper}>
           <h3 className='featureHeaders'>Payment History</h3>
           <PaymentsTable payments={studentData.payments} />
+        </div>
+
+        {/* contacts */}
+        <div className={styles.contactsWrapper}>
+          <h3 className='featureHeaders'>Contacts</h3>
+          <ContactsTable contacts={studentData.contacts} />
         </div>
       </div>
     )

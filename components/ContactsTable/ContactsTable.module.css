@@ -1,0 +1,65 @@
+.contactsTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+.contactsTable th {
+  color: rgb(128, 255, 128);
+  font-size: 1.75rem;
+  padding-bottom: 1rem;
+}
+.contactsTableBody tr {
+  border: solid 1px rgb(71, 71, 71);
+}
+.contactsTableBody td {
+  font-size: 1.25rem;
+  margin: .5rem;
+  padding: .75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+
+}
+.th-name {
+
+}
+.th-email {
+
+}
+.th-phone {
+
+}
+.th-preference {
+
+}
+.td-name {
+
+}
+.td-email {
+
+}
+.td-phone {
+
+}
+.td-preference {
+
+}
+.th-name, .td-name {
+  width: 20%;
+  text-align: center;
+}
+.th-email, .td-email {
+  width: 20%;
+  text-align: center;
+}
+.th-phone, .td-phone {
+  width: 20%;
+  text-align: center;
+}
+.th-preference, .td-preference {
+  width: 20%;
+  text-align: center;
+}
+.th-relation, .td-relation {
+  width: 20%;
+  text-align: center;
+
+}
