@@ -31,7 +31,7 @@ export default function StudentScheduling() {
           <h2 className='featureHeaders'>Schedule A Makeup Lesson</h2>
           <p className='featureComments'>Use a makeup credit</p>
         </Link>
-        <Link href='/students/scheduling/schedule-extra'>
+        <Link href='/students/scheduling/attendance-history'>
           <h2 className='featureHeaders'>View Attendance History</h2>
           <p className='featureComments'>View Lessons Attended, Cancelled, and Made-Up</p>
         </Link>

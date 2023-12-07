@@ -5,12 +5,16 @@ import { supabase } from '../../../utils/supabase';
 import StudentContext, { useAuth } from '../layout.js';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import getUpcomingLessons from '../../../utils/getUpcomingLessons.js';
-import UpcomingLessons from '../../../components/StudentComponents/UpcomingLessons/UpcomingLessons.js';
+import Link from 'next/link';
+import getStudentData from '../../../utils/getStudentData';
+import StudentLessonLog from '../../../components/TeacherComponents/StudentLessonLog/StudentLessonLog.js';
+import StudentPracticeSession from '../../../components/TeacherComponents/StudentPracticeSession/StudentPracticeSession.js';
+
 
 export default function StudentHome() {
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
   const [announcements, setAnnouncements] = useState([]);
+  const [studentData, setStudentData] = useState({});
 
 
   useEffect(() => {
@@ -25,17 +29,30 @@ export default function StudentHome() {
         setAnnouncements(data);
       }
     };
+
     getAnnouncements();
   }, []);
 
   useEffect(() => {
-    // console.log('announcements: ', announcements);
-  }, [announcements]);
-  // console.log('google user data:', googleUserData);
-  // console.log('supabase user data:', supabaseUserData);
+    if (student && student.id) {
+      const loadStudentData = async () => {
+        const allStudentData = await getStudentData(student.id);
+        allStudentData.info = allStudentData.lessons.students[0];
+        delete allStudentData.lessons.students;
+        console.log('student data: ', allStudentData);
+        setStudentData(allStudentData);
+      }
+      loadStudentData()
+    }
+  }, [student])
+
+  useEffect(() => {
+    console.log('studentData: ', studentData)
+  }, [studentData])
 
 
-  if (googleUserData && student && announcements) {
+
+  if (googleUserData && student && announcements && studentData.lessonLogs) {
     const name = student.first_name;
     const makeups = student.makeups;
 
@@ -53,11 +70,20 @@ export default function StudentHome() {
             </div>
           )
         })}
+        <Link href='/students/scheduling/schedule-makeup' className={styles.makeups}>
+          <p className={styles.makeupsNumber}>{`${makeups} ${makeups === 1 ? 'makeup' : 'makeups'} available`}</p>
+        </Link>
 
-        <h2 className='featureHeaders'>Makeups Available:</h2>
-        <p className={styles.makeupsNumber}>{makeups}</p>
-        <h2 className='featureHeaders'>Upcoming Lessons</h2>
-        <UpcomingLessons studentId={student.id} numOfLessons={5}/>
+        {/* lesson logs */}
+        <h3 className='featureHeaders'>Lesson Logs</h3>
+        { studentData.lessonLogs.slice(0, 4).map((log, index) => {
+          return (
+            <StudentLessonLog log={log} key={index} />
+          )
+        })}
+
+        {/* <h2 className='featureHeaders'>Upcoming Lessons</h2> */}
+        {/* <UpcomingLessons studentId={student.id} numOfLessons={2}/> */}
 
 
       </main>

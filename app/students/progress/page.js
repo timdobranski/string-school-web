@@ -76,26 +76,6 @@ export default function Progress() {
         <Link href='/students/progress/skills'><p className='text'>View All Skills</p></Link>
 
 
-        <h1 className='featureHeaders'>Lesson Logs</h1>
-        <p className='featureComments'>Updates From Me</p>
-        <table className={styles.lessonLogsTable}>
-          <thead>
-            <tr>
-              <th className={styles.lessonLogHeader}>What We Did</th>
-              <th className={styles.lessonLogHeader}>What to Practice</th>
-              <th className={styles.lessonLogHeader}>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lessonLogs.map((log) => (
-              <tr key={log.id} className={styles.lessonLogRow}>
-                <td className={styles.lessonLogCell}>{log.what_we_did}</td>
-                <td className={styles.lessonLogCell}>{log.what_to_practice}</td>
-                <td className={styles.lessonLogCell}>{log.notes}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
 
       </div>
     )

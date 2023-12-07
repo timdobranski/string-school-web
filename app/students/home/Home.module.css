@@ -15,7 +15,16 @@
     rgba(28, 28, 28, 0.5) 100%
   );
 }
+.makeups {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: .5rem;
+}
 .makeupsNumber {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
+  padding: .5rem;
+  background-color: rgb(63, 155, 254);
+  color: black;
   /* margin-top: 1.5rem; */
 }
