@@ -24,7 +24,10 @@
 .makeupsNumber {
   font-size: 1.25rem;
   padding: .5rem;
-  background-color: rgb(63, 155, 254);
-  color: black;
+  /* background-color: rgb(63, 155, 254); */
+  background: linear-gradient(to right, rgb(254, 63, 63), rgb(254, 130, 63));
+  border-radius: 4px;
+  color: white;
+  margin: .5rem;
   /* margin-top: 1.5rem; */
 }

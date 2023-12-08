@@ -16,38 +16,43 @@ export default function Songs() {
   const [recentSongs, setRecentSongs] = useState([]);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
   const Router = useRouter();
+  const [spotifyQuery, setSpotifyQuery] = useState('');
 
   const getRecentSongs = async () => {
     const { data, error } = await supabase
-    .from('recent_songs')
-    .select(`
+      .from('recent_songs')
+      .select(`
       song,
       songs (
         title,
         gp_url
       )
     `)
-    .eq('student', supabaseUserData.student_id);
+      .eq('student', supabaseUserData.student_id);
     // .eq('student', 21);
 
-  if (error) {
-    console.error('Error retrieving songs: ', error);
-  } else {
-    console.log('Retrieved songs: ', data);
-    setRecentSongs(data);
-  }
+    if (error) {
+      console.error('Error retrieving songs: ', error);
+    } else {
+      console.log('Retrieved songs: ', data);
+      setRecentSongs(data);
+    }
   };
 
   const searchHandler = async () => {
-  console.log('router params: ', searchQuery, searchType);
+    // console.log('router params: ', searchQuery, searchType);
     Router.push(`/students/songs/search-results?query=${searchQuery}&type=${searchType}`,
     );
   };
+  const spotifySearchHandler = async () => {
+    Router.push(`/students/songs/search-results?query=${spotifyQuery}&type=spotify`)
+  }
 
   const openFile = (file) => {
-    console.log('file inside recentSongs openFile: ', file);
+    // console.log('file inside recentSongs openFile: ', file);
     Router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${file}`);
   };
+
 
   useEffect(() => {
     if (supabaseUserData) {
@@ -57,26 +62,28 @@ export default function Songs() {
 
   return (
     <main className='infoCard'>
+      <input value={spotifyQuery} onChange={(e) => setSpotifyQuery(e.target.value)} type='text' placeholder='Search for songs' />
+      <button onClick={spotifySearchHandler}>Search</button>
       <div className={styles.searchContainer}>
         <h2 className='featureHeaders'>Search The Song Library</h2>
         <div className={styles.searchInputContainer}>
-        <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-          <option value="song">By Song</option>
-          <option value="artist">By Artist</option>
-        </select>
-        <input
-          className={styles.searchInput}
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              searchHandler();
-            }
-          }}
-          placeholder={`Search for ${searchType}s`}
-        />
-      </div>
+          <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+            <option value="song">By Song</option>
+            <option value="artist">By Artist</option>
+          </select>
+          <input
+            className={styles.searchInput}
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                searchHandler();
+              }
+            }}
+            placeholder={`Search for ${searchType}s`}
+          />
+        </div>
         <button onClick={searchHandler}>Search</button>
       </div>
       <h2 className='featureHeaders'>Browse All Songs By Category</h2>

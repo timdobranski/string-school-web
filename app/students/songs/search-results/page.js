@@ -13,23 +13,43 @@ import addToRecentSongs from '../../../../utils/addToRecentSongs';
 const SearchResults = () => {
   const router = useRouter();
   const [searchResults, setSearchResults] = useState([]);
+  const [spotifyResults, setSpotifyResults] = useState([]);
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
-
-
   const query = searchParams.get('query')
   const type = searchParams.get('type')
 
-  console.log('query: ', query);
-  console.log('type: ', type);
   useEffect(() => {
-    if (query && searchResults.length === 0) {
-      fetchSearchResults();
-    }
-  }, [query, type]);
+    // Fetch results from Spotify API
+    const fetchSpotifyResults = async () => {
+      setIsLoading(true); // Set loading state
 
+      try {
+        const response = await fetch(`/api/spotifySongSearch?query=${encodeURIComponent(query)}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setSpotifyResults(data); // Update state with fetched results
+      } catch (error) {
+        console.error('Failed to fetch:', error);
+      } finally {
+        setIsLoading(false); // Reset loading state
+      }
+    };
+
+    if (query) {
+      if (type !== 'spotify' && searchResults.length === 0) {
+        fetchSearchResults();
+      } else if (type === 'spotify' && spotifyResults.length === 0) {
+        fetchSpotifyResults();
+      }
+    }
+  }, [query, type, searchResults.length, spotifyResults.length]);
+
+  // sends request to back end for song search results
   const fetchSearchResults = async () => {
     try {
       const searchTypeParam = type === 'artist' ? '&searchType=artist' : '';
