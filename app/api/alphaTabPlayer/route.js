@@ -12,7 +12,7 @@ export async function GET(request) {
     if (!songFileLink) {
       throw new Error('No song file provided');
     }
-
+    console.log('songfile inside alphaTabPlayer: ', songFileLink);
     // Fetch the file from the provided link
     const response = await fetch(songFileLink);
 

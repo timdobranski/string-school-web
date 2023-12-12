@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '../../../utils/supabase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowDown, faCirclePlay, faSpinner } from '@fortawesome/free-solid-svg-icons';
-
+import alphatabReader from '../../../utils/alphatabReader';
 
 export default function Songs() {
   const [searchType, setSearchType] = useState('song'); // 'song' or 'artist'
@@ -53,6 +53,14 @@ export default function Songs() {
     Router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${file}`);
   };
 
+  useEffect(() => {
+    const getMetadata = async () => {
+      const metadata = await alphatabReader('https://drive.google.com/uc?id=1cP0aPUlkVq0uhbdB6QQlSkKAr9TnhovO&export=download');
+      console.log('metadata: ', metadata);
+      return metadata;
+    }
+    getMetadata();
+  }, [])
 
   useEffect(() => {
     if (supabaseUserData) {
