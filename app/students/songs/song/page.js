@@ -5,13 +5,18 @@ import { useSearchParams } from 'next/navigation';
 import styles from './song.module.css';
 import Image from 'next/image';
 import dateFormatter from '../../../../utils/dateFormatter';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleArrowDown, faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 
 export default function Song() {
   const searchParams = useSearchParams()
   const songId = searchParams.get('id')
 
   const [metadata, setMetadata] = useState(null);
+
+  const downloadHandler = () => {
+
+  }
 
   // fetch metadata
   useEffect(() => {
@@ -42,12 +47,26 @@ export default function Song() {
     <div className='infoCard'>
       <h1 className={styles.songTitle}>{metadata.title}</h1>
       <h3 className={styles.songArtist}>{metadata.artist}</h3>
+      <div className={styles.guitarProContainer}>
+        <span className={styles.buttonSpan}>
+          <a href={`/api/downloadGuitarProFile?url=${metadata.gp_url}`} download className={styles.buttonLink}>
+            <FontAwesomeIcon icon={faCircleArrowDown} className={styles.buttonIcon} />
+      Download for Guitar Pro
+          </a>
+        </span>
+        <span className={styles.buttonSpan}>
+          <button onClick={() => openFile(file)} className={styles.buttonLink}>
+            <FontAwesomeIcon icon={faCirclePlay} className={styles.buttonIcon} />
+      Open Here
+          </button>
+        </span>
+      </div>
       <div className={styles.songDataContainer}>
         <div className={styles.songInfoContainer}>
           <h3 className={styles.header}>Song Info</h3>
           <Image src={metadata.image_url} width={200} height={200} alt='album cover' />
           <h3>{metadata.album}</h3>
-          <h3>{dateFormatter(metadata.release_date, {includeYear: true})}</h3>
+          <h3>{metadata.release_date.length === 4 ? metadata.release_date : dateFormatter(metadata.release_date, {includeYear: true})}</h3>
           {metadata.explicit ? <h3 className={styles.explicitTag}>Explicit</h3> : null}
           {metadata.key ? <h3>Key: {metadata.key}</h3> : null}
           {metadata.tempo ? <h3>Tempo: {metadata.tempo}</h3>: null }

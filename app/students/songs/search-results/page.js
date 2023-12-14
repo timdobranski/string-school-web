@@ -21,33 +21,7 @@ const SearchResults = () => {
   const query = searchParams.get('query')
   const type = searchParams.get('type')
 
-  useEffect(() => {
-    // Fetch results from Spotify API
-    const fetchSpotifyResults = async () => {
-      setIsLoading(true); // Set loading state
 
-      try {
-        const response = await fetch(`/api/spotifySongSearch?query=${encodeURIComponent(query)}`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-        const data = await response.json();
-        setSpotifyResults(data); // Update state with fetched results
-      } catch (error) {
-        console.error('Failed to fetch:', error);
-      } finally {
-        setIsLoading(false); // Reset loading state
-      }
-    };
-
-    if (query) {
-      if (type !== 'spotify' && searchResults.length === 0) {
-        fetchSearchResults();
-      } else if (type === 'spotify' && spotifyResults.length === 0) {
-        fetchSpotifyResults();
-      }
-    }
-  }, [query, type, searchResults.length, spotifyResults.length]);
 
   // sends request to back end for song search results
   const fetchSearchResults = async () => {
@@ -73,6 +47,7 @@ const SearchResults = () => {
     router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${fileUrl}`);
   };
 
+
   return (
     <div className='infoCard'>
       {isLoading ? (
@@ -87,7 +62,7 @@ const SearchResults = () => {
             <div key={index} className={styles.searchResult}>
               <span>{file.name}</span>
               <span>
-                <a href={`https://drive.google.com/uc?export=download&id=${file.id}`} download>
+                <a href={`/api/downloadGuitarProFile?url=${metadata.gp_url}`} download>
                   <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
                   Download for Guitar Pro
                 </a>
