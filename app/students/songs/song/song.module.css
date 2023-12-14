@@ -1,0 +1,39 @@
+.songTitle {
+  font-size: 2rem;
+  color: rgb(126, 255, 126);
+  margin-bottom: 1rem;
+}
+.songArtist {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.songDataContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.songInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 33%;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  margin: 1rem;
+}
+.songInfoContainer * {
+  margin: 0.5rem;
+
+}
+.explicitTag {
+  font-size: 1.25rem;
+  color: rgb(255, 0, 0);
+}
+.header {
+  color: rgb(126, 255, 126);
+  font-size: 1.75rem;
+}
