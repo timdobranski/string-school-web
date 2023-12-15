@@ -9,8 +9,8 @@ import { supabase } from '../../../utils/supabase';
 
 export default function AlphatabPlayer() {
 
-    const searchParams = useSearchParams();
-    const fileUrl = searchParams.get('fileUrl');
+  const searchParams = useSearchParams();
+  const fileUrl = searchParams.get('fileUrl');
 
   return (
     <div className={styles.playerContainer}>

@@ -7,12 +7,18 @@ import Image from 'next/image';
 import dateFormatter from '../../../../utils/dateFormatter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowDown, faCirclePlay } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
+import addToRecentSongs from '../../../../utils/addToRecentSongs';
+import StudentContext, { useAuth } from '../../layout.js';
 
 export default function Song() {
   const searchParams = useSearchParams()
   const songId = searchParams.get('id')
-
   const [metadata, setMetadata] = useState(null);
+  const router = useRouter();
+  const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
+
+
 
   const downloadHandler = () => {
 
@@ -37,9 +43,12 @@ export default function Song() {
     fetchSongData();
   }, [songId]);
 
-  useEffect(() => {
-    console.log('metadata: ', metadata);
-  }, [metadata])
+  const openFile = (file) => {
+    // console.log('supabaseUserData: ', supabaseUserData);
+    addToRecentSongs(supabaseUserData.student_id, file);
+    const fileUrl = `${encodeURIComponent(file)}`;
+    router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${fileUrl}`);
+  };
 
   if (!metadata || metadata.length <= 0) { return null }
 
@@ -55,7 +64,7 @@ export default function Song() {
           </a>
         </span>
         <span className={styles.buttonSpan}>
-          <button onClick={() => openFile(file)} className={styles.buttonLink}>
+          <button onClick={() => openFile(metadata.gp_url)} className={styles.buttonLink}>
             <FontAwesomeIcon icon={faCirclePlay} className={styles.buttonIcon} />
       Open Here
           </button>
