@@ -13,7 +13,6 @@ import addToRecentSongs from '../../../../utils/addToRecentSongs';
 const SearchResults = () => {
   const router = useRouter();
   const [searchResults, setSearchResults] = useState([]);
-  const [spotifyResults, setSpotifyResults] = useState([]);
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
@@ -39,13 +38,16 @@ const SearchResults = () => {
     }
   };
 
+  useEffect(() => {
+    fetchSearchResults();
+  }, [])
+  useEffect(() => {
+    if (searchResults.length > 0) {
+      console.log('searchResults: ', searchResults);
+    }
+  }, [searchResults])
 
-  const openFile = (file) => {
-    // console.log('supabaseUserData: ', supabaseUserData);
-    addToRecentSongs(supabaseUserData.student_id, file);
-    const fileUrl = `${encodeURIComponent(file.webContentLink)}`;
-    router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${fileUrl}`);
-  };
+
 
 
   return (
@@ -53,26 +55,19 @@ const SearchResults = () => {
       {isLoading ? (
         <div className={styles.loading}>
           <FontAwesomeIcon icon={faSpinner} spin />
-          <h2>Searching Google Drive...</h2>
+          <h2>{`Searching for ${query}`}</h2>
         </div>
       ) : (
         <>
           <h1 className='sectionHeader'>{`Search Results for "${query}":`}</h1>
           {searchResults.length > 0 ? searchResults.map((file, index) => (
-            <div key={index} className={styles.searchResult}>
-              <span>{file.name}</span>
-              <span>
-                <a href={`/api/downloadGuitarProFile?url=${metadata.gp_url}`} download>
-                  <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
-                  Download for Guitar Pro
-                </a>
-              </span>
-              <span className={styles.openButtonSpan}>
-                <button onClick={() => openFile(file)}>
-                  <FontAwesomeIcon icon={faCirclePlay} className={styles.playIcon} />
-                  Open Here
-                </button>
-              </span>
+            <div
+              key={index}
+              className={styles.searchResult}
+              onClick={() => { router.push(`/students/songs/song?id=${file.id}`); addToRecentSongs(supabaseUserData.student_id, file) } }
+            >
+              <span>{file.title}</span>
+
             </div>
           )) : <p className={styles.noResultsMessage}>{`No ${type}s found :( `}</p>}
         </>
