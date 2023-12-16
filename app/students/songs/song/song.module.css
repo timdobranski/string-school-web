@@ -81,5 +81,7 @@
 }
 .buttonIcon {
   margin: 0rem 1rem 0rem 0rem;
+  height: 20px;
+  width: 20px;
   /* border: solid red 4px; */
 }
