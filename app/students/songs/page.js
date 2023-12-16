@@ -53,14 +53,6 @@ export default function Songs() {
     Router.push(`/students/alphatab-player?title=${file.name}&fileUrl=${file}`);
   };
 
-  // useEffect(() => {
-  //   const getMetadata = async () => {
-  //     const metadata = await alphatabReader('https://drive.google.com/uc?id=1cP0aPUlkVq0uhbdB6QQlSkKAr9TnhovO&export=download');
-  //     console.log('metadata: ', metadata);
-  //     return metadata;
-  //   }
-  //   getMetadata();
-  // }, [])
 
   useEffect(() => {
     if (supabaseUserData) {
@@ -70,8 +62,6 @@ export default function Songs() {
 
   return (
     <main className='infoCard'>
-      <input value={spotifyQuery} onChange={(e) => setSpotifyQuery(e.target.value)} type='text' placeholder='Search for songs' />
-      <button onClick={spotifySearchHandler}>Search</button>
       <div className={styles.searchContainer}>
         <h2 className='featureHeaders'>Search The Song Library</h2>
         <div className={styles.searchInputContainer}>

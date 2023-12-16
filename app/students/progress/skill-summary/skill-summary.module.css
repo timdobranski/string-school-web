@@ -30,6 +30,8 @@
   top: 50%;
   transform: translateY(-50%);
   right: .5rem;
+  height: 15px;
+  width: 15px;
 }
 .icon:hover {
   color: white;
