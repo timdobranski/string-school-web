@@ -20,8 +20,6 @@ const SearchResults = () => {
   const query = searchParams.get('query')
   const type = searchParams.get('type')
 
-
-
   // sends request to back end for song search results
   const fetchSearchResults = async () => {
     try {
@@ -41,20 +39,13 @@ const SearchResults = () => {
   useEffect(() => {
     fetchSearchResults();
   }, [])
-  useEffect(() => {
-    if (searchResults.length > 0) {
-      console.log('searchResults: ', searchResults);
-    }
-  }, [searchResults])
-
-
 
 
   return (
     <div className='infoCard'>
       {isLoading ? (
         <div className={styles.loading}>
-          <FontAwesomeIcon icon={faSpinner} spin />
+          <FontAwesomeIcon className={styles.icon} icon={faSpinner} spin />
           <h2>{`Searching for ${query}`}</h2>
         </div>
       ) : (
