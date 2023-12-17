@@ -10,6 +10,11 @@ import PublicNavbar from '../components/PublicNavbar/PublicNavbar';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json'
+import ru from 'javascript-time-ago/locale/ru.json'
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(ru)
 
 export default function Home() {
   const router= useRouter();

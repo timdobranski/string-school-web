@@ -82,7 +82,7 @@ export default function Songs() {
             placeholder={`Search for ${searchType}s`}
           />
         </div>
-        <button onClick={searchHandler}>Search</button>
+        <button className='featureButton' onClick={searchHandler}>Search</button>
       </div>
       <h2 className='featureHeaders'>Browse All Songs By Category</h2>
 
@@ -90,19 +90,8 @@ export default function Songs() {
       {recentSongs.length > 0 ? (
         recentSongs.map((file, index) => (
           <div key={index} className={styles.searchResult}>
-            <span>{file.songs.title}</span>
-            <span>
-              <a href={file.songs.gp_url} download>
-                <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
-                Download for Guitar Pro
-              </a>
-            </span>
-            <span className={styles.openButtonSpan}>
-              <button onClick={() => {console.log('file '); openFile(file.songs.gp_url)}}>
-                <FontAwesomeIcon icon={faCirclePlay} className={styles.playIcon} />
-                Open Here
-              </button>
-            </span>
+            <p className='linkedText'>{file.songs.title}</p>
+
           </div>
         ))
       ): null}

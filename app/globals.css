@@ -119,6 +119,8 @@ a {
   margin: 2rem;
   padding: 2rem;
   border:rgb(126, 255, 126) solid 6px;
+  border:rgb(72, 72, 72) solid 1px;
+  border-radius: 10px;
   min-height: 500px;
   min-width: 1000px;
   font-family: JennaSue;
@@ -136,6 +138,16 @@ a {
   font-size: 1.25rem;
   margin: .5rem;
   line-height: 1.2;
+}
+.linkedText {
+  font-size: 1.25rem;
+  /* margin: .5rem; */
+  line-height: 1;
+  color: rgb(255, 255, 255);
+}
+.linkedText:hover {
+  cursor: pointer;
+  color: rgb(126, 255, 126);
 }
 .featureHeaders {
   color: rgb(95, 180, 225);
@@ -164,6 +176,10 @@ a {
   padding: .5rem 1rem .5rem 1rem;
   border: none;
   border-radius: 4px;
+}
+.featureButton:hover {
+  cursor: pointer;
+
 }
 .alert {
   position: relative;

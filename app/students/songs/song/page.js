@@ -1,5 +1,9 @@
 'use client'
 
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json'
+TimeAgo.addDefaultLocale(en)
+import ReactTimeAgo from 'react-time-ago'
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import styles from './song.module.css';
@@ -10,6 +14,7 @@ import { faCircleArrowDown, faCirclePlay } from '@fortawesome/free-solid-svg-ico
 import { useRouter } from 'next/navigation';
 import addToRecentSongs from '../../../../utils/addToRecentSongs';
 import StudentContext, { useAuth } from '../../layout.js';
+import AudioPlayer from '../../../../components/AudioPlayer/AudioPlayer';
 
 export default function Song() {
   const searchParams = useSearchParams()
@@ -18,11 +23,6 @@ export default function Song() {
   const router = useRouter();
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
-
-
-  const downloadHandler = () => {
-
-  }
 
   // fetch metadata
   useEffect(() => {
@@ -54,21 +54,28 @@ export default function Song() {
 
   return (
     <div className='infoCard'>
-      <h1 className={styles.songTitle}>{metadata.title}</h1>
-      <h3 className={styles.songArtist}>{metadata.artist}</h3>
-      <div className={styles.guitarProContainer}>
-        <span className={styles.buttonSpan}>
-          <a href={`/api/downloadGuitarProFile?url=${metadata.gp_url}`} download className={styles.buttonLink}>
-            <FontAwesomeIcon icon={faCircleArrowDown} className={styles.buttonIcon} />
+      <div className={styles.songHeader}>
+        <Image className={styles.artistImage} src={metadata.artistData.images[0].url} width={250} height={250} alt='album cover' />
+        <h1 className={styles.songTitle}>{metadata.title}</h1>
+        <h3 className={styles.songArtist}>{metadata.artist}</h3>
+        <AudioPlayer audioId={metadata.id} />
+        {metadata.updated_at ? <p className='text'>
+          Pages last updated <ReactTimeAgo date={metadata.updated_at} locale="en-US"/>
+        </p> : null}
+        <div className={styles.guitarProContainer}>
+          <span className={styles.buttonSpan}>
+            <a href={`/api/downloadGuitarProFile?url=${metadata.gp_url}`} download className={styles.buttonLink}>
+              <FontAwesomeIcon icon={faCircleArrowDown} className={styles.buttonIcon} />
       Download for Guitar Pro
-          </a>
-        </span>
-        <span className={styles.buttonSpan}>
-          <button onClick={() => openFile(metadata.gp_url)} className={styles.buttonLink}>
-            <FontAwesomeIcon icon={faCirclePlay} className={styles.buttonIcon} />
-      Open Here
-          </button>
-        </span>
+            </a>
+          </span>
+          <span className={styles.buttonSpan}>
+            <button onClick={() => openFile(metadata.gp_url)} className={styles.buttonLink}>
+              <FontAwesomeIcon icon={faCirclePlay} className={styles.buttonIcon} />
+      Open or Print Pages Here
+            </button>
+          </span>
+        </div>
       </div>
       <div className={styles.songDataContainer}>
         <div className={styles.songInfoContainer}>
