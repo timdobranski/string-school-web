@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowDown, faCirclePlay, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ const SearchResults = () => {
   const router = useRouter();
   const [searchResults, setSearchResults] = useState([]);
   const searchParams = useSearchParams();
+  const [previousParams, setPreviousParams] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
 
@@ -30,6 +31,7 @@ const SearchResults = () => {
       }
       const data = await response.json();
       setSearchResults(data);
+      localStorage.setItem('searchResults', JSON.stringify(data)); // Store the results in localStorage
       setIsLoading(false);
     } catch (error) {
       console.error('Failed to fetch:', error);
@@ -37,8 +39,23 @@ const SearchResults = () => {
   };
 
   useEffect(() => {
-    fetchSearchResults();
-  }, [])
+    console.log('inside useEffect')
+    // Convert searchParams to a string for storage and comparison
+    const searchParamsString = searchParams.toString();
+    const storedPreviousParams = localStorage.getItem('previousSearchParams');
+    const storedSearchResults = localStorage.getItem('searchResults');
+
+    if (searchParamsString !== storedPreviousParams) {
+      console.log('SONG SEARCH RAN FROM USE EFFECT');
+      localStorage.setItem('previousSearchParams', searchParamsString);
+      fetchSearchResults();
+    } else if (storedSearchResults) {
+      console.log('SEARCH RESULTS LOADED FROM LOCAL STORAGE')
+      // Load the results from localStorage if the searchParams haven't changed
+      setSearchResults(JSON.parse(storedSearchResults));
+      setIsLoading(false);
+    }
+  }, []);
 
 
   return (

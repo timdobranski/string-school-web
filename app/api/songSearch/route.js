@@ -9,7 +9,9 @@ export async function GET(request) {
     let { data, error } = await supabase
       .from('songs')
       .select('*')
-      .ilike(`${queryColumn}`, `%${searchQuery}%`); // Use ILIKE for case-insensitive partial match
+      .textSearch(`${queryColumn}`, `${searchQuery}`, {
+        type: 'websearch'
+      });
 
     if (error) {
       throw error;

@@ -73,6 +73,8 @@ a {
 #app {
   position: relative;
   background-image: url('/images/background.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
   /* border: solid red 4px; */
   display: flex;
   flex-direction: column;

@@ -58,7 +58,7 @@ export default function Song() {
         <Image className={styles.artistImage} src={metadata.artistData.images[0].url} width={250} height={250} alt='album cover' />
         <h1 className={styles.songTitle}>{metadata.title}</h1>
         <h3 className={styles.songArtist}>{metadata.artist}</h3>
-        <AudioPlayer audioId={metadata.id} />
+        {metadata.audio_url ? <AudioPlayer audioId={metadata.id}/> : null}
         {metadata.updated_at ? <p className='text'>
           Pages last updated <ReactTimeAgo date={metadata.updated_at} locale="en-US"/>
         </p> : null}
