@@ -72,7 +72,7 @@ export default function Song() {
           <span className={styles.buttonSpan}>
             <button onClick={() => openFile(metadata.gp_url)} className={styles.buttonLink}>
               <FontAwesomeIcon icon={faCirclePlay} className={styles.buttonIcon} />
-      Open or Print Pages Here
+      Open or Print Pages
             </button>
           </span>
         </div>

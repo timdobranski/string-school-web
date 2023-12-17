@@ -1,7 +1,7 @@
 .songHeader {
   /* border: solid red 4px; */
   width: 100%;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .artistImage {
@@ -60,11 +60,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 1rem;
-  margin: 1rem;
-
+  padding: 0;
+  margin-top: 1rem;
 }
-.buttonSpan, .buttonSpan {
+.buttonSpan {
   position: relative;
   /* display: inline-block; */
   background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
@@ -78,8 +77,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  border-radius: 4px;
 }
-.buttonSpan:hover, .buttonSpan:hover {
+.buttonSpan:hover{
   cursor: pointer;
   transform: scale(1.1);
 }
