@@ -7,32 +7,40 @@
   background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
   overflow: display;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
-.row1 {
+
+.col1 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width: 25%;
+  /* border: solid yellow 4px; */
 
 }
-.row2 {
+.col2 {
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   /* border: solid green 2px; */
-  width: 100%;
+  width: 50%;
 }
-
+.col3 {
+  width: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 .playPauseIcon {
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   /* Style for play/pause button */
 }
 
@@ -43,51 +51,56 @@
 }
 
 .progressBarContainer {
-  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .time {
   margin: .5rem;
 }
 .volumeIcon {
   cursor: pointer;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   /* Style your volume icon */
 }
 .volumeControl {
   position: relative;
-  display: inline-block; /* Adjust as necessary */
+  display: inline-block;
 }
 .volumeControl:hover .volumeSlider {
-  opacity: 1; /* This should show the slider when .volumeControl is hovered */
+  opacity: 1;
 }
 .volumeSlider {
-width: 100px; /* Adjust the width as needed */
-height: 4px; /* Adjust the height as needed */
-position: absolute;
-left: 100%; /* Adjust position based on your layout */
-bottom: 100%; /* Place it above the icon */
-transform-origin: bottom;
-transform: rotate(-90deg);
-opacity: 0;
-transition: opacity 0.2s ease;
-color:rgb(146, 255, 146);
-background-color: rgb(146, 255, 146);
-/* Style your slider */
+  width: 100px; /* Adjust the width as needed */
+  height: 4px; /* Adjust the height as needed */
+  position: absolute;
+  left: -70%; /* Start with 50% for centering */
+  bottom: 350%; /* Adjust this value to move closer to the icon, match the icon's height */
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: bottom;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  /* ...other styles... */
 }
 .volumeSlider::-webkit-slider-runnable-track {
   background: white;
+  height: 10px;
+  z-index: 1;
 }
 /* Style for the thumb (the draggable circle) for WebKit browsers */
 .volumeSlider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Required to make custom styles apply */
   appearance: none;
-  width: 20px; /* Width of the thumb */
+  width: 8px; /* Width of the thumb */
   height: 20px; /* Height of the thumb */
   background: #92FF92; /* Your desired thumb color */
   color:rgb(146, 255, 146);
   cursor: pointer;
-  border-radius: 50%; /* Makes it circular */
+  border-radius: 50%;
+  transform: translateY(-20%);
 }
 .speedControlContainer {
   display: inline-block;

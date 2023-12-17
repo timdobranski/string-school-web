@@ -70,8 +70,10 @@ const AudioPlayer = ({ audioId }) => {
   return (
     <div className={styles.audioPlayer}>
       <audio ref={audioRef} src={audioUrl} preload="metadata" className={styles.audioElement} />
-      <div className={styles.row1}>
+      <div className={styles.col1}>
         <FontAwesomeIcon icon={isPlaying ? faCirclePause : faCirclePlay} onClick={togglePlayPause} className={styles.playPauseIcon} />
+      </div>
+      <div className={styles.col2}>
         <div className={styles.progressBarContainer}>
           <span className={styles.time}> {new Date(currentTime * 1000).toISOString().substr(14, 5)}</span>
           <input type="range" min="0" max="100" value={progress} onChange={handleSeek} className={styles.progressBar} />
@@ -79,7 +81,16 @@ const AudioPlayer = ({ audioId }) => {
             {new Date(duration * 1000).toISOString().substr(14, 5)}
           </span>
         </div>
-
+        <div className={styles.speedControlContainer}>
+          <label className={styles.speedLabel}>Speed: </label>
+          <select value={speed} onChange={changeSpeed} className={styles.speedControl}>
+            {[0.5, 0.6, 0.7, 0.8, 0.9, 1.0].map(speedOption => (
+              <option key={speedOption} value={speedOption}>{speedOption * 100}%</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className={styles.col3}>
         <div className={styles.volumeControl}>
           <FontAwesomeIcon icon={faVolumeOff} className={styles.volumeIcon} />
           <input
@@ -92,22 +103,12 @@ const AudioPlayer = ({ audioId }) => {
             className={styles.volumeSlider}
             orient="vertical"
           />
+
+          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} className={styles.volumeSlider} />
         </div>
         <a href={audioUrl} download className={styles.downloadButton}>
           <FontAwesomeIcon icon={faCircleArrowDown} className={styles.downloadIcon} />
         </a>
-        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} className={styles.volumeSlider} />
-      </div>
-
-      <div className={styles.row2}>
-        <div className={styles.speedControlContainer}>
-          <label className={styles.speedLabel}>Speed: </label>
-          <select value={speed} onChange={changeSpeed} className={styles.speedControl}>
-            {[0.5, 0.6, 0.7, 0.8, 0.9, 1.0].map(speedOption => (
-              <option key={speedOption} value={speedOption}>{speedOption * 100}%</option>
-            ))}
-          </select>
-        </div>
       </div>
     </div>
   );

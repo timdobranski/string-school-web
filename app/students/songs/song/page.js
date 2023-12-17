@@ -80,6 +80,7 @@ export default function Song() {
       <div className={styles.songDataContainer}>
         <div className={styles.songInfoContainer}>
           <h3 className={styles.header}>Song Info</h3>
+          <p className='text'>Album</p>
           <Image src={metadata.image_url} width={200} height={200} alt='album cover' />
           <h3>{metadata.album}</h3>
           <h3>{metadata.release_date.length === 4 ? metadata.release_date : dateFormatter(metadata.release_date, {includeYear: true})}</h3>
