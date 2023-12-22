@@ -39,11 +39,11 @@
   --purpleBooked: rgba(166, 77, 121, 1);
   --purpleOpen: rgba(213, 166, 189, 1);
 }
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
 
   }
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -161,6 +161,15 @@ a {
   font-weight: 800;
   margin-bottom: 1rem;;
 }
+.subheaders {
+  color: rgb(126, 255, 126);
+  margin-top: 1rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;;
+
+}
 .featureComments {
   font-style:italic;
   font-family: SanFrancisco;
@@ -198,4 +207,14 @@ a {
 }
 .alert:hover {
   cursor: pointer;
+}
+.section {
+  position: relative;
+  background: rgba(255, 255, 255, .2);
+  border: solid 1px rgb(93, 93, 93);
+  font-size: 1.35rem;
+  color: white;
+  padding: 1rem;
+  line-height: 1.1;
+  margin: 1rem 0rem 1rem 0rem;
 }

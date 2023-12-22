@@ -63,29 +63,3 @@ async function searchSpotify(query) {
     return [];
   }
 }
-
-// export async function GET(req) {
-//   // Extract the query parameter from the request URL
-//   const url = new URL(req.url, `http://${req.headers.host}`);
-//   const query = url.searchParams.get('query');
-
-//   if (!query) {
-//     return new Response(JSON.stringify({ error: 'No query provided' }), {
-//       status: 400,
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     });
-//   }
-
-//   // Use the searchSpotify function to perform the search
-//   const results = await searchSpotify(query);
-//   // console.log('results: ', results);
-//   // Return the search results
-//   return new Response(JSON.stringify({ data: results }), {
-//     status: 200,
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
-// }
