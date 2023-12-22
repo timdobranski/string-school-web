@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Home.module.css';
-import { supabase } from '../../../utils/supabase';
+// import { supabase } from '../../../utils/supabase';
 import StudentContext, { useAuth } from '../layout.js';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -22,36 +22,53 @@ export default function StudentHome() {
   const router = useRouter();
 
   useEffect(() => {
-    const getAnnouncements = async () => {
-      const { data, error } = await supabase
-        .from('announcements')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (error) {
-        console.log('error: ', error);
-      } else {
+    const loadAnnouncements = async () => {
+      try {
+        const response = await fetch('/api/getAnnouncements');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
         setAnnouncements(data);
+        console.log('announcements: ', data);
+      } catch (error) {
+        console.error('Error fetching announcements:', error);
       }
     };
 
-    getAnnouncements();
+    loadAnnouncements();
   }, []);
 
   useEffect(() => {
-    if (student && student.id && supabaseUserData) {
+    const loadStudentData = async () => {
+      if (student && student.id && supabaseUserData) {
+        try {
+          const response = await fetch(`/api/getStudentData?student=${student.id}`);
 
-      const loadStudentData = async () => {
-        const allStudentData = await getStudentData(student.id);
-        allStudentData.info = allStudentData.lessons.students[0];
-        delete allStudentData.lessons.students;
-        console.log('student data: ', allStudentData);
-        setStudentData(allStudentData);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const allStudentData = await response.json();
+          console.log('all student data: ', allStudentData);
+
+          if (allStudentData.lessons && allStudentData.lessons.students) {
+            allStudentData.info = allStudentData.lessons.students[0];
+            delete allStudentData.lessons.students;
+          }
+
+          console.log('student data: ', allStudentData);
+          setStudentData(allStudentData);
+        } catch (error) {
+          console.error('Error fetching student data:', error);
+        }
       }
-      setShowAnnouncement(supabaseUserData.announcement_dismissed);
-      loadStudentData();
+    };
 
-    }
-  }, [student])
+    setShowAnnouncement(supabaseUserData?.announcement_dismissed);
+    loadStudentData();
+  }, [student, supabaseUserData]);
+
 
   if (googleUserData && student && announcements && studentData.lessonLogs) {
     const name = student.first_name;
