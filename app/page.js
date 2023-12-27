@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import InfoCard from '../components/InfoCard/InfoCard';
+import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabase';
 import { useRouter } from 'next/navigation';
@@ -18,6 +19,7 @@ TimeAgo.addLocale(ru)
 
 export default function Home() {
   const router= useRouter();
+  // Modal.setAppElement('#app');
 
 
   useEffect(() => {

@@ -37,7 +37,7 @@ export default function StudentScheduling() {
         </Link>
         <Link href='/students/scheduling/switch-spots'>
           <h2 className='featureHeaders'>Switch Spots</h2>
-          <p className='featureComments'>Change To A Different Recurring Weekly Spot</p>
+          <p className='featureComments'>Move To A Different Recurring Weekly Spot</p>
         </Link>
         <Link href='/students/scheduling/add-spot'>
           <h2 className='featureHeaders'>Add An Additional Spot</h2>

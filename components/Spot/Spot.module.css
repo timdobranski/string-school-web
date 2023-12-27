@@ -3,10 +3,7 @@
   font-size: 1.25rem;
   padding: .5rem;
   font-family: Economica;
-}
-
-.statusColumn {
-  width: 80%;
+  width: 100%;
 }
 .statusColumn:hover {
   cursor: pointer;

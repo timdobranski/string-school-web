@@ -1,7 +1,8 @@
 import './globals.css';
 import Header from '../components/Header/Header';
 import Image from 'next/image';
-import background from '../public/images/background.jpeg'
+import background from '../public/images/background.jpeg';
+// import Modal from 'react-modal';
 
 
 
@@ -11,7 +12,6 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en">
       <body id='app'>

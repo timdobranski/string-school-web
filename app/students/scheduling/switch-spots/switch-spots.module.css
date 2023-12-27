@@ -1,0 +1,30 @@
+.makeupList {
+  font-size: 1.5rem;
+  margin: 3rem;
+}
+.makeupText {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+.makeupButton {
+  text-align: center;
+  background-color: white;
+  border: solid black 1px;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  margin: 1rem;
+  height: 50px;
+  width: 250px;
+}
+.makeupButtonsContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.makeupButton:hover {
+  cursor: pointer;
+  border-radius: 4px;
+
+}

@@ -15,6 +15,7 @@ const getStudentData = async (studentId) => {
     // Prepare all the promises for concurrent execution
     const lessonsPromise = getAllUpcomingLessons(8, false, studentId);
     const skillsPromise = getSkills(studentId);
+    const spotsPromise = supabase.from('schedule').select('*').eq('student', studentId);
     const contactsPromise = supabase.from('users').select('*').eq('student_id', studentId);
     const lessonLogsPromise = supabase.from('lessonLogs').select('*').eq('student', studentId);
     const paymentsPromise = supabase.from('payments').select('*').eq('student', studentId);
@@ -30,6 +31,7 @@ const getStudentData = async (studentId) => {
 
     // Execute all promises concurrently
     const [
+      spotsResult,
       lessonsResult,
       skillsResult,
       contactsResult,
@@ -39,6 +41,7 @@ const getStudentData = async (studentId) => {
       setlistSongsResult,
       recentSongsResult
     ] = await Promise.all([
+      spotsPromise,
       lessonsPromise,
       skillsPromise,
       contactsPromise,
@@ -50,6 +53,7 @@ const getStudentData = async (studentId) => {
     ]);
 
     // Check for errors in the results
+    if (spotsResult.error) throw spotsResult.error;
     if (lessonsResult.error) throw lessonsResult.error;
     if (skillsResult.error) throw skillsResult.error;
     if (contactsResult.error) throw contactsResult.error;
@@ -60,6 +64,7 @@ const getStudentData = async (studentId) => {
     if (recentSongsResult.error) throw recentSongsResult.error;
 
     // Extract data from results
+    const spots = spotsResult.data;
     const lessons = lessonsResult;
     const skills = skillsResult;
     const contacts = contactsResult.data;
@@ -78,6 +83,7 @@ const getStudentData = async (studentId) => {
     recentSongs.forEach(item => delete item.songs);
 
     const result = {
+      spots,
       lessons,
       skills,
       contacts,

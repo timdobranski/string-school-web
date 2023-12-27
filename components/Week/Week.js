@@ -13,9 +13,6 @@ export default function Week({ weekSchedule, formattedDates, index, activeSpotId
     Sunday: ['10:00am', '10:30am', '11:00am', '11:30am']
   }
 
-  console.log('weekSchedule data: ', weekSchedule);
-
-
   return (
     // table render
     <div className={styles.scheduleContainer} key={index}>
@@ -32,18 +29,13 @@ export default function Week({ weekSchedule, formattedDates, index, activeSpotId
               <tbody>
                 {times.map((time) => {
                   const spot = weekSchedule.find(entry => entry.day === day && entry.time === time);
-                  // console.log('spot data: ', spot)
-                  // if spot.type === break, AND privacy === true, don't render
-                  if (spot && spot.day === 'Monday' && spot.time === "6:30pm") {
-                    console.log('spot: ', spot)
-                    console.log('privacy: ', privacy)
 
-                  }
+                  // if spot.type === break, AND privacy === true, don't render
                   if (spot && spot.type === 'break' && privacy) { return null };
 
                   // spot render
                   return (
-                    <tr key={`${day}-${time}`}>
+                    <tr key={`${day}-${time}`} className={styles.spotRow}>
                       <td className={styles.timeColumn}>{time.slice(0, -2)}</td>
                       <Spot
                         handler={handler}
