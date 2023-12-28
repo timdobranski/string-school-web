@@ -15,6 +15,7 @@ export default function Songs() {
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSongs, setRecentSongs] = useState([]);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
+  const Link = require('next/link');
   const Router = useRouter();
   const [spotifyQuery, setSpotifyQuery] = useState('');
 
@@ -84,7 +85,9 @@ export default function Songs() {
         </div>
         <button className='featureButton' onClick={searchHandler}>Search</button>
       </div>
-      <h2 className='featureHeaders'>Browse All Songs By Category</h2>
+      <Link href='/students/songs/browse'>
+        <h2 className='featureHeaders'>Browse All Songs By Category</h2>
+      </Link>
 
       <h2 className='featureHeaders'>Recent Songs</h2>
       {recentSongs.length > 0 ? (
