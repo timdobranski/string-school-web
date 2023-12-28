@@ -2,4 +2,33 @@
   font-size: 1.25rem;
   margin: 1rem;
   padding: .5rem;
+
+}
+.folderContentsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  width: 100%;
+}
+.folderLink {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.25rem;
+  margin: .75rem;
+
+}
+.label {
+  position: absolute;
+  left: 0;
+  color: rgb(124, 255, 124);
+  margin-left: 5rem;
+
+}
+.folderName {
+  width: 100%;
+
 }

@@ -4,11 +4,17 @@ import { useState, useEffect } from 'react';
 import styles from './SongBrowser.module.css';
 
 export default function SongBrowser({ folderOptions }) {
-  const [filepath, setFilepath] = useState('Musical Artists');
+  const [filepath, setFilepath] = useState('Choose Category');
   const [folderContents, setFolderContents] = useState([]);
   const [folderContentsRender, setFolderContentsRender] = useState((<>Loading...</>));
 
   useEffect(() => {
+    setFilepath('Choose Category');
+  }, [])
+  // fetch folder contents of filepath
+  useEffect(() => {
+    console.log('filepath: ', filepath );
+    if (filepath === 'Choose Category') { return; }
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/listStorageFolder?folderPath=${encodeURIComponent('guitar-pro/' + filepath)}`);
@@ -48,24 +54,52 @@ export default function SongBrowser({ folderOptions }) {
     fetchData();
   }, [filepath]);
 
+  // render jsx for folder contents
   useEffect(() => {
     const render = (
       folderContents.map((file, i) => {
         console.log('file or folder: ', file)
-        // if there is an id, return a link to the song page
+        // if there is an id, it's a gp file return a link to the song page
         if (file.id) {
           console.log('file: ', file.song_table_data);
+          // this is the return for gp_files
           return (
-            <a key={i}className={styles.songLink} href={`/students/songs/song?id=${file.song_table_data.id}`}>{file.song_table_data.title}</a>
+            <a key={i}className={styles.folderLink} href={`/students/songs/song?id=${file.song_table_data.id}`}>
+              <p className={styles.label}>Song</p>
+              <p className={styles.folderName}>{file.song_table_data.title}</p>
+            </a>
           )
         }
-        // if no id value, it's a folder. Add click handler to change filepath
+        // if no id value, it's a folder. Give it a label for its type (artist, holiday, game, etc)
+        // and add click handler to change filepath
+        const folderType = filepath.split('/').pop();
+        let label;
+        switch (folderType) {
+        case 'Musical Artists':
+          label = 'Artist';
+          break;
+        case 'Movies, TV, & Games':
+          label = 'Movie, TV, or Game';
+          break;
+        case 'Holidays':
+          label = 'Holidays';
+          break;
+        case 'Kids Songs':
+          label = ''; // or you can use 'Kids Songs' if you want to label it as such
+          break;
+        default:
+          label = folderType; // or handle unknown folder types differently if needed
+        }
+        // this is the return for folders
         return (
-          <h3
+          <div
+            className = {styles.folderLink}
             key ={i}
             onClick={() => {setFilepath(prev => prev + '/' + file.name)}}
-          >{file.name}</h3>
-          // </div>
+          >
+            <p className={styles.label}>{label}</p>
+            <p className={styles.folderName}>{file.name}</p>
+          </div>
         )}
       )
     );
@@ -95,7 +129,9 @@ export default function SongBrowser({ folderOptions }) {
       <div className='infoCard'>
         <h1>Browse Songs</h1>
         {select}
-        {folderContentsRender}
+        <div className={styles.folderContentsContainer}>
+          {filepath === 'Choose Category' ? null : folderContentsRender}
+        </div>
       </div>
     )
   }
