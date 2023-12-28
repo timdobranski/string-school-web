@@ -13,10 +13,11 @@ import Modal from 'react-modal';
 export default function SwitchSpots() {
   const [step, setStep] = useState(1);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [makeupWarnings, setMakeupWarnings] = useState([]);
+  const [makeups, setMakeups] = useState([]);
+  const [futureStudentStartDate, setFutureStudentStartDate] = useState('');
+  const [modalWarning, setModalWarning] = useState([]);
   const { googleUserData, supabaseUserData, student, session, signOut } = useAuth();
   const [newSpot, setNewSpot] = useState({ date: '', time: '', dbDate: '', day: '', student: '', createdBy: '' });
-
   const modalStyles = {
     overlay: {
       backgroundColor: 'rgba(0,0,0,0.6)'
@@ -39,41 +40,97 @@ export default function SwitchSpots() {
       transform: 'translateY(-50%)',
     }
   }
-  Modal.setAppElement('#app');
+  // Modal.setAppElement('#app');
 
-
+  // handler for when a user chooses a new spot on the schedule
   const handleNewSpot = async (spot) => {
-    // If the spot is currently booked
-    if (spot.student) {
-      alert('This spot is already booked. Please choose another.');
-      return;
-    }
-    // Check for future makeups and students
+    // If the spot is currently booked, an alert should pop up by default via the spot component
+
+    // Check for future makeups and students in the chosen spot
     try {
-      const response = await fetch(`/api/checkFutureSpotAvailability?date=${spot.dbDate}&day=${spot.day}&time=${spot.time}&student=${student.id}`);
-      const makeupsAndBookings = await response.json();
-      const makeups = makeupsAndBookings.makeups;
-      console.log('makeups: ', makeups);
-      // If there are makeups
-      if (makeups.length > 0) {
-        const makeupsList = makeups.map(makeup => {
+      const response = await fetch(`/api/checkFutureSpotAvailability?date=${spot.dbDate}&spot=${spot.id}&time=${spot.time}`);
+      const { makeups, bookings } = await response.json();
+      // Create a separate array of makeups that don't belong to the current student
+      const nonStudentMakeups = makeups.filter(makeup => makeup.student !== student.id);
+      const studentMakeups = makeups.filter(makeup => makeup.student === student.id);
+
+      // if the spot is booked starting in a future week, set the modal content as a warning
+      if (bookings & bookings.length > 0) {
+        const startDate = dateFormatter(bookings[0].new_student_start_date);
+        setModalWarning(
+          <>
+            <h2 className={styles.makeupHeader}>{`This spot is open for this week, but is booked by another student starting ${startDate}.`}</h2>
+
+            <h2>{`You can schedule this spot as a makeup for this week only, but cannot schedule it for recurring future lessons. `}</h2>
+            <div className={styles.makeupButtonsContainer}>
+              <button className={styles.makeupButton} onClick={() => setModalIsOpen(false)}>Back</button>
+
+            </div>
+          </>
+        )
+        setModalIsOpen(true);
+      }
+      // if there are future makeups in the spot, set the modal content as a warning
+      else if (makeups.length > 0) {
+        setMakeups(makeups);
+
+        const nonStudentMakeupsList = nonStudentMakeups.map(makeup => {
           return (
             <div key={makeup.id} className={styles.makeup}>
               <p className={styles.makeupText}>{`${dateFormatter(makeup.date)}`}</p>
             </div>
           );
         });
-
-        // If there are future students, set the modal content as a warning
-        setMakeupWarnings(
-          <>
-            <h2 className={styles.makeupHeader}>{`This spot is available for recurring lessons, but the following
-            ${makeups.length > 1 ? 'dates have' : 'date has'} already been booked:`}</h2>
-            <div className={styles.makeupList}>
-              {makeupsList}
+        const studentMakeupsList = studentMakeups.map(makeup => {
+          return (
+            <div key={makeup.id} className={styles.makeup}>
+              <p className={styles.makeupText}>{`${dateFormatter(makeup.date)}`}</p>
             </div>
-            <h2>{`If you continue, ${makeups.length} cancellation${makeups.length > 1 ? 's' : ''} and makeup
-            credit${makeups.length > 1 ? 's' : ''} will be added to your account for these days.`}</h2>
+          );
+        });
+        const hasStudentMakeups = studentMakeupsList.length > 0;
+        const hasNonStudentMakeups = nonStudentMakeupsList.length > 0;
+
+        let message = null;
+
+        if (hasStudentMakeups && hasNonStudentMakeups) {
+          // Case when both lists contain makeups
+          message = (
+            <>
+              <p>You have already booked makeups on the following days:</p>
+              <div className={styles.makeupList}>{studentMakeupsList}</div>
+              <p>Switching to this spot will cancel these makeups and return the makeup credits to your account.</p>
+              <p>Additionally, the following makeups have been booked by other students:</p>
+              <div className={styles.makeupList}>{nonStudentMakeupsList}</div>
+              <p>{`If you continue, these dates will be cancelled and ${nonStudentMakeupsList.length} makeup credits will be adjusted accordingly.`}</p>
+            </>
+          );
+        } else if (hasStudentMakeups) {
+          const plural = studentMakeupsList.length > 1;
+          // Case when only studentMakeupsList contains makeups
+          message = (
+            <>
+              <h2 className={styles.makeupHeader}>Notice for Recurring Lessons:</h2>
+              <p>You have already booked {plural ? 'makeups' : 'a makeup'} for this spot on the following {plural ? 'days' : 'day'}:</p>
+              <div className={styles.makeupList}>{studentMakeupsList}</div>
+              <p>Switching to this spot will cancel {plural ? 'these makeups' : 'this makeup'} and return the makeup {plural ? 'credits' : 'credit'} to your account.</p>
+            </>
+          );
+        } else if (hasNonStudentMakeups) {
+          // Case when only nonStudentMakeupsList contains makeups
+          message = (
+            <>
+              <h2 className={styles.makeupHeader}>This spot is available for recurring lessons, but the following
+                {nonStudentMakeups.length > 1 ? ' dates have' : ' date has'} already been booked by other students:</h2>
+              <div className={styles.makeupList}>{nonStudentMakeupsList}</div>
+              <h2>If you continue, {nonStudentMakeups.length} cancellation{makeups.length > 1 ? 's' : ''} and makeup
+            credit{makeups.length > 1 ? 's' : ''} will be added to your account for {makeups.length > 1 ? 'these days' : 'this day'}.</h2>
+            </>
+          );
+        }
+        setModalWarning(
+          <>
+            {message}
             <div className={styles.makeupButtonsContainer}>
               <button className={styles.makeupButton} onClick={() => setModalIsOpen(false)}>Go Back</button>
               <button className={styles.makeupButton} onClick={() => {
@@ -93,7 +150,9 @@ export default function SwitchSpots() {
           </>
         );
         setModalIsOpen(true)
+
       } else {
+        // no makeups, so just set the new spot and move to next step
         setNewSpot(prevState => ({
           ...prevState,
           date: spot.date,
@@ -106,20 +165,10 @@ export default function SwitchSpots() {
         }));
         setStep(previous => previous + 1);
       }
-
-
-
     } catch (error) {
       console.error('Error checking future spot availability:', error);
     }
   }
-  // choose open spot
-  // if open spot contains makeups, inform users that cancellations will be added w/makeup credits: confirm or go back
-  // choose start date for new spot from list of upcoming spot's dates;
-  // confirm or go back
-  // confirmation page
-
-  // add spot
 
   return (
     <div className='infoCard'>
@@ -132,14 +181,14 @@ export default function SwitchSpots() {
             shouldCloseOnOverlayClick={true}
             style={modalStyles}
           >
-            {makeupWarnings}
+            {modalWarning}
           </Modal>
           <h1>{`Choose the new spot you'd like to move to on the week you'd like to switch below:`}</h1>
           <Schedule setStep={setStep} handler={handleNewSpot} privacy={true} />
         </>
         : null
       }
-      {step === 2 ? <ConfirmNewSpot newSpot={newSpot} const oldSpot={student.spot} setStep={setStep} />: null}
+      {step === 2 ? <ConfirmNewSpot newSpot={newSpot} oldSpot={student.spot} makeups={makeups} futureStudentStartDate={futureStudentStartDate} setStep={setStep} />: null}
     </div>
 
   )
