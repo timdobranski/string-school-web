@@ -39,22 +39,8 @@ const SearchResults = () => {
   };
 
   useEffect(() => {
-    console.log('inside useEffect')
-    // Convert searchParams to a string for storage and comparison
-    const searchParamsString = searchParams.toString();
-    const storedPreviousParams = localStorage.getItem('previousSearchParams');
-    const storedSearchResults = localStorage.getItem('searchResults');
-
-    if (searchParamsString !== storedPreviousParams) {
-      console.log('SONG SEARCH RAN FROM USE EFFECT');
-      localStorage.setItem('previousSearchParams', searchParamsString);
-      fetchSearchResults();
-    } else if (storedSearchResults) {
-      console.log('SEARCH RESULTS LOADED FROM LOCAL STORAGE')
-      // Load the results from localStorage if the searchParams haven't changed
-      setSearchResults(JSON.parse(storedSearchResults));
-      setIsLoading(false);
-    }
+    fetchSearchResults();
+    // }
   }, []);
 
 

@@ -39,14 +39,18 @@ export default function StudentScheduling() {
           <h2 className='featureHeaders'>Switch Spots</h2>
           <p className='featureComments'>Move To A Different Recurring Weekly Spot</p>
         </Link>
-        <Link href='/students/scheduling/add-spot'>
+        {/* <Link href='/students/scheduling/add-spot'>
           <h2 className='featureHeaders'>Add An Additional Spot</h2>
           <p className='featureComments'>Book An Additional Recurring Weekly Spot</p>
-        </Link>
+        </Link> */}
         <Link href='/students/scheduling/schedule-extra'>
           <h2 className='featureHeaders'>Schedule An Extra Lesson</h2>
           <p className='featureComments'>Book A One-Time Extra Lesson</p>
         </Link>
+        {/* <Link href='/students/scheduling/end-lessons'>
+          <h2 className='featureHeaders'>End Lessons</h2>
+          <p className='featureComments'></p>
+        </Link> */}
       </div>
     )
   } else {

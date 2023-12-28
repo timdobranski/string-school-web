@@ -6,7 +6,7 @@ import querystring from 'querystring';
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get('song');
-
+  console.log('id:', id);
   const { data, error } = await supabase
     .from('songs')
     .select(`*`)
@@ -14,7 +14,7 @@ export async function GET(request) {
   if (error) {
     console.log('error: ', error);
   }
-  console.log('data.spotify_id: ', data[0]);
+  console.log('data from song search: ', data);
   const results = await searchSpotify(data[0].spotify_artist_id);
   // console.log('results: ', results);
   data[0].artistData = results;
