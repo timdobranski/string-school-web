@@ -4,7 +4,9 @@ export default function Resources() {
   return (
     <div className='infoCard'>
       <h1 className='sectionHeaders'>Resources</h1>
-      <h2 className='featureHeaders'>Lesson Textbook</h2>
+      <a href='https://drive.google.com/file/d/1FGTRea0Hl99xproEFarB6yReLMpr62E0/view?usp=drive_link'>
+        <h2 className='featureHeaders'>Lesson Textbook</h2>
+      </a>
       <p className='featureComments'>View or Download the Textbook in PDF format</p>
 
       <h2 className='featureHeaders'>Lesson Videos</h2>

@@ -5,6 +5,8 @@
 
 }
 .folderContentsContainer {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,15 +20,19 @@
   display: flex;
   flex-direction: row;
   font-size: 1.25rem;
-  margin: .75rem;
-
+  margin: .25rem;
+  padding: .75rem
+}
+.folderLink:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, .3);
+  color: rgb(124, 255, 124);
 }
 .label {
   position: absolute;
   left: 0;
   color: rgb(124, 255, 124);
   margin-left: 5rem;
-
 }
 .folderName {
   width: 100%;

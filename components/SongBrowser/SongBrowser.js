@@ -6,7 +6,7 @@ import styles from './SongBrowser.module.css';
 export default function SongBrowser({ folderOptions }) {
   const [filepath, setFilepath] = useState('Choose Category');
   const [folderContents, setFolderContents] = useState([]);
-  const [folderContentsRender, setFolderContentsRender] = useState((<>Loading...</>));
+  const [folderContentsRender, setFolderContentsRender] = useState(null);
 
   useEffect(() => {
     setFilepath('Choose Category');
@@ -26,7 +26,7 @@ export default function SongBrowser({ folderOptions }) {
         // Fetch song data for each file concurrently
         const fetchSongDataPromises = data.map(async (file) => {
           if (!file.id) {
-            return file; // If no id, return the file as is
+            return file;
           }
 
           try {
@@ -126,13 +126,10 @@ export default function SongBrowser({ folderOptions }) {
 
   if (folderContentsRender && folderContentsRender.length !== (<>Loading...</>)) {
     return (
-      <div className='infoCard'>
-        <h1>Browse Songs</h1>
+      <>
         {select}
-        <div className={styles.folderContentsContainer}>
-          {filepath === 'Choose Category' ? null : folderContentsRender}
-        </div>
-      </div>
+        {filepath === 'Choose Category' ? null : <div className={styles.folderContentsContainer}>{folderContentsRender}</div> }
+      </>
     )
   }
 }
