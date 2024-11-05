@@ -31,6 +31,9 @@ export default function StudentNavbar() {
         <Link href='/students/payments'>
           <div className={styles.navLink}>PAYMENTS</div>
         </Link>
+        <Link href='/students/fretboard'>
+          <div className={styles.navLink}>FRETBOARD</div>
+        </Link>
       </div>
     )
   } else {

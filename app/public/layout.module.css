@@ -1,0 +1,13 @@
+.publicPageWrapper {
+    background-image: url('/images/background.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: rgb(48, 48, 48); */
+  display: flex;
+  padding-top: 8rem;
+  align-items: flex-start;
+  justify-content: center;
+  /* border: solid red 1px; */
+  height: 100vh;
+  overflow-y: auto;
+}

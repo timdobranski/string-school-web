@@ -34,6 +34,7 @@ export default function Song() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        console.log('metadata: ', data[0])
         setMetadata(data[0]);
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
@@ -55,7 +56,13 @@ export default function Song() {
   return (
     <div className='infoCard'>
       <div className={styles.songHeader}>
-        <Image className={styles.artistImage} src={metadata.artistData.images[0].url} width={250} height={250} alt='album cover' />
+        <Image
+          className={styles.artistImage}
+          src={metadata?.artistData?.images?.[0]?.url || '/images/background.jpeg'}
+          width={250}
+          height={250}
+          alt='album cover'
+        />
         <h1 className={styles.songTitle}>{metadata.title}</h1>
         <h3 className={styles.songArtist}>{metadata.artist}</h3>
         {metadata.audio_url ? <AudioPlayer audioId={metadata.id}/> : null}
@@ -76,6 +83,10 @@ export default function Song() {
             </button>
           </span>
         </div>
+        <div className={styles.songTheoryContainer}>
+          {metadata.key ? <h3>Key: {metadata.key}</h3> : null}
+          {metadata.tempo ? <h3>Tempo: {metadata.tempo}</h3>: null }
+          </div>
       </div>
       <div className={styles.songDataContainer}>
         <div className={styles.songInfoContainer}>
@@ -85,19 +96,32 @@ export default function Song() {
           <h3>{metadata.album}</h3>
           <h3>{metadata.release_date.length === 4 ? metadata.release_date : dateFormatter(metadata.release_date, {includeYear: true})}</h3>
           {metadata.explicit ? <h3 className={styles.explicitTag}>Explicit</h3> : null}
-          {metadata.key ? <h3>Key: {metadata.key}</h3> : null}
-          {metadata.tempo ? <h3>Tempo: {metadata.tempo}</h3>: null }
 
         </div>
         <div className={styles.songInfoContainer}>
           <h3 className={styles.header}>Your Progress</h3>
           {metadata.structure ? metadata.structure.map((section, index) => {return <p key={index}>{section}</p> }) :
-            `No progress has been recorded for this song yet`}
+            <>
+              <p>{`Last Progress Recorded:`}</p>
+              <p>{`Full Song, 90% speed`}</p>
+              <p>{`Dec 23rd, 2023`}</p>
+            </>
+
+          }
         </div>
         <div className={styles.songInfoContainer}>
           <h3 className={styles.header}>Structure</h3>
           {metadata.structure ? metadata.structure.map((section, index) => {return <p key={index}>{section}</p> }) :
-            `The structure of this song hasn't been added yet`}
+                     <>
+                     <p>{`Intro`}</p>
+                     <p>{`Verse x2`}</p>
+                     <p>{`Chorus`}</p>
+                     <p>{`Verse`}</p>
+                     <p>{`Chorus`}</p>
+                    <p>{`Bridge`}</p>
+                    <p>{`Chorus x2`}</p>
+                   </>
+            }
         </div>
       </div>
     </div>

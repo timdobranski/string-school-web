@@ -1,13 +1,14 @@
-import PublicNavbar from '../../components/PublicNavbar/PublicNavbar';
+import PublicHeader from '../../components/PublicHeader/PublicHeader';
+import styles from './layout.module.css'
 
 export default function PublicLayout({ children }) {
 
   return (
-    <>
-      <PublicNavbar/>
+    <div className={styles.publicPageWrapper}>
+      <PublicHeader/>
       {children}
 
-    </>
+    </div>
 
   )
 }

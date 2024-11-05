@@ -106,7 +106,7 @@ export default function StudentHome() {
           }
         </div>
         <Link href='/students/scheduling/schedule-makeup' className={styles.makeups}>
-          <p className={styles.makeupsNumber}>{`${makeups} ${makeups === 1 ? 'makeup' : 'makeups'} available`}</p>
+          <p className={styles.makeupsNumber}>{`${student.makeups} ${student.makeups === 1 ? 'makeup' : 'makeups'} available`}</p>
         </Link>
 
         {/* lesson logs - renders most recent 4 */}

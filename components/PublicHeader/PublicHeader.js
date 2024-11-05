@@ -4,12 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../public/images/logo.png';
 import logoWhite from '../../public/images/logo-white-bg.png';
-import styles from './Header.module.css';
+import styles from './PublicHeader.module.css';
 import  { supabase } from '../../utils/supabase';
 import { useEffect, useState } from 'react';
+import PublicNavbar from '../PublicNavbar/PublicNavbar';
 
 
-export default function Header() {
+export default function PublicHeader() {
   const [signedIn, setSignedIn] = useState(false);
   const [picture, setPicture] = useState(null);
 
@@ -49,9 +50,10 @@ export default function Header() {
 
   return (
     <div className={styles.headerContainer}>
+      <PublicNavbar />
       <Link href='/' className={styles.homeButton}>
         {/* <div className={styles.logoContainer}> */}
-          <img src={'/images/logo.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
+        <img src={'/images/logo.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
         {/* </div> */}
       </Link>
 

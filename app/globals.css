@@ -38,6 +38,8 @@
   --yellowOpen: rgba(255, 242, 204, 1);
   --purpleBooked: rgba(166, 77, 121, 1);
   --purpleOpen: rgba(213, 166, 189, 1);
+
+  --primary-gradient: -webkit-linear-gradient(left, rgb(132, 255, 171), rgb(0, 229, 255))
 }
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -70,18 +72,21 @@ a {
   }
 }
 
-#app {
+.app {
   position: relative;
-  background-image: url('/images/background.jpeg');
+  /* background-image: url('/images/background.jpeg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+  background: black;
   /* border: solid red 4px; */
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  overflow-y: none;
+  /* border: solid white 1px; */
 }
-#appContentContainer {
+.appContentContainer {
  flex: 1;
  margin-top: 8vw;
   display: flex;
@@ -106,7 +111,11 @@ a {
   transform: scale(1.1);
   cursor: pointer;
 }
-.infoCard {
+/* .ageContentWrapper {
+  border: solid red 1px;
+
+} */
+.infoCard, .pageContentWrapper {
   position: relative;
   /* border: solid red 4px; */
   display: flex;
@@ -127,7 +136,11 @@ a {
   min-width: 1000px;
   font-family: JennaSue;
   text-align: center;
-  overflow:visible;
+  overflow-y: none;
+}
+.pageContentWrapper {
+border-radius: 0px;
+
 }
 .sectionHeaders {
   text-decoration: underline;

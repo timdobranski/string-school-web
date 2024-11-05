@@ -40,7 +40,18 @@ export default function Login() {
   return (
     <div className='infoCard'>
       <h1>STUDENT LOGIN</h1>
-      <button onClick={handleSignIn}>Sign in with Google</button>
+      <input type='text' placeholder='Email' className={styles.loginInput}/>
+      <input type='password' placeholder='Password' className={styles.loginInput}/>
+      <button className='featureButton'>Sign In</button>
+      <p>Forgot Password?</p>
+      <p>{`Don't have an account? `}<a href='/signup'>Sign Up</a></p>
+      <hr className={styles.divider}/>
+
+        <button className={styles.signInWithGoogleButton} onClick={handleSignIn}>
+          <img src='/images/google.svg' alt='Google Icon' className={styles.googleLogo} />
+          <span className={styles.googleSignInText}><p>Sign in with Google</p></span>
+        </button>
+
     </div>
   )
 }
