@@ -40,10 +40,10 @@ export default function PublicHome() {
         direction={'right'}
         title={'The String School App'}
         photo={{image: '/images/appStores.webp'}}
-        text={`Coming soon (late 2024/early 2025). Lessons include access to my String School app for web and iOS/Android. Features of the app include
-      an interactive tab & sheet music player to view, print, and listen to my vast collection of sheet music, access to my lesson book
-      and other online resources, robust options to track your progress and songs learned, rescheduling lessons,
-      tracking payments, and more features on the way in 2024.`}
+        text={`Coming soon (late 2024/early 2025).
+        The String School app for web and iOS/Android will handle scheduling, tracking progress, and accessing sheet music and resources.
+       Features of the app include an interactive tab & sheet music player to view, print, and listen to my vast collection of sheet music,
+       weekly lesson logs, and various progress paths to view your achievements in various areas.`}
       />
 
       <div className={styles.divider}></div>
@@ -52,12 +52,11 @@ export default function PublicHome() {
         direction={'left'}
         title={'String School Concerts'}
         photo={{image: '/images/concerts.webp', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
-        text={`Since 2020, concerts have been hard to reimplement, but group concerts are back for 2024. These biannual
-      performances are the best motivator, and a great opportunity for aspiring musicians to enjoy the payoff for all their hard work.`}
+        text={`Student concerts can be one of the most fun and exciting ways to show off your skills. I hold concerts twice per year, and
+          starting in 2025 concerts are going to become .`}
       />
 
       <div className={styles.divider}></div>
-
 
       <PromoBlock
         direction={'right'}
@@ -72,7 +71,7 @@ export default function PublicHome() {
 
       <PromoBlock
         direction={'left'}
-        title={'Lesson Logs & Progress-Tracking'}
+        title={'Weekly Lesson Logs & Progress-Tracking'}
         photo={{image: '/images/progress.webp', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
         text={`Through the String School app you can review lesson logs for each week you've attended a lesson to check
             on what we did, what to practice, and any notes or other info related to that week's session. You can also track skills you've
@@ -80,6 +79,31 @@ export default function PublicHome() {
       />
 
       <div className={styles.divider}></div>
+
+      <PromoBlock
+        direction={'right'}
+        title={'Stringsmith'}
+        photo={{image: '/images/stringsmithGlitterbomb.webp', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+        text={`All students receive access to my online learning platform and game, Stringsmith. Stringsmith is a collection of interactive lessons, games,
+          and exercises designed to help you learn to play guitar and ukulele faster and more effectively. It's like an interactive version of my
+          textbook! It features customizable guitar fretboards also integrates with my String School app to track your progress and your practice time. These two apps work together: The String
+          School app is to handle scheduling and access to resources, and Stringsmith is for actual learning and practice.`}
+      />
+
+      <div className={styles.divider}></div>
+
+
+      <PromoBlock
+        direction={'left'}
+        title={'Guitar Pro 8'}
+        photo={{image: '/images/guitarPro.png', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+        text={`All students receive my personal 50% off code to purchase Guitar Pro 8, the best software for learning to play guitar and ukulele.`}
+      />
+
+      <div className={styles.divider}></div>
+
+
+
 
       <PromoBlock
         direction={'right'}
