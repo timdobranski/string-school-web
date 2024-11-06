@@ -27,7 +27,9 @@
 }
 .navLink:hover {
   cursor: pointer;
-  color: rgb(126, 255, 126);
+  background: var(--primary-gradient); /* Adjust the colors as needed */
+  -webkit-background-clip: text;
+  color: transparent;
   text-decoration: underline;
   transform: scale(1.1);
 }

@@ -19,7 +19,8 @@
 }
 .logo {
   position: relative;
-  width: 500px;
+  width: 550px;
+  /* bordeR: solid white 1px; */
 }
 .homeButton {
   margin: 0;
