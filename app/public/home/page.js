@@ -53,7 +53,8 @@ export default function PublicHome() {
         title={'String School Concerts'}
         photo={{image: '/images/concerts.webp', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
         text={`Student concerts can be one of the most fun and exciting ways to show off your skills. I hold concerts twice per year, and
-          starting in 2025 concerts are going to become .`}
+          starting in March 2025 concerts are going to move to the next level with top tier lighting and sound, and a custom-built stage set that
+          rivals any concert venue in San Diego!`}
       />
 
       <div className={styles.divider}></div>
