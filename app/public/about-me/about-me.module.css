@@ -1,9 +1,101 @@
-.imgContainer {
+.me {
   position: relative;
-  width: 550px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   margin: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  border: solid white 2px;
+  /* box-shadow: 0 0 5px rgb(255, 255, 255); */
 }
 .textContainer {
   margin-bottom: 4rem;
+}
+.container {
+  position: relative;
+  height: 100%;
+  margin: 2rem;
+}
+
+.carousel {
+  width: 70%;
+  margin-bottom: 3.5rem;
+  max-height: 500px;
+  overflow: hidden; /* Prevent images from overflowing */
+}
+
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Set the slide to take the full height of the carousel */
+  max-height: 500px; /* Match the carousel's max-height */
+}
+
+.slidePhoto {
+  max-width: 100%; /* Prevent the image from exceeding the container's width */
+  max-height: 100%; /* Prevent the image from exceeding the container's height */
+  object-fit: contain; /* Maintain aspect ratio and prevent cropping */
+  width: auto;
+  height: auto;
+}
+
+
+
+.control-arrow {
+opacity: 1; /* Make it always visible */
+background-color: #000; /* Black background */
+color: #fff; /* White arrow */
+border-radius: 50%;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  /* color: white; */
+  border-radius: 50%;
+  padding: .5rem;
+  background: var(--primary-gradient);
+  border: solid white 2px;
+  cursor: pointer;
+  transition: transform .2s ease;
+  margin: 0 .25rem;
+  top: calc(50% - 25px);
+  z-index: 20;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .9);
+  font-size: 1.5rem;
+}
+.slideButtonLeft, .slideButtonLeftDisabled {
+  left: 30px;
+}
+.slideButtonRight, .slideButtonRightDisabled {
+  right: 30px;
+}
+.slideButtonLeftDisabled, .slideButtonRightDisabled {
+  background: rgba(0, 0, 0, .5);
+  color: rgb(169, 169, 169);
+}
+.slideButton:hover {
+  transform: scale(1.1);
+}
+.caption {
+  position: absolute;
+  bottom: 0;
+  background: white;
+  background: var(--primary-gradient);
+  color: black;
+  /* border: solid red 20px; */
+  z-index: 2000;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  padding: calc(.25rem + 2px) .5rem .25rem .5rem;
+  /* height: 1000px; */
 }

@@ -7,7 +7,7 @@ import logoWhite from '../../public/images/logo-white-bg.png';
 import styles from './PublicHeader.module.css';
 import  { supabase } from '../../utils/supabase';
 import { useEffect, useState } from 'react';
-import PublicNavbar from '../PublicNavbar/PublicNavbar';
+import PublicTopbar from '../PublicTopbar/PublicTopbar';
 
 
 export default function PublicHeader() {
@@ -50,16 +50,73 @@ export default function PublicHeader() {
 
   return (
     <div className={styles.headerContainer}>
-      <PublicNavbar />
-      <Link href='/' className={styles.homeButton}>
-        {/* <div className={styles.logoContainer}> */}
-        <img src={'/images/logo.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
-        {/* </div> */}
-      </Link>
+      {/* <PublicNavbar /> */}
+
+      {/* left side of header */}
+      <div className={styles.leftSideNav}>
+        <div className={styles.logoWrapper}>
+          <Link href='/public/home'>
+            <img src='/images/logos/logo-black.png' alt="La Mesa String School Logo" className={styles.logo}/>
+          </Link>
+
+          <Link href='/' className={styles.homeButton}>
+            <img src={'/images/logos/title-black-2.png'}  alt="La Mesa String School Logo" className={styles.titleLogo}/>
+          </Link>
+
+        </div>
+
+      </div>
+
+      {/* title logo in the center */}
+      {/* <Link href='/' className={styles.homeButton}>
+        <img src={'/images/logos/title-black-2.png'}  alt="La Mesa String School Logo" className={styles.titleLogo}/>
+      </Link> */}
+
+      {/* <Link href='/' className={styles.homeButton}>
+        <h1 className={styles.title}>STRING SCHOOL</h1>
+      </Link> */}
+
+      {/* right side of header */}
+      <div className={styles.rightSideNav}>
+        {/* <div className={styles.navLink}>
+        <Link href='/public/photos'>PHOTOS</Link>
+      </div> */}
+
+        {/* <div className={styles.navLink}>
+        <Link href='/public/photos'>CONCERTS</Link>
+      </div>
+
+      <div className={styles.navLink}>
+        <Link href='/public/photos'>RECORDING</Link>
+      </div> */}
+        <div className={styles.navLink}>
+          <Link href='/public/home#why'>FEATURES</Link>
+        </div>
+
+        <div className={styles.navLink}>
+          <Link href='/public/about-lessons'>LESSON INFO</Link>
+        </div>
+
+        <div className={styles.navLink}>
+          <Link href='/public/about-me'>REVIEWS</Link>
+        </div>
+
+        <div className={styles.navLink}>
+          <Link href='/public/about-me'>ABOUT ME</Link>
+        </div>
 
 
 
-      {signedIn ? settingsButton : loginButton}
+        <div className={styles.bookingLink}>
+          <Link href='/public/book-intro'>BOOK AN INTRO</Link>
+        </div>
+
+      </div>
+
+
+      {/* {signedIn ? settingsButton : loginButton} */}
+
+
     </div>
   )
 }

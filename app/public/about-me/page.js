@@ -1,14 +1,55 @@
+'use client'
+
 import styles from './about-me.module.css';
 import Image from 'next/image';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function AboutMe() {
 
+  const nextSlideArrow = (handleClick, hasNext) => (
+    <button disabled={!hasNext} className={hasNext ? styles.slideButtonRight : styles.slideButtonRightDisabled} onClick={handleClick}>
+      <FontAwesomeIcon icon={faChevronRight}  className={styles.slideButtonIcon}/>
+    </button>
+  );
+
+  const prevSlideArrow = (handleClick, hasPrev) => (
+    <button disabled={!hasPrev} className={hasPrev ? styles.slideButtonLeft : styles.slideButtonLeftDisabled} onClick={handleClick}>
+      <FontAwesomeIcon icon={faChevronLeft} className={styles.slideButtonIcon}/>
+    </button>
+  );
+
+  const concertPhotos = [
+    {image: '/images/me/me.jpeg',
+      caption: 'Home Studio, 2022'
+    },
+    {image: '/images/me/concert1.jpg',
+      caption: 'Soma San Diego, circa 2005'
+    },
+    {image: '/images/me/concert2.jpg',
+      caption: 'Soma San Diego, circa 2005'
+    },
+    {image: '/images/me/concert3.jpg',
+      caption: 'Soma San Diego, circa 2005'
+    },
+    {image: '/images/me/concert4.jpg',
+      caption: 'Soma San Diego, circa 2005'
+    },
+    {image: '/images/me/concert5.webp',
+      caption: 'Starlight Theater, Los Angeles 2013'
+    },
+    {image: '/images/me/concert5.webp',
+      caption: 'Starlight Theater, Los Angeles 2013'
+    },
+  ]
 
   return (
-    <div className='pageContentWrapper'>
-      <div className={styles.imgContainer}>
-        <Image src='/images/me.jpeg' alt='photo of tim playing guitar'fill='true'/>
-      </div>
+    <div>
+      {/* <div className={styles.imgContainer}> */}
+      {/* <img src='/images/me/me.jpeg' alt='photo of tim playing guitar' className={styles.me}/> */}
+      {/* </div> */}
 
       <div className={styles.textContainer}>
         <h2 className='featureHeaders'>About Me</h2>
@@ -21,15 +62,17 @@ export default function AboutMe() {
         </p>
       </div>
 
+
       <div className={styles.textContainer}>
         <h2 className='featureHeaders'>Teaching</h2>
-        <p className='text'>{`I began working for the La Mesa/Spring Valley School District in 2006 with
+        <p className='text'>{`I began working for the La Mesa/Spring Valley School District in 2006 in the after school program with
         children grades K-8th. For several years I taught my very own RockStar Guitar Troupe, traveling
         to various schools throughout the district to teach guitar and culminating in a student concert. In 2009
         I started offering private guitar lessons in college. Since then I've prided myself in offering innovative and effective
         ideas to improve my lessons and help students learn quickly and more effectively.`}
         </p>
       </div>
+
 
       <div className={styles.textContainer}>
         <h2 className='featureHeaders'>Software Development</h2>
@@ -47,6 +90,34 @@ export default function AboutMe() {
         in March 2025!`}
         </p>
       </div>
+
+      <Carousel
+        className={styles.carousel}
+        showArrows={true}
+        swipeable={true}
+        dynamicHeight={false}
+        emulateTouch={true}
+        useKeyboardArrows={true}
+        centerMode={true}
+        centerSlidePercentage={100}
+        transitionTime={500}
+        swipeScrollTolerance={5}
+        renderArrowPrev={prevSlideArrow}
+        renderArrowNext={nextSlideArrow}
+        showStatus={false}
+        showThumbs={false}
+        showIndicators={false}
+      >
+        {concertPhotos.map((photo, index) => {
+          return (
+            <div className={styles.slide} key={index}>
+              <img src={photo.image} alt='photo of time playing guitar' className={styles.slidePhoto} />
+              <p className={styles.caption}>{photo.caption}</p>
+            </div>)
+        })}
+
+      </Carousel>
+
 
     </div>
   )

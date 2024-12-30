@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabase';
 import { useRouter } from 'next/navigation';
-import PublicNavbar from '../components/PublicNavbar/PublicNavbar';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;

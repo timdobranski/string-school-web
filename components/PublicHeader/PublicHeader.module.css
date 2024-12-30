@@ -1,27 +1,59 @@
 .headerContainer {
   top: 0;
-  position: absolute;
-  z-index: 1;
-  width: 100vw;
-  padding: .5rem;
-  /* height: 8vw; */
+  position: relative;
+  /* position: absolute; */
+  z-index: 0;
+  width: 100%;
+  /* padding: .5rem; */
+  /* border: solid rgb(235, 255, 82) 1px; */
+  height: 1000px;
   background: rgba(0, 0, 0, 0.4);
+  background: rgb(46, 46, 46);
   /* background: black; */
+  background: white;
   backdrop-filter: blur(5px);
-  border-bottom: solid 1px rgb(48, 48, 48);
+  /* border-bottom: solid 1px rgb(103, 103, 103); */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
-.logoContainer {
+.leftSideNav, .rightSideNav {
+  display: flex;
+  flex-direction: row;
+  /* border: solid rgb(102, 255, 75) 2px; */
+}
+.rightSideNav {
+
+}
+.title {
+  font-family: UnicaOne;
+  font-size: 4rem;
+  font-weight: 200;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.logoWrapper {
+  padding: .5rem
+}
+.titleLogo {
+  position: relative;
+  width: 400px;
+  max-width: 90%;
+  margin: 0 0 4px 2rem;
+
 
 }
 .logo {
   position: relative;
-  width: 550px;
-  /* bordeR: solid white 1px; */
+  left: 0;
+  top: 0;
+  height: 70px;
+  /* border: solid white 2px; */
 }
+
 .homeButton {
   margin: 0;
   padding: 0;
@@ -47,14 +79,41 @@
   border-radius: 50px;
   width: 60px;
   height: 60px;
-  border: solid rgb(255, 255, 255) 1px;
+  /* border: solid rgb(255, 255, 255) 1px; */
   overflow: hidden;
 }
 
-
-@media (prefers-color-scheme: dark) {
-  #headerContainer {
-    background: rgba(255, 255, 255, 0.7);
-
-  }
+.navLink {
+  margin: .5rem 1rem;
+  transition: transform 0.5s;
+  font-size: 1.25rem;
+  /* border: solid red 1px; */
+  height: fit-content;
+  color: black;
+  font-weight: 800;
+  padding: .5rem .75rem .25rem .75rem;
+}
+.navLink:hover {
+  cursor: pointer;
+  background: var(--primary-gradient); /* Adjust the colors as needed */
+  transform: scale(1.1);
+}
+.bookingLink {
+  /* border: solid red 1px; */
+  box-shadow: 0 0  4px 0 rgba(0, 0, 0, 0.4);
+  /* border: solid 1px rgb(0, 216, 94); */
+  font-size: 1.25rem;
+  font-weight: bold;
+  position: relative;
+  color: black;
+  padding: .5rem 1rem;
+  margin: .5rem 1rem;
+  font-weight: bold;
+  background: var(--primary-gradient);
+  transition: transform 0.5s;
+  height: fit-content;
+}
+.bookingLink:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }

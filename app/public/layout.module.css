@@ -1,7 +1,8 @@
 .publicPageWrapper {
-    background-image: url('/images/background.jpeg');
+  background-image: url('/images/background.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100%;
   /* background: rgb(48, 48, 48); */
   display: flex;
   padding-top: 8rem;
@@ -9,5 +10,8 @@
   justify-content: center;
   /* border: solid red 1px; */
   height: 100vh;
-  overflow-y: auto;
+
+  /* this will need to be enabled after i disable wherever the other scrollbar is coming from */
+  /* overflow-y: auto; */
+
 }
