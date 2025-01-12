@@ -6,7 +6,7 @@
   align-items: center;
   /* margin-top: 4rem; */
 }
-.section1Container, .section2Container, .section3Container, .section4Container {
+.section1Container, .section2Container, .section3Container, .section4Container, .section5Container {
   background: var(--lightBackground1);
   position: relative;
   width: 100%;
@@ -31,13 +31,16 @@
 .section4Container {
   background: white;
 }
+.section5Container {
+  background: var(--lightBackground1);
+}
 
 
 
 .sectionTitle, .title, .whiteSectionTitle {
   font-size: 2rem;
   margin: 1rem;
-  color: black; /* Text remains black */
+  color: var(--primary-blue);
   text-align: center;
   position: relative;
   margin-bottom: 30px;
@@ -76,7 +79,7 @@
 }
 
 
-.lessonInfoWrapper {
+.lessonInfoWrapper, .lessonInfoWrapperMidMargin {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -86,6 +89,9 @@
   max-width: 90%;
   /* border: solid red 1px; */
   text-align: center;
+}
+.lessonInfoWrapperMidMargin {
+  margin: 2rem 0 2rem 0;
 }
 .lessonInfoSection {
   display: flex;
@@ -144,6 +150,10 @@
 
 .policiesWrapper {
   margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .imageContainer {
   position: relative;
@@ -153,15 +163,7 @@
   width: 400px;
   margin: 2rem;
 }
-/* .horizontalPhoto {
-  position: relative;
-  z-index: -1;
-  width: 600px;
-  height: 600px;
-  object-fit: cover;
-  border-radius: 10px;
 
-} */
 
 .carousel {
 /* border: solid red 4px; */
@@ -193,9 +195,21 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
-.slide {
-position: relative;
-/* border: solid white 4px; */
+.slide, .videoSlide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Ensure slides take full height */
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.slide img {
+  max-height: 600px; /* Make sure the image fits the slide's height */
+  max-width: 100%; /* Prevent landscape images from overflowing horizontally */
+  object-fit: contain; /* Maintain aspect ratio without stretching */
 }
 
 .slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
@@ -229,7 +243,7 @@ position: relative;
   transform: scale(1.1);
 }
 .caption {
-  position: absolute;
+  position: relative;
   bottom: 0;
   background: white;
   background: var(--primary-blue);
@@ -241,6 +255,11 @@ position: relative;
   text-align: center;
   padding: calc(.25rem + 2px) .5rem .25rem .5rem;
   /* height: 1000px; */
+}
+.textContainer {
+  width: 1000px;
+  max-width: 96%;
+  margin-bottom: 2rem;
 }
 
 @media(max-width: 768px) {
