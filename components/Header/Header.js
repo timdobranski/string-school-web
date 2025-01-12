@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../public/images/final-title.png';
-import logoWhite from '../../public/images/final-title-white.png';
+import logo from '../../public/images/logos/final-title.png';
+import logoWhite from '../../public/images/logos/final-title-white.png';
 import styles from './Header.module.css';
 import  { supabase } from '../../utils/supabase';
 import { useEffect, useState } from 'react';
