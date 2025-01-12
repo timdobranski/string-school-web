@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../public/images/logo.png';
-import logoWhite from '../../public/images/logo-white-bg.png';
+import logo from '../../public/images/final-title.png';
+import logoWhite from '../../public/images/final-title-white.png';
 import styles from './Header.module.css';
 import  { supabase } from '../../utils/supabase';
 import { useEffect, useState } from 'react';
@@ -51,7 +51,7 @@ export default function Header() {
     <div className={styles.headerContainer}>
       <Link href='/' className={styles.homeButton}>
         {/* <div className={styles.logoContainer}> */}
-          <img src={'/images/logo.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
+        <img src={'/images/logo.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
         {/* </div> */}
       </Link>
 
