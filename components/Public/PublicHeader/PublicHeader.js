@@ -9,6 +9,7 @@ import PublicTopbar from '../PublicTopbar/PublicTopbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
+
 export default function PublicHeader() {
   const [signedIn, setSignedIn] = useState(false);
   const [picture, setPicture] = useState(null);
@@ -103,7 +104,7 @@ export default function PublicHeader() {
 
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/about-lessons">REVIEWS</Link>
+            <Link href="/public/reviews">REVIEWS</Link>
           </div>
           {/* <div className={styles.dropdown}>
             <Link href="/public/about-me#section1">TEACHING APPROACH</Link>
@@ -118,7 +119,7 @@ export default function PublicHeader() {
         </div> */}
 
         <div className={styles.navLink}>
-          <Link href='/students/login'>STUDENT SHOWCASE</Link>
+          <Link href='/students/login'>STUDENT LOGIN</Link>
         </div>
 
 

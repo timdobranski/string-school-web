@@ -75,6 +75,7 @@
   --primary-gradient: -webkit-linear-gradient(left, rgb(181, 255, 156) 0%, rgb(101, 251, 198) 100%);
 
   --logo-gradient: -webkit-linear-gradient(left, #87ceb2 0%, #bbd393 100%);
+  --primary-gradient-darker: -webkit-linear-gradient(right, rgb(92, 234, 149), rgb(180, 230, 0))
 
 
 }
@@ -292,6 +293,10 @@ border-radius: 0px;
 }
 
 @media(max-width: 768px) {
+  .app {
+    /* border: solid red 4px; */
+    overflow: hidden;
+  }
   .pageContentWrapper {
     margin-top: 0;
     width: 95vw;

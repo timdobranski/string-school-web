@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import StudentNavbar from '../../components/StudentComponents/StudentNavbar/StudentNavbar';
+import Header from '../../components/Header/Header';
 import { supabase } from '../../utils/supabase';
 import { useRouter } from 'next/navigation';
 
@@ -107,6 +108,7 @@ export default function StudentContext({ children }) {
   return (
     <AuthProvider>
       <main>
+        <Header />
         <StudentNavbar />
         {children}
       </main>

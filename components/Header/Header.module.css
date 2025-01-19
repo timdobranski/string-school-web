@@ -49,9 +49,10 @@
 }
 
 
-@media (prefers-color-scheme: dark) {
-  #headerContainer {
-    background: rgba(255, 255, 255, 0.7);
-
+@media (max-width: 768px) {
+  .headerContainer {
+    padding: 0;
+    /* height: 10vw; */
+    border: solid red 2px;
   }
 }
