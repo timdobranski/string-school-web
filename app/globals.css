@@ -297,8 +297,11 @@ border-radius: 0px;
 
 @media(max-width: 768px) {
   .app {
-    /* border: solid red 4px; */
-    overflow: hidden;
+    top: 0 !important;
+    left: 0;
+    position: absolute;
+    overflow-y: auto;
+    margin: 0;
   }
   .pageContentWrapper {
     margin-top: 0;

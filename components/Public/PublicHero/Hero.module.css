@@ -136,7 +136,8 @@
     /* border: solid red 4px; */
   }
   .header {
-    font-size: 3rem;
+    width: 100%;
+    font-size: 2.5rem;
   }
   .title {
 

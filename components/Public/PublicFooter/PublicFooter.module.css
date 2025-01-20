@@ -47,3 +47,24 @@
   margin: 1rem 0;
   height: 80px;
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    height: fit-content;
+  }
+  .text {
+    position: relative;
+    top: unset;
+    bottom: unset;
+    right: unset;
+    text-align: center;
+    transform: unset;
+    margin: 1rem 0;
+    /* width: 100%; */
+  }
+  .logo {
+    position: relative;
+    height:
+  }
+}
