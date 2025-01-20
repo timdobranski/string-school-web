@@ -2,7 +2,7 @@
   top: 0;
   position: relative;
   /* position: absolute; */
-  z-index: 1;
+  z-index: 3;
   width: 100%;
   /* padding: .5rem; */
   height: 1000px;
@@ -16,13 +16,56 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
 }
 .leftSideNav, .rightSideNav {
   display: flex;
   flex-direction: row;
 }
-.rightSideNav {
-
+.menuHandleIconWrapper {
+  margin: 0 2rem 0 0;
+  height: 3rem;
+  width: 3rem;
+  /* border: solid red 1px; */
+}
+.menuIcon {
+  height: 100%;
+  width: 100%;
+  color: var(--primary-blue);
+  color: rgb(135, 207, 143);
+}
+.navTray {
+  position: fixed;
+  width: 90vw;
+  height: 100vh;
+  top: 0;
+  transition: left 0.5s;
+  background: var(--primary-blue);
+  margin: 0;
+  color: white;
+  padding: 0;
+}
+.menuOpen {
+  left: 10vw;
+}
+.menuClosed {
+  left: 100vw
+}
+.backIconWrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  margin: 0;
+  height: 2rem;
+  width: 2rem;
+  /* border: solid red 4px; */
+}
+.backIcon {
+  height: 100%;
+  width: 100%;
+  color: var(--primary-blue);
+  color: rgb(135, 207, 143);
 }
 .title {
   font-family: UnicaOne;
@@ -33,13 +76,18 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.logoWrapper {
+.logoWrapper, .navTrayLogoWrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: .5rem;
   margin-left: 1rem;
+}
+.navTrayLogoWrapper {
+  width: 100%;
+  margin: 0 0 3rem 0;
+  position: relative;
 }
 .titleLogo {
   position: relative;
@@ -91,60 +139,17 @@
 }
 
 .navLink {
-  margin: 0.5rem 0.75rem;
+  margin: 1rem 0.75rem;
   transition: transform 0.5s;
   font-size: 1.25rem;
   height: fit-content;
-  color: black;
+  color: white;
   font-weight: 800;
   padding: 0.5rem 0.75rem 0.25rem 0.75rem;
   text-align: center;
   position: relative;
   /* border: solid 1px black; */
 }
-
-.navLink:hover {
-  cursor: pointer;
-  /* color: white; */
-  background: var(--primary-gradient);
-  transform: scale(1.1);
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%; /* Place dropdown below the navLink */
-  left: 0;
-  background: white;
-  /* border: 1px solid #ddd; */
-  /* padding: 0.5rem 0; */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  z-index: 100;
-  width: max-content;
-}
-
-.dropdown a {
-  display: block;
-  padding: 1rem 1.5rem .75rem 1.5rem;
-  color: black;
-  text-decoration: none;
-  width: fit-content;
-  width: auto;
-  /* padding-bottom: .25rem; */
-}
-
-.dropdown a:hover {
-  background: var(--primary-gradient);
-  /* color: white; */
-}
-
-.navLinkContainer:hover .dropdown {
-  display: block; /* Show dropdown when the whole container is hovered */
-}
-.navLinkContainer:hover .icon {
-  transform: rotate(180deg)
-}
-
 
 
 .bookingLink {
@@ -174,22 +179,4 @@
   font-size: 1rem;
   color: var(--primary-blue);
   transition: transform 0.5s;
-}
-
-@media(max-width: 768px) {
-  .headerContainer {
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    border: solid red 4px;
-    display: none;
-  }
-  .bookingLink {
-    position: fixed;
-    top: unset;
-    right: unset;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }

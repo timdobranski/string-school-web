@@ -36,9 +36,10 @@ export default function PublicHome() {
           direction={'left'}
           background={'lightBackground1'}
           title={'The String School Guitar Method'}
-          photo={{image: '/images/bookCover.png', styles: { boxShadow: '0 0 10px 5px rgba(255, 255, 255, 0.5)', transform: 'rotate(10deg)'}}}
+          photo={{image: '/images/book.webp'}}
           text={`The String School Guitar Method is my textbook, and it is currently in the second edition. Every student
-      receives a free PDF copy, and printed copies are available at the cost of printing them, which is around $45 in 2023`}
+      receives a free PDF copy, and printed copies are available at the cost of printing them. Much of the book teaches concepts through color-coded
+      charts and information, which has been a big help for students but also raises the cost of printing to around $45 or so in 2025.`}
         />
       </div>
 

@@ -116,10 +116,29 @@
 }
 
 @media(max-width: 768px) {
+  .wrapper {
+    width: 100vw;
+    height: 80vh;
+  }
+  .videoWrapper {
+    width: 100vw;
+    object-position: 75% top;
+    object-fit: cover;
+  }
   .image, .video {
     height: 100%;
-    width: auto;
-    object-position: 25% top;
+    width: 100vw;
+
+    object-position: center;
+
+  }
+  .contentWrapper {
+    /* border: solid red 4px; */
+  }
+  .header {
+    font-size: 3rem;
+  }
+  .title {
 
   }
 }

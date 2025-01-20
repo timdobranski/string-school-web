@@ -16,6 +16,8 @@ export default function AboutLessons() {
     '/images/studio/6.webp', '/images/studio/7.webp', '/images/studio/8.webp', '/images/studio/9.webp', '/images/studio/10.webp', '/images/studio/11.webp'];
   const studioCaptions = ['Studio Walkthrough Video Daytime', 'Studio Walkthrough Video Nighttime', 'Studio (daytime)', 'Studio (daytime)', 'Studio (daytime)',
     'Studio (daytime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)'];
+  const lobbyVideos= ['https://www.youtube.com/embed/Bu_v4VPjqUo?si=l65ijgCSB3Ug4W_T']
+
   const lobbyPhotos = ['/images/lobby/1.webp', '/images/lobby/2.webp', '/images/lobby/3.webp', '/images/lobby/4.webp'];
   const lobbyCaptions = ['Waiting Room(daytime)', 'Waiting Room(daytime)', 'Waiting Room(nighttime)', 'Waiting Room(nighttime)'];
   const outsidePhotos= ['/images/outside/1.webp', '/images/outside/2.webp']
@@ -255,6 +257,33 @@ export default function AboutLessons() {
           showIndicators={false}
           showThumbs={false}
         >
+          {lobbyVideos.map((src, index) => (
+            <div className={styles.slide} key={index}>
+              <div className={styles.videoSlide}>
+                <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
+                  <iframe
+                    src={lobbyVideos[index]}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      border: 0,
+                      margin: 0
+                    }}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <p className={styles.caption}>{studioCaptions[index]}</p>
+              </div>
+            </div>
+          ))}
+
           {lobbyPhotos.map((src, index) => (
             <div className={styles.slide} key={index}>
               <img key={index} src={src} alt={`Photo ${index + 1}`} />

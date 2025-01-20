@@ -47,3 +47,8 @@
 .contactItem {
   margin: 0 1rem;
 }
+@media (max-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+}
