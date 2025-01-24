@@ -88,8 +88,9 @@
   }
 } */
 
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 * {
@@ -124,17 +125,11 @@ p {
 
 .app {
   position: relative;
-  /* background-image: url('/images/background.jpeg');
-  background-repeat: no-repeat;
-  background-size: cover; */
   background: black;
-  /* border: solid rgba(0, 0, 0, 0) 1px; */
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  /* overflow-y: auto; */
-  /* border: solid white 1px; */
 }
 .appContentContainer {
  flex: 1;
@@ -144,6 +139,44 @@ p {
   justify-content: flex-start;
   align-items: center;
 }
+.sectionTitle, .smallerSectionTitle, .sectionTitleWhite, .smallerSectionTitleWhite {
+  font-size: 4rem;
+  margin: 1rem;
+  color: var(--primary-blue);
+  font-weight: 400;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30px;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+.sectionTitle::after, .smallerSectionTitle::after, .sectionTitleWhite::after, .smallerSectionTitleWhite::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px; /* Adjust the distance from the text */
+  width: 100%;
+  height: 4px; /* Thickness of the underline */
+  background: var(--primary-gradient-darker) !important;
+}
+.sectionTitle::after, .sectionTitleWhite::after {
+  bottom: -8px; /* Adjust the distance from the text */
+  height: 8px;
+}
+.sectionTitleWhite::after, .smallerSectionTitleWhite::after {
+  background: var(--primary-gradient);
+}
+.smallerSectionTitle, .smallerSectionTitleWhite {
+  font-size: 2rem;
+}
+.sectionTitleWhite, .smallerSectionTitleWhite {
+  color: white;
+}
+.smallerSectionTitleWhite {
+
+}
+
 .button {
   position: relative;
   margin: 2rem;
@@ -297,8 +330,9 @@ border-radius: 0px;
 
 @media(max-width: 768px) {
   .app {
-    top: 0 !important;
+    top: 0;
     left: 0;
+    width: 100vw;
     position: absolute;
     overflow-y: auto;
     margin: 0;

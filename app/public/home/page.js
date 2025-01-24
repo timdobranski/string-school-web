@@ -49,8 +49,8 @@ export default function PublicHome() {
           background={'white'}
           title={'The String School App'}
           photo={{image: '/images/appStores.webp'}}
-          text={`Coming soon (late 2024/early 2025).
-        The String School app for web and iOS/Android will handle scheduling, tracking progress, and accessing sheet music and resources.
+          text={`Coming 2025,
+        the String School app for web and iOS/Android will handle scheduling, tracking progress, and accessing sheet music and resources.
        Features of the app include an interactive tab & sheet music player to view, print, and listen to my vast collection of digital sheet music,
        weekly lesson logs, and various progress paths to view your achievements in various areas.`}
         />
@@ -119,8 +119,8 @@ export default function PublicHome() {
         <PromoBlock
           direction={'right'}
           background={'white'}
-          title={'Continual Improvements'}
-          photo={{image: '/images/me/me.jpeg', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+          title={'The Future'}
+          photo={{image: '/images/me/me.webp' }}
           text={`When I began giving lessons in 2009, I had none of these things. The most important thing that I can offer my students
       is the promise that I am always looking for new and unique ways to improve my lessons! At least once per year, I roll out a series of
       improvements designed to help you learn faster and more comfortably! `}

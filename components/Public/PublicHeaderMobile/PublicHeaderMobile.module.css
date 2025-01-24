@@ -5,7 +5,7 @@
   z-index: 3;
   width: 100%;
   /* padding: .5rem; */
-  height: 1000px;
+  height: 100px !important;
   background: rgba(0, 0, 0, 0.4);
   background: rgb(46, 46, 46);
   /* background: black; */
@@ -17,7 +17,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 0;
+  /* margin-top: 1rem; */
+  /* min-height: 100px; */
   display: none;
+  /* overflow-x: hidden; */
+  /* border: solid red 4px; */
 }
 .leftSideNav, .rightSideNav {
   display: flex;
@@ -39,12 +43,12 @@
   position: fixed;
   width: 90vw;
   height: 100vh;
-  top: 0;
+  top: 0rem;
   transition: left 0.5s, display 0.5s;
   background: var(--primary-blue);
   margin: 0;
   color: white;
-  padding: 0;
+  padding: 1rem;
   display: block;
 }
 .menuOpen {
@@ -74,6 +78,7 @@
   font-family: UnicaOne;
   font-size: 4rem;
   font-weight: 200;
+  height: 100px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -86,11 +91,13 @@
   align-items: center;
   padding: .5rem;
   margin-left: 1rem;
+  height: 90px;
 }
 .navTrayLogoWrapper {
   width: 100%;
   margin: 0 0 3rem 0;
   position: relative;
+  height: 50px;
 }
 .titleLogo {
   position: relative;
@@ -186,5 +193,6 @@
 @media (max-width: 768px) {
   .headerContainer {
     display: flex;
+    /* height: 100px !important; */
   }
 }

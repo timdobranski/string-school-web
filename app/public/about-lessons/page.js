@@ -3,9 +3,9 @@
 import styles from './about-lessons.module.css'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import { config } from '@fortawesome/fontawesome-svg-core';
-config.autoAddCss = false;
+// import '@fortawesome/fontawesome-svg-core/styles.css';
+// import { config } from '@fortawesome/fontawesome-svg-core';
+// config.autoAddCss = false;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faMicrophone, faLaptop, faUser, faLocationDot, faClock, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import Hero from '../../../components/Public/PublicHero/Hero';
@@ -71,14 +71,14 @@ export default function AboutLessons() {
 
       <div className={styles.section1Container} id='approach'>
         {/* <img src='/images/teaching-approach.jpg' alt='Studio Photo 1' className={styles.section1Image} /> */}
-        <h2 className={styles.sectionTitle}>Teaching Approach</h2>
+        <h2 className={"sectionTitle"}>Teaching Approach</h2>
         <p className={'text'}>{`I believe each student requires their own
           unique approach, but there are common themes that I try to implment with most students:`}</p>
 
         <div className={styles.lessonInfoWrapper}>
           <div className={styles.lessonInfoSection}>
             <FontAwesomeIcon icon={faMicrophone} className={styles.icon} />
-            <h2 className={styles.title}>Projects</h2>
+            <h2 className={"smallerSectionTitle"}>Projects</h2>
 
             <p className={'text'}>{`I encourage every student to persue an optional project of some kind,
       and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a
@@ -88,7 +88,7 @@ export default function AboutLessons() {
           <div className={`${styles.lessonInfoSection} ${styles.middleInfoSection}`}>
             <FontAwesomeIcon icon={faLaptop} className={styles.icon} />
 
-            <h2 className={styles.title}>Technology</h2>
+            <h2 className={"smallerSectionTitle"}>Technology</h2>
 
             <p className={'text'}>{`Whenever possible, I incorporate the latest technology into my lessons in ways that continue to make learning
             to play an instrument much easier. I'm also a software developer, and I am continually working to grow and improve my own
@@ -97,7 +97,7 @@ export default function AboutLessons() {
           </div>
           <div className={styles.lessonInfoSection}>
             <FontAwesomeIcon icon={faUser} className={styles.icon} />
-            <h2 className={styles.title}>Personalization</h2>
+            <h2 className={"smallerSectionTitle"}>Personalization</h2>
             <p className={'text'}>{`Musicians view songs as a fluid collection of ideas, and the same song can be played many different ways and at different skill
           levels. In most cases, when we work on songs together, I'll transpose a version of it that is both fun and challenging for you. We call this the zone
           of proximal development, and it is the sweet spot for quick and effective learning.`}
@@ -109,17 +109,17 @@ export default function AboutLessons() {
       </div>
 
       <div className={styles.section2Container} id='details'>
-        <h2 className={styles.sectionTitle}>The Details</h2>
+        <h2 className={"sectionTitle"}>The Details</h2>
         <div className={styles.lessonInfoWrapper}>
           <div className={styles.lessonInfoSection}>
             <FontAwesomeIcon icon={faClock} className={styles.icon} />
-            <h2 className={styles.title}>When</h2>
+            <h2 className={"smallerSectionTitle"}>When</h2>
             <p className={'text'}>{`Lessons are offered in 30 minute recurring weekly blocks at the following times:`}</p>
             <table className={styles.scheduleTable}>
               <tbody>
                 <tr>
                   <td className={styles.days}>Mon-Thurs</td>
-                  <td className={styles.times}>4:30pm - 8:30pm</td>
+                  <td className={styles.times}>4:30pm - 8:00pm</td>
                 </tr>
                 <tr>
                   <td className={styles.days}>Fri</td>
@@ -137,7 +137,7 @@ export default function AboutLessons() {
           <div className={`${styles.lessonInfoSection} ${styles.middleInfoSection}`}>
             {/* <div className={styles.verticalDividerLeft}></div> */}
             <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-            <h2 className={styles.title}>Where</h2>
+            <h2 className={"smallerSectionTitle"}>Where</h2>
             {/* <div className={styles.verticalDividerRight}></div> */}
             <p className={'text'}>{`Lessons are held at my home music studio in Fletcher Hills, CA. As this is my personal residence as well,
             the address is not listed here and is provided upon booking a lesson.`} </p>
@@ -149,7 +149,7 @@ export default function AboutLessons() {
 
           <div className={styles.lessonInfoSection}>
             <FontAwesomeIcon icon={faDollarSign} className={styles.icon} />
-            <h2 className={styles.title}>Fees</h2>
+            <h2 className={"smallerSectionTitle"}>Fees</h2>
             <p className={'text'}>Fees are the same every month, regardless of attendance or the number of weeks/lessons in the month.</p>
             <p className={'text'}>Most months will include 4 weekly lessons; some will include an extra 5th depending on how the calendar lines up.</p>
 
@@ -167,7 +167,7 @@ export default function AboutLessons() {
 
       <div className={styles.section3Container} id='policies'>
         <div className={styles.policiesWrapper}>
-          <h2 className={styles.whiteSectionTitle}>Attendance & Payments Policies</h2>
+          <h2 className={"sectionTitleWhite"}>Attendance & Payments Policies</h2>
           <p className={'whiteText'}>Good attendance is expected of every student.</p>
           <p className={'whiteText'}>Missed lessons can be rescheduled as long as they are
       cancelled in the app with two hours notice. </p>
@@ -179,7 +179,7 @@ export default function AboutLessons() {
 
 
       <div className={styles.section4Container} id='studio'>
-        <h2 className={styles.sectionTitle} >See The Studio</h2>
+        <h2 className={"sectionTitle"} >See The Studio</h2>
         <div className={styles.lessonInfoWrapperMidMargin}>
           <p className='text'>{`My home studio is both a fun and professional environment for kids and adults alike to learn. When you arrive, you'll enter into the waiting room
             where you can access the wifi and use the restroom while you wait. Parents are welcome to sit in on lessons, wait in the waiting room, or drop their kiddos
@@ -297,7 +297,7 @@ export default function AboutLessons() {
       </div>
 
       <div className={styles.section5Container} id='tim'>
-      <h2 className={styles.sectionTitle} >Meet Tim</h2>
+      <h2 className={"sectionTitle"} >Meet Tim</h2>
       <div className={styles.textContainer}>
         {/* <h2 className={styles.title}>My Roots</h2> */}
         <p className='text'>{`My name is Tim and I teach guitar under the name of The La Mesa String School.
@@ -311,7 +311,7 @@ export default function AboutLessons() {
 
 
       <div className={styles.textContainer}>
-        <h2 className={styles.title}>Teaching</h2>
+        <h2 className={"smallerSectionTitle"}>Teaching</h2>
         <p className='text'>{`I began working for the La Mesa/Spring Valley School District in 2006 in the after school program with
         children grades K-8th. For several years I taught my very own RockStar Guitar Troupe, traveling
         to various schools throughout the district to teach guitar and culminating in a student concert. In 2009
@@ -323,7 +323,7 @@ export default function AboutLessons() {
 
 
       <div className={styles.textContainer}>
-        <h2 className={styles.title}>Software Development</h2>
+        <h2 className={"smallerSectionTitle"}>Software Development</h2>
         <p className='text'>{`Around 2021 I returned to school myself to study software development. In 2024 I left the LMSV school district to
         pursue a career in software development. I now work as a web developer for a media company in San Francisco and continue to teach in the evenings.
         In my spare time I'm continuing to develop Stringsmith, my very own guitar learning and practice platform, which I hope to launch in early 2025.`}
@@ -331,7 +331,7 @@ export default function AboutLessons() {
       </div>
 
       <div className={styles.textContainer}>
-        <h2 className={styles.title}>The Future</h2>
+        <h2 className={"smallerSectionTitle"}>The Future</h2>
         <p className='text'>{`As 2024 begins to conclude, I'm still working closely with the LMSV school district to construct a very exciting and elaborate
         stage set and lighting system for future String School concerts and school events. The set I've designed and am constructing alongside the Parkway
         Academy engineering class will outshine almost any real concert venue in San Diego, and I'm beyond excited to unveil this at the next concert

@@ -3,6 +3,7 @@ import PublicheaderMobile from '../../components/Public/PublicHeaderMobile/Publi
 import PublicTopbar from '../../components/Public/PublicTopbar/PublicTopbar';
 import PublicFooter from '../../components/Public/PublicFooter/PublicFooter';
 import styles from './layout.module.css'
+import Link from 'next/link';
 
 export default function PublicLayout({ children }) {
 
@@ -13,6 +14,11 @@ export default function PublicLayout({ children }) {
       <PublicHeader/>
       <PublicheaderMobile/>
       {children}
+      {/* <div className={styles.studentLoginWrapper}>
+        <img src="/images/logos/icon-blue-background.png" alt="Student Login Icon" className={styles.studentLoginIcon}/>
+        <a href="/login" className={styles.studentLogin}>Student Login</a>
+      </div> */}
+
       <PublicFooter />
     </>
   )

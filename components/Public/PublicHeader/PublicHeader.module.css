@@ -47,12 +47,15 @@
   height: 70px;
 
 }
-.logo {
+.logo, .iconLogo {
   position: relative;
   left: 0;
   top: 0;
   height: 65px;
   /* border: solid white 2px; */
+}
+.iconLogo {
+  border-radius: 50%;
 }
 
 .homeButton {

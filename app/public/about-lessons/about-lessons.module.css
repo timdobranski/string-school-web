@@ -52,7 +52,7 @@
   bottom: -8px; /* Adjust the distance from the text */
   width: 100%;
   height: 6px; /* Thickness of the underline */
-  background: var(--primary-gradient-darker); /* Use your gradient here */
+  background: var(--primary-gradient-darker);
   /* border: solid 1px rgb(0, 201, 0); */
 }
 .whiteSectionTitle::after {

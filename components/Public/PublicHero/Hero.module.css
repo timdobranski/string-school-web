@@ -103,7 +103,7 @@
   transform: translateX(-50%) scale(1); /* Include scale(1) to normalize the base */
   border-radius: 50%;
   padding: 0.5rem;
-  background: var(--primary-gradient);
+  background: var(--primary-gradient-darker);
   border: solid white 2px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
   transform-origin: center;
@@ -112,7 +112,7 @@
 .icon:hover {
   transform: translateX(-50%) scale(1.1); /* Apply both transformations */
   box-shadow: 0 0 40px rgba(0, 0, 0, 1);
-  background: var(--secondary-gradient);
+  /* background: var(--secondary-gradient); */
 }
 
 @media(max-width: 768px) {

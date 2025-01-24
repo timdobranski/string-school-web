@@ -2,6 +2,9 @@ import './globals.css';
 import Header from '../components/Header/Header';
 import Image from 'next/image';
 import background from '../public/images/background.jpeg';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
 // import Modal from 'react-modal';
 
 
@@ -17,7 +20,7 @@ export default function RootLayout({ children }) {
       <body className='app'>
         {/* <Header /> */}
         {/* <div id='appContentContainer'> */}
-          {children}
+        {children}
         {/* </div> */}
       </body>
     </html>

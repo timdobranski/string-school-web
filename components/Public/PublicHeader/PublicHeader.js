@@ -57,6 +57,8 @@ export default function PublicHeader() {
         <div className={styles.logoWrapper}>
           <Link href='/public/home'>
             <img src='/images/logos/final-title.png' alt="La Mesa String School Logo" className={styles.logo}/>
+            {/* <img src='/images/logos/icon-blue-background.png' alt="La Mesa String School Logo" className={styles.iconLogo}/> */}
+
           </Link>
 {/*
           <Link href='/' className={styles.homeButton}>
