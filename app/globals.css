@@ -176,6 +176,9 @@ p {
 .smallerSectionTitleWhite {
 
 }
+.sectionTitleMobile {
+  display: none;
+}
 
 .button {
   position: relative;
@@ -346,7 +349,7 @@ border-radius: 0px;
   .sectionTitle {
     font-size: 2rem;
   }
-  .sectionTitle::after {
+  .sectionTitle::after , .sectionTitleWhite::after{
     height: 4px;
   }
   .smallerSectionTitle {
@@ -355,4 +358,11 @@ border-radius: 0px;
   .sectionTitleWhite {
     font-size: 2rem;
   }
+  .sectionTitleMobile {
+    display: block;
+  }
+  .sectionTitleDesktop {
+    display: none;
+  }
+
 }

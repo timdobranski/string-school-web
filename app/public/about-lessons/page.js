@@ -14,7 +14,7 @@ export default function AboutLessons() {
   const studioVideos= ['https://www.youtube.com/embed/EraS5O2kslY?si=JmyTG0q11QSwQBq8', 'https://www.youtube.com/embed/Yco7rXyXhaU?si=hOMpC-BJ2bUqJ4Uj']
   const studioPhotos = ['/images/studio/1.webp', '/images/studio/2.webp', '/images/studio/3.webp', '/images/studio/4.webp', '/images/studio/5.webp',
     '/images/studio/6.webp', '/images/studio/7.webp', '/images/studio/8.webp', '/images/studio/9.webp', '/images/studio/10.webp', '/images/studio/11.webp'];
-  const studioCaptions = ['Studio Walkthrough Video Daytime', 'Studio Walkthrough Video Nighttime', 'Studio (daytime)', 'Studio (daytime)', 'Studio (daytime)',
+  const studioCaptions = ['Studio Walkthrough', 'Studio Walkthrough', 'Studio (daytime)', 'Studio (daytime)', 'Studio (daytime)',
     'Studio (daytime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)', 'Studio (nighttime)'];
   const lobbyVideos= ['https://www.youtube.com/embed/Bu_v4VPjqUo?si=l65ijgCSB3Ug4W_T']
 
@@ -167,7 +167,18 @@ export default function AboutLessons() {
 
       <div className={styles.section3Container} id='policies'>
         <div className={styles.policiesWrapper}>
-          <h2 className={"sectionTitleWhite"}>Attendance & Payments Policies</h2>
+          <>
+            {/* Desktop Version */}
+            <h2 className="sectionTitleWhite sectionTitleDesktop">Attendance & Payments Policies</h2>
+
+            {/* Mobile Version (Split into Two Lines) */}
+            <h2 className="sectionTitleWhite sectionTitleMobile">
+              Attendance &
+            </h2>
+            <h2 className="sectionTitleWhite sectionTitleMobile">
+              Payments Policies
+            </h2>
+          </>
           <p className={'whiteText'}>Good attendance is expected of every student.</p>
           <p className={'whiteText'}>Missed lessons can be rescheduled as long as they are
       cancelled in the app with two hours notice. </p>
@@ -185,7 +196,6 @@ export default function AboutLessons() {
             where you can access the wifi and use the restroom while you wait. Parents are welcome to sit in on lessons, wait in the waiting room, or drop their kiddos
             off, so long as they are sure to return before the end of the lesson.`}</p>
         </div>
-
         <Carousel
           className={styles.carousel}
           showArrows={true}
@@ -239,6 +249,7 @@ export default function AboutLessons() {
             </div>
           ))}
         </Carousel>
+          <br></br>
 
         <Carousel
           className={styles.carousel}
@@ -297,49 +308,49 @@ export default function AboutLessons() {
       </div>
 
       <div className={styles.section5Container} id='tim'>
-      <h2 className={"sectionTitle"} >Meet Tim</h2>
-      <div className={styles.textContainer}>
-        {/* <h2 className={styles.title}>My Roots</h2> */}
-        <p className='text'>{`My name is Tim and I teach guitar under the name of The La Mesa String School.
+        <h2 className={"sectionTitle"} >Meet Tim</h2>
+        <div className={styles.textContainer}>
+          {/* <h2 className={styles.title}>My Roots</h2> */}
+          <p className='text'>{`My name is Tim and I teach guitar under the name of The La Mesa String School.
         I'm a La Mesa native. I picked up the guitar early in grade school and I've been playing ever
       since. In the 20 some years since then, I've learned from many of San Diego's best guitar
       instructors. I spent several years after high school in a band gaining experience as both a
       musician and a businessman. We were signed to a record label, released one album and then
       promptly broke up!`}
-        </p>
-      </div>
+          </p>
+        </div>
 
 
-      <div className={styles.textContainer}>
-        <h2 className={"smallerSectionTitle"}>Teaching</h2>
-        <p className='text'>{`I began working for the La Mesa/Spring Valley School District in 2006 in the after school program with
+        <div className={styles.textContainer}>
+          <h2 className={"smallerSectionTitle"}>Teaching</h2>
+          <p className='text'>{`I began working for the La Mesa/Spring Valley School District in 2006 in the after school program with
         children grades K-8th. For several years I taught my very own RockStar Guitar Troupe, traveling
         to various schools throughout the district to teach guitar and culminating in a student concert. In 2009
         I began offering private guitar lessons while attending San Diego State University. As I continued to teach, I began to develop a deep
         interest in music pedagogy and in finding ways to help my students learn quickly and more effectively. In the years since then,
         I've prided myself in offering innovative and effective ideas to improve my lessons and help students learn quickly and more effectively.`}
-        </p>
-      </div>
+          </p>
+        </div>
 
 
-      <div className={styles.textContainer}>
-        <h2 className={"smallerSectionTitle"}>Software Development</h2>
-        <p className='text'>{`Around 2021 I returned to school myself to study software development. In 2024 I left the LMSV school district to
+        <div className={styles.textContainer}>
+          <h2 className={"smallerSectionTitle"}>Software Development</h2>
+          <p className='text'>{`Around 2021 I returned to school myself to study software development. In 2024 I left the LMSV school district to
         pursue a career in software development. I now work as a web developer for a media company in San Francisco and continue to teach in the evenings.
         In my spare time I'm continuing to develop Stringsmith, my very own guitar learning and practice platform, which I hope to launch in early 2025.`}
-        </p>
-      </div>
+          </p>
+        </div>
 
-      <div className={styles.textContainer}>
-        <h2 className={"smallerSectionTitle"}>The Future</h2>
-        <p className='text'>{`As 2024 begins to conclude, I'm still working closely with the LMSV school district to construct a very exciting and elaborate
+        <div className={styles.textContainer}>
+          <h2 className={"smallerSectionTitle"}>The Future</h2>
+          <p className='text'>{`As 2024 begins to conclude, I'm still working closely with the LMSV school district to construct a very exciting and elaborate
         stage set and lighting system for future String School concerts and school events. The set I've designed and am constructing alongside the Parkway
         Academy engineering class will outshine almost any real concert venue in San Diego, and I'm beyond excited to unveil this at the next concert
         in March 2025!`}
-        </p>
-      </div>
+          </p>
+        </div>
 
-      <Carousel
+        <Carousel
           className={styles.carousel}
           showArrows={true}
           swipeable={true}

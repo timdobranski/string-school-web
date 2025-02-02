@@ -3,7 +3,8 @@
   margin: 2rem 0;
   padding: 1rem 2rem;
   position: relative;
-  border-radius: .75rem
+  border-radius: .75rem;
+  background: white;
 }
 .header {
   display: flex;

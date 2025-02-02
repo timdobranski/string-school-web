@@ -74,7 +74,7 @@ export default function PublicHeader() {
 
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/home#book">FEATURES
+            <Link href="/public/home">FEATURES
               <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
             </Link>
           </div>

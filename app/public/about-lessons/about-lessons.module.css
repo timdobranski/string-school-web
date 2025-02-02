@@ -156,6 +156,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  list-style-type: disc; /* Ensures bullets are shown */
+
+}
+.policiesHeaderWrapper {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .imageContainer {
   position: relative;
@@ -295,40 +304,40 @@ justify-content: center;
     display: none;
   }
   .caption {
-    display: none;
+    /* display: none; */
   }
   .slideButtonLeft, .slideButtonRight {
-    display: none;
+    /* display: none; */
   }
   .slideButtonLeftDisabled, .slideButtonRightDisabled {
-    display: none;
+    /* display: none; */
   }
   .slideButton:hover {
-    display: none;
+    /* display: none; */
   }
   .slide {
     width: 100%;
   }
   .slideButtonLeft, .slideButtonRight {
-    display: none;
+    /* display: none; */
   }
   .slideButtonLeftDisabled, .slideButtonRightDisabled {
-    display: none;
+    /* display: none; */
   }
   .slideButton:hover {
-    display: none;
+    /* display: none; */
   }
   .caption {
-    display: none;
+    /* display: none; */
   }
   .slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
-    display: none;
+    /* display: none; */
   }
   .slideButton:hover {
-    display: none;
+    /* display: none; */
   }
   .control-arrow {
-    display: none;
+    /* display: none; */
   }
   .carousel {
     width: 100%;
@@ -342,24 +351,38 @@ justify-content: center;
     height: 300px;
   }
   .control-arrow {
-    display: none;
+    /* display: none; */
   }
   .caption {
-    display: none;
+    /* display: none; */
   }
   .slideButtonLeft, .slideButtonRight {
-    display: none;
+    /* display: none; */
   }
   .slideButtonLeftDisabled, .slideButtonRightDisabled {
-    display: none;
+    /* display: none; */
   }
   .slideButton:hover {
-    display: none;
+    /* display: none; */
   }
   .slide {
     width: 100%;
+    padding: 0 .5px;
   }
-  .slideButtonLeft, .slideButtonRight {
-    display: none;
+  .slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
+    /* display: none; */
+    font-size: 1rem;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    z-index: 20;
+    top: unset;
+    bottom: .4rem;
+  }
+  .slideButtonLeft, .slideButtonLeftDisabled {
+    left: 10px;
+  }
+  .slideButtonRight, .slideButtonRightDisabled {
+    right: 10px;
   }
 }
