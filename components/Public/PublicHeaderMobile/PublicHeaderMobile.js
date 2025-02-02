@@ -38,6 +38,19 @@ export default function PublicHeaderMobile() {
     })
   }, [])
 
+  useEffect(() => {
+    const preventScroll = (e) => e.preventDefault();
+
+    if (menuOpen) {
+      document.addEventListener("touchmove", preventScroll, { passive: false });
+    } else {
+      document.removeEventListener("touchmove", preventScroll);
+    }
+
+    return () => document.removeEventListener("touchmove", preventScroll);
+  }, [menuOpen]);
+
+
   const loginButton = ( <Link href='/login' className={styles.loginButton} id={styles.loginButton}>Sign In</Link>)
   const settingsButton = (
     <Link href='/students/settings'>
@@ -53,19 +66,22 @@ export default function PublicHeaderMobile() {
 
 
   return (
-    <div className={styles.headerContainer}>
-      {/* <PublicNavbar /> */}
+    <>
+      <div className={`${styles.overlay} ${menuOpen ? styles.overlayOn : ''}`}></div>
+      <div className={styles.headerContainer}>
+        {/* <PublicNavbar /> */}
 
-      {/* left side of header */}
+        {/* left side of header */}
 
-      <div className={styles.logoWrapper}>
-        <Link href='/public/home' onClick={handleCloseMenu}>
-          <img src='/images/logos/final-title.png' alt="La Mesa String School Logo" className={styles.logo}/>
-        </Link>
-      </div>
+        <div className={styles.logoWrapper}>
+          <Link href='/public/home' onClick={handleCloseMenu}>
+            <img src='/images/logos/final-title.png' alt="La Mesa String School Logo" className={styles.logo}/>
+          </Link>
+        </div>
 
-      <div className={styles.menuHandleIconWrapper} onClick={() => setMenuOpen(!menuOpen)}>
-        <FontAwesomeIcon icon={faBars} className={styles.menuIcon} />
+        <div className={styles.menuHandleIconWrapper} onClick={() => setMenuOpen(!menuOpen)}>
+          <FontAwesomeIcon icon={faBars} className={styles.menuIcon} />
+        </div>
       </div>
 
       <div className={`${styles.navTray} ${menuOpen ? styles.menuOpen : styles.menuClosed}`}>
@@ -117,6 +133,7 @@ export default function PublicHeaderMobile() {
       {/* {signedIn ? settingsButton : loginButton} */}
 
 
-    </div>
+
+    </>
   )
 }

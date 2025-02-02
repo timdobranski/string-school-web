@@ -76,6 +76,7 @@
 }
 .icon {
   color: var(--primary-blue);
+  color: rgb(148, 212, 157);
   margin-bottom: 2rem;
 }
 

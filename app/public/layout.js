@@ -10,9 +10,9 @@ export default function PublicLayout({ children }) {
 
   return (
     <>
+      <PublicheaderMobile/>
       <PublicTopbar/>
       <PublicHeader/>
-      <PublicheaderMobile/>
       {children}
       {/* <div className={styles.studentLoginWrapper}>
         <img src="/images/logos/icon-blue-background.png" alt="Student Login Icon" className={styles.studentLoginIcon}/>

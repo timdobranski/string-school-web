@@ -343,4 +343,16 @@ border-radius: 0px;
     min-width: 95vw;
     padding: .25rem;
   }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  .sectionTitle::after {
+    height: 4px;
+  }
+  .smallerSectionTitle {
+    font-size: 1.5rem;
+  }
+  .sectionTitleWhite {
+    font-size: 2rem;
+  }
 }
