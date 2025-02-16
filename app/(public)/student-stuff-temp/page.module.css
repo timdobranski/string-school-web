@@ -10,6 +10,22 @@
 
   /* border: solid red 2px; */
 }
+.sectionTitles {
+  color: var(--primary-blue);
+  margin: 2rem 0;
+  position: relative;
+  font-size: 2rem;
+  font-weight: 400;
+}
+.sectionTitles::after {
+  content: '';
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: var(--primary-gradient-darker);
+}
 .contentWrapper {
   width: 100%;
   max-width: 1200px;
@@ -57,6 +73,7 @@
 .label {
   margin: .25rem 0 1.5rem 0;
   width: 500px;
+  max-width: 90%;
   text-align: center;
 }
 .paymentsSectionWrapper, .formsWrapper, .resourcesWrapper {
@@ -66,7 +83,7 @@
   /* background: rgb(231, 231, 231); */
   /* background: linear-gradient(to right, rgba(0, 108, 166, .5), rgba(105, 242, 155, .5)); */
   width: 800px;
-  max-width: 90%;
+  max-width: 98%;
   padding: 0rem 0rem 2rem 0rem;
   margin-bottom: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -75,4 +92,15 @@
   align-items: center;
   flex-direction: column;
   padding-top: 1rem
+}
+@media(max-width: 768px) {
+  .wrapper {
+    padding: 2rem 1rem;
+  }
+  .paymentsSectionWrapper, .formsWrapper, .resourcesWrapper {
+    margin: 0;
+  }
+  .sectionTitles {
+    font-size: 1.5rem;
+  }
 }

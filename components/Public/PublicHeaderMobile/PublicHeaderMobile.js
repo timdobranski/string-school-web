@@ -98,20 +98,20 @@ export default function PublicHeaderMobile() {
 
 
         <div className={styles.navLink}>
-          <Link href="/public/home#book" onClick={handleCloseMenu}>FEATURES
+          <Link href="/home#book" onClick={handleCloseMenu}>FEATURES
           </Link>
         </div>
 
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/about-lessons" onClick={handleCloseMenu}>LESSON INFO
+            <Link href="/about-lessons" onClick={handleCloseMenu}>LESSON INFO
             </Link>
           </div>
         </div>
 
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/reviews" onClick={handleCloseMenu}>REVIEWS</Link>
+            <Link href="/reviews" onClick={handleCloseMenu}>REVIEWS</Link>
           </div>
         </div>
 
@@ -120,7 +120,7 @@ export default function PublicHeaderMobile() {
         </div> */}
 
         <div className={styles.navLink}>
-          <Link href='/students/login' onClick={handleCloseMenu}>STUDENT LOGIN</Link>
+          <Link href='/student-stuff-temp' onClick={handleCloseMenu}>STUDENTS</Link>
         </div>
 
       </div>

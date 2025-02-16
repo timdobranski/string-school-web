@@ -9,7 +9,7 @@ export default function StudentStuffTemp() {
       <h1 className={'sectionTitle'}>STUDENT STUFF</h1>
       <div className={styles.contentWrapper}>
         <p className={styles.text}>This page is temporary, and will soon be replaced with student login for access to an entirely new suite of resources. Until then, you can access the familiar links from the old site below:</p>
-        <p className='smallerSectionTitle'>SCHEDULING</p>
+        <p className={styles.sectionTitles}>SCHEDULING</p>
         <div className={styles.formsWrapper}>
           <div className={styles.navLink}>
             <a href='https://docs.google.com/document/d/18_k8ToYmk2PYpF2TiPqBhdFUpaXBPx7VqTcrwoZfQxk/edit?tab=t.0' target='blank'>VIEW SCHEDULE</a>
@@ -26,7 +26,7 @@ export default function StudentStuffTemp() {
           <p className={styles.label}>Use this form to schedule a make-up lesson for a past cancellation</p>
 
         </div>
-        <p className='smallerSectionTitle'>RESOURCES</p>
+        <p className={styles.sectionTitles}>RESOURCES</p>
         <div className={styles.resourcesWrapper}>
 
           <div className={styles.navLink}>
@@ -40,7 +40,7 @@ export default function StudentStuffTemp() {
           <p className={styles.label}>Browse sheet music here</p>
         </div>
         <div className={styles.navLink}>
-          <p className='smallerSectionTitle'>PAYMENTS</p>
+          <p className={styles.sectionTitles}>PAYMENTS</p>
         </div>
         <div className={styles.paymentsSectionWrapper}>
           <div className={styles.navLink}>
