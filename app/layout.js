@@ -12,7 +12,10 @@ config.autoAddCss = false;
 export const metadata = {
   title: 'The La Mesa String School',
   description: 'Modern, Innovative, & Fun Guitar Lessons',
-  metadatabase: new URL("https://string-school-web.vercel.app/")
+  metadataBase: new URL("https://string-school-web.vercel.app/"),
+  openGraph: {
+    images: "/images/opengraph-image.jpg",
+  },
 }
 
 export default function RootLayout({ children }) {
