@@ -11,7 +11,7 @@ config.autoAddCss = false;
 
 export const metadata = {
   title: 'The La Mesa String School',
-  description: 'Modern, Innovative, & Fun Guitar Lessons',
+  description: 'Modern, Fun & Innovative Guitar Lessons in La Mesa, CA',
   metadataBase: new URL("https://string-school-web.vercel.app/"),
   openGraph: {
     images: "/images/opengraph-image.jpg",
