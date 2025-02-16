@@ -54,7 +54,7 @@ export default function Home() {
 
       } else {
         console.log('No session');
-        router.push('/public/home')
+        router.push('/home')
       }
     };
     checkSession();

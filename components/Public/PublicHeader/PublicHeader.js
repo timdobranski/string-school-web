@@ -55,7 +55,7 @@ export default function PublicHeader() {
       {/* left side of header */}
       <div className={styles.leftSideNav}>
         <div className={styles.logoWrapper}>
-          <Link href='/public/home'>
+          <Link href='/home'>
             <img src='/images/logos/final-title.png' alt="La Mesa String School Logo" className={styles.logo}/>
             {/* <img src='/images/logos/icon-blue-background.png' alt="La Mesa String School Logo" className={styles.iconLogo}/> */}
 
@@ -74,39 +74,39 @@ export default function PublicHeader() {
 
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/home">FEATURES
+            <Link href="/home">FEATURES
               <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
             </Link>
           </div>
           <div className={styles.dropdown}>
-            <Link href="/public/home#book">THE BOOK</Link>
-            <Link href="/public/home#stringSchoolApp">THE STRING SCHOOL APP</Link>
-            <Link href="/public/home#concerts">STUDENT CONCERTS</Link>
-            <Link href="/public/home#studio">STUDIO</Link>
-            <Link href="/public/home#progress">PROGRESS TRACKING</Link>
-            <Link href="/public/home#stringsmith">STRINGSMITH</Link>
-            <Link href="/public/home#guitarPro">GUITAR PRO 8</Link>
-            <Link href="/public/home#future">THE FUTURE</Link>
+            <Link href="/home#book">THE BOOK</Link>
+            <Link href="/home#stringSchoolApp">THE STRING SCHOOL APP</Link>
+            <Link href="/home#concerts">STUDENT CONCERTS</Link>
+            <Link href="/home#studio">STUDIO</Link>
+            <Link href="/home#progress">PROGRESS TRACKING</Link>
+            <Link href="/home#stringsmith">STRINGSMITH</Link>
+            <Link href="/home#guitarPro">GUITAR PRO 8</Link>
+            <Link href="/home#future">THE FUTURE</Link>
           </div>
         </div>
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/about-lessons">LESSON INFO
+            <Link href="/about-lessons">LESSON INFO
               <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
             </Link>
           </div>
           <div className={styles.dropdown}>
-            <Link href="/public/about-lessons#approach">TEACHING APPROACH</Link>
-            <Link href="/public/about-lessons#details">WHEN, WHERE & HOW MUCH</Link>
-            <Link href="/public/about-lessons#policies">ATTENDANCE POLICIES</Link>
-            <Link href="/public/about-lessons#studio">SEE THE STUDIO</Link>
-            <Link href="/public/about-lessons#tim">ABOUT ME</Link>
+            <Link href="/about-lessons#approach">TEACHING APPROACH</Link>
+            <Link href="/about-lessons#details">WHEN, WHERE & HOW MUCH</Link>
+            <Link href="/about-lessons#policies">ATTENDANCE POLICIES</Link>
+            <Link href="/about-lessons#studio">SEE THE STUDIO</Link>
+            <Link href="/about-lessons#tim">ABOUT ME</Link>
           </div>
         </div>
 
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
-            <Link href="/public/reviews">REVIEWS</Link>
+            <Link href="/reviews">REVIEWS</Link>
           </div>
           {/* <div className={styles.dropdown}>
             <Link href="/public/about-me#section1">TEACHING APPROACH</Link>
@@ -121,12 +121,12 @@ export default function PublicHeader() {
         </div> */}
 
         <div className={styles.navLink}>
-          <Link href='/students/login'>STUDENT LOGIN</Link>
+          <Link href='/student-stuff-temp'>STUDENTS</Link>
         </div>
 
 
         <div className={styles.bookingLink}>
-          <Link href='/public/book-intro'>BOOK AN INTRO</Link>
+          <Link href='/book-intro'>BOOK AN INTRO</Link>
         </div>
 
       </div>

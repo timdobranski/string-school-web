@@ -1,6 +1,6 @@
 .wrapper {
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 118px);
   object-fit: cover;
   position: relative;
   overflow: hidden;
@@ -18,10 +18,10 @@
 }
 .videoWrapper {
   position: relative;
-  width: 100%;
-  height: 100vh; /* Match the height you're using for the video */
-  overflow: hidden; /* Prevent overlay overflow */
+  /* width: 100%; */
+  height: 100%; /* Match the height you're using for the video */
   z-index: -1;
+
   /* border: solid red 4px; */
 }
 .video {
@@ -93,7 +93,7 @@
 .icon {
   position: absolute;
   left: 50%;
-  bottom: -5rem;
+  bottom: 2rem;
   color: black;
   cursor: pointer;
   margin-top: 6rem;
@@ -118,19 +118,27 @@
 @media(max-width: 768px) {
   .wrapper {
     width: 100vw;
-    height: 80vh;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    /* height: 80vh; */
   }
   .videoWrapper {
-    width: 100vw;
-    object-position: 75% top;
-    object-fit: cover;
+    /* width: 100vw; */
+    /* object-position: 75% top; */
+    /* object-fit: cover; */
+    margin: 0;
+    padding: 0;
+    /* display: inline-block; */
   }
   .image, .video {
-    height: 100%;
-    width: 100vw;
+    /* height: 100%; */
 
-    object-position: center;
-
+  }
+  .video {
+    /* border: solid blue 3px; */
+    /* width: 100%; */
+    /* height: fit-content */
   }
   .contentWrapper {
     /* border: solid red 4px; */
@@ -141,5 +149,17 @@
   }
   .title {
 
+  }
+  .icon {
+    display: none
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

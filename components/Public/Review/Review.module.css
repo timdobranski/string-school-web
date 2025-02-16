@@ -3,7 +3,7 @@
   margin: 2rem 0;
   padding: 1rem 2rem;
   position: relative;
-  border-radius: .75rem;
+  /* border-radius: .75rem; */
   background: white;
 }
 .header {
@@ -63,8 +63,8 @@
 }
 .starIcon {
   color: rgb(247, 210, 0);
-  /* color: var(--primary-blue); */
-  /* color: rgb(132, 132, 132); */
+  color: var(--primary-blue);
+  /* color: rgb(79, 207, 113); */
   font-size: 1.25rem;
 }
 .text {

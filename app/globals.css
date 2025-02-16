@@ -170,6 +170,9 @@ p {
 .smallerSectionTitle, .smallerSectionTitleWhite {
   font-size: 2rem;
 }
+.smallerSectionTitle::after, .smallerSectionTitleWhite::after {
+  bottom: 2px;
+}
 .sectionTitleWhite, .smallerSectionTitleWhite {
   color: white;
 }

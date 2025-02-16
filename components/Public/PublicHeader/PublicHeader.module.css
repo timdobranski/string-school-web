@@ -5,7 +5,7 @@
   z-index: 1;
   width: 100%;
   /* padding: .5rem; */
-  height: 1000px;
+  /* height: 1000px; */
   background: rgba(0, 0, 0, 0.4);
   background: rgb(46, 46, 46);
   /* background: black; */
@@ -111,6 +111,7 @@
   /* color: white; */
   background: var(--primary-gradient);
   transform: scale(1.1);
+  outline: solid 1px rgb(118, 236, 185);
 }
 
 .dropdown {
@@ -175,7 +176,7 @@
 .icon {
   margin: 0 0 .125rem .5rem;
   font-size: 1rem;
-  color: var(--primary-blue);
+  /* color: var(--primary-blue); */
   transition: transform 0.5s;
 }
 
