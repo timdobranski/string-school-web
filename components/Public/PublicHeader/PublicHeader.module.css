@@ -16,6 +16,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+
+  background: var(--primary-blue);
+  color: white;
+
 }
 .leftSideNav, .rightSideNav {
   display: flex;
@@ -103,15 +108,19 @@
   padding: 0.5rem 0.75rem 0.25rem 0.75rem;
   text-align: center;
   position: relative;
+  border-radius: 4px;
   /* border: solid 1px black; */
+
+
+  color: white;
 }
 
 .navLink:hover {
   cursor: pointer;
   /* color: white; */
+  color: black;
   background: var(--primary-gradient);
   transform: scale(1.1);
-  outline: solid 1px rgb(118, 236, 185);
 }
 
 .dropdown {
@@ -152,9 +161,8 @@
 
 
 .bookingLink {
-  /* border: solid red 1px; */
+  border-radius: 4px;
   box-shadow: 0 0  4px 0 rgba(0, 0, 0, 0.4);
-  /* border: solid 1px rgb(0, 216, 94); */
   font-size: 1.25rem;
   font-weight: bold;
   position: relative;
@@ -162,11 +170,18 @@
   padding: .5rem 1rem;
   margin: .5rem 1rem;
   font-weight: bold;
-  background: var(--primary-gradient);
+  background: var(--primary-blue);
+  color: white;
   transition: transform 0.5s;
   height: fit-content;
   text-align: center;
-
+  color: black;
+  background: var(--primary-gradient);
+  padding-top: .75rem;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+.bookingLink a {
+  /* font-weight: 400; */
 }
 .bookingLink:hover {
   cursor: pointer;

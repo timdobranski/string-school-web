@@ -56,7 +56,7 @@ export default function PublicHeader() {
       <div className={styles.leftSideNav}>
         <div className={styles.logoWrapper}>
           <Link href='/home'>
-            <img src='/images/logos/final-title.png' alt="La Mesa String School Logo" className={styles.logo}/>
+            <img src='/images/logos/final-title-white.png' alt="La Mesa String School Logo" className={styles.logo}/>
             {/* <img src='/images/logos/icon-blue-background.png' alt="La Mesa String School Logo" className={styles.iconLogo}/> */}
 
           </Link>
@@ -126,7 +126,7 @@ export default function PublicHeader() {
 
 
         <div className={styles.bookingLink}>
-          <Link href='/book-intro'>BOOK AN INTRO</Link>
+          <Link href='/book-intro'>SCHEDULE A FREE INTRO</Link>
         </div>
 
       </div>
