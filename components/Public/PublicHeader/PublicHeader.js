@@ -79,11 +79,11 @@ export default function PublicHeader() {
             </Link>
           </div>
           <div className={styles.dropdown}>
-            <Link href="/home#book">THE BOOK</Link>
             <Link href="/home#stringSchoolApp">THE STRING SCHOOL APP</Link>
             <Link href="/home#concerts">STUDENT CONCERTS</Link>
             <Link href="/home#studio">STUDIO</Link>
             <Link href="/home#progress">PROGRESS TRACKING</Link>
+            <Link href="/home#book">TEXTBOOK</Link>
             <Link href="/home#stringsmith">STRINGSMITH</Link>
             <Link href="/home#guitarPro">GUITAR PRO 8</Link>
             <Link href="/home#future">THE FUTURE</Link>
@@ -126,8 +126,12 @@ export default function PublicHeader() {
 
 
         <div className={styles.bookingLink}>
-          <Link href='/book-intro'>SCHEDULE A FREE INTRO</Link>
+          <Link href='/contact'>SCHEDULE A FREE INTRO</Link>
         </div>
+
+        {/* <div className={styles.bookingLink}>
+          <Link href='/book-intro'>tim@LaMesaStringSchool.com</Link>
+        </div> */}
 
       </div>
 

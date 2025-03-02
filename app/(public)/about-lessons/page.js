@@ -1,6 +1,7 @@
 'use client'
 
 import styles from './about-lessons.module.css'
+import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -21,6 +22,9 @@ export default function AboutLessons() {
   const lobbyPhotos = ['/images/lobby/1.webp', '/images/lobby/2.webp', '/images/lobby/3.webp', '/images/lobby/4.webp'];
   const lobbyCaptions = ['Waiting Room(daytime)', 'Waiting Room(daytime)', 'Waiting Room(nighttime)', 'Waiting Room(nighttime)'];
   const outsidePhotos= ['/images/outside/1.webp', '/images/outside/2.webp']
+
+  const [studioCarousel, setStudioCarousel] = useState('videos');
+  const [lobbyCarousel, setLobbyCarousel] = useState('videos');
 
   const concertPhotos = [
     {image: '/images/me/me.webp',

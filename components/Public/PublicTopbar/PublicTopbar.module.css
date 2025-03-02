@@ -6,7 +6,7 @@
   color: rgb(0, 0, 0);
   background: var(--primary-gradient);
   background: rgb(0, 106, 152);
-  /* background: linear-gradient(to right, rgb(72, 208, 250), rgb(0, 115, 181)); */
+  background: linear-gradient(to right, rgb(251, 138, 85), rgb(255, 253, 134));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@
   padding: .25rem;
 
 
-  background: white;
+  /* background: white; */
 }
 .messageText {
   color: white;

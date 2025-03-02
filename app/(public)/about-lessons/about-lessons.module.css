@@ -10,8 +10,8 @@
   background: var(--lightBackground1);
   position: relative;
   width: 100%;
-  padding: 2rem 0;
-  margin-top: 0;
+  padding: 6rem 0 2rem 0;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -384,6 +384,12 @@ justify-content: center;
   }
   .slideButtonRight, .slideButtonRightDisabled {
     right: 10px;
+  }
+  .section1Container, .section2Container, .section3Container, .section4Container, .section5Container {
+    padding: 4rem 0 0 0;
+  }
+  .section4Container {
+    padding-bottom: 4rem
   }
 
 }

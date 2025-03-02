@@ -32,7 +32,7 @@
   background: rgb(46, 46, 46);
   /* background: black; */
   background: white;
-  backdrop-filter: blur(5px);
+  /* backdrop-filter: blur(5px); */
   /* border-bottom: solid 1px rgb(103, 103, 103); */
   display: flex;
   flex-direction: row;
@@ -44,6 +44,8 @@
   display: none;
   /* overflow-x: hidden; */
   /* border: solid red 4px; */
+  background: var(--primary-blue);
+
 }
 .leftSideNav, .rightSideNav {
   display: flex;

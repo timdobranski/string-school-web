@@ -8,7 +8,8 @@ export default function StudentStuffTemp() {
     <div className={styles.wrapper}>
       <h1 className={'sectionTitle'}>STUDENT STUFF</h1>
       <div className={styles.contentWrapper}>
-        <p className={styles.text}>This page is temporary, and will soon be replaced with student login for access to an entirely new suite of resources. Until then, you can access the familiar links from the old site below:</p>
+        <p className={styles.text}>This page is temporary, and will soon be replaced with student login for access to an entirely new suite of features and resources. Until then, you can access the familiar links from the old site below:</p>
+        <p className={styles.text}>The old login is no longer necessary; all files are temporarily available freely until the new system is in place.</p>
         <p className={styles.sectionTitles}>SCHEDULING</p>
         <div className={styles.formsWrapper}>
           <div className={styles.navLink}>

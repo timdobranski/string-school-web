@@ -75,7 +75,7 @@ export default function PublicHeaderMobile() {
 
         <div className={styles.logoWrapper}>
           <Link href='/public/home' onClick={handleCloseMenu}>
-            <img src='/images/logos/final-title.png' alt="La Mesa String School Logo" className={styles.logo}/>
+            <img src='/images/logos/final-title-white.png' alt="La Mesa String School Logo" className={styles.logo}/>
           </Link>
         </div>
 
@@ -98,7 +98,7 @@ export default function PublicHeaderMobile() {
 
 
         <div className={styles.navLink}>
-          <Link href="/home#book" onClick={handleCloseMenu}>FEATURES
+          <Link href="/home#stringSchoolApp" onClick={handleCloseMenu}>FEATURES
           </Link>
         </div>
 
@@ -123,11 +123,12 @@ export default function PublicHeaderMobile() {
           <Link href='/student-stuff-temp' onClick={handleCloseMenu}>STUDENTS</Link>
         </div>
 
+        <div className={styles.bookingLink}>
+          <Link href='/contact' onClick={handleCloseMenu}>BOOK AN INTRO</Link>
+        </div>
+
       </div>
 
-      {/* <div className={styles.bookingLink}>
-          <Link href='/public/book-intro'>BOOK AN INTRO</Link>
-        </div> */}
 
 
       {/* {signedIn ? settingsButton : loginButton} */}

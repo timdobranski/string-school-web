@@ -1,0 +1,115 @@
+.wrapper {
+  /* background: var(--lightBackground1); */
+  background-color: white;
+  width: 100%;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.25rem;
+
+  /* border: solid red 2px; */
+}
+.sectionTitles {
+  color: var(--primary-blue);
+  margin: 2rem 0;
+  position: relative;
+  font-size: 2rem;
+  font-weight: 400;
+}
+.sectionTitles::after {
+  content: '';
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: var(--primary-gradient-darker);
+}
+.contentWrapper {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem
+}
+.text {
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+.formsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.navLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.navLink a {
+  margin: 1rem 0;
+  color: var(--primary-blue);
+  background: var(--primary-gradient-darker);
+  padding: 1.25rem 1.5rem 1rem 1.5rem;
+  /* outline: solid 4px white; */
+  color: black;
+  text-decoration-color: rgb(116, 225, 141);
+  text-underline-offset: 2px;
+  transition: transform .2s;
+  /* border-radius: 2rem; */
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+.navLink a:hover {
+  /* border-color: white; */
+  transform: scale(1.1);
+}
+.label {
+  margin: .25rem 0 1.5rem 0;
+  width: 500px;
+  max-width: 90%;
+  text-align: center;
+}
+.paymentsSectionWrapper, .formsWrapper, .resourcesWrapper {
+  background: white;
+  background: var(--primary-blue);
+  color: white;
+  /* background: rgb(231, 231, 231); */
+  /* background: linear-gradient(to right, rgba(0, 108, 166, .5), rgba(105, 242, 155, .5)); */
+  width: 800px;
+  max-width: 98%;
+  padding: 0rem 0rem 2rem 0rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 1rem
+}
+.link {
+  background: none !important;
+  box-shadow: none !important;
+  color: white !important;
+  padding: unset !important;
+  text-decoration: underline;
+  font-weight: bold;
+}
+@media(max-width: 768px) {
+  .wrapper {
+    padding: 2rem 1rem;
+  }
+  .paymentsSectionWrapper, .formsWrapper, .resourcesWrapper {
+    margin: 0;
+  }
+  .sectionTitles {
+    font-size: 1.5rem;
+  }
+}

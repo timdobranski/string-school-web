@@ -11,7 +11,7 @@ export default function PublicLayout({ children }) {
   return (
     <>
       <PublicheaderMobile/>
-      <PublicTopbar/>
+      {/* <PublicTopbar/> */}
       <PublicHeader/>
       {children}
       {/* <div className={styles.studentLoginWrapper}>

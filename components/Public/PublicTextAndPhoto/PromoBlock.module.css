@@ -96,6 +96,9 @@
 }
 
 @media(max-width: 768px) {
+  .text {
+    font-size: 1.5rem;
+  }
   .background {
     padding: 2rem 0;
     border: none;
@@ -113,6 +116,9 @@
   }
   .textSide, .photoSide {
     width: 100%;
+  }
+  .textSide {
+    padding: 0 .5rem;
   }
   .photoSide {
     padding: 1rem 0;

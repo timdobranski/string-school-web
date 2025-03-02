@@ -20,7 +20,7 @@ export default function PublicHeader() {
       </div> */}
 
       <img src="/images/logos/final-title-white.png" alt="La Mesa String School Logo" className={styles.logo}/>
-      <p className={styles.text}>Copyright 2024, Tim Dobranski</p>
+      {/* <p className={styles.text}>Copyright 2024, Tim Dobranski</p> */}
     </div>
   )
 
