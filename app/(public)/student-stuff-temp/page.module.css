@@ -95,13 +95,14 @@
   padding-top: 1rem
 }
 @media(max-width: 768px) {
+
   .wrapper {
     padding: 2rem 1rem;
   }
   .paymentsSectionWrapper, .formsWrapper, .resourcesWrapper {
     margin: 0;
   }
-  .sectionTitles {
+  .sectionTitles, .label, .text {
     font-size: 1.5rem;
   }
 }

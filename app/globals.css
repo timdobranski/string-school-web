@@ -367,5 +367,8 @@ border-radius: 0px;
   .sectionTitleDesktop {
     display: none;
   }
+  .text, .whiteText {
+    font-size: 1.5rem;
+  }
 
 }

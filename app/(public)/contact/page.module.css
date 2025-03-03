@@ -103,6 +103,11 @@
   font-weight: bold;
 }
 @media(max-width: 768px) {
+  .label {
+    font-size: 1.5rem;
+    width: 90%;
+    max-width: 90% !important;
+  }
   .wrapper {
     padding: 2rem 1rem;
   }
