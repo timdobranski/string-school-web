@@ -74,7 +74,7 @@ export default function PublicHeaderMobile() {
         {/* left side of header */}
 
         <div className={styles.logoWrapper}>
-          <Link href='/public/home' onClick={handleCloseMenu}>
+          <Link href='/home' onClick={handleCloseMenu}>
             <img src='/images/logos/final-title-white.png' alt="La Mesa String School Logo" className={styles.logo}/>
           </Link>
         </div>
