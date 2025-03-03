@@ -80,7 +80,10 @@
   margin-bottom: 2rem;
 }
 
-
+.scheduleTable td {
+  color: black;
+  font-size: 1.5rem;
+}
 .lessonInfoWrapper, .lessonInfoWrapperMidMargin {
   display: flex;
   flex-direction: row;

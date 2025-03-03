@@ -39,6 +39,7 @@
 .text {
   margin: 0 0 1rem 0;
   text-align: center;
+  color: black
 }
 .formsWrapper {
   display: flex;

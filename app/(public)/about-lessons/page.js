@@ -122,7 +122,7 @@ export default function AboutLessons() {
             <table className={styles.scheduleTable}>
               <tbody>
                 <tr>
-                  <td className={styles.days}>Mon-Thurs</td>
+                  <td className={styles.days}>Mon-Thu</td>
                   <td className={styles.times}>4:30pm - 8:00pm</td>
                 </tr>
                 <tr>

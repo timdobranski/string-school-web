@@ -19,7 +19,7 @@ export default function ReviewsPage() {
       /> */}
       <div className={styles.reviewsWrapper}>
         <div className={styles.contentWrapper}>
-        <h1 className={'sectionTitle'}>REVIEWS</h1>
+          <h1 className={'sectionTitle'}>REVIEWS</h1>
           <p className={styles.text}>{`I'm very proud of the feedback I've received from my students over the years. My students have become
         friends and even neighbors. See what everyone is saying about their experience learning with me below:`}</p>
 
