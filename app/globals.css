@@ -242,6 +242,9 @@ border-radius: 0px;
   margin: .5rem;
   line-height: 1.2;
 }
+.text {
+  color: black;
+}
 .whiteText {
   color: white;
 }
