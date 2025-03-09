@@ -55,6 +55,7 @@ export default function Progress() {
 
   if (supabaseUserData && student && lessonLogs && setlist) {
     return (
+      <div className='studentPageWrapper'>
       <div className='infoCard'>
         <h1 className='sectionHeader'>Progress</h1>
 
@@ -75,9 +76,8 @@ export default function Progress() {
         <p className='featureComments'>{`Skills You've Learned, Shown In Relation To Different Skills Paths`}</p>
         <Link href='/students/progress/skills'><p className='text'>View All Skills</p></Link>
 
-
-
       </div>
+    </div>
     )
   } else {
     return <p>Loading...</p>

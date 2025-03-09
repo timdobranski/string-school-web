@@ -30,18 +30,16 @@ export default function ViewStudent() {
       <div className='studentPageWrapper'>
       <div className='infoCard'>
         <p className='sectionHeaders'>{`${studentData.info.first_name} ${studentData.info.last_name}`}</p>
-        <div className={styles.lessonLogsWrapper}>
-          <h3 className='featureHeaders'>LESSON LOGS</h3>
-
-          {studentData.lessonLogs.slice(0, 4).map((log, index) => {
+          {/* lesson logs - renders most recent 4 */}
+          <h3 className='smallerSectionTitleWhite'>LESSON LOGS</h3>
+          { studentData.lessonLogs.slice(0, 4).map((log, index) => {
             return (
               <LessonLog log={log} key={index} />
             )
-          }
-          )}
-        </div>
-        <div className={styles.lessonLogsWrapper}>
-          <h3 className='featureHeaders'>PRACTICE SESSIONS</h3>
+          })}
+
+<div className={styles.lessonLogsWrapper}>
+          <h3 className='smallerSectionTitleWhite'>PRACTICE SESSIONS</h3>
           <div className={styles.practiceSessionsHeader}>
             <h3>Date</h3>
             <h3>Duration</h3>
@@ -58,7 +56,7 @@ export default function ViewStudent() {
         {/* main wrapper for song AND skills */}
         <div className={styles.songsAndSkillsWrapper}>
           <div className={styles.songsWrapper}>
-            <h3 className='featureHeaders'>SETLIST SONGS</h3>
+            <h3 className='smallerSectionTitleWhite'>SETLIST SONGS</h3>
 
             <div className={styles.allSongsWrapper}>
               <div className={styles.setlistSongsWrapper}>
@@ -86,7 +84,7 @@ export default function ViewStudent() {
           </div>
 
           <div className={styles.skillsWrapper}>
-            <h3 className='featureHeaders'>SKILLS</h3>
+            <h3 className='smallerSectionTitleWhite'>SKILLS</h3>
             <div className={styles.skillListWrapper}>
               <div className={styles.skillListHeader}>
                 <p className={styles.skillName}>Skill</p>
@@ -110,13 +108,13 @@ export default function ViewStudent() {
 
         {/* payments */}
         <div className={styles.paymentsWrapper}>
-          <h3 className='featureHeaders'>PAYMENTS & ATTENDANCE</h3>
+          <h3 className='smallerSectionTitleWhite'>PAYMENTS & ATTENDANCE</h3>
           <PaymentsTable payments={studentData.payments} />
         </div>
 
         {/* contacts */}
         <div className={styles.contactsWrapper}>
-          <h3 className='featureHeaders'>CONTACTS</h3>
+          <h3 className='smallerSectionTitleWhite'>CONTACTS</h3>
           <ContactsTable contacts={studentData.contacts} />
         </div>
       </div>

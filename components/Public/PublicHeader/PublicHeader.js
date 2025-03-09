@@ -75,7 +75,7 @@ export default function PublicHeader() {
       <div className={styles.navLinkContainer}>
         <div className={styles.navLink}>
           <Link href="/home" className={isActive('/home')}>
-            FEATURES <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
+            HOME <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
           </Link>
         </div>
         <div className={styles.dropdown}>
@@ -108,7 +108,7 @@ export default function PublicHeader() {
       {createNavLink('/reviews', 'REVIEWS')}
       {createNavLink('/student-stuff-temp', 'STUDENTS')}
       <div className={styles.bookingLink}>
-        {createNavLink('/contact', 'SCHEDULE A FREE INTRO')}
+        <Link href="/contact">SCHEDULE A FREE INTRO</Link>
       </div>
     </>
   );
@@ -152,7 +152,7 @@ export default function PublicHeader() {
         {!signedIn && publicLinks}
         {signedIn && userEmail === 'tim@lamesastringschool.com' && teacherTitle}
         {signedIn && userEmail !== 'tim@lamesastringschool.com' && studentLinks}
-        {signedIn ? settingsButton : loginButton}
+        {/* {signedIn ? settingsButton : loginButton} */}
       </div>
     </div>
   );
