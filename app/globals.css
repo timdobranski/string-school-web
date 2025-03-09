@@ -218,7 +218,7 @@ p {
   margin: 2rem;
   padding: 2rem;
   /* border:rgb(72, 72, 72) solid 1px; */
-  border-radius: 10px;
+  /* border-radius: 10px; */
   min-height: 500px;
   min-width: 1000px;
   font-family: JennaSue;
@@ -272,15 +272,14 @@ p {
   -webkit-background-clip: text;
   background-clip: text;
   color: white;
-  /* font-family: Economica; */
-  margin-top: 2rem;
   font-size: 2rem;
   text-decoration: underline;
   margin-bottom: 1rem;
   font-weight: 400;
   width: fit-content;
   margin: 0 auto;
-  margin-bottom: 1rem;;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 .pageHeaders {
   font-size: 3rem;

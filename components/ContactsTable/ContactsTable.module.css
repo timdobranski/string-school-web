@@ -4,18 +4,18 @@
   border: none;
 }
 .contactsTable th {
-  color: rgb(128, 255, 128);
+  /* color: rgb(128, 255, 128); */
   font-size: 1.75rem;
   padding-bottom: 1rem;
 }
 .contactsTableBody tr {
-  border: solid 1px rgb(71, 71, 71);
+  /* border: solid 1px rgb(71, 71, 71); */
 }
 .contactsTableBody td {
   font-size: 1.25rem;
   margin: .5rem;
   padding: .75rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
 
 }
 .th-name {

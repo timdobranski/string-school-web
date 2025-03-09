@@ -1,10 +1,10 @@
 .lessonLogWrapper {
   width: 100%;
   position: relative;
-  margin: .5rem 0rem .5rem 0rem;
-  padding: .5rem 1rem .5rem 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  border: solid 1px rgb(71, 71, 71)
+  margin: 1rem 0rem 1rem 0rem;
+  padding: 1rem 1rem 1.5rem 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  /* border: solid 1px rgb(71, 71, 71) */
 }
 .lessonLogWrapper * {
   display: inline-block;
@@ -28,8 +28,9 @@
   display: inline-block;
   text-align: center;
   font-size: 1.25rem;
-  color: rgb(128, 255, 128);
+  /* color: rgb(128, 255, 128); */
   text-decoration: underline;
+  /* text-decoration-color: rgb(150, 255, 150); */
 }
 .lessonLogHeader {
   display: block;

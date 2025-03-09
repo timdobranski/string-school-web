@@ -20,7 +20,7 @@ export default function ScheduleMakeup() {
 
   return (
 
-    <div className='infoCard'>
+    <div className='studentPageWrapper'>
 
       {step === 1 ? <ChooseMakeup setStep={setStep} setMakeup={setMakeup} /> : null}
       {step === 2 ? <ConfirmMakeup setStep={setStep} user={supabaseUserData} student={student} makeup={makeup}  /> : null}

@@ -3,7 +3,7 @@
   /* border-collapse: collapse; */
   margin-top: 2rem;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   border: solid 1px rgb(71, 71, 71);
   padding: .5rem;
 }

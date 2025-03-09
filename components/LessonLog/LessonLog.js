@@ -10,9 +10,9 @@ export default function StudentLessonLog({ log }) {
     <div className={styles.lessonLogWrapper}>
       <h1 className={styles.date}>{date}</h1>
       <div className={styles.lessonLogsHeader}>
-        <h3>Lesson Summary</h3>
-        <h3>Practice</h3>
-        <h3>Notes</h3>
+        <h3>LESSON SUMMARY</h3>
+        <h3>PRACTICE</h3>
+        <h3>NOTES</h3>
 
       </div>
       <div className={styles.logRowContainer}>

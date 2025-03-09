@@ -122,6 +122,7 @@ export default function PublicHeader() {
       {createNavLink('/students/progress', 'PROGRESS')}
       {createNavLink('/students/practice', 'PRACTICE')}
       {createNavLink('/students/payments', 'PAYMENTS')}
+      {createNavLink('/students/announcements', 'ANNOUNCEMENTS')}
     </>
   );
 

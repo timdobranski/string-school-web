@@ -4,7 +4,7 @@ import styles from './view-student.module.css';
 import getStudentData from '../../../utils/getStudentData';
 import { useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react';
-import StudentLessonLog from '../../../components/TeacherComponents/StudentLessonLog/StudentLessonLog.js';
+import LessonLog from '../../../components/LessonLog/LessonLog.js';
 import StudentPracticeSession from '../../../components/TeacherComponents/StudentPracticeSession/StudentPracticeSession.js';
 import PaymentsTable from '../../../components/PaymentsTable/PaymentsTable';
 import ContactsTable from '../../../components/ContactsTable/ContactsTable';
@@ -27,20 +27,21 @@ export default function ViewStudent() {
 
   if (studentData) {
     return (
+      <div className='studentPageWrapper'>
       <div className='infoCard'>
         <p className='sectionHeaders'>{`${studentData.info.first_name} ${studentData.info.last_name}`}</p>
         <div className={styles.lessonLogsWrapper}>
-          <h3 className='featureHeaders'>Lesson Logs</h3>
+          <h3 className='featureHeaders'>LESSON LOGS</h3>
 
           {studentData.lessonLogs.slice(0, 4).map((log, index) => {
             return (
-              <StudentLessonLog log={log} key={index} />
+              <LessonLog log={log} key={index} />
             )
           }
           )}
         </div>
         <div className={styles.lessonLogsWrapper}>
-          <h3 className='featureHeaders'>Practice Sessions</h3>
+          <h3 className='featureHeaders'>PRACTICE SESSIONS</h3>
           <div className={styles.practiceSessionsHeader}>
             <h3>Date</h3>
             <h3>Duration</h3>
@@ -57,7 +58,7 @@ export default function ViewStudent() {
         {/* main wrapper for song AND skills */}
         <div className={styles.songsAndSkillsWrapper}>
           <div className={styles.songsWrapper}>
-            <h3 className='featureHeaders'>Setlist Songs</h3>
+            <h3 className='featureHeaders'>SETLIST SONGS</h3>
 
             <div className={styles.allSongsWrapper}>
               <div className={styles.setlistSongsWrapper}>
@@ -85,7 +86,7 @@ export default function ViewStudent() {
           </div>
 
           <div className={styles.skillsWrapper}>
-            <h3 className='featureHeaders'>Skills</h3>
+            <h3 className='featureHeaders'>SKILLS</h3>
             <div className={styles.skillListWrapper}>
               <div className={styles.skillListHeader}>
                 <p className={styles.skillName}>Skill</p>
@@ -109,16 +110,17 @@ export default function ViewStudent() {
 
         {/* payments */}
         <div className={styles.paymentsWrapper}>
-          <h3 className='featureHeaders'>Payment History</h3>
+          <h3 className='featureHeaders'>PAYMENTS & ATTENDANCE</h3>
           <PaymentsTable payments={studentData.payments} />
         </div>
 
         {/* contacts */}
         <div className={styles.contactsWrapper}>
-          <h3 className='featureHeaders'>Contacts</h3>
+          <h3 className='featureHeaders'>CONTACTS</h3>
           <ContactsTable contacts={studentData.contacts} />
         </div>
       </div>
+    </div>
     )
 
   }
