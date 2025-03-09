@@ -1,5 +1,5 @@
-import styles from './StudentLessonLog.module.css';
-import dateFormatter from '../../../utils/dateFormatter';
+import styles from './LessonLog.module.css';
+import dateFormatter from '../../utils/dateFormatter';
 
 export default function StudentLessonLog({ log }) {
 

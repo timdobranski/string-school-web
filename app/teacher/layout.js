@@ -1,9 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
-import StudentNavbar from '../../components/StudentComponents/StudentNavbar/StudentNavbar';
-import StudentHeader from '../../components/StudentComponents/StudentHeader/StudentHeader';
-import PublicHeader from '../../components/Public/PublicHeader/PublicHeader';
+import Header from '../../components/Public/PublicHeader/PublicHeader';
 import { supabase } from '../../utils/supabase';
 import { useRouter } from 'next/navigation';
 
@@ -114,7 +112,7 @@ export function useAuth() {
 export default function StudentContext({ children }) {
   return (
     <AuthProvider>
-      <PublicHeader />
+      <Header />
       {/* <StudentNavbar /> */}
       <main>{children}</main>
     </AuthProvider>

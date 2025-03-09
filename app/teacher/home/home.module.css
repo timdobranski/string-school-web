@@ -7,6 +7,13 @@
   background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
   animation : transform 2s;
 }
+.headerWrapper {
+  background: var(--primary-blue);
+  width: 100%;
+}
+.logo {
+  height: 100px;
+}
 .signOutButton:hover {
   cursor: pointer;
 }

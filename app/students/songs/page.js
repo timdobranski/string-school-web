@@ -75,10 +75,11 @@ export default function Songs() {
 
 
   return (
-    <main className='infoCard'>
-      <h2 className='featureHeaders'>Search The Song Library</h2>
+    <div className='studentPageWrapper'>
+    <div className='infoCard'>
+      <h2 className='smallerSectionTitleWhite'>Search The Song Library</h2>
       <SongSearch context='student'/>
-      <h2 className='featureHeaders'>Or Browse All Songs By Category</h2>
+      <h2 className='smallerSectionTitleWhite'>Or Browse All Songs By Category</h2>
 
       <SongBrowser folderOptions={browseFolderOptions} />
 
@@ -96,15 +97,16 @@ export default function Songs() {
 
       {/* Render setlist songs, if any*/}
       {setlistSongs.length > 0 ? (
-        <>
-          <h2 className='featureHeaders'>Setlist Songs</h2>
+        <div className={styles.setlistWrapper}>
+          <h2 className='smallerSectionTitleWhite'>Setlist Songs</h2>
           {setlistSongs.map((file, index) => (
             <div key={index} className={styles.searchResult}>
               <p className='linkedText'>{file.songs.title}</p>
             </div>
           ))}
-        </>
+        </div>
       ) : null}
-    </main>
+    </div>
+  </div>
   );
 }

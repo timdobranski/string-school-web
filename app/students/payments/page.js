@@ -48,7 +48,7 @@ export default function Payments() {
 
   if (supabaseUserData && student && payments) {
     return (
-      <div>
+      <div className='studentPageWrapper'>
         <div className='infoCard'>
         <h1 className='sectionHeaders'>Payments</h1>
         <h2 className='featureHeaders'>

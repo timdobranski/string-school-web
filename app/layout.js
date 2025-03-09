@@ -1,5 +1,4 @@
 import './globals.css';
-import Header from '../components/Header/Header';
 import Image from 'next/image';
 import background from '../public/images/background.jpeg';
 import '@fortawesome/fontawesome-svg-core/styles.css';

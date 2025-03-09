@@ -61,7 +61,7 @@
 }
 .searchResult button {
   background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
-
+  border: solid red 4px;
   border: none;
   font-size: 1.25rem;
 }
@@ -108,4 +108,7 @@
   width: 100vw;
   height: 100vh;
   background-color: red;
+}
+.setlistWrapper {
+  margin-top: 6rem;
 }

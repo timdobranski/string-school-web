@@ -3,7 +3,7 @@
   position: relative;
   margin: .5rem 0rem .5rem 0rem;
   padding: .5rem 1rem .5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.5);
   border: solid 1px rgb(71, 71, 71)
 }
 .lessonLogWrapper * {

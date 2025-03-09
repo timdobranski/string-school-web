@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 // import getStudentData from '../../../utils/getStudentData';
-import StudentLessonLog from '../../../components/TeacherComponents/StudentLessonLog/StudentLessonLog.js';
+import LessonLog from '../../../components/LessonLog/LessonLog.js';
 // import StudentPracticeSession from '../../../components/TeacherComponents/StudentPracticeSession/StudentPracticeSession.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faX } from '@fortawesome/free-solid-svg-icons';
@@ -75,49 +75,51 @@ export default function StudentHome() {
     const announcement = announcements[0];
 
     return (
-      <main className='infoCard'>
-        <h2 className='sectionHeaders'>{`${name}'s Lessons`}</h2>
-        {
-          studentData.spots.map((spot, index) => (
-            <div key={index}>
-              <h3 className={styles.lessonInfo}>{`${spot.day}s @ ${spot.time}`}</h3>
-              {
-                spot.new_student_start_date &&
-        <h3 className={styles.lessonInfo}>
-          {`Switching to new spot ${spot.new_day}s @ ${spot.new_time} on ${spot.new_student_start_date}`}
-        </h3>
-              }
-            </div>
-          ))
-        }
-        <div>
-          <button className={styles.viewAllAnnouncements}onClick={() => {router.push('/students/home/announcements')}}>View All Announcements</button>
-
-          { !showAnnouncement ? null :
-            <div key={announcements[announcements[0]]} className='section'>
-              {/* <h2 className='featureHeaders'>Announcements</h2> */}
-              <FontAwesomeIcon icon={faX} className={styles.dismissAnnouncements}onClick={() => {
-                fetch(`/api/dismissAnnouncement?user=${supabaseUserData.id}`)
-                  .then(() => { setShowAnnouncement(false) })
-              }} />
-              <h2 className='subheaders'>{announcement.title}</h2>
-              <p className='text'>{announcement.text}</p>
-            </div>
+      <div className='studentPageWrapper'>
+        <div className='infoCard'>
+          <h2 className='sectionTitleWhite'>{`${name}'s Lessons`}</h2>
+          {
+            studentData.spots.map((spot, index) => (
+              <div key={index}>
+                <h3 className={styles.lessonInfo}>{`${spot.day}s @ ${spot.time}`}</h3>
+                {
+                  spot.new_student_start_date &&
+          <h3 className={styles.lessonInfo}>
+            {`Switching to new spot ${spot.new_day}s @ ${spot.new_time} on ${spot.new_student_start_date}`}
+          </h3>
+                }
+              </div>
+            ))
           }
+          <div>
+            <button className={styles.viewAllAnnouncements}onClick={() => {router.push('/students/home/announcements')}}>View All Announcements</button>
+
+            { !showAnnouncement ? null :
+              <div key={announcements[announcements[0]]} className='section'>
+                {/* <h2 className='featureHeaders'>Announcements</h2> */}
+                <FontAwesomeIcon icon={faX} className={styles.dismissAnnouncements}onClick={() => {
+                  fetch(`/api/dismissAnnouncement?user=${supabaseUserData.id}`)
+                    .then(() => { setShowAnnouncement(false) })
+                }} />
+                <h2 className='subheaders'>{announcement.title}</h2>
+                <p className='text'>{announcement.text}</p>
+              </div>
+            }
+          </div>
+          <Link href='/students/scheduling/schedule-makeup' className={styles.makeups}>
+            <p className={styles.makeupsNumber}>{`${student.makeups} ${student.makeups === 1 ? 'makeup' : 'makeups'} available`}</p>
+          </Link>
+
+          {/* lesson logs - renders most recent 4 */}
+          <h3 className='smallerSectionTitleWhite'>Lesson Logs</h3>
+          { studentData.lessonLogs.slice(0, 4).map((log, index) => {
+            return (
+              <LessonLog log={log} key={index} />
+            )
+          })}
+
         </div>
-        <Link href='/students/scheduling/schedule-makeup' className={styles.makeups}>
-          <p className={styles.makeupsNumber}>{`${student.makeups} ${student.makeups === 1 ? 'makeup' : 'makeups'} available`}</p>
-        </Link>
-
-        {/* lesson logs - renders most recent 4 */}
-        <h3 className='featureHeaders'>Lesson Logs</h3>
-        { studentData.lessonLogs.slice(0, 4).map((log, index) => {
-          return (
-            <StudentLessonLog log={log} key={index} />
-          )
-        })}
-
-      </main>
+      </div>
     )
   } else {
     return <h1>Loading...</h1>

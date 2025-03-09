@@ -6,7 +6,7 @@ import styles from './Schedule.module.css';
 import supabase from '../../utils/supabase';
 import getAllUpcomingLessons from '../../utils/getAllUpcomingLessons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import getScheduleDates from '../../utils/getScheduleDates';
 import dateFormatter from '../../utils/dateFormatter';
 import { Carousel } from 'react-responsive-carousel';
@@ -85,7 +85,7 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
         {/* CAROUSEL NAVIGATION */}
         <div className={styles.scheduleHeadersContainer}>
           <button onClick={prevWeek} className={styles.customArrowLeft}>
-            <FontAwesomeIcon icon={faCircleArrowLeft} className={styles.arrow}/>
+            <FontAwesomeIcon icon={faChevronLeft} className={styles.arrow}/>
           </button>
           <div className={styles.dateAndDotsContainer}>
             <h2 className={styles.scheduleHeader}>{`${formattedDates[currentItem][0]} - ${formattedDates[currentItem][5]}`}</h2>
@@ -100,7 +100,7 @@ export default function Schedule({ startDate, privacy, handler, activeSpotId, st
             </div>
           </div>
           <button onClick={nextWeek} className={styles.customArrowRight}>
-            <FontAwesomeIcon icon={faCircleArrowRight} className={styles.arrow} />
+            <FontAwesomeIcon icon={faChevronRight} className={styles.arrow} />
           </button>
         </div>
 

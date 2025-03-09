@@ -213,21 +213,29 @@ p {
   color: white;
   width: 70vw;
   background-color: rgba(0, 0, 0, 0.85);
+  background-color: var(--primary-blue);
   backdrop-filter: blur(5px);
   margin: 2rem;
   padding: 2rem;
-  border:rgb(126, 255, 126) solid 6px;
-  border:rgb(72, 72, 72) solid 1px;
+  /* border:rgb(72, 72, 72) solid 1px; */
   border-radius: 10px;
   min-height: 500px;
   min-width: 1000px;
   font-family: JennaSue;
   text-align: center;
   overflow-y: hidden;
+  margin: 0 auto;
 }
 .pageContentWrapper {
-border-radius: 0px;
-
+  border-radius: 0px;
+}
+.studentPageWrapper, .teacherPageWrapper {
+  background: white;
+  min-height: 90vh;
+  padding: 1rem;
+}
+.teacherPageWrapper {
+  background: black;
 }
 .sectionHeaders {
   text-decoration: underline;
@@ -263,19 +271,19 @@ border-radius: 0px;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
+  color: white;
   /* font-family: Economica; */
   margin-top: 2rem;
   font-size: 2rem;
   text-decoration: underline;
   margin-bottom: 1rem;
-  font-weight: 800;
+  font-weight: 400;
   width: fit-content;
   margin: 0 auto;
   margin-bottom: 1rem;;
 }
 .pageHeaders {
   font-size: 3rem;
-  /* margin-top: 4rem; */
   margin-bottom: 2rem;
 }
 
@@ -291,7 +299,8 @@ border-radius: 0px;
 .featureComments {
   font-style:italic;
   font-family: SanFrancisco;
-  color: #ababab;
+  color: #dcdcdc;
+  margin-bottom: 3rem;
   /* border: solid white 2px; */
 }
 .featureButton {
@@ -300,7 +309,7 @@ border-radius: 0px;
   justify-content: center;
   font-size: 1.25rem;
   margin: 1rem;
-  background: linear-gradient(to bottom right, rgb(115, 239, 255), rgb(146, 255, 146));
+  background: var(--primary-gradient) !important;
   color: black;
   padding: .5rem 1rem .5rem 1rem;
   border: none;
@@ -309,6 +318,9 @@ border-radius: 0px;
 .featureButton:hover {
   cursor: pointer;
 
+}
+.currentPageLink {
+  text-decoration: underline;
 }
 .alert {
   position: relative;

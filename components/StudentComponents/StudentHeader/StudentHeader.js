@@ -2,14 +2,15 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../../public/images/logos/final-title.png';
-import logoWhite from '../../public/images/logos/final-title-white.png';
-import styles from './Header.module.css';
-import  { supabase } from '../../utils/supabase';
+import logo from '../../../public/images/logos/final-title.png';
+import logoWhite from '../../../public/images/logos/final-title-white.png';
+import styles from './StudentHeader.module.css';
+import  { supabase } from '../../../utils/supabase';
 import { useEffect, useState } from 'react';
+import StudentNavbar from '../StudentNavbar/StudentNavbar';
 
 
-export default function Header() {
+export default function StudentHeader() {
   const [signedIn, setSignedIn] = useState(false);
   const [picture, setPicture] = useState(null);
 
@@ -51,13 +52,14 @@ export default function Header() {
     <div className={styles.headerContainer}>
       <Link href='/' className={styles.homeButton}>
         {/* <div className={styles.logoContainer}> */}
-        <img src={'/images/logo.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
+        <img src={'/images/logos/final-title-white.png'}  alt="La Mesa String School Logo" className={styles.logo}/>
         {/* </div> */}
       </Link>
 
-
-
-      {signedIn ? settingsButton : loginButton}
+      <div className={styles.headerRightSideWrapper}>
+        <StudentNavbar />
+        {signedIn ? settingsButton : loginButton}
+      </div>
     </div>
   )
 }

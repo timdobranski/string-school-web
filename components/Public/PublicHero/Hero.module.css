@@ -7,7 +7,7 @@
   margin-top: 0;
   padding-top: 0;
 }
-.image, .video {
+.image {
   /* height: calc(100vh - 125px) */
   display: block;
   width: 100%;

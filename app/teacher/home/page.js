@@ -62,7 +62,7 @@ export default function TeacherHome() {
 
 
   return (
-    <>
+    <div className='teacherPageWrapper'>
       <Schedule
         privacy={false}
         handler={spotClickHandler}
@@ -70,8 +70,8 @@ export default function TeacherHome() {
         setActiveSpotId={setActiveSpotId}
         studentData={studentInfoRender}
       />
-      <button className={styles.signOutButton} onClick={handleSignout}>Sign Out</button>
+      {/* <button className={styles.signOutButton} onClick={handleSignout}>Sign Out</button> */}
 
-    </>
+    </div>
   )
 }

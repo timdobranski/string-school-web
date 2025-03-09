@@ -16,9 +16,10 @@ export default function StudentScheduling() {
 
   if (googleUserData) {
     return (
+      <div className='studentPageWrapper'>
       <div className='infoCard'>
 
-        <h1 className='sectionHeaders'>SCHEDULING</h1>
+        <h1 className='smallerSectionTitleWhite'>SCHEDULING</h1>
         <Link href='/students/scheduling/cancel-lesson'>
           <h2 className='featureHeaders'>Cancel A Lesson</h2>
           <p className='featureComments'>Cancel now & reschedule later</p>
@@ -51,6 +52,7 @@ export default function StudentScheduling() {
           <h2 className='featureHeaders'>End Lessons</h2>
           <p className='featureComments'></p>
         </Link> */}
+      </div>
       </div>
     )
   } else {

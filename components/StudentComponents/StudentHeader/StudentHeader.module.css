@@ -1,23 +1,34 @@
 .headerContainer {
-  position: absolute;
+  position: relative;
   z-index: 1;
   width: 100vw;
   padding: .5rem;
   /* height: 8vw; */
   background: rgba(0, 0, 0, 0.4);
+  background: var(--primary-blue);
   backdrop-filter: blur(5px);
   border-bottom: solid 1px rgb(48, 48, 48);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 .logoContainer {
 
 }
 .logo {
-  position: relative;
-  width: 500px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+  width: 150px;
+}
+.headerRightSideWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 1rem; */
 }
 .homeButton {
   margin: 0;
@@ -36,16 +47,17 @@
   animation : transform 2s;
 }
 .profileImgContainer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 2rem;
-  margin-right: 3rem;
+  position: relative;
+  /* top: 0;
+  right: 0; */
+  /* margin: 2rem; */
+  margin: 0 1rem;
   border-radius: 50px;
   width: 60px;
   height: 60px;
   border: solid rgb(255, 255, 255) 1px;
   overflow: hidden;
+
 }
 
 

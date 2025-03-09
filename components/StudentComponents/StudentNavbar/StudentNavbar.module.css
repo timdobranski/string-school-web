@@ -2,27 +2,37 @@
   box-sizing: border-box;
   position: relative;
   /* top: 8vw; */
-  width: 70vw;
-  min-width: 1000px;
+  /* width: 70vw; */
+  width: fit-content;
+  right: 0;
+  left: unset;
+  /* min-width: 1000px; */
   height: 75px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border: solid 4px rgb(153, 255, 139);
-  background: rgba(0, 0, 0, 0.5);
-  margin: 1vw;
+  /* border: solid 4px rgb(153, 255, 139); */
+  /* background: rgba(0, 0, 0, 0.5); */
+
+  /* margin-top: 1rem;
+  margin-bottom: 1rem; */
   backdrop-filter: blur(5px);
 }
 .navLink {
   color: white;
-  margin: 1rem;
+  /* margin: 1rem; */
+  padding: .5rem .5rem .25rem .5rem;
   font-size: 1.5rem;
+  border-radius: 4px;
+  margin: 0 1rem;
 }
 .navLink:hover {
-  color: rgb(84, 255, 178);
+  color: black;
   cursor: pointer;
   transform: scale(1.1);
+  background: var(--primary-gradient);
+
 }
 .profileImgContainer {
   position: relative;

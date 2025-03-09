@@ -11,11 +11,9 @@
   justify-content: center;
   align-items: flex-start;
   color: black;
-  /* background-color: rgba(0, 0, 0, 0.7); */
   background: transparent;
   width: 80vw;
-  /* border: solid rgb(99, 245, 99) 4px; */
-  font-family: Economica;
+
   margin-left: 10vw;
   margin-right: 10vw;
   margin-bottom: 3rem;
@@ -25,16 +23,18 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   color: black;
   background-color: rgba(0, 0, 0, 0);
   padding: 1rem;
-  width: 100%;
+  /* width: 100%; */
+  width: fit-content;
   margin: 0 auto;
   margin-bottom: 1rem;
 }
 .scheduleHeader {
+  position: relative;
   font-size: 2rem;
   width: 500px;
   text-align: center;
@@ -43,10 +43,16 @@
 }
 .arrow {
   position: relative;
-  width: 60px;
-  height: 60px;
-  color: rgb(104, 245, 137);
-  z-index: 1;
+  background: var(--primary-gradient);
+  border: solid white 2px;
+  border-radius: 50%;
+  color: black;
+  height: 40px;
+  width: 40px;
+  padding: .5rem;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  /* z-index: 1; */
 }
 .arrow:hover {
   transform: scale(1.1);
@@ -57,7 +63,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: black;
   background-color: rgba(0, 0, 0, 0.9);
@@ -124,4 +130,7 @@
   transition: max-height 0.75s ease-in;
   z-index: 900;
 
+}
+.dateAndDotsContainer {
+  padding: 1.5rem;
 }

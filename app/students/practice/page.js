@@ -28,8 +28,9 @@ export default function Practice() {
   if (student && student.practice_tracking && practiceSessions) {
 
     return (
+      <div className='studentPageWrapper'>
       <div className='infoCard'>
-        <h1 className='sectionHeader'>Practice</h1>
+        <h1 className='smallerSectionTitleWhite'>Practice</h1>
         <Link href='/students/practice/timer'>
         <div className='featureButton'>Start A Practice Session</div>
         </Link>
@@ -37,32 +38,33 @@ export default function Practice() {
 
         <h2 className={'featuresHeader'}>{`This Week's Practice`}</h2>
         <table className={styles.practiceSessionsTable}>
-  <thead>
-    <tr className={styles.practiceSessionHeadersRow}>
-      <th className='featureHeaders'>Date</th>
-      <th className='featureHeaders'>Start Time</th>
-      <th className='featureHeaders'>Duration</th>
-      <th className='featureHeaders'>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    {practiceSessions.map((item, index) => (
-      <tr key={index} className={styles.practiceSessionRow}>
-        <td className={styles.practiceSessionData}>{item.day}</td>
-        <td className={styles.practiceSessionData}>{item.start_time}</td>
-        <td className={styles.practiceSessionData}>{item.duration}</td>
-        <td className={styles.practiceSessionData}>{item.notes}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+          <thead>
+            <tr className={styles.practiceSessionHeadersRow}>
+              <th className='featureHeaders'>Date</th>
+              <th className='featureHeaders'>Start Time</th>
+              <th className='featureHeaders'>Duration</th>
+              <th className='featureHeaders'>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {practiceSessions.map((item, index) => (
+              <tr key={index} className={styles.practiceSessionRow}>
+                <td className={styles.practiceSessionData}>{item.day}</td>
+                <td className={styles.practiceSessionData}>{item.start_time}</td>
+                <td className={styles.practiceSessionData}>{item.duration}</td>
+                <td className={styles.practiceSessionData}>{item.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <h2 className={'featuresHeader'}>{`View Previous Weeks`}</h2>
-        </div>
+      </div>
+      </div>
     )
   } else if (student && !student.practice_tracking) {
     return (
       <div className='infoCard'>
-        <h1 className='sectionHeader'>Practice</h1>
+        <h1 className='smallerSectionTitleWhite'>Practice</h1>
         <h2 className={'featuresHeader'}>Practice Tracking Is Not Enabled</h2>
         <p className={'featureComments'}>Practice tracking is not enabled for your account. Enable it below:</p>
         <button className='featureButton' onClick={() => togglePracticeTracking(student.id)}>Enable Practice Tracking</button>
