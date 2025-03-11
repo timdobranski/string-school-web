@@ -248,3 +248,15 @@
 }
 .spotRow {
 }
+
+@media(max-width: 768px) {
+  .scheduleContainer {
+    flex-direction: column !important;
+    width: 98%;
+    margin: 0 auto;
+    padding: 0 !important;
+  }
+  .dayContainer {
+    width: 100%;
+  }
+}

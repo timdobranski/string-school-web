@@ -125,24 +125,22 @@
   padding: 0.5rem 0.75rem 0.25rem 0.75rem;
   text-align: center;
   position: relative;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   /* border: solid 1px black; */
-
-
   color: white;
+}
+.navLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgb(144, 250, 123);
+  text-underline-offset: 4px;
 }
 .currentPageLink {
   text-decoration: underline;
   text-decoration-color: rgb(144, 250, 123);
   text-underline-offset: 4px;
 }
-.navLink:hover {
-  cursor: pointer;
-  /* color: white; */
-  color: black;
-  background: var(--primary-gradient);
-  /* transform: scale(1.1); */
-}
+
 
 .dropdown {
   display: none;
@@ -189,7 +187,7 @@
   position: relative;
   color: black;
   padding: .5rem 1rem;
-  margin: .5rem 1rem;
+  margin: .5rem 1.5rem .5rem 1rem;
   font-weight: bold;
   background: var(--primary-blue);
   color: white;

@@ -51,8 +51,6 @@
   width: 40px;
   padding: .5rem;
   top: 50%;
-  /* transform: translateY(-50%); */
-  /* z-index: 1; */
 }
 .arrow:hover {
   transform: scale(1.1);
@@ -133,4 +131,15 @@
 }
 .dateAndDotsContainer {
   padding: 1.5rem;
+}
+
+@media(max-width: 768px) {
+  .scheduleSlide {
+    width: 96%;
+    margin:0 auto;
+    padding: 0 !important
+  }
+  .slide {
+    margin: 0;
+  }
 }

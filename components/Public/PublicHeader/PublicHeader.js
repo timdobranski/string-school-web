@@ -62,9 +62,9 @@ export default function PublicHeader() {
     </Link>
   );
 
-  const createNavLink = (href, text) => (
-    <div className={styles.navLink}>
-      <Link href={href} className={`${isActive(href)}`}>
+  const createNavLink = (href, text, dropdown = false) => (
+    <div className={dropdown ? '' : styles.navLink}>
+      <Link href={href} className={isActive(href)}>
         {text}
       </Link>
     </div>
@@ -79,14 +79,14 @@ export default function PublicHeader() {
           </Link>
         </div>
         <div className={styles.dropdown}>
-          {createNavLink('/home#stringSchoolApp', 'THE STRING SCHOOL APP')}
-          {createNavLink('/home#concerts', 'STUDENT CONCERTS')}
-          {createNavLink('/home#studio', 'STUDIO')}
-          {createNavLink('/home#progress', 'PROGRESS TRACKING')}
-          {createNavLink('/home#book', 'TEXTBOOK')}
-          {createNavLink('/home#stringsmith', 'STRINGSMITH')}
-          {createNavLink('/home#guitarPro', 'GUITAR PRO 8')}
-          {createNavLink('/home#future', 'THE FUTURE')}
+          {createNavLink('/home#stringSchoolApp', 'THE STRING SCHOOL APP', true)}
+          {createNavLink('/home#concerts', 'STUDENT CONCERTS', true)}
+          {createNavLink('/home#studio', 'STUDIO', true)}
+          {createNavLink('/home#progress', 'PROGRESS TRACKING', true)}
+          {createNavLink('/home#book', 'TEXTBOOK', true)}
+          {createNavLink('/home#stringsmith', 'STRINGSMITH', true)}
+          {createNavLink('/home#guitarPro', 'GUITAR PRO 8', true)}
+          {createNavLink('/home#future', 'THE FUTURE', true)}
         </div>
       </div>
 
@@ -97,11 +97,11 @@ export default function PublicHeader() {
           </Link>
         </div>
         <div className={styles.dropdown}>
-          {createNavLink('/about-lessons#approach', 'TEACHING APPROACH')}
-          {createNavLink('/about-lessons#details', 'WHEN, WHERE & HOW MUCH')}
-          {createNavLink('/about-lessons#policies', 'ATTENDANCE POLICIES')}
-          {createNavLink('/about-lessons#studio', 'SEE THE STUDIO')}
-          {createNavLink('/about-lessons#tim', 'ABOUT ME')}
+          {createNavLink('/about-lessons#approach', 'TEACHING APPROACH', true)}
+          {createNavLink('/about-lessons#details', 'WHEN, WHERE & HOW MUCH', true)}
+          {createNavLink('/about-lessons#policies', 'ATTENDANCE POLICIES', true)}
+          {createNavLink('/about-lessons#studio', 'SEE THE STUDIO', true)}
+          {createNavLink('/about-lessons#tim', 'ABOUT ME', true)}
         </div>
       </div>
 
