@@ -57,7 +57,7 @@ export default function ConcertsPage() {
         type={'photo'}
         title={['CONCERTS']}
         button={false}
-        image={'/images/concerts/hero/5.jpg'} // 5-12
+        image={'/images/concerts/hero/12.jpg'} // 5-12
         imageStyles={{ filter: 'brightness(80%)' }}
         // textDirection={'right'}
         text={[]}
