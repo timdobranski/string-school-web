@@ -1,0 +1,237 @@
+.wrapper {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.25rem;
+}
+.contentWrapper {
+  width: 1000px;
+  max-width: 98%;
+  padding-top: 2rem;
+  /* border: solid red 4px */
+}
+.text {
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 3rem 0 5rem 0;
+  color: black;
+}
+
+
+
+
+
+.carousel {
+  /* border: solid red 4px; */
+  width: 1000px;
+  max-width: 90%;
+  margin-bottom: 3.5rem;
+
+  /* display: flex;
+  flex-direction: row; */
+  }
+  .verticalCarousel {
+    width: 30%;
+
+  }
+  /* .vertPhoto {
+  height: 400px;
+  width: 200px;
+  } */
+  /*  */
+
+  .control-arrow {
+  opacity: 1; /* Make it always visible */
+  background-color: #000; /* Black background */
+  color: #fff; /* White arrow */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  .slide, .videoSlide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Ensure slides take full height */
+    overflow: hidden; /* Prevent content overflow */
+  }
+
+  .slide img {
+    max-height: 600px; /* Make sure the image fits the slide's height */
+    max-width: 100%; /* Prevent landscape images from overflowing horizontally */
+    object-fit: contain; /* Maintain aspect ratio without stretching */
+  }
+
+  .slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    /* color: white; */
+    border-radius: 50%;
+    padding: .5rem;
+    background: var(--primary-gradient);
+    border: solid white 2px;
+    cursor: pointer;
+    transition: transform .2s ease;
+    margin: 0 .25rem;
+    top: calc(50% - 25px);
+    z-index: 20;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .9);
+    font-size: 1.5rem;
+  }
+  .slideButtonLeft, .slideButtonLeftDisabled {
+    left: 30px;
+  }
+  .slideButtonRight, .slideButtonRightDisabled {
+    right: 30px;
+  }
+  .slideButtonLeftDisabled, .slideButtonRightDisabled {
+    background: rgba(0, 0, 0, .5);
+    color: rgb(169, 169, 169);
+  }
+  .slideButton:hover {
+    transform: scale(1.1);
+  }
+  .caption {
+    position: relative;
+    bottom: 0;
+    background: white;
+    background: var(--primary-blue);
+    color: white;
+    /* border: solid red 20px; */
+    z-index: 2000;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    padding: calc(.25rem + 2px) .5rem .25rem .5rem;
+    /* height: 1000px; */
+  }
+  .textContainer {
+    width: 1000px;
+    max-width: 96%;
+    margin-bottom: 2rem;
+  }
+
+  @media(max-width: 768px) {
+    .lessonInfoWrapper {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0 2rem 0;
+    }
+    .lessonInfoSection {
+      width: 100%;
+      margin: 0;
+    }
+    .middleInfoSection {
+      width: 100%;
+      margin: 0;
+      border: none;
+    }
+    .carousel {
+      width: 100%;
+      margin: 0;
+    }
+    .verticalCarousel {
+      width: 100%;
+    }
+    .imageContainer {
+      width: 100%;
+      height: 300px;
+    }
+    .control-arrow {
+      display: none;
+    }
+    .caption {
+      /* display: none; */
+    }
+    .slideButtonLeft, .slideButtonRight {
+      /* display: none; */
+    }
+    .slideButtonLeftDisabled, .slideButtonRightDisabled {
+      /* display: none; */
+    }
+    .slideButton:hover {
+      /* display: none; */
+    }
+    .slide {
+      width: 100%;
+    }
+    .slideButtonLeft, .slideButtonRight {
+      /* display: none; */
+    }
+    .slideButtonLeftDisabled, .slideButtonRightDisabled {
+      /* display: none; */
+    }
+    .slideButton:hover {
+      /* display: none; */
+    }
+    .caption {
+      /* display: none; */
+    }
+    .slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
+      /* display: none; */
+    }
+    .slideButton:hover {
+      /* display: none; */
+    }
+    .control-arrow {
+      /* display: none; */
+    }
+    .carousel {
+      width: 100%;
+      margin: 0;
+    }
+    .verticalCarousel {
+      width: 100%;
+    }
+    .imageContainer {
+      width: 100%;
+      height: 300px;
+    }
+    .control-arrow {
+      /* display: none; */
+    }
+    .caption {
+      /* display: none; */
+    }
+    .slideButtonLeft, .slideButtonRight {
+      /* display: none; */
+    }
+    .slideButtonLeftDisabled, .slideButtonRightDisabled {
+      /* display: none; */
+    }
+    .slideButton:hover {
+      /* display: none; */
+    }
+    .slide {
+      width: 100%;
+      padding: 0 .5px;
+    }
+    .slideButtonLeft, .slideButtonRight, .slideButtonLeftDisabled, .slideButtonRightDisabled {
+      /* display: none; */
+      font-size: 1rem;
+      height: 30px;
+      width: 30px;
+      padding: 0;
+      z-index: 20;
+      top: unset;
+      bottom: .4rem;
+    }
+    .slideButtonLeft, .slideButtonLeftDisabled {
+      left: 10px;
+    }
+    .slideButtonRight, .slideButtonRightDisabled {
+      right: 10px;
+    }
+
+  }

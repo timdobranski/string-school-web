@@ -28,6 +28,21 @@ export default function Spot({handler, activeSpotId, spot, studentData, privacy 
   }
   const isPast = isSpotPast(spot.dbDate, spot.time);
 
+  // const teacherOnClickHandler =  async ({ day, time, date, dbDate, student, id }) => {
+  //   if (activeSpotId === id) { setActiveSpotId(null); return;}
+
+  //   const studentMenu = (
+  //     <div className={styles.studentCardWrapper}>
+  //       <Link href={`/teacher/view-student?studentId=${student}`}><p classname='text'>View Student</p></Link>
+  //       <Link href={`/teacher/log-absence?student=${student}`}><p className='text'>Log Absence</p></Link>
+  //       <Link href={`/teacher/log-payment?student=${student}`}><p className='text'>Log Payment</p></Link>
+  //     </div>
+  //   )
+
+  //   setStudentInfoRender(studentMenu);
+  //   setActiveSpotId(id);
+  // }
+
 
   const onClickHandler = () => {
     if (isPast && privacy) {
