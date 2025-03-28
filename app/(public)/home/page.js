@@ -41,7 +41,7 @@ export default function PublicHome() {
           direction={'right'}
           background={'white'}
           title={'The String School App'}
-          photo={{image: '/images/appStores.webp'}}
+          photo={{image: '/images/home-page/tech-green-background.jpg'}}
           text={`This is the String School web app, and while features for students are still being finalized, it will eventually handle scheduling, tracking progress, and accessing sheet music and resources.
        Other features include an interactive tab & sheet music player to view, print, and listen to my vast collection of digital sheet music,
        weekly lesson logs, and various progress paths to view your achievements in different areas of focus. Once the web app is complete, work will begin on finalizing the mobile
@@ -53,10 +53,9 @@ export default function PublicHome() {
           direction={'left'}
           title={'String School Concerts'}
           background={'lightBackground1'}
-          photo={{image: '/images/concerts.webp', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
-          text={`Student concerts can be one of the most fun and exciting ways to show off your skills. I hold concerts twice per year, and
-          starting in March 2025 concerts are going to move to the next level with top tier lighting and sound, and a custom-built stage set that
-          rivals any concert venue in San Diego!`}
+          photo={{image: '/images/home-page/concerts-2.jpg', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+          text={`Student concerts can be one of the most fun and exciting ways to show off your skills. I hold concerts twice per year, they include
+           top tier lighting and sound, and a custom-built stage set that rivals any concert venue in San Diego! `}
         />
       </div>
       <div id='studio'>
@@ -65,7 +64,7 @@ export default function PublicHome() {
           background={'white'}
 
           title={'String School Studio'}
-          photo={{image: '/images/studio.webp', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+          photo={{image: '/images/home-page/studio.jpg', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
           text={`For those that are less inclined to be performers, you can record a song instead! Twice a year I offer the choice
       of a concert performance or recording studio time to record your own song! It can be an original, or a cover song of your choice that
       we work on throughout the year. Learn more about the String School Studio`}
@@ -76,7 +75,7 @@ export default function PublicHome() {
           direction={'left'}
           background={'lightBackground1'}
           title={'Lesson Logs'}
-          photo={{image: '/images/progress.webp', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+          photo={{image: '/images/home-page/progress.webp', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
           text={`Through the String School app you can review lesson logs for each week you've attended a lesson to check
             on what we did, what to practice, and any notes or other info related to that week's session. You can also track skills you've
             learned and see them in relation to different skill paths for genres of music you'd like to learn or goals you'd like to accomplish.`}
@@ -88,14 +87,14 @@ export default function PublicHome() {
           direction={'right'}
           background={'white'}
           title={'The String School Textbook'}
-          photo={{image: '/images/book.webp'}}
+          photo={{image: '/images/home-page/book-cover.jpg'}}
           text={`The String School Guitar Method is my textbook, and it is currently in the second edition. Every student
       receives a free PDF copy, and printed copies are available at the cost of printing them. Much of the book teaches concepts through color-coded
       charts and information, which has been a big help for students but also raises the cost of printing to around $45 or so in 2025.`}
         />
       </div>
 
-      <div id='stringsmith'>
+      {/* <div id='stringsmith'>
         <PromoBlock
           direction={'left'}
           background={'lightBackground1'}
@@ -107,12 +106,12 @@ export default function PublicHome() {
           textbook! It features customizable guitar fretboards also integrates with my String School app to track your progress and your practice time. These two apps work together: The String
           School app is to handle scheduling and access to resources, and Stringsmith is for actual learning and practice.`}
         />
-      </div>
+      </div> */}
 
       <div id='guitarPro'>
         <PromoBlock
-          direction={'right'}
-          background={'white'}
+          direction={'left'}
+          background={'lightBackground1'}
           title={'Guitar Pro 8'}
           photo={{image: '/images/guitarPro.png', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
           text={`All students receive my personal 50% off code to purchase Guitar Pro 8, an incredible program for reading, writing, and practicing music for guitar.`}
@@ -123,8 +122,8 @@ export default function PublicHome() {
 
       <div id='future'>
         <PromoBlock
-          direction={'left'}
-          background={'lightBackground1'}
+          direction={'right'}
+          background={'white'}
           title={'The Future'}
           photo={{image: '/images/me/me.webp' }}
           text={`When I began giving lessons in 2009, I had none of these things. The most important thing that I can offer my students
