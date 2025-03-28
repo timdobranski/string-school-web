@@ -11,28 +11,46 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function ConcertsPage() {
   const concertPhotos = [
-    {image: '/images/concerts/hero/5.jpg',
+    {image: '/images/concerts/5.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/6.jpg',
+    {image: '/images/concerts/6.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/7.jpg',
+    {image: '/images/concerts/7.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/8.jpg',
+    {image: '/images/concerts/8.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/9.jpg',
+    {image: '/images/concerts/9.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/10.jpg',
+    {image: '/images/concerts/10.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/11.jpg',
+    {image: '/images/concerts/11.jpg',
       caption: 'String School Concert, 2025'
     },
-    {image: '/images/concerts/hero/12.jpg',
+    {image: '/images/concerts/12.jpg',
+      caption: 'String School Concert, 2025'
+    },
+    {image: '/images/concerts/13.jpg',
+      caption: 'String School Concert, 2025'
+    },
+    {image: '/images/concerts/14.jpg',
+      caption: 'String School Concert, 2025'
+    },
+    {image: '/images/concerts/15.jpg',
+      caption: 'String School Concert, 2025'
+    },
+    {image: '/images/concerts/16.jpg',
+      caption: 'String School Concert, 2025'
+    },
+    {image: '/images/concerts/17.jpg',
+      caption: 'String School Concert, 2025'
+    },
+    {image: '/images/concerts/18.jpg',
       caption: 'String School Concert, 2025'
     },
   ]
@@ -57,13 +75,13 @@ export default function ConcertsPage() {
         type={'photo'}
         title={['CONCERTS']}
         button={false}
-        image={'/images/concerts/hero/12.jpg'} // 5-12
+        image={'/images/concerts/12.jpg'} // 5-12
         imageStyles={{ filter: 'brightness(80%)' }}
         // textDirection={'right'}
         text={[]}
       />
       <div className={styles.contentWrapper}>
-        {/* <h1 className={'sectionTitle'}>CONCERTS</h1> */}
+        <h1 className={'smallerSectionTitle'}>THE REAL THING</h1>
         <p className={styles.text}>{`String School Concerts are one of the most fun ways to build motivation and experience as a musician. These are designed to be real concerts, featuring professional, custom lighting and sound, food, games, and a welcoming atmosphere. They’re also a great opportunity for students to meet, connect, and build friendships through music.`}</p>
       </div>
       <Carousel
@@ -83,11 +101,15 @@ export default function ConcertsPage() {
         showThumbs={false}
         showIndicators={false}
       >
-        {concertPhotos.map((src, index) => (
+        {concertPhotos.map((photo, index) => (
           <div className={styles.slide} key={index}>
-            <img key={index} src={concertPhotos[index].image} alt={`Photo ${index + 1}`} />
-            <p className={styles.caption}>{concertPhotos[index].caption}</p>
-
+            <picture>
+              {/* WebP version */}
+              <source srcSet={photo.image.replace(/\.(jpg|jpeg|png)$/, '.webp')} type="image/webp" />
+              {/* Fallback to JPG/PNG */}
+              <img src={photo.image} alt={`Photo ${index + 1}`} className={styles.carouselImage} />
+            </picture>
+            <p className={styles.caption}>{photo.caption}</p>
           </div>
         ))}
       </Carousel>
