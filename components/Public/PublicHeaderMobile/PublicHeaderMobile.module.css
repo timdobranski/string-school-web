@@ -198,7 +198,7 @@
   padding: .5rem 1rem;
   margin: .5rem 1rem;
   font-weight: bold;
-  background: var(--primary-gradient);
+  background: var(--primary-gradient-darker);
   transition: transform 0.5s;
   height: fit-content;
   text-align: center;

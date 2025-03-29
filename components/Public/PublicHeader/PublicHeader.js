@@ -109,7 +109,7 @@ export default function PublicHeader() {
       {createNavLink('/concerts', 'CONCERTS')}
       {createNavLink('/student-stuff-temp', 'STUDENTS')}
       <div className={styles.bookingLink}>
-        <Link href="/contact">SCHEDULE A FREE INTRO</Link>
+        <Link href="/contact">SCHEDULE A FREE&nbsp;INTRO</Link>
       </div>
     </>
   );

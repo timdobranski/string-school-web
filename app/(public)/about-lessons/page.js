@@ -25,6 +25,8 @@ export default function AboutLessons() {
 
   const [studioCarousel, setStudioCarousel] = useState('videos');
   const [lobbyCarousel, setLobbyCarousel] = useState('videos');
+  const [approachSlide, setApproachSlide] = useState(0);
+  const [detailsSlide, setDetailsSlide] = useState(0);
 
   const concertPhotos = [
     {image: '/images/me/me.webp',
@@ -80,44 +82,69 @@ export default function AboutLessons() {
           unique approach, but there are common themes that I try to implment with most students:`}</p>
 
         <div className={styles.lessonInfoWrapper}>
-          <div className={styles.lessonInfoSection}>
-            <FontAwesomeIcon icon={faMicrophone} className={styles.icon} />
-            <h2 className={"smallerSectionTitle"}>Projects</h2>
-
-            <p className={'text'}>{`I encourage every student to persue an optional project of some kind,
-      and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a
-      song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.`}</p>
+          <div onClick={approachSlide === 1 ? () => setApproachSlide(0) : () => setApproachSlide(1)} className={`${styles.lessonInfoSection} ${approachSlide === 1 && styles.selected}`}>
+            <FontAwesomeIcon icon={faMicrophone} className={`${approachSlide === 1 ? styles.selectedIcon : styles.icon}`} />
+            <h2 className={`${approachSlide === 1 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Projects</h2>
 
           </div>
-          <div className={`${styles.lessonInfoSection} ${styles.middleInfoSection}`}>
-            <FontAwesomeIcon icon={faLaptop} className={styles.icon} />
+          <div onClick={approachSlide === 2 ? () => setApproachSlide(0) : () => setApproachSlide(2)} className={`${styles.lessonInfoSection} ${styles.middleInfoSection} ${approachSlide === 2 && styles.selected}`}>
+            <FontAwesomeIcon icon={faLaptop} className={`${approachSlide === 2 ? styles.selectedIcon : styles.icon}`} />
+            <h2 className={`${approachSlide === 2 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Technology</h2>
 
-            <h2 className={"smallerSectionTitle"}>Technology</h2>
+          </div>
+          <div onClick={approachSlide === 3 ? () => setApproachSlide(0) : () => setApproachSlide(3)} className={`${styles.lessonInfoSection} ${approachSlide === 3 && styles.selected}`}>
+            <FontAwesomeIcon icon={faUser} className={`${approachSlide === 3 ? styles.selectedIcon : styles.icon}`} />
+            <h2 className={`${approachSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Custom</h2>
+          </div>
 
-            <p className={'text'}>{`Whenever possible, I incorporate the latest technology into my lessons in ways that continue to make learning
+        </div>
+
+        <div className={`${styles.contentSectionWrapper} ${styles.iconSwitchContent}`}>
+          <div className={`${styles.tabContent} ${approachSlide !== 0 ? styles.notSelected : styles.selectedText}`}>
+            <p className={`text`}>{`Select one of the choices above to learn more about my lessons.`}</p>
+          </div>
+          <div className={`${styles.tabContent} ${approachSlide !== 1 ? styles.notSelected : styles.selectedText}`}>
+            <p className={`text`}>{`I encourage every student to persue an optional project of some kind,
+              and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a
+              song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.`}</p>
+          </div>
+          <p className={`text ${approachSlide !== 2 ? styles.notSelected : styles.selectedText}`}>{`Whenever possible, I incorporate the latest technology into my lessons in ways that continue to make learning
             to play an instrument much easier. I'm also a software developer, and I am continually working to grow and improve my own
             guitar learning platform, Stringsmith. I use and highly recommend Guitar Pro software, and all students have access to my 50% off code to buy it yourself.`}
-            </p>
-          </div>
-          <div className={styles.lessonInfoSection}>
-            <FontAwesomeIcon icon={faUser} className={styles.icon} />
-            <h2 className={"smallerSectionTitle"}>Personalization</h2>
-            <p className={'text'}>{`Musicians view songs as a fluid collection of ideas, and the same song can be played many different ways and at different skill
-          levels. In most cases, when we work on songs together, I'll transpose a version of it that is both fun and challenging for you. We call this the zone
-          of proximal development, and it is the sweet spot for quick and effective learning.`}
-            </p>
-            <p className={'text'}>{``}</p>
-          </div>
-
+          </p>
+          <p className={`text ${approachSlide !== 3 ? styles.notSelected : styles.selectedText}`}>{`Each song we work on is customized to fit your playing level. We can work with prearranged versions
+          that I have written in the past, or start a whole new version with adjustments for difficulty or just for a fun, unique twist on any song. Students learn the best when they have
+          a moderate but attainable challenge. We call this the zone of proximal development, and it is the sweet spot for quick and effective learning.`}
+          </p>
         </div>
       </div>
 
       <div className={styles.section2Container} id='details'>
         <h2 className={"sectionTitle"}>The Details</h2>
         <div className={styles.lessonInfoWrapper}>
-          <div className={styles.lessonInfoSection}>
-            <FontAwesomeIcon icon={faClock} className={styles.icon} />
-            <h2 className={"smallerSectionTitle"}>When</h2>
+          <div onClick={detailsSlide === 1 ? () => setDetailsSlide(0) : () => setDetailsSlide(1)} className={`${styles.lessonInfoSection} ${detailsSlide === 1 && styles.selected}`}>
+            <FontAwesomeIcon icon={faClock} className={`${detailsSlide === 1 ? styles.selectedIcon : styles.icon}`} />
+            <h2 className={`${detailsSlide === 1 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>When</h2>
+
+          </div>
+
+          <div onClick={detailsSlide === 2 ? () => setDetailsSlide(0) : () => setDetailsSlide(2)} className={`${styles.lessonInfoSection} ${detailsSlide === 2 && styles.selected}`}>
+            {/* <div className={styles.verticalDividerLeft}></div> */}
+            <FontAwesomeIcon icon={faLocationDot} className={`${detailsSlide === 2 ? styles.selectedIcon : styles.icon}`} />
+            <h2 className={`${detailsSlide === 2 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Where</h2>
+            {/* <div className={styles.verticalDividerRight}></div> */}
+          </div>
+
+          <div onClick={detailsSlide === 3 ? () => setDetailsSlide(0) : () => setDetailsSlide(3)} className={`${styles.lessonInfoSection} ${detailsSlide === 3 && styles.selected}`}>
+            <FontAwesomeIcon icon={faDollarSign} className={`${detailsSlide === 3 ? styles.selectedIcon : styles.icon}`} />
+            <h2 className={`${detailsSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Fees</h2>
+          </div>
+        </div>
+        <div className={`${styles.contentSectionWrapper} ${styles.iconSwitchContent}`}>
+          <div className={`${styles.tabContent} ${detailsSlide !== 0 ? styles.notSelected : styles.selectedText}`}>
+            <p className={`text`}>{`Select one of the choices above to learn more about my lessons.`}</p>
+          </div>
+          <div className={`${styles.tabContent} ${detailsSlide !== 1 ? styles.notSelected : styles.selectedText}`}>
             <p className={'text'}>{`Lessons are offered in 30 minute recurring weekly blocks at the following times:`}</p>
             <table className={styles.scheduleTable}>
               <tbody>
@@ -138,34 +165,25 @@ export default function AboutLessons() {
             <p className={'text'}>{`Students interested in longer or more frequent lessons are welcome to book multiple spots.`}</p>
           </div>
 
-          <div className={`${styles.lessonInfoSection} ${styles.middleInfoSection}`}>
-            {/* <div className={styles.verticalDividerLeft}></div> */}
-            <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-            <h2 className={"smallerSectionTitle"}>Where</h2>
-            {/* <div className={styles.verticalDividerRight}></div> */}
+          <div className={`text ${detailsSlide !== 2 ? styles.notSelected : styles.selectedText}`}>
             <p className={'text'}>{`Lessons are held at my home music studio in Fletcher Hills, CA. As this is my personal residence as well,
-            the address is not listed here and is provided upon booking a lesson.`} </p>
+              the address is not listed here and is provided upon booking a lesson.`} </p>
 
             <p className={'text'}>{`I also offer lessons online via Zoom. These lessons can be much more convenient, but I don't recommend them
-            for all situations. Feel free to reach out if this is something you'd like to discuss!`}
+              for all situations. Feel free to reach out if this is something you'd like to discuss!`}
             </p>
           </div>
 
-          <div className={styles.lessonInfoSection}>
-            <FontAwesomeIcon icon={faDollarSign} className={styles.icon} />
-            <h2 className={"smallerSectionTitle"}>Fees</h2>
+
+          <div className={`text ${detailsSlide !== 3 ? styles.notSelected : styles.selectedText}`}>
             <p className={'text'}>Fees are the same every month, regardless of attendance or the number of weeks/lessons in the month.</p>
             <p className={'text'}>Most months will include 4 weekly lessons; some will include an extra 5th depending on how the calendar lines up.</p>
 
             <div className={styles.fees}>
               <p className={styles.price}>$120/month</p>
               <p>Cash, personal check, Venmo, Zelle, Paypal</p>
-
-
             </div>
-
           </div>
-
         </div>
       </div>
 
@@ -253,7 +271,7 @@ export default function AboutLessons() {
             </div>
           ))}
         </Carousel>
-          <br></br>
+        <br></br>
 
         <Carousel
           className={styles.carousel}
