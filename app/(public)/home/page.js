@@ -55,7 +55,7 @@ export default function PublicHome() {
           background={'lightBackground1'}
           photo={{image: '/images/home-page/concerts-2.jpg', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
           text={`Student concerts can be one of the most fun and exciting ways to show off your skills. I hold concerts twice per year, they include
-           top tier lighting and sound, and a custom-built stage set that rivals any concert venue in San Diego! `}
+           top tier lighting and sound, and a custom-built stage set that rivals any concert venue in San Diego! Learn more about concerts <a style='text-decoration: underline' href="/concerts">here</a>.`}
         />
       </div>
       <div id='studio'>

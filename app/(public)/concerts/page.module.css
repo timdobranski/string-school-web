@@ -6,6 +6,7 @@
   align-items: center;
   flex-direction: column;
   font-size: 1.25rem;
+  padding-bottom: 4rem;
 }
 .contentWrapper {
   width: 1000px;
@@ -152,10 +153,10 @@
       /* display: none; */
     }
     .slideButtonLeft, .slideButtonRight {
-      /* display: none; */
+      display: none;
     }
     .slideButtonLeftDisabled, .slideButtonRightDisabled {
-      /* display: none; */
+      display: none;
     }
     .slideButton:hover {
       /* display: none; */

@@ -87,7 +87,7 @@ export default function PublicHeaderMobile() {
       <div className={`${styles.navTray} ${menuOpen ? styles.menuOpen : styles.menuClosed}`}>
 
         <div className={styles.navTrayLogoWrapper}>
-          <Link href='/public/home'>
+          <Link href='/home'>
             <img src='/images/logos/final-title-white.png' alt="La Mesa String School Logo" className={styles.logo}/>
           </Link>
           <div className={styles.backIconWrapper} onClick={() => setMenuOpen(!menuOpen)}>
@@ -112,6 +112,12 @@ export default function PublicHeaderMobile() {
         <div className={styles.navLinkContainer}>
           <div className={styles.navLink}>
             <Link href="/reviews" onClick={handleCloseMenu}>REVIEWS</Link>
+          </div>
+        </div>
+
+        <div className={styles.navLinkContainer}>
+          <div className={styles.navLink}>
+            <Link href="/concerts" onClick={handleCloseMenu}>CONCERTS</Link>
           </div>
         </div>
 

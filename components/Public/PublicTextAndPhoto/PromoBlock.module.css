@@ -102,6 +102,8 @@
   .background {
     padding: 2rem 0;
     border: none;
+    width: 100vw;
+    margin: 0;
   }
   .wrapper {
     height: auto;
@@ -111,7 +113,7 @@
   }
 
   .left, .right {
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 100%;
   }
   .textSide, .photoSide {
@@ -133,8 +135,11 @@
     /* flex-direction: column-reverse; */
   }
   .image {
-    max-height: 250px;
+    max-height: 50vh;
+    height: auto;
     margin: 1rem 0;
+    /* width: 100vw; */
+    max-width: 98vw;
   }
 
 }
