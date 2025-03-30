@@ -1,4 +1,13 @@
-
+.spotsList {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: .5rem 1rem;
+  text-align: right;
+}
+.spotsList * {
+  padding: .25rem 0;
+}
 
 .announcement {
   display: flex;

@@ -230,15 +230,24 @@ p {
 .pageContentWrapper {
   border-radius: 0px;
 }
-.studentPageWrapper, .teacherPageWrapper {
+.studentPageWrapper, .teacherPageWrapper, .teacherPageWrapperWhite, .teacherPageWrapperBlue {
+  position: relative;
   background: white;
   min-height: 90vh;
   padding: 1rem;
+  margin: 0 !important;
+  padding: 0;
 }
 .teacherPageWrapper {
   background: black;
-  margin: 0 !important;
-  padding: 0;
+}
+.teacherPageWrapperWhite {
+  background: white;
+  padding-top: 2rem;
+}
+
+.teacherPageWrapperBlue {
+  background: var(--primary-blue);
 }
 .sectionHeaders {
   text-decoration: underline;

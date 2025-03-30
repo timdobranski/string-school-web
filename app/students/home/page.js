@@ -80,7 +80,8 @@ export default function StudentHome() {
     return (
       <div className='studentPageWrapper'>
         <div className='infoCard'>
-          <h2 className='sectionTitleWhite'>{`${name}'s Lessons`}</h2>
+          <h2 className='smallerSectionTitleWhite'>{`${name}'s Lessons`}</h2>
+          <div className={styles.spotsList}>
           {
             studentData.spots.map((spot, index) => (
               <div key={index}>
@@ -94,6 +95,7 @@ export default function StudentHome() {
               </div>
             ))
           }
+          </div>
           <div>
             {/* <button className={styles.viewAllAnnouncements}onClick={() => {router.push('/students/announcements')}}>View All Announcements</button> */}
 
@@ -114,6 +116,7 @@ export default function StudentHome() {
           </Link>
 
           {/* lesson logs - renders most recent 4 */}
+          <br></br>
           <h3 className='smallerSectionTitleWhite'>LESSON LOGS</h3>
           { studentData.lessonLogs.slice(0, 4).map((log, index) => {
             return (

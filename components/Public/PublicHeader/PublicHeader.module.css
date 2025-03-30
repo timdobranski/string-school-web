@@ -136,6 +136,18 @@
   text-decoration-color: #95d478;
   text-underline-offset: 4px;
 }
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+}
+.flexRow:hover {
+  background: var(--primary-gradient-darker);
+}
+.icon {
+  color: var(--primary-blue);
+}
 .currentPageLink {
   text-decoration: underline;
   text-decoration-color: #95d478;
@@ -143,7 +155,7 @@
 }
 
 
-.dropdown {
+.dropdown, .settingsDropdown {
   display: none;
   position: absolute;
   top: 100%; /* Place dropdown below the navLink */
@@ -156,7 +168,7 @@
   width: max-content;
 }
 
-.dropdown a {
+.dropdown a, .settingsDropdown a, .linkText {
   display: block;
   padding: 1rem 1.5rem .75rem 1.5rem;
   color: black;
@@ -166,7 +178,7 @@
   /* padding-bottom: .25rem; */
 }
 
-.dropdown a:hover {
+.dropdown a:hover, .settingsDropdown a:hover {
   background: var(--primary-gradient-darker);
   /* color: white; */
 }
@@ -177,8 +189,6 @@
 .navLinkContainer:hover .icon {
   transform: rotate(180deg)
 }
-
-
 
 .bookingLink {
   font-size: 1.25rem;
@@ -208,8 +218,7 @@
   color: black;
   color: white;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-
-  /* color: var(--primary-blue); */
+  padding-left: 0;
   height: fit-content;
   width: fit-content;
   min-width: none;
@@ -227,6 +236,22 @@
   /* color: var(--primary-blue); */
   transition: transform 0.5s;
 }
+
+.settingsButton {
+  overflow: visible;
+  position: relative;
+}
+
+.settingsDropdown {
+  display: block;
+  left: unset;
+  right: 1rem;
+  top: calc(100% + .5rem);
+}
+
+/* .settingsDropdown a {
+  margin-left: 0;
+} */
 
 @media(max-width: 768px) {
   .headerContainer {

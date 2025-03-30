@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from '../../../utils/supabase';
 import { useRouter } from 'next/navigation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function TeacherHome() {
   const [currentStudent, setCurrentStudent] = useState();
@@ -61,8 +63,15 @@ export default function TeacherHome() {
   }, [currentStudent])
 
 
+
   return (
     <div className='teacherPageWrapper'>
+      <div className={styles.addStudentButton}>
+      <Link href="/teacher/add-student">
+        <FontAwesomeIcon icon={faPlus} className={styles.addStudentIcon} />
+        Add Student
+      </Link>
+      </div>
       <Schedule
         privacy={false}
         handler={spotClickHandler}

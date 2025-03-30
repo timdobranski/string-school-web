@@ -53,6 +53,9 @@ export default function ConcertsPage() {
     {image: '/images/concerts/18.jpg',
       caption: 'String School Concert, 2025'
     },
+    {image: '/images/concerts/19.jpg',
+      caption: 'String School Concert, 2025'
+    },
   ]
 
   const nextSlideArrow = (handleClick, hasNext) => (

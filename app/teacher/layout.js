@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import Header from '../../components/Public/PublicHeader/PublicHeader';
 import { supabase } from '../../utils/supabase';
 import { useRouter } from 'next/navigation';
+import Script from 'next/script';
 
 const AuthContext = createContext();
 
@@ -112,6 +113,18 @@ export function useAuth() {
 export default function StudentContext({ children }) {
   return (
     <AuthProvider>
+       <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-529YQQGWYS');
+          `,
+        }}
+      />
       <Header />
       {/* <StudentNavbar /> */}
       <main>{children}</main>

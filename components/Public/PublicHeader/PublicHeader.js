@@ -5,16 +5,23 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './PublicHeader.module.css';
 import { supabase } from '../../../utils/supabase';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import PublicTopbar from '../PublicTopbar/PublicTopbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faHouse, faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
+
 
 export default function PublicHeader() {
   const [signedIn, setSignedIn] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [picture, setPicture] = useState(null);
   const pathname = usePathname(); // Get the current route
+  const isStudentOrTeacherPage = pathname.startsWith('/students') || pathname.startsWith('/teacher');
+  const [settingsDropdownOpen, setSettingsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -31,6 +38,19 @@ export default function PublicHeader() {
     };
 
     checkAuth();
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSettingsDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -53,22 +73,89 @@ export default function PublicHeader() {
     </Link>
   );
 
-  const settingsHref = userEmail === 'tim@lamesastringschool.com' ? '/teacher/settings' : '/student/settings';
-  const settingsButton = (
-    <Link href={settingsHref} className={`${isActive(settingsHref)}`}>
-      <div className={styles.profileImgContainer}>
-        <Image src={picture} alt="User Photo" fill="true" sizes="(max-width: 768px) 50px, 50px" />
-      </div>
-    </Link>
-  );
+  // const createNavLink = (href, text, dropdown = false, icon = null) => (
+  //   <div className={dropdown ? styles.flexRow : styles.navLink}>
+  //     {icon && <FontAwesomeIcon icon={icon} className={styles.icon} />} {/* Only render if icon is passed */}
+  //     <Link href={href} className={isActive(href)}>
+  //       {text}
+  //     </Link>
+  //   </div>
+  // );
 
-  const createNavLink = (href, text, dropdown = false) => (
-    <div className={dropdown ? '' : styles.navLink}>
-      <Link href={href} className={isActive(href)}>
-        {text}
-      </Link>
+  const createNavLink = (href, text, dropdown = false, icon = null, onClick = null) => (
+    <div
+      className={dropdown ? styles.flexRow : styles.navLink} // Correct classnames from the top version
+      onClick={onClick ? onClick : null} // Correct functionality from the bottom version
+    >
+      {/* Only render the icon if passed */}
+      {icon && <FontAwesomeIcon icon={icon} className={styles.icon} />}
+
+      {/* Conditionally render a span for onClick or a Link for regular navigation */}
+      {onClick ? (
+        <span className={styles.linkText}>{text}</span> // Keeps the look the same as other links
+      ) : (
+        <Link href={href} className={isActive(href)}>
+          {text}
+        </Link>
+      )}
     </div>
   );
+
+
+
+  const settingsHref = userEmail === 'tim@lamesastringschool.com' ? '/teacher/settings' : '/student/settings';
+
+  const settingsButton = (
+    <div
+      className={styles.settingsButton}
+      ref={dropdownRef}
+      onClick={() => setSettingsDropdownOpen(!settingsDropdownOpen)}
+    >
+      {/* Profile Image */}
+      <div className={styles.profileImgContainer}>
+        <Image
+          src={picture}
+          alt="User Photo"
+          fill
+          sizes="(max-width: 768px) 50px, 50px"
+        />
+      </div>
+
+      {/* Dropdown Content */}
+      {settingsDropdownOpen && (
+        <div className={styles.settingsDropdown}>
+          {/* Dynamic Home Link based on email */}
+          {createNavLink(
+            userEmail === 'tim@lamesastringschool.com' ? '/teacher/home' : '/students/home',
+            'HOME',
+            true,
+            faHouse
+          )}
+
+          {/* Settings Link */}
+          {createNavLink(
+            settingsHref, // Dynamic settings based on user type
+            'SETTINGS',
+            true,
+            faGear
+          )}
+
+          {/* Logout Button Styled Correctly */}
+          {createNavLink(
+            '#', // Use # to prevent navigation
+            'LOG OUT',
+            true,
+            faRightFromBracket,
+            async () => {
+              await supabase.auth.signOut();
+              window.location.href = '/'; // Redirect after logout if necessary
+            }
+          )}
+        </div>
+      )}
+    </div>
+  );
+
 
   const publicLinks = (
     <>
@@ -129,7 +216,9 @@ export default function PublicHeader() {
 
   const teacherLinks = (
     <>
-      {createNavLink('/teacher/dashboard', 'HOME')}
+      {createNavLink('/teacher/home', 'HOME')}
+      {createNavLink('/home', 'PUBLIC HOME')}
+      {/* {createNavLink('/teacher/home', 'HOME')} */}
     </>
   );
 
@@ -150,10 +239,13 @@ export default function PublicHeader() {
 
       {/* Right side of header */}
       <div className={styles.rightSideNav}>
-        {!signedIn && publicLinks}
-        {signedIn && userEmail === 'tim@lamesastringschool.com' && teacherTitle}
-        {signedIn && userEmail !== 'tim@lamesastringschool.com' && studentLinks}
-        {/* {signedIn ? settingsButton : loginButton} */}
+        {/* Show public links when not on /students or /teacher */}
+        {!isStudentOrTeacherPage && publicLinks}
+
+        {/* Show student or teacher links when signed in and on student/teacher pages */}
+        {isStudentOrTeacherPage && signedIn && userEmail === 'tim@lamesastringschool.com' && teacherLinks}
+        {isStudentOrTeacherPage && signedIn && userEmail !== 'tim@lamesastringschool.com' && studentLinks}
+        {signedIn ? settingsButton : null}
       </div>
     </div>
   );
