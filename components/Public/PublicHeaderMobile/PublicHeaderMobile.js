@@ -98,7 +98,7 @@ export default function PublicHeaderMobile() {
 
 
         <div className={styles.navLink}>
-          <Link href="/home#stringSchoolApp" onClick={handleCloseMenu}>FEATURES
+          <Link href="/home#stringSchoolApp" onClick={handleCloseMenu}>HOME
           </Link>
         </div>
 

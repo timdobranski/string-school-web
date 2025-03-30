@@ -87,8 +87,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 1rem;
-  margin: 0 1rem 0 0;
+  right: 0;
+  margin: 0 .5rem 0 0;
   height: 2rem;
   width: 2rem;
   /* border: solid red 4px; */

@@ -88,7 +88,7 @@ export default function PublicHeader() {
       onClick={onClick ? onClick : null} // Correct functionality from the bottom version
     >
       {/* Only render the icon if passed */}
-      {icon && <FontAwesomeIcon icon={icon} className={styles.icon} />}
+      {icon && <FontAwesomeIcon icon={icon} className={styles.dropdownIcon} />}
 
       {/* Conditionally render a span for onClick or a Link for regular navigation */}
       {onClick ? (

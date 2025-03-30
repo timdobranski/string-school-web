@@ -146,6 +146,9 @@
   background: var(--primary-gradient-darker);
 }
 .icon {
+  color: white;
+}
+.dropdownIcon {
   color: var(--primary-blue);
 }
 .currentPageLink {
@@ -230,7 +233,7 @@
 }
 
 
-.icon {
+.icon, .dropdownIcon {
   margin: 0 0 .125rem .5rem;
   font-size: 1rem;
   /* color: var(--primary-blue); */
