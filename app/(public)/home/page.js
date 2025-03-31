@@ -94,24 +94,23 @@ export default function PublicHome() {
         />
       </div>
 
-      {/* <div id='stringsmith'>
+      <div id='stringsmith'>
         <PromoBlock
           direction={'left'}
           background={'lightBackground1'}
           tag={'Coming 2025'}
-          title={'Stringsmith'}
-          photo={{image: '/images/stringsmithGlitterbomb.webp', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
-          text={`All students receive access to my online learning platform and game, Stringsmith. Stringsmith is a collection of interactive lessons, games,
-          and exercises designed to help you learn to play guitar and ukulele faster and more effectively. It's like an interactive version of my
-          textbook! It features customizable guitar fretboards also integrates with my String School app to track your progress and your practice time. These two apps work together: The String
-          School app is to handle scheduling and access to resources, and Stringsmith is for actual learning and practice.`}
+          title={'Custom Tools & Games'}
+          photo={{image: '/images/home-page/fretboard-tool-2.png', styles: { }}}
+          text={`I use my skills as a software developer to create custom interactive virtual tools and games for my students. When I find that a student is struggling with a concept,
+             I either find or create a tool or game to help them learn it faster and more effectively. These tools are available to all students through the String School app.
+             Check out a free preview example <a style='text-decoration: underline' href="https://stringsmith.vercel.app/fretboard">here</a>.`}
         />
-      </div> */}
+      </div>
 
       <div id='guitarPro'>
         <PromoBlock
-          direction={'left'}
-          background={'lightBackground1'}
+          direction={'right'}
+          background={'white'}
           title={'Guitar Pro 8'}
           photo={{image: '/images/guitarPro.png', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
           text={`All students receive my personal 50% off code to purchase Guitar Pro 8, an incredible program for reading, writing, and practicing music for guitar.`}
@@ -122,8 +121,8 @@ export default function PublicHome() {
 
       <div id='future'>
         <PromoBlock
-          direction={'right'}
-          background={'white'}
+          direction={'left'}
+          background={'lightBackground1'}
           title={'The Future'}
           photo={{image: '/images/me/me.webp' }}
           text={`When I began giving lessons in 2009, I had none of these things. The most important thing that I can offer my students
