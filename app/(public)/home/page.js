@@ -63,7 +63,7 @@ export default function PublicHome() {
           direction={'right'}
           background={'white'}
           tag={'Coming 2025'}
-          title={'Virtual Learning Tools & Games'}
+          title={`Custom Tools\u00A0&\u00A0Games`}
           photo={{image: '/images/home-page/stringsmith-mockup-blue.png', styles: { }}}
           text={`I use my skills as a software developer to create custom interactive virtual tools and games for my students. When I find that a student is struggling with a concept,
              I either find or create a tool or game to help them learn it faster and more effectively. These tools are available to all students through the String School app and will
