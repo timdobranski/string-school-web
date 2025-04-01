@@ -58,10 +58,22 @@ export default function PublicHome() {
            top tier lighting and sound, and a custom-built stage set that rivals any concert venue in San Diego! Learn more about concerts <a style='text-decoration: underline' href="/concerts">here</a>.`}
         />
       </div>
-      <div id='studio'>
+      <div id='stringsmith'>
         <PromoBlock
           direction={'right'}
           background={'white'}
+          tag={'Coming 2025'}
+          title={'Virtual Learning Tools & Games'}
+          photo={{image: '/images/home-page/stringsmith-mockup-blue.png', styles: { }}}
+          text={`I use my skills as a software developer to create custom interactive virtual tools and games for my students. When I find that a student is struggling with a concept,
+             I either find or create a tool or game to help them learn it faster and more effectively. These tools are available to all students through the String School app and will
+             be launched as a standalone learning platform for those who are not students in the future. Check out a free preview example <a style='text-decoration: underline' href="https://stringsmith.vercel.app/fretboard">here</a>.`}
+        />
+      </div>
+      <div id='studio'>
+        <PromoBlock
+          direction={'left'}
+          background={'lightBackground1'}
 
           title={'String School Studio'}
           photo={{image: '/images/home-page/studio.jpg', styles: { border: 'solid 2px, rgba(255, 255, 255, .7'}}}
@@ -70,6 +82,19 @@ export default function PublicHome() {
       we work on throughout the year. Learn more about the String School Studio`}
         />
       </div>
+
+      <div id='book'>
+        <PromoBlock
+          direction={'right'}
+          background={'white'}
+          title={'The String School Textbook'}
+          photo={{image: '/images/home-page/book-mockup-wide.jpg'}}
+          text={`The String School Guitar Method is my textbook, and it is currently in the second edition. Every student
+      receives a free PDF copy, and printed copies are available at the cost of printing them. Much of the book teaches concepts through color-coded
+      charts and information, which has been a big help for students but also raises the cost of printing to around $45 or so in 2025.`}
+        />
+      </div>
+
       <div id='progress'>
         <PromoBlock
           direction={'left'}
@@ -82,37 +107,12 @@ export default function PublicHome() {
         />
       </div>
 
-      <div id='book'>
-        <PromoBlock
-          direction={'right'}
-          background={'white'}
-          title={'The String School Textbook'}
-          photo={{image: '/images/home-page/book-cover.jpg'}}
-          text={`The String School Guitar Method is my textbook, and it is currently in the second edition. Every student
-      receives a free PDF copy, and printed copies are available at the cost of printing them. Much of the book teaches concepts through color-coded
-      charts and information, which has been a big help for students but also raises the cost of printing to around $45 or so in 2025.`}
-        />
-      </div>
-
-      <div id='stringsmith'>
-        <PromoBlock
-          direction={'left'}
-          background={'lightBackground1'}
-          tag={'Coming 2025'}
-          title={'Custom Tools & Games'}
-          photo={{image: '/images/home-page/fretboard-tool-2.png', styles: { }}}
-          text={`I use my skills as a software developer to create custom interactive virtual tools and games for my students. When I find that a student is struggling with a concept,
-             I either find or create a tool or game to help them learn it faster and more effectively. These tools are available to all students through the String School app.
-             Check out a free preview example <a style='text-decoration: underline' href="https://stringsmith.vercel.app/fretboard">here</a>.`}
-        />
-      </div>
-
       <div id='guitarPro'>
         <PromoBlock
           direction={'right'}
           background={'white'}
           title={'Guitar Pro 8'}
-          photo={{image: '/images/guitarPro.png', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
+          photo={{image: '/images/home-page/guitar-pro.jpg', styles: {border: 'solid 2px, rgba(255, 255, 255, .7'}}}
           text={`All students receive my personal 50% off code to purchase Guitar Pro 8, an incredible program for reading, writing, and practicing music for guitar.`}
         />
       </div>

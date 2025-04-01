@@ -168,10 +168,10 @@ export default function PublicHeader() {
         <div className={styles.dropdown}>
           {createNavLink('/home#stringSchoolApp', 'THE STRING SCHOOL APP', true)}
           {createNavLink('/home#concerts', 'STUDENT CONCERTS', true)}
+          {createNavLink('/home#stringsmith', 'VIRTUAL TOOLS & GAMES', true)}
           {createNavLink('/home#studio', 'STUDIO', true)}
-          {createNavLink('/home#progress', 'PROGRESS TRACKING', true)}
           {createNavLink('/home#book', 'TEXTBOOK', true)}
-          {createNavLink('/home#stringsmith', 'STRINGSMITH', true)}
+          {createNavLink('/home#progress', 'PROGRESS TRACKING', true)}
           {createNavLink('/home#guitarPro', 'GUITAR PRO 8', true)}
           {createNavLink('/home#future', 'THE FUTURE', true)}
         </div>

@@ -1,6 +1,5 @@
 import './globals.css';
 import Image from 'next/image';
-import background from '../public/images/background.jpeg';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import Script from 'next/script';

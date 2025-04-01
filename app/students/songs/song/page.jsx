@@ -58,7 +58,7 @@ export default function Song() {
       <div className={styles.songHeader}>
         <Image
           className={styles.artistImage}
-          src={metadata?.artistData?.images?.[0]?.url || '/images/background.jpeg'}
+          src={metadata?.artistData?.images?.[0]?.url || '/images/green-crowd.jpg'}
           width={250}
           height={250}
           alt='album cover'
