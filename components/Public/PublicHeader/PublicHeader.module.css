@@ -144,6 +144,7 @@
 }
 .flexRow:hover {
   background: var(--primary-gradient-darker);
+  cursor: pointer;
 }
 .icon {
   color: white;
@@ -183,6 +184,9 @@
 
 .dropdown a:hover, .settingsDropdown a:hover {
   background: var(--primary-gradient-darker);
+  width: 100%;
+  cursor: pointer;
+
   /* color: white; */
 }
 
@@ -217,7 +221,9 @@
   border-radius: 4px;
   height: auto;
   /* width: 200px; */
-  min-width: none;
+  /* width: fit-content; */
+  width: auto;
+  min-width: unset;
 }
 .bookingLink a {
   color: black;
@@ -225,8 +231,8 @@
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   padding-left: 0;
   height: fit-content;
-  width: fit-content;
-  min-width: none;
+  width: auto;
+  min-width: unset;
 
 }
 .bookingLink:hover {
