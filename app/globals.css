@@ -57,15 +57,16 @@
   --darkBackground3: rgb(28, 28, 28);
   --darkBackground4: rgb(76, 76, 76);
 
-  --primary-green: rgb(126, 255, 126);
+  /* --primary-green: rgb(126, 255, 126); */
   --primary-blue: rgb(0, 106, 152);
-
+  --primary-green: rgb(149, 212, 120);
 
   /* green to blue, more obvious, darker blue, from stringsmith */
   --primary-gradient: -webkit-linear-gradient(left, rgb(132, 255, 171), rgb(0, 229, 255));
 
   /* green to blue, more subtle, lighter blue */
   --secondary-gradient: -webkit-linear-gradient(left, rgb(181, 255, 156) 0%, rgb(101, 251, 255) 100%);
+  --secondary-gradient : -webkit-linear-gradient(left, #95d478 0%, rgb(43, 217, 147) 100%);
 
   /* light green to dark green */
   --green-gradient: -webkit-linear-gradient(left, rgb(156, 255, 157) 0%, rgb(0, 207, 100) 100%);

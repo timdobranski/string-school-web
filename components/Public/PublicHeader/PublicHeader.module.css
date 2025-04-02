@@ -207,6 +207,8 @@
   text-align: center;
   background: var(--primary-gradient);
   background: #95d478;
+  background: var(--secondary-gradient);
+  /* background: var(--primary-green); */
   /* background: #8bc66f; */
   /* background: #a5e687; */
   /* background: #aeff88; */
@@ -220,7 +222,7 @@
 .bookingLink a {
   color: black;
   color: white;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   padding-left: 0;
   height: fit-content;
   width: fit-content;
