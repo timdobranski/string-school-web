@@ -87,7 +87,7 @@ export default function PublicHome() {
         <PromoBlock
           direction={'right'}
           background={'white'}
-          title={'The String School Textbook'}
+          title={'The String School Book'}
           photo={{image: '/images/home-page/book-mockup-wide.jpg'}}
           text={`The String School Guitar Method is my textbook, and it is currently in the second edition. Every student
       receives a free PDF copy, and printed copies are available at the cost of printing them. Much of the book teaches concepts through color-coded
@@ -124,7 +124,7 @@ export default function PublicHome() {
           direction={'left'}
           background={'lightBackground1'}
           title={'The Future'}
-          photo={{image: '/images/me/me.webp' }}
+          photo={{image: '/images/me/me.webp', styles: {margin: '2rem 0 2rem 0'}}}
           text={`When I began giving lessons in 2009, I had none of these things. The most important thing that I can offer my students
       is the promise that I am always looking for new and unique ways to improve my lessons! At least once per year, I roll out a series of
       improvements designed to help you learn faster and more comfortably! `}
