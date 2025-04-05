@@ -25,7 +25,7 @@
   max-width: 90%;
 }
 .curriculumGrid {
-  margin-left: 10rem;
+  margin-left: 8rem;
   display: flex;
   flex-direction: row;
   /* border: solid blue 2px; */
@@ -34,14 +34,44 @@
 }
 .curriculumList {
 /* border: solid red 1px; */
-margin: 2rem;
 }
 .curriculumList li {
   font-size: 1.35rem;
   margin: 1rem;
   color: black;
 }
+.techList {
+margin: 3rem 0 3rem 2rem;
+list-style: none;
+}
+.techList li {
+  font-size: 1.25rem ;
+  margin: 1rem 0;
 
+}
+.techListItemWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.techListItemImage {
+  width: 50px;
+  margin-right: 2rem;
+}
+.circularIcon {
+  border-radius: 50%;
+}
+.addedContrastEdges {
+  /* filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.7)) */
+
+}
+.fadeIn {
+  /* animation: fadeIn 0.3s ease both; */
+}
+.iconTabTitles {
+  font-weight: 400 !important;
+}
 .notSelected {
   display: none;
   transition: opacity .5s;
@@ -53,9 +83,10 @@ margin: 2rem;
   opacity: 1;
 }
 .iconSwitchContent {
-  height: fit-content;
+  padding: 2rem;
+  /* height: fit-content;
   max-height: 1000px;
-  transition: max-height .5s;
+  transition: max-height .5s; */
 }
 .contentSectionWrapper {
   width: 1000px;
@@ -65,15 +96,17 @@ margin: 2rem;
   justify-content: center;
   align-items: center;
   background: rgb(223, 223, 223);
-  background: var(--primary-gradient-darker);
+  background: white;
+  /* background: var(--primary-gradient-darker); */
+  /* background: var(--primary-blue); */
   border-radius: 2rem;
   padding: 2rem 0 2rem 0;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-
+  /* transition: max-height 0.3s ease-out, padding 0.3s ease-out; */
+  margin-bottom: 4rem;
   /* border: solid red 4px; */
 }
 .contentSectionWrapper.expanded {
-  max-height: 500px; /* Or any sufficiently large value */
+  /* max-height: 500px; */
   padding: 20px;
   opacity: 1;
   visibility: visible;
@@ -361,7 +394,6 @@ justify-content: center;
     width: 100vw;
     max-width: 98vw;
     -webkit-tap-highlight-color: transparent; /* Disable tap highlight */
-
   }
   .lessonInfoWrapper * {
     width: 30%;
@@ -409,6 +441,14 @@ justify-content: center;
     /* transition: none; */
     /* animation: none; */
   }
+  .techList {
+    margin-left: 0;
+  }
+  .techList li {
+    margin: 2rem 0;
+  }
+
+
   .carousel {
     width: 100%;
     margin: 0;
@@ -543,5 +583,16 @@ justify-content: center;
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

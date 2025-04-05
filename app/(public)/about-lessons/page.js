@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './about-lessons.module.css'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -27,6 +27,10 @@ export default function AboutLessons() {
   const [lobbyCarousel, setLobbyCarousel] = useState('videos');
   const [approachSlide, setApproachSlide] = useState(0);
   const [detailsSlide, setDetailsSlide] = useState(0);
+  const [approachHeight, setApproachHeight] = useState(0)
+  const [detailsHeight, setDetailsHeight] = useState(0)
+  const approachRef = useRef(null)
+  const detailsRef = useRef(null)
 
   const concertPhotos = [
     {image: '/images/me/me.webp',
@@ -48,6 +52,83 @@ export default function AboutLessons() {
       caption: 'Starlight Theater, Los Angeles 2013'
     },
   ]
+
+  useEffect(() => {
+    if (!approachRef.current) return
+
+    const images = approachRef.current.querySelectorAll('img')
+    let loadedCount = 0
+
+    const updateHeight = () => {
+      setApproachHeight(approachRef.current.scrollHeight)
+    }
+
+    const checkAllLoaded = () => {
+      loadedCount++
+      if (loadedCount === images.length) {
+        updateHeight()
+      }
+    }
+
+    if (images.length === 0) {
+      updateHeight()
+    } else {
+      images.forEach((img) => {
+        if (img.complete) {
+          checkAllLoaded()
+        } else {
+          img.addEventListener('load', checkAllLoaded)
+          img.addEventListener('error', checkAllLoaded)
+        }
+      })
+    }
+
+    return () => {
+      images.forEach((img) => {
+        img.removeEventListener('load', checkAllLoaded)
+        img.removeEventListener('error', checkAllLoaded)
+      })
+    }
+  }, [approachSlide])
+
+
+  useEffect(() => {
+    if (!detailsRef.current) return
+
+    const images = detailsRef.current.querySelectorAll('img')
+    let loadedCount = 0
+
+    const updateHeight = () => {
+      setDetailsHeight(detailsRef.current.scrollHeight)
+    }
+
+    const checkAllLoaded = () => {
+      loadedCount++
+      if (loadedCount === images.length) {
+        updateHeight()
+      }
+    }
+
+    if (images.length === 0) {
+      updateHeight()
+    } else {
+      images.forEach((img) => {
+        if (img.complete) {
+          checkAllLoaded()
+        } else {
+          img.addEventListener('load', checkAllLoaded)
+          img.addEventListener('error', checkAllLoaded)
+        }
+      })
+    }
+
+    return () => {
+      images.forEach((img) => {
+        img.removeEventListener('load', checkAllLoaded)
+        img.removeEventListener('error', checkAllLoaded)
+      })
+    }
+  }, [detailsSlide])
 
   const nextSlideArrow = (handleClick, hasNext) => (
     <button disabled={!hasNext} className={hasNext ? styles.slideButtonRight : styles.slideButtonRightDisabled} onClick={handleClick}>
@@ -79,10 +160,15 @@ export default function AboutLessons() {
       <div className={styles.section1Container} id='approach'>
         {/* <img src='/images/teaching-approach.jpg' alt='Studio Photo 1' className={styles.section1Image} /> */}
         <h2 className={"sectionTitle"}>Teaching Approach</h2>
-        <p className={'text'}>{`I have over a decade of experience teaching students of all ages and from beginner to advanced playing levels.
+        <div className={`pageContentWidth`}>
+        <p className={'text vertMarginSmall'}>{`For over 15 years I have taught students of all ages and from beginner to advanced playing levels.
        I am comfortable and familiar working with any genre of music. My students are generally about 1/3 adults and 2/3 children & teens.
        Most students are either beginners learning the fundamentals, or lifelong players looking to improve their improvisation, songwriting, or music theory skills.
        `}</p>
+        <p className={'text vertMarginSmall'}>{`There are some limits to my knowledge and experience, mostly relating to advanced jazz theory. If you are an advanced player
+        and curious if I can help you, please reach out and I will be happy to discuss your needs.
+       `}</p>
+       </div>
          <div className={styles.curriculumGrid}>
            <ul className={styles.curriculumList}>
              <li>Playing Mechanics</li>
@@ -103,60 +189,137 @@ export default function AboutLessons() {
         <div className={styles.lessonInfoWrapper}>
           <div onClick={approachSlide === 1 ? () => setApproachSlide(0) : () => setApproachSlide(1)} className={`${styles.lessonInfoSection} ${approachSlide === 1 && styles.selected}`}>
             <FontAwesomeIcon icon={faMicrophone} className={`${approachSlide === 1 ? styles.selectedIcon : styles.icon}`} />
-            <h2 className={`${approachSlide === 1 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Projects</h2>
+            <h2 className={`${approachSlide === 1 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'} ${styles.iconTabTitles}`}>Projects</h2>
 
           </div>
           <div onClick={approachSlide === 2 ? () => setApproachSlide(0) : () => setApproachSlide(2)} className={`${styles.lessonInfoSection} ${styles.middleInfoSection} ${approachSlide === 2 && styles.selected}`}>
             <FontAwesomeIcon icon={faLaptop} className={`${approachSlide === 2 ? styles.selectedIcon : styles.icon}`} />
-            <h2 className={`${approachSlide === 2 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Technology</h2>
+            <h2 className={`${approachSlide === 2 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}  ${styles.iconTabTitles}`}>Technology</h2>
 
           </div>
           <div onClick={approachSlide === 3 ? () => setApproachSlide(0) : () => setApproachSlide(3)} className={`${styles.lessonInfoSection} ${approachSlide === 3 && styles.selected}`}>
             <FontAwesomeIcon icon={faUser} className={`${approachSlide === 3 ? styles.selectedIcon : styles.icon}`} />
-            <h2 className={`${approachSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Custom</h2>
+            <h2 className={`${approachSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}  ${styles.iconTabTitles}`}>Custom</h2>
           </div>
 
         </div>
 
-        <div className={`${styles.contentSectionWrapper} ${styles.iconSwitchContent}`}>
-          <div className={`${styles.tabContent} ${approachSlide !== 0 ? styles.notSelected : styles.selectedText}`}>
-            <p className={`text`}>{`Select one of the choices above to learn more about my lessons.`}</p>
+        <div
+          className={`${styles.contentSectionWrapper}`}
+          style={{
+            height: `${approachHeight}px`,
+            transition: 'height 0.7s ease',
+            overflow: 'hidden'
+          }}
+        >
+          <div className={styles.iconSwitchContent} ref={approachRef}>
+            {approachSlide === 0 && (
+              <div className="fadeIn">
+                <p className="text">Select one of the choices above to learn more about my lessons.</p>
+              </div>
+            )}
+            {approachSlide === 1 && (
+              <div className="fadeIn">
+                <p className="text">  I encourage every student to pursue an optional project of some kind, and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.</p>
+              </div>
+            )}
+            {approachSlide === 2 && (
+              <div className="fadeIn">
+                <p className="text">{`Whenever possible, I incorporate the latest technology into my lessons in ways that continue to make learning
+                 to play an instrument much easier. Some of the tech I use includes:
+                 `}</p>
+                <ul className={styles.techList}>
+                  <li>
+                    <div className={styles.techListItemWrapper}>
+                    <img src='/images/tech-icons/gp8.png' alt='Guitar Pro 8' className={styles.techListItemImage} />
+                    <span>
+                      Guitar Pro 8 for practicing & writing interactive music pages with sound
+                    </span>
+                    </div>
+                    </li>
+                  <li>
+                  <div className={styles.techListItemWrapper}>
+                    <img src='/images/tech-icons/ripx.png' alt='RipX DAW' className={styles.techListItemImage} />
+                    <span>
+                      RipX DAW for editing songs to remove or modify the guitar and create backing tracks
+                    </span>
+                  </div>
+                  </li>
+                  <li>
+                  <div className={styles.techListItemWrapper}>
+                  <img src='/images/logos/icon-blue-background.png' alt='String School app' className={`${styles.techListItemImage} ${styles.circularIcon}`} />
+                  <span>
+                      My String School app for scheduling and managing lessons & progress
+                    </span>
+                      </div>
+                      </li>
+                  <li>
+                  <div className={styles.techListItemWrapper}>
+                  <img src='/images/tech-icons/pro-tools.png' alt='Pro Tools' className={`${styles.techListItemImage} `} />
+                    <span>
+                    Pro Tools for recording student tracks in professional quality
+                    </span>
+                    </div>
+                    </li>
+                  <li>
+                  <div className={styles.techListItemWrapper}>
+                  <img src='/images/tech-icons/lmss-2.png' alt='String School toolbox' className={`${styles.techListItemImage} ${styles.addedContrastEdges}`}/>
+                  <span>
+                    My very own collection of interactive teaching tools - when one doesn't exist that I need - I create it myself!
+                  </span>
+                    </div>
+                    </li>
+                    <li>
+                  <div className={styles.techListItemWrapper}>
+                  <img src='/images/tech-icons/spotify.png' alt='Spotify' className={`${styles.techListItemImage} `} />
+                    <span>
+                    Spotify for sharing playlists for song suggestions, examples of topics, or just for fun!
+                    </span>
+                    </div>
+                    </li>
+                  <li>
+                  <div className={styles.techListItemWrapper}>
+                  <img src='/images/tech-icons/classroom.png' alt='String School toolbox' className={`${styles.techListItemImage}`} />
+                  <span>
+                    Google Classroom Quizzes & Forms to test student knowledge
+                    </span>
+                  </div>
+                  </li>
+                </ul>
+                <p className="text"> {`These tools enable students to learn more, learn faster, and have way more fun doing it. I strongly recommend that
+                practice sessions at home take place with a PC or Mac nearby to access the full suite of advantages that these tools offer. Mobile devices
+                unfortunately do not provide the same experience at this time.`}</p>
+              </div>
+            )}
+            {approachSlide === 3 && (
+              <div className="fadeIn">
+                <p className="text">Each song we work on is customized to fit your playing level. We can work with prearranged versions that I have written in the past, or start a whole new version with adjustments for difficulty or just for a fun, unique twist on any song. Students learn the best when they have a moderate but attainable challenge. We call this the zone of proximal development, and it is the sweet spot for quick and effective learning.</p>
+              </div>
+            )}
           </div>
-          <div className={`${styles.tabContent} ${approachSlide !== 1 ? styles.notSelected : styles.selectedText}`}>
-            <p className={`text`}>{`I encourage every student to persue an optional project of some kind,
-              and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a
-              song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.`}</p>
-          </div>
-          <p className={`text ${approachSlide !== 2 ? styles.notSelected : styles.selectedText}`}>{`Whenever possible, I incorporate the latest technology into my lessons in ways that continue to make learning
-            to play an instrument much easier. I'm also a software developer, and I am continually working to grow and improve my own
-            guitar learning platform, Stringsmith. I use and highly recommend Guitar Pro software, and all students have access to my 50% off code to buy it yourself.`}
-          </p>
-          <p className={`text ${approachSlide !== 3 ? styles.notSelected : styles.selectedText}`}>{`Each song we work on is customized to fit your playing level. We can work with prearranged versions
-          that I have written in the past, or start a whole new version with adjustments for difficulty or just for a fun, unique twist on any song. Students learn the best when they have
-          a moderate but attainable challenge. We call this the zone of proximal development, and it is the sweet spot for quick and effective learning.`}
-          </p>
         </div>
-      </div>
+
+
 
       <div className={styles.section2Container} id='details'>
         <h2 className={"sectionTitle"}>The Details</h2>
         <div className={styles.lessonInfoWrapper}>
           <div onClick={detailsSlide === 1 ? () => setDetailsSlide(0) : () => setDetailsSlide(1)} className={`${styles.lessonInfoSection} ${detailsSlide === 1 && styles.selected}`}>
-            <FontAwesomeIcon icon={faClock} className={`${detailsSlide === 1 ? styles.selectedIcon : styles.icon}`} />
-            <h2 className={`${detailsSlide === 1 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>When</h2>
+            <FontAwesomeIcon icon={faClock} className={`${detailsSlide === 1 ? styles.selectedIcon : styles.icon} `} />
+            <h2 className={`${detailsSlide === 1 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}  ${styles.iconTabTitles}`}>When</h2>
 
           </div>
 
           <div onClick={detailsSlide === 2 ? () => setDetailsSlide(0) : () => setDetailsSlide(2)} className={`${styles.lessonInfoSection} ${detailsSlide === 2 && styles.selected}`}>
             {/* <div className={styles.verticalDividerLeft}></div> */}
             <FontAwesomeIcon icon={faLocationDot} className={`${detailsSlide === 2 ? styles.selectedIcon : styles.icon}`} />
-            <h2 className={`${detailsSlide === 2 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Where</h2>
+            <h2 className={`${detailsSlide === 2 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}  ${styles.iconTabTitles}` }>Where</h2>
             {/* <div className={styles.verticalDividerRight}></div> */}
           </div>
 
           <div onClick={detailsSlide === 3 ? () => setDetailsSlide(0) : () => setDetailsSlide(3)} className={`${styles.lessonInfoSection} ${detailsSlide === 3 && styles.selected}`}>
             <FontAwesomeIcon icon={faDollarSign} className={`${detailsSlide === 3 ? styles.selectedIcon : styles.icon}`} />
-            <h2 className={`${detailsSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}`}>Fees</h2>
+            <h2 className={`${detailsSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}  ${styles.iconTabTitles}`}>Fees</h2>
           </div>
         </div>
         <div className={`${styles.contentSectionWrapper} ${styles.iconSwitchContent}`}>
@@ -420,7 +583,7 @@ export default function AboutLessons() {
 
 
       </div>
-
+          </div>
     </div>
   )
 }

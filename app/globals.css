@@ -187,7 +187,6 @@ p {
 .sectionTitleMobile {
   display: none;
 }
-
 .button {
   position: relative;
   margin: 2rem;
@@ -276,6 +275,9 @@ p {
 }
 .whiteText {
   color: white;
+}
+.vertMarginSmall {
+  margin: 2rem 0 ;
 }
 .linkedText {
   font-size: 1.25rem;
