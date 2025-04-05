@@ -232,7 +232,14 @@ export default function PublicHeader() {
       <div className={styles.leftSideNav}>
         <div className={styles.logoWrapper}>
           <Link href="/home">
-            <img src="/images/logos/final-title-white.png" alt="La Mesa String School Logo" className={styles.logo} />
+            <picture>
+              <source srcSet="/images/logos/final-title-white.webp" type="image/webp" />
+              <img
+                src="/images/logos/final-title-white.jpg"
+                alt="La Mesa String School Logo"
+                className={styles.logo}
+              />
+            </picture>
           </Link>
         </div>
       </div>

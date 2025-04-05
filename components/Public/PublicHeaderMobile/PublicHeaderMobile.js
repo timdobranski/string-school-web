@@ -14,6 +14,7 @@ export default function PublicHeaderMobile() {
   const [signedIn, setSignedIn] = useState(false);
   const [picture, setPicture] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [touchStartX, setTouchStartX] = useState(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -67,7 +68,7 @@ export default function PublicHeaderMobile() {
 
   return (
     <>
-      <div className={`${styles.overlay} ${menuOpen ? styles.overlayOn : ''}`}></div>
+      <div className={`${styles.overlay} ${menuOpen ? styles.overlayOn : ''}`}   onClick={handleCloseMenu} ></div>
       <div className={styles.headerContainer}>
         {/* <PublicNavbar /> */}
 
@@ -75,11 +76,32 @@ export default function PublicHeaderMobile() {
 
         <div className={styles.logoWrapper}>
           <Link href='/home' onClick={handleCloseMenu}>
-            <img src='/images/logos/final-title-white.png' alt="La Mesa String School Logo" className={styles.logo}/>
+            <picture onClick={handleCloseMenu}>
+              <source srcSet="/images/logos/final-title-white.webp" type="image/webp" onClick={handleCloseMenu}/>
+              <img
+                src="/images/logos/final-title-white.png"
+                alt="La Mesa String School Logo"
+                className={styles.logo}
+                onClick={handleCloseMenu}
+              />
+            </picture>
           </Link>
         </div>
 
-        <div className={styles.menuHandleIconWrapper} onClick={() => setMenuOpen(!menuOpen)}>
+        <div className={styles.menuHandleIconWrapper} onClick={() => setMenuOpen(!menuOpen)}
+          onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
+          onTouchMove={(e) => {
+            if (touchStartX !== null) {
+              const currentX = e.touches[0].clientX;
+              const diff = currentX - touchStartX;
+              if (diff > 60) { // 60px right swipe
+                handleCloseMenu();
+                setTouchStartX(null); // reset
+              }
+            }
+          }}
+          onTouchEnd={() => setTouchStartX(null)}
+        >
           <FontAwesomeIcon icon={faBars} className={styles.menuIcon} />
         </div>
       </div>

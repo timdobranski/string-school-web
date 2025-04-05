@@ -69,6 +69,7 @@ export default function AboutLessons() {
         title={['LESSON INFO']}
         button={false}
         image={'/images/hero-2.jpg'}
+        webp={'/images/hero-2.webp'}
         imageStyles={{ filter: 'brightness(80%)' }}
         // textDirection={'right'}
         text={[]}

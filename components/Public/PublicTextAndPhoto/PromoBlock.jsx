@@ -3,6 +3,7 @@ import styles from './PromoBlock.module.css';
 import parse from 'html-react-parser';
 
 export default function PromoBlock({ title, text, photo, direction, background, titleClassName }) {
+  console.log('webp: ', photo.webp);
   return (
     <div className={styles.background} style={{ background: `var(--${background})` }}>
       <div
@@ -16,12 +17,15 @@ export default function PromoBlock({ title, text, photo, direction, background, 
         </div>
 
         <div className={styles.photoSide}>
+        <picture className={styles.pictureElement}>
+          <source srcSet={photo.webp} type="image/webp" />
           <img
             src={photo.image}
             alt="promo photo"
             className={styles.image}
             style={{ ...photo.styles }}
           />
+        </picture>
         </div>
       </div>
     </div>

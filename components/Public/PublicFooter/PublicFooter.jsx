@@ -19,8 +19,14 @@ export default function PublicHeader() {
         <FontAwesomeIcon icon={faTiktok} className={styles.icon} />
       </div> */}
 
-      <img src="/images/logos/final-title-white.png" alt="La Mesa String School Logo" className={styles.logo}/>
-      {/* <p className={styles.text}>Copyright 2024, Tim Dobranski</p> */}
+<picture>
+  <source srcSet="/images/logos/final-title-white.webp" type="image/webp" />
+  <img
+    src="/images/logos/final-title-white.png"
+    alt="La Mesa String School Logo"
+    className={styles.logo}
+  />
+</picture>      {/* <p className={styles.text}>Copyright 2024, Tim Dobranski</p> */}
     </div>
   )
 

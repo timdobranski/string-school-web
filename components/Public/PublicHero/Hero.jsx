@@ -7,7 +7,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-export default function Hero({type, title = [], text = [], videoSrc = '/videos/hero-video.mov', image, imageStyles, direction, button, buttonHash,
+export default function Hero({type, title = [], text = [], videoSrc = '/videos/hero-video.mov', image, webp, imageStyles, direction, button, buttonHash,
   titleStyles, loopVideo, hideTitle }) {
 
   return (
@@ -28,11 +28,14 @@ export default function Hero({type, title = [], text = [], videoSrc = '/videos/h
       }
 
       {type === 'photo' &&
-        <img
-          src={image}
-          className={styles.image}
-          style={imageStyles}
-        />
+       <picture>
+         <source srcSet={webp} type="image/webp" />
+         <img
+           src={image}
+           className={styles.image}
+           style={imageStyles}
+         />
+       </picture>
       }
 
       <div className={styles.contentWrapper}>
@@ -52,9 +55,9 @@ export default function Hero({type, title = [], text = [], videoSrc = '/videos/h
           </p>
         ))} */}
       </div>
-        {button ? <Link href={`#${buttonHash}`}>
-          <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
-        </Link> : null}
+      {button ? <Link href={`#${buttonHash}`}>
+        <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
+      </Link> : null}
     </div>
   );
 }

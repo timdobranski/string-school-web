@@ -197,8 +197,8 @@
   font-weight: bold;
   position: relative;
   color: white;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-  padding: .5rem 1.5rem;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  padding: .75rem 1.5rem .5rem 1.5rem;
   margin: .5rem 1rem;
   font-weight: bold;
   background: var(--primary-gradient-darker);
@@ -208,6 +208,7 @@
   text-align: center;
   width: fit-content;
   margin: 0 auto;
+  border-radius: 4px;
 
 }
 .bookingLink:hover {
