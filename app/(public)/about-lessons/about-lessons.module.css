@@ -20,6 +20,28 @@
   /* border: solid red 4px; */
   height: auto;
 }
+.contentWrapper {
+  width: 1000px;
+  max-width: 90%;
+}
+.curriculumGrid {
+  margin-left: 10rem;
+  display: flex;
+  flex-direction: row;
+  /* border: solid blue 2px; */
+  justify-content: center;
+  align-items: space-between;
+}
+.curriculumList {
+/* border: solid red 1px; */
+margin: 2rem;
+}
+.curriculumList li {
+  font-size: 1.35rem;
+  margin: 1rem;
+  color: black;
+}
+
 .notSelected {
   display: none;
   transition: opacity .5s;
@@ -141,11 +163,13 @@
   /* border: solid red 1px; */
   text-align: center;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .lessonInfoWrapperMidMargin {
   margin: 2rem 0 2rem 0;
 }
 .lessonInfoSection {
+  -webkit-tap-highlight-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -486,6 +510,26 @@ justify-content: center;
   }
   .section4Container {
     padding-bottom: 4rem
+  }
+  .curriculumGrid {
+    margin: 2rem 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-blue);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 94%;
+  }
+  .curriculumList {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .curriculumList li {
+    font-size: 1.25rem;
+    margin: 1rem;
+    color: white;
   }
 
 }

@@ -78,8 +78,26 @@ export default function AboutLessons() {
       <div className={styles.section1Container} id='approach'>
         {/* <img src='/images/teaching-approach.jpg' alt='Studio Photo 1' className={styles.section1Image} /> */}
         <h2 className={"sectionTitle"}>Teaching Approach</h2>
-        <p className={'text'}>{`I believe each student requires their own
-          unique approach, but there are common themes that I try to implment with most students:`}</p>
+        <p className={'text'}>{`I have over a decade of experience teaching students of all ages and from beginner to advanced playing levels.
+       I am comfortable and familiar working with any genre of music. My students are generally about 1/3 adults and 2/3 children & teens.
+       Most students are either beginners learning the fundamentals, or lifelong players looking to improve their improvisation, songwriting, or music theory skills.
+       `}</p>
+         <div className={styles.curriculumGrid}>
+           <ul className={styles.curriculumList}>
+             <li>Playing Mechanics</li>
+             <li>Strumming</li>
+             <li>Music Theory</li>
+             <li>Ear Training</li>
+
+
+           </ul>
+           <ul className={styles.curriculumList}>
+             <li>Songwriting</li>
+             <li>Improvisation</li>
+             <li>Tab or Standard Notation</li>
+             <li>Ear Training</li>
+           </ul>
+         </div>
 
         <div className={styles.lessonInfoWrapper}>
           <div onClick={approachSlide === 1 ? () => setApproachSlide(0) : () => setApproachSlide(1)} className={`${styles.lessonInfoSection} ${approachSlide === 1 && styles.selected}`}>
