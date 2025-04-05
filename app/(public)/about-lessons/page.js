@@ -220,7 +220,7 @@ export default function AboutLessons() {
             )}
             {approachSlide === 1 && (
               <div className="fadeIn">
-                <p className="text">  I encourage every student to pursue an optional project of some kind, and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.</p>
+                <p className="text"> {`I encourage every student to pursue an optional project of some kind, and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.`}</p>
               </div>
             )}
             {approachSlide === 2 && (
