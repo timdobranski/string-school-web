@@ -265,7 +265,7 @@ export default function AboutLessons() {
                   <div className={styles.techListItemWrapper}>
                   <img src='/images/tech-icons/lmss-2.png' alt='String School toolbox' className={`${styles.techListItemImage} ${styles.addedContrastEdges}`}/>
                   <span>
-                    My very own collection of interactive teaching tools - when one doesn't exist that I need - I create it myself!
+                    {`My very own collection of interactive teaching tools - when one doesn't exist that I need - I create it myself!`}
                   </span>
                     </div>
                     </li>
