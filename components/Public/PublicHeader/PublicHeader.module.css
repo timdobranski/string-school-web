@@ -25,6 +25,8 @@
 .leftSideNav, .rightSideNav {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .rightSideNav {
 
@@ -111,20 +113,20 @@
 
 .navLinkContainer {
   position: relative; /* Ensures the dropdown is positioned relative to this container */
-  height: fit-content;
-  /* border: solid 1px black; */
+  height: fit-content;  /* border: solid 1px black; */
 }
 
 .navLink {
-  margin: 0.5rem 0.75rem;
+  margin: 0.5rem 1.5rem;
   transition: transform 0.5s;
   font-size: 1.25rem;
   height: fit-content;
   color: black;
   font-weight: 800;
-  padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+  /* padding: 0.5rem 0.75rem 0.25rem 0.75rem; */
   text-align: center;
   position: relative;
+  height: 100%;
   /* border-radius: 4px; */
   /* border: solid 1px black; */
   color: white;
@@ -135,6 +137,9 @@
   text-decoration-color: rgb(144, 250, 123);
   text-decoration-color: #95d478;
   text-underline-offset: 4px;
+}
+.navLinkContainer.dropdownDisabled .dropdown {
+  display: none !important
 }
 .flexRow {
   display: flex;

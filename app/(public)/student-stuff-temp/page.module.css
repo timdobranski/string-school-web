@@ -52,12 +52,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 .navLink a {
   margin: 1rem 0;
   color: var(--primary-blue);
   background: var(--secondary-gradient);
-  padding: 1.25rem 1.5rem 1rem 1.5rem;
+  padding: .75rem 1rem .5rem 1rem;
   /* outline: solid 4px white; */
   color: rgb(255, 255, 255);
   text-decoration-color: rgb(116, 225, 141);

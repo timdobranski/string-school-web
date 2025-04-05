@@ -22,6 +22,10 @@ export default function PublicHeader() {
   const isStudentOrTeacherPage = pathname.startsWith('/students') || pathname.startsWith('/teacher');
   const [settingsDropdownOpen, setSettingsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [disabledDropdowns, setDisabledDropdowns] = useState({
+    home: false,
+    lessonInfo: false,
+  })
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -63,6 +67,25 @@ export default function PublicHeader() {
     });
 
   }, []);
+
+  const temporarilyDisableDropdown = (key) => {
+    setDisabledDropdowns(prev => ({ ...prev, [key]: true }))
+
+    const handleMouseMove = () => {
+      setDisabledDropdowns(prev => ({ ...prev, [key]: false }))
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+  }
+
+  const handleDropdownClick = (e, key) => {
+    if (e.type === 'click') {
+      temporarilyDisableDropdown(key)
+    } else if (e.type === 'touchstart') {
+      setDisabledDropdowns(prev => ({ ...prev, [key]: true }))
+    }
+  }
 
   // Function to check if the current link is active
   const isActive = (href) => pathname.startsWith(href) ? styles.currentPageLink : '';
@@ -159,9 +182,16 @@ export default function PublicHeader() {
 
   const publicLinks = (
     <>
-      <div className={styles.navLinkContainer}>
-        <div className={styles.navLink}>
-          <Link href="/home" className={isActive('/home')}>
+      <div
+        className={`${styles.navLinkContainer} ${disabledDropdowns.home ? styles.dropdownDisabled : ''}`}
+      >
+        <div className={styles.navLink} >
+          <Link
+            href="/home"
+            className={`${isActive('/home')}`}
+            onClick={(e) => handleDropdownClick(e, 'home')}
+            onTouchStart={(e) => handleDropdownClick(e, 'home')}
+          >
             HOME <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
           </Link>
         </div>
@@ -177,9 +207,15 @@ export default function PublicHeader() {
         </div>
       </div>
 
-      <div className={styles.navLinkContainer}>
+      <div
+        className={`${styles.navLinkContainer} ${disabledDropdowns.lessonInfo ? styles.dropdownDisabled : ''}`}
+>
         <div className={styles.navLink}>
-          <Link href="/about-lessons" className={isActive('/about-lessons')}>
+          <Link
+            href="/about-lessons" className={isActive('/about-lessons')}
+            onClick={(e) => handleDropdownClick(e, 'lessonInfo')}
+            onTouchStart={(e) => handleDropdownClick(e, 'lessonInfo')}
+          >
             LESSON INFO <FontAwesomeIcon icon={faChevronDown} className={styles.icon} />
           </Link>
         </div>
