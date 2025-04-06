@@ -222,7 +222,50 @@ export default function AboutLessons() {
             )}
             {approachSlide === 1 && (
               <div className="fadeIn">
-                <p className="text"> {`I encourage every student to pursue an optional project of some kind, and I've found tremendous success with students who engage with this idea. Examples include my very own biannual concerts, recording a song here in my studio, starting their own social media channel through YouTube, starting a band with friends or classmates, etc.`}</p>
+                <p className="text"> {`I encourage every student to pursue an optional project of some kind, and I've found tremendous success with students who engage with this idea.
+                My biannual concerts and recording sessions are great stand-ins for when a student is just starting out but here are just a few examples of projects
+                that both inspire and motivate students:`}</p>
+                {/* <div className={styles.projectsWrapper}> */}
+                <div className={styles.projectWrapper}>
+                  <picture>
+                    <source srcSet="/images/projects/band.webp" type="image/webp" />
+                    <img src="/images/projects/band.jpg" alt="Concert Photo 1" className={styles.projectImage} />
+                  </picture>
+                  <div className={styles.projectTextWrapper}>
+                  <p className={styles.projectTitle}>Start A Band With Friends</p>
+                  <p className={styles.projectDescription}>{`This is the most fun and engaging way to build musical skills. Find some friends and make some noise!
+                  Band practice once or twice a week is a great chance to try new songs together, stay motivated, and inspire new musical ideas.`}</p>
+                  </div>
+                </div>
+
+                <div className={styles.projectWrapperReverse}>
+                  <picture>
+                    <source srcSet="/images/projects/social.webp" type="image/webp" />
+                    <img src="/images/projects/social.jpg" alt="Concert Photo 1" className={styles.projectImage} />
+                  </picture>
+                  <div className={styles.projectTextWrapperReverse}>
+                  <p className={styles.projectTitle}>Start A YouTube Channel</p>
+
+                    <p className={styles.projectDescription}>{`Social media can be a divisive subject and should be treated with caution,
+                     but it has brought unprecedented opportunity for musicians to easily share their work. Social media channels can be public,
+                     or set to private and shared only with friends and family.`}</p>
+                  </div>
+                </div>
+
+                <div className={styles.projectWrapper}>
+                  <picture>
+                    <source srcSet="/images/projects/recording.webp" type="image/webp" />
+                    <img src="/images/projects/recording.jpg" alt="Concert Photo 1" className={styles.projectImage} />
+                  </picture>
+                  <div className={styles.projectTextWrapper}>
+                    <p className={styles.projectTitle}>Write & Record Your Own Music</p>
+                    <p className={styles.projectDescription}>{`Not every musician wants to perform, and that's ok. Writing and recording music can be done
+                    without the pressure of a live audience or a camera, and can allow more artistic freedom.`}</p>
+                  </div>
+                {/* </div> */}
+                </div>
+                      <a href='#approach' className={styles.topOfSectionLink} >Back To All Teaching Approaches</a>
+
               </div>
             )}
             {approachSlide === 2 && (
@@ -234,56 +277,56 @@ export default function AboutLessons() {
                   <li>
                     <div className={styles.techListItemWrapper}>
                     <img src='/images/tech-icons/gp8.png' alt='Guitar Pro 8' className={styles.techListItemImage} />
-                    <span>
-                      Guitar Pro 8 for practicing & writing interactive music pages with sound
-                    </span>
+                    <p className={styles.techListItemDescription}>
+                      <span className={styles.techListItemTitle}>Guitar Pro 8</span> for practicing & writing interactive music pages with sound
+                    </p>
                     </div>
                     </li>
                   <li>
                   <div className={styles.techListItemWrapper}>
                     <img src='/images/tech-icons/ripx.png' alt='RipX DAW' className={styles.techListItemImage} />
-                    <span>
-                      RipX DAW for editing songs to remove or modify the guitar and create backing tracks
+                    <span className={styles.techListItemDescription}>
+                    <span className={styles.techListItemTitle}>RipX DAW </span>for editing songs to remove or modify the guitar and create backing tracks
                     </span>
                   </div>
                   </li>
                   <li>
                   <div className={styles.techListItemWrapper}>
                   <img src='/images/logos/icon-blue-background.png' alt='String School app' className={`${styles.techListItemImage} ${styles.circularIcon}`} />
-                  <span>
-                      My String School app for scheduling and managing lessons & progress
+                  <span className={styles.techListItemDescription}>
+                  My <span className={styles.techListItemTitle}>String School</span> app for scheduling and managing lessons & progress
                     </span>
                       </div>
                       </li>
                   <li>
                   <div className={styles.techListItemWrapper}>
                   <img src='/images/tech-icons/pro-tools.png' alt='Pro Tools' className={`${styles.techListItemImage} `} />
-                    <span>
-                    Pro Tools for recording student tracks in professional quality
+                  <span className={styles.techListItemDescription}>
+                  <span className={styles.techListItemTitle}>Pro Tools</span> for recording student tracks in professional quality
                     </span>
                     </div>
                     </li>
                   <li>
                   <div className={styles.techListItemWrapper}>
                   <img src='/images/tech-icons/lmss-2.png' alt='String School toolbox' className={`${styles.techListItemImage} ${styles.addedContrastEdges}`}/>
-                  <span>
-                    {`My very own collection of interactive teaching tools - when one doesn't exist that I need - I create it myself!`}
+                  <span className={styles.techListItemDescription}>
+                  <span className={styles.techListItemTitle}>String School Toolbox</span> - My very own collection of interactive teaching tools
                   </span>
                     </div>
                     </li>
                     <li>
                   <div className={styles.techListItemWrapper}>
                   <img src='/images/tech-icons/spotify.png' alt='Spotify' className={`${styles.techListItemImage} `} />
-                    <span>
-                    Spotify for sharing playlists for song suggestions, examples of topics, or just for fun!
+                  <span className={styles.techListItemDescription}>
+                  <span className={styles.techListItemTitle}>Spotify</span> for sharing playlists for song suggestions, examples of topics, or just for fun!
                     </span>
                     </div>
                     </li>
                   <li>
                   <div className={styles.techListItemWrapper}>
-                  <img src='/images/tech-icons/classroom.png' alt='String School toolbox' className={`${styles.techListItemImage}`} />
-                  <span>
-                    Google Classroom Quizzes & Forms to test student knowledge
+                  <img src='/images/tech-icons/classroom.png' alt='Google classroom icon' className={`${styles.techListItemImage}`} />
+                  <span className={styles.techListItemDescription}>
+                  <span className={styles.techListItemTitle}>Google Classroom</span> Quizzes & Forms to test student knowledge
                     </span>
                   </div>
                   </li>
@@ -291,11 +334,68 @@ export default function AboutLessons() {
                 <p className="text"> {`These tools enable students to learn more, learn faster, and have way more fun doing it. I strongly recommend that
                 practice sessions at home take place with a PC or Mac nearby to access the full suite of advantages that these tools offer. Mobile devices
                 unfortunately do not provide the same experience at this time.`}</p>
+                <a href='#approach' className={styles.topOfSectionLink} >Back To All Teaching Approaches</a>
+
               </div>
             )}
             {approachSlide === 3 && (
               <div className="fadeIn">
                 <p className="text">Each song we work on is customized to fit your playing level. We can work with prearranged versions that I have written in the past, or start a whole new version with adjustments for difficulty or just for a fun, unique twist on any song. Students learn the best when they have a moderate but attainable challenge. We call this the zone of proximal development, and it is the sweet spot for quick and effective learning.</p>
+                <picture>
+                  <source
+                    srcSet="/images/custom-tracks-mockup-mobile.webp"
+                    type="image/webp"
+                    media="(max-width: 768px)"
+                  />
+                  <source
+                    srcSet="/images/custom-tracks-mockup-mobile.png"
+                    type="image/png"
+                    media="(max-width: 768px)"
+                  />
+                  <source
+                    srcSet="/images/custom-tracks-mockup.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/images/custom-tracks-mockup.png"
+                    alt="Guitar Pro 8 screenshot"
+                    className={styles.customTracksImage}
+                  />
+                </picture>
+
+                <p className="text"> {`My song library is stored in Guitar Pro format, which allows me to create different versions of any song in the same file. When you
+                open one of my song files, you will find some combination of the following versions:`}</p>
+
+                <ul className={styles.customTracksList}>
+                <li>
+                    <span className={`${styles.trackDot} ${styles.trackDotGreen}`}></span>
+                    <span className={styles.trackTitle}>Easy Version</span>
+                    <p className={`text ${styles.trackDescription}`}>{`These versions are a bare minimum interpretation that can be used to build skills when just starting out. They are great for
+                    your first few songs.`}</p>
+                  </li>
+
+                  <li>
+                    <span className={`${styles.trackDot} ${styles.trackDotYellow}`}></span>
+                    <span className={styles.trackTitle}>Medium Version</span>
+                    <p className={`text ${styles.trackDescription}`}>{`These versions have been adapted to suite players at a mid-level range of playing skill. They often sound almost identical to
+                    the original versions, but are easier to play.`}</p>
+                  </li>
+
+                  <li>
+                    <span className={`${styles.trackDot} ${styles.trackDotRed}`}></span>
+                    <span className={styles.trackTitle}>Full Version</span>
+                    <p className={`text ${styles.trackDescription}`}>{`This is the original version of the song, accurate or nearly accurate to the original recording.`}</p>
+                  </li>
+
+                  <li>
+                    <span className={`${styles.trackDot} ${styles.trackDotBlue}`}></span>
+                    <span className={styles.trackTitle}>Custom Versions</span>
+                    <p className={`text ${styles.trackDescription}`}>{`Blue tracks can include custom versions for a particular student, or other versions irrespective of difficulty such as
+                    chord versions, interpretations in a different genre, a blending of two guitar parts into one part, etc.`}</p>
+                  </li>
+                  </ul>
+
+                <a href='#approach' className={styles.topOfSectionLink} >Back To All Teaching Approaches</a>
               </div>
             )}
           </div>

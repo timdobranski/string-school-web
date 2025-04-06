@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
-
 export default function ConcertsPage() {
   const concertPhotos = [
     {image: '/images/concerts/5.jpg',
@@ -70,16 +68,15 @@ export default function ConcertsPage() {
     </button>
   );
 
-
-
   return (
     <div className={styles.wrapper}>
       <Hero
         type={'photo'}
         title={['CONCERTS']}
         button={false}
-        image={'/images/concerts/12.jpg'} // 5-12
-        imageStyles={{ filter: 'brightness(80%)' }}
+        image={'/images/concerts/12-2.jpg'}
+        webp={'/images/concerts/12-2.webp'}
+        // imageStyles={{ filter: 'brightness(80%)' }}
         // textDirection={'right'}
         text={[]}
       />

@@ -28,7 +28,7 @@
   max-width: 90%;
 }
 .curriculumGrid {
-  margin-left: 8rem;
+  /* margin-left: 8rem; */
   display: flex;
   flex-direction: row;
   /* border: solid blue 2px; */
@@ -50,7 +50,51 @@
   text-decoration-color: rgb(156, 211, 130);
   text-underline-offset: 4px;
   font-weight: 400;
+  text-align: center;
+  list-style: none;
+}
+.projectWrapper, .projectWrapperReverse {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 4rem 0;
+}
+.projectWrapperReverse {
+  flex-direction: row-reverse !important;
+}
+.projectImage {
+  width: calc(500px - 2rem);
 
+  /* margin: */
+  /* min-width: 50%; */
+  height:auto;
+  max-height: unset;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .6);
+}
+.projectTextWrapper, .projectTextWrapperReverse {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0 2rem;
+}
+.projectTextWrapperReverse {
+  padding: 0 2rem 0 0;
+}
+.projectTitle, .projectDescription {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--primary-blue);
+  text-align: center;
+}
+.projectDescription {
+  font-size: 1.25rem;
+  color: black;
+  margin: 1rem 0;
 }
 .techList {
 margin: 3rem 0 3rem 2rem;
@@ -67,8 +111,12 @@ list-style: none;
   justify-content: flex-start;
   align-items: center;
 }
-.techListItemWrapper span {
+.techListItemDescription {
   color: black !important;
+}
+.techListItemTitle {
+  color: var(--primary-blue);
+  font-weight: 400 !important;
 }
 .techListItemImage {
   width: 50px;
@@ -77,9 +125,42 @@ list-style: none;
 .circularIcon {
   border-radius: 50%;
 }
-.addedContrastEdges {
-  /* filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.7)) */
-
+.customTracksImage {
+  width: 100%;
+}
+.customTracksList li {
+  list-style: none;
+}
+.trackTitle {
+  font-size: 2rem;
+  color: var(--primary-blue);
+  text-align: center;
+  margin: 1rem;
+  text-decoration: underline;
+}
+.trackDot {
+  display: inline-block;
+  border-radius: 50%;
+  height: .5rem;
+  width: .5rem;
+  margin: 0 .5rem;
+  padding: 10px;
+}
+.trackDotRed {
+  background: rgb(255, 108, 108);
+}
+.trackDotGreen {
+  background: rgb(120, 223, 144);
+}
+.trackDotBlue {
+  background: rgb(63, 182, 251);
+}
+.trackDotYellow {
+  background: rgb(255, 217, 0);
+}
+.trackDescription {
+  text-align: left;
+  margin-left: 4rem;
 }
 .fadeIn {
   animation: fadeIn 0.3s ease both;
@@ -296,10 +377,18 @@ list-style: none;
   text-underline-offset: 2px;
   color: var(--primary-blue);
 }
-.link {
+.link, .topOfSectionLink {
+  display: block;
   color: var(--primary-blue);
   text-decoration: underline;
   font-size: 1.25rem;
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+}
+.topOfSectionLink {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 
@@ -486,11 +575,41 @@ justify-content: center;
     /* transition: none; */
     /* animation: none; */
   }
+  .projectWrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .projectWrapperReverse {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .projectTitle {
+    margin-top: 1rem;
+  }
+  .projectTextWrapper {
+    padding: 0;
+  }
+  .projectTextWrapperReverse {
+    padding: 0;
+  }
+  .projectImage {
+    width: 100%;
+    height: auto;
+    max-height: unset;
+    margin: 0;
+  }
   .techList {
     margin-left: 0;
   }
   .techList li {
     margin: 2rem 0;
+  }
+  .trackTitle {
+    font-size: 1.5rem;
+  }
+  .trackDescription {
+    font-size: 1.25rem;
+    margin-left: 0;
   }
 .scheduleTable {
   margin: 1rem 0;
