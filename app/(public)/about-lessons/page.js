@@ -155,11 +155,8 @@ export default function AboutLessons() {
         // textDirection={'right'}
         text={[]}
       />
-
-
-      <div className={styles.section1Container} id='approach'>
-        {/* <img src='/images/teaching-approach.jpg' alt='Studio Photo 1' className={styles.section1Image} /> */}
-        <h2 className={"sectionTitle"}>Teaching Approach</h2>
+      <div className={styles.section0Container} id='intro'>
+        <h2 className={"sectionTitle"}>About Lessons</h2>
         <div className={`pageContentWidth`}>
         <p className={'text vertMarginSmall'}>{`For over 15 years I have taught students of all ages and from beginner to advanced playing levels.
        I am comfortable and familiar working with any genre of music. My students are generally about 1/3 adults and 2/3 children & teens.
@@ -167,6 +164,8 @@ export default function AboutLessons() {
        `}</p>
         <p className={'text vertMarginSmall'}>{`There are some limits to my knowledge and experience, mostly relating to advanced jazz theory. If you are an advanced player
         and curious if I can help you, please reach out and I will be happy to discuss your needs.
+       `}</p>
+        <p className={'text vertMarginSmall'}>{`A few of the things we can work on in your lessons include:
        `}</p>
        </div>
          <div className={styles.curriculumGrid}>
@@ -176,15 +175,18 @@ export default function AboutLessons() {
              <li>Music Theory</li>
              <li>Ear Training</li>
 
-
-           </ul>
-           <ul className={styles.curriculumList}>
              <li>Songwriting</li>
              <li>Improvisation</li>
              <li>Tab or Standard Notation</li>
-             <li>Ear Training</li>
+             <li>Transcription</li>
            </ul>
          </div>
+      </div>
+
+      <div className={styles.section1Container} id='approach'>
+        <h2 className={"sectionTitle"}>Teaching Approach</h2>
+
+        {/* <img src='/images/teaching-approach.jpg' alt='Studio Photo 1' className={styles.section1Image} /> */}
 
         <div className={styles.lessonInfoWrapper}>
           <div onClick={approachSlide === 1 ? () => setApproachSlide(0) : () => setApproachSlide(1)} className={`${styles.lessonInfoSection} ${approachSlide === 1 && styles.selected}`}>
@@ -322,12 +324,33 @@ export default function AboutLessons() {
             <h2 className={`${detailsSlide === 3 ? 'smallerSectionTitleWhite' : 'smallerSectionTitle'}  ${styles.iconTabTitles}`}>Fees</h2>
           </div>
         </div>
-        <div className={`${styles.contentSectionWrapper} ${styles.iconSwitchContent}`}>
+        <div className={`${styles.contentSectionWrapper} ${styles.iconSwitchContentGray}`}
+          style={{
+            height: `${detailsHeight}px`,
+            transition: 'height 0.7s ease',
+            overflow: 'hidden'
+          }}
+        >
+          <div className={styles.iconSwitchContent} ref={detailsRef}>
+
+          {/* <div className={styles.iconSwitchContent} ref={detailsRef}> */}
           <div className={`${styles.tabContent} ${detailsSlide !== 0 ? styles.notSelected : styles.selectedText}`}>
             <p className={`text`}>{`Select one of the choices above to learn more about my lessons.`}</p>
           </div>
           <div className={`${styles.tabContent} ${detailsSlide !== 1 ? styles.notSelected : styles.selectedText}`}>
-            <p className={'text'}>{`Lessons are offered in 30 minute recurring weekly blocks at the following times:`}</p>
+            <p className="text">
+              Lessons are offered in 30 minute recurring weekly blocks at the following times.
+              Students interested in longer or more frequent lessons are welcome to book multiple spots.
+              View my current schedule openings through a live Google Doc{' '}
+              <a
+                href="https://docs.google.com/document/d/18_k8ToYmk2PYpF2TiPqBhdFUpaXBPx7VqTcrwoZfQxk/edit?tab=t.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                here
+              </a>.
+            </p>
             <table className={styles.scheduleTable}>
               <tbody>
                 <tr>
@@ -344,12 +367,20 @@ export default function AboutLessons() {
                 </tr>
               </tbody>
             </table>
-            <p className={'text'}>{`Students interested in longer or more frequent lessons are welcome to book multiple spots.`}</p>
           </div>
 
           <div className={`text ${detailsSlide !== 2 ? styles.notSelected : styles.selectedText}`}>
-            <p className={'text'}>{`Lessons are held at my home music studio in Fletcher Hills, CA. As this is my personal residence as well,
+            <p className={'text'}>{`Lessons are held at my home music studio in Fletcher Hills, CA, near Grossmont High School. As this is my personal residence as well,
               the address is not listed here and is provided upon booking a lesson.`} </p>
+
+            <iframe
+              title="Lesson Area"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13415.977491273556!2d-117.00753623060034!3d32.79240847851275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1743892392143!5m2!1sen!2sus"
+              className={styles.map}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
 
             <p className={'text'}>{`I also offer lessons online via Zoom. These lessons can be much more convenient, but I don't recommend them
               for all situations. Feel free to reach out if this is something you'd like to discuss!`}
@@ -363,10 +394,11 @@ export default function AboutLessons() {
 
             <div className={styles.fees}>
               <p className={styles.price}>$120/month</p>
-              <p>Cash, personal check, Venmo, Zelle, Paypal</p>
+              <p className={'text'}>{`Payments can be made via cash, check, Venmo, Zelle, and Paypal`}</p>
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       <div className={styles.section3Container} id='policies'>
