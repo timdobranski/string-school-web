@@ -36,7 +36,7 @@ export default function StudentStuffTemp() {
           <p className={styles.label}>View or print the PDF copy of my textbook here</p>
 
           <div className={styles.navLink}>
-            <a href='https://drive.google.com/drive/folders/1n9iEYNLl4Dgd_BTzB04SwxpPd4F2FWry?usp=drive_link' target='blank'>SONG LIBRARY</a>
+            <a href='https://drive.google.com/drive/folders/12oHQsJIl9NN0FDcoyUaIw3-OG23IAjOI?usp=sharing' target='blank'>SONG LIBRARY</a>
           </div>
           <p className={styles.label}>Browse sheet music here</p>
         </div>
